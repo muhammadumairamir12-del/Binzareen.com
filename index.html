@@ -4,27 +4,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bin Zareen.PVT - Premium Solar Solutions Pakistan</title>
+<title>Bin Zareen Solar Pvt. Ltd. - Solar & Power Solutions Pakistan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* New Red Palette */
-    --red-deep: #B71C1C; /* Darker Red */
-    --red-mid: #D32F2F; /* Mid Red */
-    --red-bright: #F44336; /* Bright Red */
-    --red-light: #FFCDD2; /* Light Red */
-    --red-pale: #FFEBEE; /* Very Light Red */
-
+    --blue-deep: #1E3A8A; /* 70% base blue */
+    --blue-mid: #1E40AF;
+    --blue-bright: #2563EB;
+    --blue-light: #DBEAFE;
+    --blue-pale: #EFF6FF;
     --white: #FFFFFF;
     --gray-light: #F8FAFC;
     --gray-mid: #94A3B8;
     --gray-dark: #334155;
     --text: #1E293B;
-    --accent-red: #E91E63; /* For highlights like stars, cart count */
+    --orange: #F59E0B;
     --green: #10B981;
-    --shadow: 0 4px 24px rgba(183,28,28,0.10); /* Updated from blue */
-    --shadow-lg: 0 12px 48px rgba(183,28,28,0.18); /* Updated from blue */
+    --red-highlight: #EF4444; /* For headings etc. */
+    --shadow: 0 4px 24px rgba(30,64,175,0.10);
+    --shadow-lg: 0 12px 48px rgba(30,64,175,0.18);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,8 +39,7 @@
   #splash {
     position: fixed;
     inset: 0;
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, var(--red-deep) 0%, var(--red-mid) 40%, var(--red-bright) 100%);
+    background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 40%, #2563EB 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -147,7 +145,7 @@
 
   /* ===== TOPBAR ===== */
   .topbar {
-    background: var(--red-deep); /* Updated from blue */
+    background: var(--blue-deep);
     color: rgba(255,255,255,0.85);
     font-size: 0.82rem;
     padding: 8px 0;
@@ -162,7 +160,7 @@
   /* ===== NAVBAR ===== */
   .navbar {
     background: white;
-    box-shadow: 0 2px 16px rgba(183,28,28,0.08); /* Updated from blue */
+    box-shadow: 0 2px 16px rgba(30,64,175,0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -188,8 +186,7 @@
 
   .nav-logo-icon {
     width: 46px; height: 46px;
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
+    background: linear-gradient(135deg, var(--blue-mid), var(--blue-bright));
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -207,7 +204,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     line-height: 1.1;
   }
 
@@ -240,8 +237,8 @@
   }
 
   .nav-links a:hover, .nav-links a.active {
-    background: var(--red-pale); /* Updated from blue */
-    color: var(--red-bright); /* Updated from blue */
+    background: var(--blue-pale);
+    color: var(--blue-bright);
   }
 
   .nav-actions {
@@ -261,7 +258,7 @@
     transition: border-color 0.2s;
   }
 
-  .nav-search:focus-within { border-color: var(--red-bright); } /* Updated from blue */
+  .nav-search:focus-within { border-color: var(--blue-bright); }
 
   .nav-search input {
     border: none;
@@ -274,7 +271,7 @@
 
   .cart-btn {
     position: relative;
-    background: var(--red-mid); /* Updated from blue */
+    background: var(--blue-mid);
     color: white;
     border: none;
     border-radius: 10px;
@@ -288,10 +285,10 @@
     transition: background 0.2s;
   }
 
-  .cart-btn:hover { background: var(--red-deep); } /* Updated from blue */
+  .cart-btn:hover { background: var(--blue-deep); }
 
   .cart-count {
-    background: var(--accent-red); /* Updated from orange */
+    background: var(--orange);
     color: white;
     border-radius: 50%;
     width: 20px; height: 20px;
@@ -314,7 +311,7 @@
     display: block;
     width: 25px;
     height: 2.5px;
-    background: var(--red-deep); /* Updated from blue */
+    background: var(--blue-deep);
     border-radius: 3px;
     transition: all 0.3s;
   }
@@ -354,7 +351,7 @@
     cursor: pointer;
   }
 
-  .mobile-menu-panel a:hover { background: var(--red-pale); color: var(--red-bright); } /* Updated from blue */
+  .mobile-menu-panel a:hover { background: var(--blue-pale); color: var(--blue-bright); }
 
   /* ===== PAGES ===== */
   .page { display: none; animation: pageFade 0.4s ease; }
@@ -370,8 +367,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--red-pale); /* Updated from blue */
-    color: var(--red-mid); /* Updated from blue */
+    background: var(--blue-pale);
+    color: var(--blue-mid);
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
@@ -382,7 +379,7 @@
     transition: background 0.2s;
   }
 
-  .back-btn:hover { background: var(--red-light); } /* Updated from blue */
+  .back-btn:hover { background: var(--blue-light); }
 
   /* Section header */
   .section-header {
@@ -392,8 +389,8 @@
 
   .section-tag {
     display: inline-block;
-    background: var(--red-light); /* Updated from blue */
-    color: var(--red-mid); /* Updated from blue */
+    background: var(--blue-light);
+    color: var(--blue-mid);
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 3px;
@@ -407,8 +404,18 @@
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 4vw, 2.6rem);
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     line-height: 1.2;
+  }
+  
+  /* Animated headings */
+  .animated-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--red-highlight); /* Red for animated headings */
+      line-height: 1.2;
+      animation: colorChange 5s infinite alternate; /* Animation for color change */
   }
 
   .section-sub {
@@ -428,12 +435,11 @@
   }
 
   .section { padding: 72px 0; }
-  .section-alt { background: var(--red-pale); } /* Updated from blue */
+  .section-alt { background: var(--blue-pale); }
 
   /* ===== HERO ===== */
   .hero {
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, #8B0000 0%, var(--red-deep) 40%, var(--red-mid) 70%, var(--red-bright) 100%);
+    background: linear-gradient(135deg, #0F2460 0%, #1E3A8A 40%, #1E40AF 70%, #2563EB 100%);
     padding: 80px 0 60px;
     position: relative;
     overflow: hidden;
@@ -446,7 +452,6 @@
     content: '';
     position: absolute;
     inset: 0;
-    /* Kept the white pattern, but adjust opacity or color if desired */
     background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 
@@ -483,7 +488,7 @@
     margin-bottom: 20px;
   }
 
-  .hero-title span { color: var(--red-light); } /* Updated from #93C5FD */
+  .hero-title span { color: #93C5FD; }
 
   .hero-desc {
     font-size: 1.08rem;
@@ -497,7 +502,7 @@
 
   .btn-primary {
     background: white;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     border: none;
     border-radius: 12px;
     padding: 14px 28px;
@@ -611,7 +616,7 @@
 
   .cat-showcase-row:hover {
     box-shadow: var(--shadow-lg);
-    border-color: var(--red-light); /* Updated from blue */
+    border-color: var(--blue-light);
   }
 
   /* Left Side: Large Image & Heading (Always on Left) */
@@ -636,8 +641,7 @@
   .cat-showcase-overlay {
     position: absolute;
     inset: 0;
-    /* Updated gradient to red palette */
-    background: linear-gradient(to top, rgba(139,0,0,0.9) 0%, rgba(183,28,28,0.4) 50%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(15,36,96,0.9) 0%, rgba(30,64,175,0.4) 50%, rgba(0,0,0,0) 100%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -656,7 +660,7 @@
   .cat-showcase-link {
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--accent-red); /* Updated from orange */
+    color: var(--orange);
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -732,7 +736,7 @@
 
   .cat-prod-card:hover {
     transform: translateY(-5px);
-    border-color: var(--red-light); /* Updated from blue */
+    border-color: var(--blue-light);
     box-shadow: var(--shadow);
   }
 
@@ -759,7 +763,7 @@
     font-size: 1.05rem;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     margin-top: auto;
   }
 
@@ -783,12 +787,12 @@
   .product-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--red-light); /* Updated from blue */
+    border-color: var(--blue-light);
   }
 
   .product-img {
     height: 190px;
-    background: var(--red-pale); /* Updated from blue */
+    background: var(--blue-pale);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -805,7 +809,7 @@
     position: absolute;
     top: 12px;
     left: 12px;
-    background: var(--accent-red); /* Updated from orange */
+    background: var(--orange);
     color: white;
     font-size: 0.72rem;
     font-weight: 700;
@@ -819,7 +823,7 @@
   .product-cat {
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--red-bright); /* Updated from blue */
+    color: var(--blue-bright);
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 6px;
@@ -851,7 +855,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
   }
 
   .product-price small {
@@ -864,7 +868,7 @@
   }
 
   .add-cart-btn {
-    background: var(--red-mid); /* Updated from blue */
+    background: var(--blue-mid);
     color: white;
     border: none;
     border-radius: 10px;
@@ -875,14 +879,13 @@
     transition: background 0.2s;
   }
 
-  .add-cart-btn:hover { background: var(--red-deep); } /* Updated from blue */
+  .add-cart-btn:hover { background: var(--blue-deep); }
   .add-cart-btn.added { background: var(--green); }
 
   /* === PARALLAX SECTION === */
   .parallax-section {
     background-attachment: fixed;
-    /* Updated gradient to red palette */
-    background-image: linear-gradient(rgba(139,0,0,0.88), rgba(183,28,28,0.88)), url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: linear-gradient(rgba(15,36,96,0.88), rgba(30,64,175,0.88)), url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
     background-size: cover;
     padding: 80px 0;
     color: white;
@@ -903,7 +906,7 @@
     line-height: 1;
   }
 
-  .para-stat .unit { color: var(--accent-red); } /* Updated from orange */
+  .para-stat .unit { color: var(--orange); }
 
   .para-stat .lbl {
     font-size: 0.92rem;
@@ -928,14 +931,14 @@
   }
 
   .why-card:hover {
-    border-color: var(--red-light); /* Updated from blue */
+    border-color: var(--blue-light);
     box-shadow: var(--shadow);
     transform: translateY(-3px);
   }
 
   .why-icon {
     width: 56px; height: 56px;
-    background: var(--red-pale); /* Updated from blue */
+    background: var(--blue-pale);
     border-radius: 14px;
     display: flex;
     align-items: center;
@@ -943,12 +946,12 @@
     margin-bottom: 20px;
   }
 
-  .why-icon svg { width: 30px; height: 30px; stroke: var(--red-mid); } /* Updated from blue */
+  .why-icon svg { width: 30px; height: 30px; }
 
   .why-card h3 {
     font-weight: 700;
     font-size: 1.1rem;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     margin-bottom: 10px;
   }
 
@@ -973,7 +976,7 @@
     position: relative;
   }
 
-  .testi-stars { color: var(--accent-red); font-size: 1rem; margin-bottom: 14px; } /* Updated from orange */
+  .testi-stars { color: var(--orange); font-size: 1rem; margin-bottom: 14px; }
 
   .testi-text {
     font-size: 0.92rem;
@@ -987,9 +990,8 @@
 
   .testi-avatar {
     width: 44px; height: 44px;
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
     border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-mid), var(--blue-bright));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1010,8 +1012,7 @@
 
   /* === PRODUCT LIST PAGE === */
   .plp-hero {
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, var(--red-deep), var(--red-mid));
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
     padding: 48px 0 36px;
     color: white;
   }
@@ -1045,10 +1046,10 @@
   .filter-panel h3 {
     font-weight: 700;
     font-size: 1rem;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     margin-bottom: 16px;
     padding-bottom: 12px;
-    border-bottom: 2px solid var(--red-light); /* Updated from blue */
+    border-bottom: 2px solid var(--blue-light);
   }
 
   .filter-group { margin-bottom: 24px; }
@@ -1073,7 +1074,7 @@
   }
 
   .filter-group input[type="checkbox"] {
-    accent-color: var(--red-mid); /* Updated from blue */
+    accent-color: var(--blue-mid);
     width: 16px;
     height: 16px;
   }
@@ -1094,13 +1095,13 @@
   }
 
   .pdp-img-main {
-    background: var(--red-pale); /* Updated from blue */
+    background: var(--blue-pale);
     border-radius: 24px;
     height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--red-light); /* Updated from blue */
+    border: 2px solid var(--blue-light);
   }
 
   .pdp-img-main svg { width: 160px; height: 160px; }
@@ -1113,24 +1114,24 @@
 
   .pdp-thumb {
     width: 80px; height: 80px;
-    background: var(--red-pale); /* Updated from blue */
+    background: var(--blue-pale);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--red-light); /* Updated from blue */
+    border: 2px solid var(--blue-light);
     cursor: pointer;
     transition: border-color 0.2s;
   }
 
-  .pdp-thumb:hover, .pdp-thumb.active { border-color: var(--red-mid); } /* Updated from blue */
+  .pdp-thumb:hover, .pdp-thumb.active { border-color: var(--blue-mid); }
   .pdp-thumb svg { width: 36px; height: 36px; }
 
   .pdp-content h1 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     margin-bottom: 12px;
     line-height: 1.2;
   }
@@ -1143,7 +1144,7 @@
   }
 
   .pdp-price-box {
-    background: var(--red-pale); /* Updated from blue */
+    background: var(--blue-pale);
     border-radius: 16px;
     padding: 20px 24px;
     margin-bottom: 28px;
@@ -1153,7 +1154,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
   }
 
   .pdp-price-note {
@@ -1185,7 +1186,7 @@
 
   .qty-btn {
     width: 38px; height: 38px;
-    border: 2px solid var(--red-light); /* Updated from blue */
+    border: 2px solid var(--blue-light);
     background: white;
     border-radius: 10px;
     font-size: 1.2rem;
@@ -1196,7 +1197,7 @@
     transition: all 0.2s;
   }
 
-  .qty-btn:hover { background: var(--red-light); } /* Updated from blue */
+  .qty-btn:hover { background: var(--blue-light); }
 
   .qty-num {
     font-weight: 700;
@@ -1208,8 +1209,8 @@
 
   .pdp-actions { display: flex; gap: 12px; }
 
-  .btn-red { /* Changed from btn-blue */
-    background: var(--red-mid);
+  .btn-blue {
+    background: var(--blue-mid);
     color: white;
     border: none;
     border-radius: 12px;
@@ -1220,12 +1221,12 @@
     transition: background 0.2s;
   }
 
-  .btn-red:hover { background: var(--red-deep); } /* Changed from btn-blue */
+  .btn-blue:hover { background: var(--blue-deep); }
 
-  .btn-red-outline { /* Changed from btn-blue-outline */
+  .btn-blue-outline {
     background: transparent;
-    color: var(--red-mid); /* Updated from blue */
-    border: 2px solid var(--red-mid); /* Updated from blue */
+    color: var(--blue-mid);
+    border: 2px solid var(--blue-mid);
     border-radius: 12px;
     padding: 13px 24px;
     font-size: 0.95rem;
@@ -1234,7 +1235,7 @@
     transition: all 0.2s;
   }
 
-  .btn-red-outline:hover { background: var(--red-pale); } /* Updated from blue */
+  .btn-blue-outline:hover { background: var(--blue-pale); }
 
   /* === CART PAGE === */
   .cart-layout {
@@ -1262,7 +1263,7 @@
 
   .cart-item-img {
     width: 80px; height: 80px;
-    background: var(--red-pale); /* Updated from blue */
+    background: var(--blue-pale);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -1287,7 +1288,7 @@
 
   .cart-item-cat {
     font-size: 0.8rem;
-    color: var(--red-bright); /* Updated from blue */
+    color: var(--blue-bright);
     font-weight: 600;
   }
 
@@ -1295,7 +1296,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     text-align: right;
   }
 
@@ -1328,10 +1329,10 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     margin-bottom: 20px;
     padding-bottom: 14px;
-    border-bottom: 2px solid var(--red-light); /* Updated from blue */
+    border-bottom: 2px solid var(--blue-light);
   }
 
   .summary-row {
@@ -1346,16 +1347,15 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
-    border-top: 2px solid var(--red-light); /* Updated from blue */
+    color: var(--blue-deep);
+    border-top: 2px solid var(--blue-light);
     margin-top: 10px;
     padding-top: 14px;
   }
 
   .checkout-btn {
     width: 100%;
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
+    background: linear-gradient(135deg, var(--blue-mid), var(--blue-bright));
     color: white;
     border: none;
     border-radius: 12px;
@@ -1388,10 +1388,10 @@
   .form-card h3 {
     font-weight: 700;
     font-size: 1.1rem;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     margin-bottom: 24px;
     padding-bottom: 12px;
-    border-bottom: 2px solid var(--red-light); /* Updated from blue */
+    border-bottom: 2px solid var(--blue-light);
   }
 
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -1419,13 +1419,12 @@
   }
 
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    border-color: var(--red-bright); /* Updated from blue */
+    border-color: var(--blue-bright);
   }
 
   /* === ABOUT PAGE === */
   .about-hero {
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, var(--red-deep), var(--red-mid));
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
     padding: 80px 0;
     color: white;
     text-align: center;
@@ -1457,9 +1456,8 @@
 
   .team-avatar {
     width: 72px; height: 72px;
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
     border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-mid), var(--blue-bright));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1478,7 +1476,7 @@
   }
 
   .team-name { font-weight: 700; font-size: 1rem; color: var(--text); }
-  .team-role { font-size: 0.83rem; color: var(--red-bright); margin-top: 4px; } /* Updated from blue */
+  .team-role { font-size: 0.83rem; color: var(--blue-bright); margin-top: 4px; }
 
   /* === CONTACT PAGE === */
   .contact-grid {
@@ -1492,7 +1490,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     margin-bottom: 16px;
   }
 
@@ -1505,7 +1503,7 @@
 
   .contact-icon {
     width: 48px; height: 48px;
-    background: var(--red-pale); /* Updated from blue */
+    background: var(--blue-pale);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -1513,7 +1511,7 @@
     flex-shrink: 0;
   }
 
-  .contact-icon svg { width: 24px; height: 24px; stroke: var(--red-mid); } /* Updated from blue */
+  .contact-icon svg { width: 24px; height: 24px; }
 
   .contact-label { font-size: 0.8rem; color: var(--gray-mid); }
   .contact-val { font-weight: 700; color: var(--text); font-size: 0.95rem; }
@@ -1535,15 +1533,14 @@
   }
 
   .service-card:hover {
-    border-color: var(--red-light); /* Updated from blue */
+    border-color: var(--blue-light);
     box-shadow: var(--shadow-lg);
     transform: translateY(-4px);
   }
 
   .service-icon {
     width: 72px; height: 72px;
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, var(--red-pale), var(--red-light));
+    background: linear-gradient(135deg, var(--blue-pale), var(--blue-light));
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -1559,13 +1556,13 @@
     transition: filter 0.25s;
   }
 
-  .service-icon svg { width: 40px; height: 40px; stroke: var(--red-mid); } /* Updated from blue */
+  .service-icon svg { width: 40px; height: 40px; }
 
   .service-card h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--red-deep); /* Updated from blue */
+    color: var(--blue-deep);
     margin-bottom: 12px;
   }
 
@@ -1577,8 +1574,7 @@
 
   /* === FOOTER === */
   .footer {
-    /* Updated gradient to red palette */
-    background: linear-gradient(135deg, #8B0000 0%, var(--red-deep) 100%);
+    background: linear-gradient(135deg, #0F1F4A 0%, #1E3A8A 100%);
     color: white;
     padding: 64px 0 0;
   }
@@ -1683,7 +1679,7 @@
     transition: color 0.2s;
     cursor: pointer;
   }
-  .footer-col ul li a:hover { color: var(--red-light); } /* Updated from #93C5FD */
+  .footer-col ul li a:hover { color: #93C5FD; }
 
   .footer-contact-item {
     display: flex;
@@ -1692,7 +1688,7 @@
     align-items: flex-start;
   }
 
-  .footer-contact-item svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; color: var(--red-light); } /* Updated from #93C5FD */
+  .footer-contact-item svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; color: #93C5FD; }
 
   .footer-contact-item span {
     font-size: 0.86rem;
@@ -1737,7 +1733,7 @@
     right: 28px;
     z-index: 500;
     width: 58px; height: 58px;
-    background: #25D366; /* Kept green */
+    background: #25D366;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1760,7 +1756,7 @@
     position: fixed;
     bottom: 90px;
     right: 28px;
-    background: var(--green); /* Kept green */
+    background: var(--green);
     color: white;
     padding: 12px 20px;
     border-radius: 12px;
@@ -1796,7 +1792,7 @@
   }
 
   .breadcrumb span { cursor: pointer; }
-  .breadcrumb span:hover { color: var(--red-bright); } /* Updated from blue */
+  .breadcrumb span:hover { color: var(--blue-bright); }
   .breadcrumb .sep { color: var(--gray-mid); }
 
   /* === RESPONSIVE === */
@@ -1851,6 +1847,14 @@
     .hero-btns { flex-direction: column; }
     .pdp-thumbs { overflow-x: auto; }
   }
+
+  /* Color change animation for headings */
+  @keyframes colorChange {
+    0% { color: var(--red-highlight); } /* Red */
+    33% { color: var(--blue-mid); }     /* Blue */
+    66% { color: var(--orange); }       /* Orange */
+    100% { color: var(--red-highlight); } /* Back to Red */
+  }
 </style>
 </head>
 <body>
@@ -1860,10 +1864,10 @@
   <div class="splash-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
   <div class="splash-logo-wrap">
     <div class="splash-logo-icon">
-      <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/600162814_122093707215176825_4713505872281903544_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=fpDuxHgmcOoQ7kNvwHxzahK&_nc_oc=Adpq5effqkiuiIrDTB5bEuM0TPg3k19S5N2qx8mhlx7j-W9qgqnIVFK3Lw1r56L721J2P1Eo-eOspx4f0XwN-fYA&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=agvjsILREiP_1D3couGMXQ&_nc_ss=7a3a8&oh=00_Af30nwIK1A6yw9jOerP80Igl8TmrAXdXtPCF6lSRcYCU1g&oe=69ED3F52" alt="Bin Zareen.PVT Logo">
+      <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/549652592_122095933551042358_7149296960295024277_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=UhJZmpzFzJYQ7kNvwEmjdw6&_nc_oc=AdqvE1IHEw3HoN8q03zWoYaAsooHqgcLkt1jTyMrCPp-lERVPub8lyOixPDMnqLOmzlU4q-_LaeaYa6mBaakNSzo&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=hK2nwHcROvb28NIL3U_DpA&_nc_ss=7b2a8&oh=00_Af1NixGkzY3n1SalYCkPD8aF5aD-0-1URmDN_dArPq14-w&oe=69EEE6EF" alt="Bin Zareen Solar Logo">
     </div>
-    <div class="splash-company">Bin Zareen.PVT</div>
-    <div class="splash-tagline">Premium Solar Solutions</div>
+    <div class="splash-company">Bin Zareen Solar Pvt. Ltd.</div>
+    <div class="splash-tagline">Solar & Power Solutions</div>
   </div>
   <div class="splash-dots">
     <span></span><span></span><span></span>
@@ -1875,9 +1879,9 @@
 
   <!-- TOPBAR -->
   <div class="topbar">
-    <span>📞 <a href="tel:+923252053313">+92 325 2053313</a></span>
-    <span>📧 <a href="mailto:binzareen@gmail.com">binzareen@gmail.com</a></span>
-    <span>⚡ Free Installation on Orders Over Rs. 50,000</span>
+    <span>📞 <a href="tel:+3252053313">+32 52 05 33 13</a></span>
+    <span>📍 Islamabad Branch</span>
+    <span>⚡ Free Consultation & Site Survey</span>
   </div>
 
   <!-- NAVBAR -->
@@ -1885,9 +1889,9 @@
     <div class="nav-inner">
       <a class="nav-logo" onclick="showPage('home')">
         <div class="nav-logo-icon">
-          <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/600162814_122093707215176825_4713505872281903544_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=fpDuxHgmcOoQ7kNvwHxzahK&_nc_oc=Adpq5effqkiuiIrDTB5bEuM0TPg3k19S5N2qx8mhlx7j-W9qgqnIVFK3Lw1r56L721J2P1Eo-eOspx4f0XwN-fYA&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=agvjsILREiP_1D3couGMXQ&_nc_ss=7a3a8&oh=00_Af30nwIK1A6yw9jOerP80Igl8TmrAXdXtPCF6lSRcYCU1g&oe=69ED3F52" alt="Bin Zareen.PVT Logo">
+          <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/549652592_122095933551042358_7149296960295024277_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=UhJZmpzFzJYQ7kNvwEmjdw6&_nc_oc=AdqvE1IHEw3HoN8q03zWoYaAsooHqgcLkt1jTyMrCPp-lERVPub8lyOixPDMnqLOmzlU4q-_LaeaYa6mBaakNSzo&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=hK2nwHcROvb28NIL3U_DpA&_nc_ss=7b2a8&oh=00_Af1NixGkzY3n1SalYCkPD8aF5aD-0-1URmDN_dArPq14-w&oe=69EEE6EF" alt="Bin Zareen Solar Logo">
         </div>
-        <div class="nav-logo-text">Bin Zareen <small>PVT</small></div>
+        <div class="nav-logo-text">Bin . Zareen  <small> Pvt. Ltd.</small></div>
       </a>
 
       <ul class="nav-links">
@@ -1918,7 +1922,7 @@
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobile-menu" onclick="closeMobileOnBg(event)">
     <div class="mobile-menu-panel">
-      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--red-deep);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--red-light);">Menu</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--blue-deep);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--blue-light);">Menu</div>
       <a onclick="showPage('home');toggleMobile()">🏠 Home</a>
       <a onclick="showPage('products');toggleMobile()">⚡ All Products</a>
       <a onclick="showPage('cat','solar-panels');toggleMobile()">☀️ Solar Panels</a>
@@ -2016,7 +2020,7 @@
         </div>
         <div class="products-grid" id="featured-products"></div>
         <div style="text-align:center;margin-top:40px;">
-          <button class="btn-red" onclick="showPage('products')" style="padding:14px 36px;font-size:1rem;">View All Products</button>
+          <button class="btn-blue" onclick="showPage('products')" style="padding:14px 36px;font-size:1rem;">View All Products</button>
         </div>
       </div>
     </section>
@@ -2025,10 +2029,10 @@
     <section class="parallax-section">
       <div class="container">
         <div class="parallax-inner">
-          <div class="para-stat"><div class="num">14<span class="unit">K+</span></div><div class="lbl">Happy Customers</div></div>
+          <div class="para-stat"><div class="num">1200<span class="unit">+</span></div><div class="lbl">Happy Customers</div></div>
           <div class="para-stat"><div class="num">100<span class="unit">+</span></div><div class="lbl">Expert Team</div></div>
           <div class="para-stat"><div class="num">4.9<span class="unit">+</span></div><div class="lbl">Customer Rating</div></div>
-          <div class="para-stat"><div class="num">15<span class="unit">+</span></div><div class="lbl">Years Experience</div></div>
+          <div class="para-stat"><div class="num">10<span class="unit">+</span></div><div class="lbl">Years Experience</div></div>
         </div>
       </div>
     </section>
@@ -2037,48 +2041,48 @@
     <section class="section">
       <div class="container">
         <div class="section-header">
-          <div class="section-tag">Why Bin Zareen</div>
+          <div class="section-tag">Why Bin Zareen Solar</div>
           <h2 class="section-title">Trusted by Thousands</h2>
         </div>
         <div class="why-grid">
           <div class="why-card">
             <div class="why-icon">
-              <svg viewBox="0 0 30 30" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><path d="M15 3l3.09 6.26L25 10.27l-5 4.87 1.18 6.88L15 19l-6.18 3.02L10 16.14 5 11.27l6.91-1.01L15 3z"/></svg>
+              <svg viewBox="0 0 30 30" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><path d="M15 3l3.09 6.26L25 10.27l-5 4.87 1.18 6.88L15 19l-6.18 3.02L10 16.14 5 11.27l6.91-1.01L15 3z"/></svg>
             </div>
             <h3>Experienced & Trusted</h3>
-            <p>With over 15 years in the solar industry, we deliver reliable, proven solar energy solutions that help homeowners and businesses save on energy costs.</p>
+            <p>With over 10 years in the solar industry, we deliver reliable, proven solar energy solutions that help homeowners and businesses save on energy costs.</p>
           </div>
           <div class="why-card">
             <div class="why-icon">
-              <svg viewBox="0 0 30 30" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><circle cx="15" cy="15" r="12"/><path d="M15 8v7l4 4"/></svg>
+              <svg viewBox="0 0 30 30" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><circle cx="15" cy="15" r="12"/><path d="M15 8v7l4 4"/></svg>
             </div>
             <h3>Fast & Efficient Service</h3>
             <p>We understand the urgency of energy savings. Our team designs and installs efficient solar systems quickly, so you can start saving sooner.</p>
           </div>
           <div class="why-card">
             <div class="why-icon">
-              <svg viewBox="0 0 30 30" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><path d="M15 3C8.4 3 3 8.4 3 15s5.4 12 12 12 12-5.4 12-12S21.6 3 15 3zm0 20c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/><path d="M15 11v4l3 3"/></svg>
+              <svg viewBox="0 0 30 30" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><path d="M15 3C8.4 3 3 8.4 3 15s5.4 12 12 12 12-5.4 12-12S21.6 3 15 3zm0 20c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/><path d="M15 11v4l3 3"/></svg>
             </div>
             <h3>Customized Solutions</h3>
             <p>We tailor our solar panel installations to meet your specific energy needs, ensuring maximum efficiency and long-term performance.</p>
           </div>
           <div class="why-card">
             <div class="why-icon">
-              <svg viewBox="0 0 30 30" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><rect x="3" y="8" width="24" height="16" rx="2"/><path d="M20 8V6a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v2"/><path d="M12 17h6"/></svg>
+              <svg viewBox="0 0 30 30" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><rect x="3" y="8" width="24" height="16" rx="2"/><path d="M20 8V6a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v2"/><path d="M12 17h6"/></svg>
             </div>
             <h3>Easy EMI & Financing</h3>
             <p>Flexible payment plans, bank installments, and easy EMI options available to make solar accessible for every household.</p>
           </div>
           <div class="why-card">
             <div class="why-icon">
-              <svg viewBox="0 0 30 30" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><path d="M15 3L6 8v9c0 5.5 3.9 10.7 9 12 5.1-1.3 9-6.5 9-12V8L15 3z"/></svg>
+              <svg viewBox="0 0 30 30" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><path d="M15 3L6 8v9c0 5.5 3.9 10.7 9 12 5.1-1.3 9-6.5 9-12V8L15 3z"/></svg>
             </div>
             <h3>Full Warranty Coverage</h3>
             <p>25-year performance warranty on solar panels, 5-year inverter warranty, and comprehensive AMC packages for peace of mind.</p>
           </div>
           <div class="why-card">
             <div class="why-icon">
-              <svg viewBox="0 0 30 30" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><circle cx="15" cy="15" r="12"/><path d="M9 15l4 4 8-8"/></svg>
+              <svg viewBox="0 0 30 30" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><circle cx="15" cy="15" r="12"/><path d="M9 15l4 4 8-8"/></svg>
             </div>
             <h3>Net Metering Assistance</h3>
             <p>Complete assistance with LESCO/MEPCO net metering applications — we handle the entire paperwork and approval process for you.</p>
@@ -2097,27 +2101,27 @@
         <div class="testi-grid">
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
-            <div class="testi-text">"Amazing service! Installed 10kW system at my factory. Bill went from Rs.85,000 to under Rs.8,000. Best investment ever. Highly recommend Bin Zareen.PVT!"</div>
-            <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Akhtar Hussain</div><div class="testi-loc">Factory Owner, Lahore</div></div></div>
+            <div class="testi-text">"Amazing service! Installed 10kW system at my factory. Bill went from Rs.85,000 to under Rs.8,000. Best investment ever. Highly recommend Bin Zareen Solar!"</div>
+            <div class="testi-author"><div class="testi-avatar">U</div><div><div class="testi-name">Uzair Momand</div><div class="testi-loc">Factory Owner, Islamabad</div></div></div>
           </div>
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
             <div class="testi-text">"Professional team, on-time installation, and great product quality. My 5kW home solar system is working perfectly. They even helped with net metering approval."</div>
-            <div class="testi-author"><div class="testi-avatar">F</div><div><div class="testi-name">Fatima Malik</div><div class="testi-loc">Homeowner, Lahore</div></div></div>
+            <div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Sana Khan</div><div class="testi-loc">Homeowner, Islamabad</div></div></div>
           </div>
           <div class="testi-card">
             <div class="testi-stars">★★★★★</div>
             <div class="testi-text">"Bought a hybrid inverter and lithium batteries. Load shedding is no longer a problem at all. Price was fair and product quality is excellent. Very satisfied!"</div>
-            <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Muhammad Asif</div><div class="testi-loc">Business Owner, Multan</div></div></div>
+            <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Adnan Iqbal</div><div class="testi-loc">Business Owner, Rawalpindi</div></div></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CTA BANNER -->
-    <section style="background:linear-gradient(135deg,var(--red-deep),var(--red-bright));padding:60px 0;text-align:center;color:white;">
+    <section style="background:linear-gradient(135deg,var(--blue-deep),var(--blue-bright));padding:60px 0;text-align:center;color:white;">
       <div class="container">
-        <div style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin-bottom:14px;">
+        <div class="animated-heading">
           Ready to Switch to Solar?
         </div>
         <div style="font-size:1rem;color:rgba(255,255,255,0.8);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;">
@@ -2167,7 +2171,7 @@
           </div>
           <div class="filter-group">
             <h4>Price Range</h4>
-            <input type="range" id="price-range" min="0" max="500000" value="500000" style="width:100%;accent-color:var(--red-mid);" oninput="document.getElementById('price-range-val').textContent = formatPrice(this.value); filterProducts()">
+            <input type="range" id="price-range" min="0" max="500000" value="500000" style="width:100%;accent-color:var(--blue-mid);" oninput="document.getElementById('price-range-val').textContent = formatPrice(this.value); filterProducts()">
             <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--gray-mid);margin-top:6px;">
               <span>Rs. 0</span><span id="price-range-val">Rs. 5,00,000</span>
             </div>
@@ -2180,6 +2184,9 @@
             <label><input type="checkbox" data-filter="brand" value="SolarEdge" checked onchange="filterProducts()"> SolarEdge</label>
             <label><input type="checkbox" data-filter="brand" value="Growatt" checked onchange="filterProducts()"> Growatt</label>
             <label><input type="checkbox" data-filter="brand" value="Volta" checked onchange="filterProducts()"> Volta</label>
+            <label><input type="checkbox" data-filter="brand" value="Honda" checked onchange="filterProducts()"> Honda</label>
+            <label><input type="checkbox" data-filter="brand" value="Yamaha" checked onchange="filterProducts()"> Yamaha</label>
+            <label><input type="checkbox" data-filter="brand" value="APC by Schneider" checked onchange="filterProducts()"> APC by Schneider</label>
           </div>
         </div>
         <div>
@@ -2248,7 +2255,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               <h3>Your cart is empty</h3>
               <p>Add some awesome products to get started!</p>
-              <button class="btn-red" onclick="showPage('products')" style="margin-top:20px;">Shop Now</button>
+              <button class="btn-blue" onclick="showPage('products')" style="margin-top:20px;">Shop Now</button>
             </div>
           </div>
         </div>
@@ -2256,7 +2263,7 @@
           <h3>Order Summary</h3>
           <div id="cart-summary-items"></div>
           <button class="checkout-btn" onclick="showPage('checkout')">Proceed to Checkout →</button>
-          <button onclick="showPage('products')" style="width:100%;margin-top:10px;background:transparent;border:none;color:var(--red-mid);font-weight:700;cursor:pointer;font-size:0.9rem;padding:8px;">← Continue Shopping</button>
+          <button onclick="showPage('products')" style="width:100%;margin-top:10px;background:transparent;border:none;color:var(--blue-mid);font-weight:700;cursor:pointer;font-size:0.9rem;padding:8px;">← Continue Shopping</button>
         </div>
       </div>
     </div>
@@ -2275,30 +2282,30 @@
       <div class="checkout-layout">
         <div>
           <div class="form-card">
-            <h3>📦 Delivery Information</h3>
+            <h3><span class="animated-heading" style="font-size:1.1rem;color:var(--red-highlight);animation:none;">📦</span> Delivery Information</h3>
             <div class="form-grid">
               <div class="form-group"><label>First Name*</label><input type="text" placeholder="Muhammad"></div>
               <div class="form-group"><label>Last Name*</label><input type="text" placeholder="Ali"></div>
             </div>
-            <div class="form-group"><label>Phone Number*</label><input type="tel" placeholder="+92 325 2053313"></div>
+            <div class="form-group"><label>Phone Number*</label><input type="tel" placeholder="+32 52 05 33 13"></div>
             <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
             <div class="form-group"><label>Complete Address*</label><textarea rows="3" placeholder="House No., Street, Area..."></textarea></div>
             <div class="form-grid">
-              <div class="form-group"><label>City*</label><select><option>Lahore</option><option>Multan</option><option>Bahawalpur</option><option>DG Khan</option><option>Karachi</option><option>Islamabad</option></select></div>
-              <div class="form-group"><label>Province*</label><select><option>Punjab</option><option>Sindh</option><option>KPK</option><option>Balochistan</option></select></div>
+              <div class="form-group"><label>City*</label><select><option>Islamabad</option><option>Rawalpindi</option><option>Lahore</option><option>Karachi</option><option>Multan</option><option>Bahawalpur</option></select></div>
+              <div class="form-group"><label>Province*</label><select><option>Islamabad Capital Territory</option><option>Punjab</option><option>Sindh</option><option>KPK</option><option>Balochistan</option></select></div>
             </div>
           </div>
           <div class="form-card">
-            <h3>💳 Payment Method</h3>
+            <h3><span class="animated-heading" style="font-size:1.1rem;color:var(--red-highlight);animation:none;">💳</span> Payment Method</h3>
             <div style="display:grid;gap:12px;">
-              <label style="display:flex;gap:14px;align-items:center;padding:16px;border:2px solid var(--red-light);border-radius:12px;cursor:pointer;background:var(--red-pale);">
-                <input type="radio" name="pay" checked style="accent-color:var(--red-mid);"> <span style="font-weight:600;">Cash on Delivery</span>
+              <label style="display:flex;gap:14px;align-items:center;padding:16px;border:2px solid var(--blue-light);border-radius:12px;cursor:pointer;background:var(--blue-pale);">
+                <input type="radio" name="pay" checked style="accent-color:var(--blue-mid);"> <span style="font-weight:600;">Cash on Delivery</span>
               </label>
               <label style="display:flex;gap:14px;align-items:center;padding:16px;border:1.5px solid #E2E8F0;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="pay" style="accent-color:var(--red-mid);"> <span style="font-weight:600;">Bank Transfer</span>
+                <input type="radio" name="pay" style="accent-color:var(--blue-mid);"> <span style="font-weight:600;">Bank Transfer</span>
               </label>
               <label style="display:flex;gap:14px;align-items:center;padding:16px;border:1.5px solid #E2E8F0;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="pay" style="accent-color:var(--red-mid);"> <span style="font-weight:600;">JazzCash / EasyPaisa</span>
+                <input type="radio" name="pay" style="accent-color:var(--blue-mid);"> <span style="font-weight:600;">JazzCash / EasyPaisa</span>
               </label>
             </div>
           </div>
@@ -2318,9 +2325,9 @@
       <div style="width:90px;height:90px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--red-deep);margin-bottom:12px;">Order Placed Successfully! 🎉</h2>
+      <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--blue-deep);margin-bottom:12px;">Order Placed Successfully! 🎉</h2>
       <p style="font-size:1.05rem;color:var(--gray-mid);max-width:480px;margin:0 auto 36px;">Shukria! Aapka order receive ho gaya hai. Hamari team 2 ghante mein aapko WhatsApp pe confirm karegi.</p>
-      <button class="btn-red" onclick="showPage('home')" style="padding:14px 36px;font-size:1rem;">← Back to Home</button>
+      <button class="btn-blue" onclick="showPage('home')" style="padding:14px 36px;font-size:1rem;">← Back to Home</button>
     </div>
   </div>
 
@@ -2329,7 +2336,7 @@
     <div class="about-hero">
       <div class="container">
         <button class="back-btn" onclick="goBack()" style="background:rgba(255,255,255,0.15);color:white;border-color:transparent;margin-bottom:20px;">← Back</button>
-        <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;margin-bottom:16px;">About Bin Zareen.PVT</div>
+        <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;margin-bottom:16px;">About Bin Zareen Solar Pvt. Ltd.</div>
         <p style="color:rgba(255,255,255,0.75);font-size:1.1rem;max-width:580px;margin:0 auto;">Pakistan mein solar aur power solutions ki bharosa mand company — 10 saal se zyada ka tajurba.</p>
       </div>
     </div>
@@ -2339,36 +2346,36 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" class="about-content-grid">
           <div>
             <div class="section-tag">Our Story</div>
-            <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--red-deep);margin:14px 0 20px;line-height:1.2;">
+            <h2 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--blue-deep);margin:14px 0 20px;line-height:1.2;">
               Powering Pakistan With Clean Energy Since 2014
             </h2>
             <p style="color:var(--gray-dark);line-height:1.8;margin-bottom:16px;">
-              Bin Zareen.PVT was established with a single mission: to make reliable and affordable solar energy accessible to every Pakistani household and business. Starting from Lahore, we have now served over 1,200+ satisfied customers across Punjab.
+              Bin Zareen Solar Pvt. Ltd. was established with a single mission: to make reliable and affordable solar energy accessible to every Pakistani household and business. Starting from Islamabad, we have now served over 1,200+ satisfied customers across the twin cities and beyond.
             </p>
             <p style="color:var(--gray-dark);line-height:1.8;margin-bottom:28px;">
-              We’ve earned a strong reputation for reliability, high-quality installations, and long-term energy savings. Whether you’re a homeowner looking to lower your electricity costs, a business aiming to reduce your carbon footprint, or a property developer integrating green energy, we provide solar systems that are custom-designed, energy-efficient, and built to last. We are authorized dealers of top brands including Jinko Solar, LONGi, Canadian Solar, Growatt, Volta Batteries, and many more — ensuring genuine, certified products with full manufacturer warranties.
+              We’ve earned a strong reputation for reliability, high-quality installations, and long-term energy savings. Whether you’re a homeowner looking to lower your electricity costs, a business aiming to reduce your carbon footprint, or a property developer integrating green energy, we provide solar systems that are custom-designed, energy-efficient, and built to last. We are trusted dealers of top brands — ensuring genuine, certified products with full manufacturer warranties.
             </p>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-              <div style="background:var(--red-pale);border-radius:16px;padding:20px;text-align:center;">
-                <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--red-deep);">1200+</div>
+              <div style="background:var(--blue-pale);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--blue-deep);">1200+</div>
                 <div style="font-size:0.85rem;color:var(--gray-mid);margin-top:4px;">Happy Customers</div>
               </div>
-              <div style="background:var(--red-pale);border-radius:16px;padding:20px;text-align:center;">
-                <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--red-deep);">10+</div>
+              <div style="background:var(--blue-pale);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--blue-deep);">10+</div>
                 <div style="font-size:0.85rem;color:var(--gray-mid);margin-top:4px;">Years Experience</div>
               </div>
-              <div style="background:var(--red-pale);border-radius:16px;padding:20px;text-align:center;">
-                <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--red-deep);">50+</div>
+              <div style="background:var(--blue-pale);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--blue-deep);">50+</div>
                 <div style="font-size:0.85rem;color:var(--gray-mid);margin-top:4px;">Brands Available</div>
               </div>
-              <div style="background:var(--red-pale);border-radius:16px;padding:20px;text-align:center;">
-                <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--red-deep);">25yr</div>
+              <div style="background:var(--blue-pale);border-radius:16px;padding:20px;text-align:center;">
+                <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--blue-deep);">25yr</div>
                 <div style="font-size:0.85rem;color:var(--gray-mid);margin-top:4px;">Panel Warranty</div>
               </div>
             </div>
           </div>
-          <div style="background:var(--red-pale);border-radius:28px;height:400px;display:flex;align-items:center;justify-content:center;">
-            <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/600162814_122093707215176825_4713505872281903544_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=fpDuxHgmcOoQ7kNvwHxzahK&_nc_oc=Adpq5effqkiuiIrDTB5bEuM0TPg3k19S5N2qx8mhlx7j-W9qgqnIVFK3Lw1r56L721J2P1Eo-eOspx4f0XwN-fYA&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=agvjsILREiP_1D3couGMXQ&_nc_ss=7a3a8&oh=00_Af30nwIK1A6yw9jOerP80Igl8TmrAXdXtPCF6lSRcYCU1g&oe=69ED3F52" alt="Bin Zareen.PVT CEO" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:16px;">
+          <div style="background:var(--blue-pale);border-radius:28px;height:400px;display:flex;align-items:center;justify-content:center;">
+            <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/549652592_122095933551042358_7149296960295024277_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=UhJZmpzFzJYQ7kNvwEmjdw6&_nc_oc=AdqvE1IHEw3HoN8q03zWoYaAsooHqgcLkt1jTyMrCPp-lERVPub8lyOixPDMnqLOmzlU4q-_LaeaYa6mBaakNSzo&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=hK2nwHcROvb28NIL3U_DpA&_nc_ss=7b2a8&oh=00_Af1NixGkzY3n1SalYCkPD8aF5aD-0-1URmDN_dArPq14-w&oe=69EEE6EF" alt="Bin Zareen Solar Pvt. Ltd. Director" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:16px;">
           </div>
         </div>
       </div>
@@ -2383,10 +2390,10 @@
         <div class="team-grid">
           <div class="team-card">
             <div class="team-avatar">
-              <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/600162814_122093707215176825_4713505872281903544_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=fpDuxHgmcOoQ7kNvwHxzahK&_nc_oc=Adpq5effqkiuiIrDTB5bEuM0TPg3k19S5N2qx8mhlx7j-W9qgqnIVFK3Lw1r56L721J2P1Eo-eOspx4f0XwN-fYA&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=agvjsILREiP_1D3couGMXQ&_nc_ss=7a3a8&oh=00_Af30nwIK1A6yw9jOerP80Igl8TmrAXdXtPCF6lSRcYCU1g&oe=69ED3F52" alt="M Umair">
+              <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/549652592_122095933551042358_7149296960295024277_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=UhJZmpzFzJYQ7kNvwEmjdw6&_nc_oc=AdqvE1IHEw3HoN8q03zWoYaAsooHqgcLkt1jTyMrCPp-lERVPub8lyOixPDMnqLOmzlU4q-_LaeaYa6mBaakNSzo&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=hK2nwHcROvb28NIL3U_DpA&_nc_ss=7b2a8&oh=00_Af1NixGkzY3n1SalYCkPD8aF5aD-0-1URmDN_dArPq14-w&oe=69EEE6EF" alt="Bin Zareen Solar Director">
             </div>
-            <div class="team-name">M Umair</div>
-            <div class="team-role">CEO & Founder</div>
+            <div class="team-name">Uzair Momand</div>
+            <div class="team-role">Director</div>
             <p style="font-size:0.8rem;color:var(--gray-mid);margin-top:10px;line-height:1.6;">Leading our vision with a decade of experience in renewable energy solutions.</p>
           </div>
           <div class="team-card">
@@ -2396,8 +2403,8 @@
              <p style="font-size:0.8rem;color:var(--gray-mid);margin-top:10px;line-height:1.6;">Ensuring cutting-edge technology and seamless installations.</p>
           </div>
           <div class="team-card">
-            <div class="team-avatar">U</div>
-            <div class="team-name">Usman Khan</div>
+            <div class="team-avatar">A</div>
+            <div class="team-name">Adnan Iqbal</div>
             <div class="team-role">Sales Manager</div>
              <p style="font-size:0.8rem;color:var(--gray-mid);margin-top:10px;line-height:1.6;">Your go-to for personalized solutions and exceptional service.</p>
           </div>
@@ -2427,35 +2434,35 @@
           <h2>Get In Touch</h2>
           <p style="color:var(--gray-mid);line-height:1.8;margin-bottom:32px;">Free consultation, site survey, and product demo available. Just call or message us on WhatsApp!</p>
           <div class="contact-item">
-            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red-mid)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3.22H6.6a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.9a16 16 0 0 0 6.1 6.1l.94-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-            <div><div class="contact-label">Phone / WhatsApp</div><div class="contact-val"><a href="tel:+923252053313" style="color:var(--text);text-decoration:none;">+92 325 2053313</a> <a href="https://wa.me/923252053313" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">(Chat: +92 325 2053313)</a></div></div>
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-mid)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3.22H6.6a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.9a16 16 0 0 0 6.1 6.1l.94-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><div class="contact-label">Phone / WhatsApp</div><div class="contact-val"><a href="tel:+3252053313" style="color:var(--text);text-decoration:none;">+32 52 05 33 13</a> <a href="https://wa.me/3252053313" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">(Chat: +32 52 05 33 13)</a></div></div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red-mid)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><div class="contact-label">Email</div><div class="contact-val">binzareen@gmail.com</div></div>
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-mid)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="contact-label">Email</div><div class="contact-val">binzareensolar@gmail.com</div></div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red-mid)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><div class="contact-label">Address</div><div class="contact-val">Imran Plaza, Near Jillani Stop, In Front of Attock Pump, Main Murree road Bharakahu, Islamabad, Pakistan, 45400</div></div>
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-mid)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="contact-label">Address</div><div class="contact-val">Islamabad Branch, 04403</div></div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--red-mid)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue-mid)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <div><div class="contact-label">Working Hours</div><div class="contact-val">Mon–Sat: 9AM – 6PM</div></div>
           </div>
         </div>
         <div class="form-card" style="margin-top:0;">
           <h3>📩 Send Us a Message</h3>
-          <div class="form-group"><label>Your Name*</label><input type="text" placeholder="Muhammad Ali"></div>
-          <div class="form-group"><label>Phone*</label><input type="tel" placeholder="+92 325 2053313"></div>
+          <div class="form-group"><label>Your Name*</label><input type="text" placeholder="Uzair Momand"></div>
+          <div class="form-group"><label>Phone*</label><input type="tel" placeholder="+32 52 05 33 13"></div>
           <div class="form-group"><label>Subject</label><input type="text" placeholder="Solar system inquiry"></div>
           <div class="form-group"><label>Message*</label><textarea rows="5" placeholder="Describe your power needs..."></textarea></div>
-          <button class="btn-red" style="width:100%;" onclick="sendMessage()">Send Message →</button>
+          <button class="btn-blue" style="width:100%;" onclick="sendMessage()">Send Message →</button>
         </div>
       </div>
     </div>
     <!-- Live Map Embed -->
     <div style="width:100%; height:400px; margin-top: 20px;">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.646961448028!2d73.13601137577543!3d33.72252197325492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfb5a222370725%3A0x8677c7329d4d82b3!2sImran%20Plaza%2C%20Main%20Murree%20Rd%2C%20Bhara%20Kahu%2C%20Islamabad%2C%20Islamabad%20Capital%20Territory%2C%20Pakistan!5e0!3m2!1sen!2s!4v1718556000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3320.73411009425!2d73.09799857500001!3d33.67921730000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbf1f00000001%3A0x450e7731e96d234b!2sIslamabad%20Capital%20Territory!5e0!3m2!1sen!2s!4v1718535000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 
@@ -2473,37 +2480,37 @@
         <div class="services-grid">
           <div class="service-card">
             <div class="service-icon">
-              <img src="https://media.istockphoto.com/id/1681913304/photo/close-up-of-solar-cell.webp?a=1&b=1&s=612x612&w=0&k=20&c=VgZiLWm6zW5u_PfhYeMO013lOrXkbhdmYfrXzZu5IwM=" alt="Solar Panel Installation">
+              <img src="https://images.unsplash.com/photo-1584277261846-c6a1672ed979?w=600&auto=format&fit=crop" alt="Solar Panel Installation">
             </div>
             <h3>Solar Panel Installation</h3>
             <p>Professional rooftop and ground-mount solar panel installation with certified engineers. Includes full wiring, mounting, and commissioning within 48 hours.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">
-              <img src="https://images.unsplash.com/photo-1697665896701-1b8bd594f860?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW52ZXJ0ZXJzfGVufDB8fDB8fHww" alt="Solar System Optimization">
+              <img src="https://images.unsplash.com/photo-1697665896701-1b8bd594f860?w=600&auto=format&fit=crop" alt="Solar System Optimization">
             </div>
             <h3>Solar System Optimization</h3>
             <p>Maximize your energy savings by optimizing your solar panel system for peak performance and efficiency.</p>
           </div>
           <div class="service-card">
             <div class="service-icon">
-              <img src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29tcGxldGUl20step%20installation%20solar|service" alt="Installation Service">
+              <img src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?w=600&auto=format&fit=crop" alt="Installation Service">
             </div>
             <h3>Complete Installation Service</h3>
             <p>You can save a lot in your electricity bill with our solar. Our expert are here to save you!</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><svg viewBox="0 0 40 40" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><circle cx="20" cy="20" r="4"/><path d="M20 8v4M20 28v4M8 20h4M28 20h4M11.5 11.5l2.8 2.8M25.7 25.7l2.8 2.8M28.5 11.5l-2.8 2.8M14.3 25.7l-2.8 2.8"/></svg></div>
+            <div class="service-icon"><svg viewBox="0 0 40 40" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><circle cx="20" cy="20" r="4"/><path d="M20 8v4M20 28v4M8 20h4M28 20h4M11.5 11.5l2.8 2.8M25.7 25.7l2.8 2.8M28.5 11.5l-2.8 2.8M14.3 25.7l-2.8 2.8"/></svg></div>
             <h3>Commercial Solar Installations</h3>
             <p>Tailored solar solutions for businesses and industrial setups to significantly reduce operational costs and carbon footprint.</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><svg viewBox="0 0 40 40" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><path d="M14 14H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2h-6"/><rect x="14" y="8" width="12" height="8" rx="2"/></svg></div>
+            <div class="service-icon"><svg viewBox="0 0 40 40" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><path d="M14 14H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2h-6"/><rect x="14" y="8" width="12" height="8" rx="2"/></svg></div>
             <h3>System Repair & Troubleshooting</h3>
             <p>Quick diagnosis and repair of existing solar systems regardless of brand. Our technicians carry all major spare parts for same-day resolution.</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><svg viewBox="0 0 40 40" fill="none" stroke="var(--red-mid)" stroke-width="2.5"><path d="M12 20H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h24a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4"/><path d="M20 20v14"/><path d="M14 28l6 6 6-6"/></svg></div>
+            <div class="service-icon"><svg viewBox="0 0 40 40" fill="none" stroke="var(--blue-mid)" stroke-width="2.5"><path d="M12 20H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h24a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4"/><path d="M20 20v14"/><path d="M14 28l6 6 6-6"/></svg></div>
             <h3>Battery Backup Solutions</h3>
             <p>Custom battery bank design and installation for load shedding protection. Lithium ion, gel, and lead acid options available for all budgets.</p>
           </div>
@@ -2519,9 +2526,9 @@
         <div class="footer-brand">
           <div class="footer-logo">
             <div class="footer-logo-icon">
-              <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/600162814_122093707215176825_4713505872281903544_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=fpDuxHgmcOoQ7kNvwHxzahK&_nc_oc=Adpq5effqkiuiIrDTB5bEuM0TPg3k19S5N2qx8mhlx7j-W9qgqnIVFK3Lw1r56L721J2P1Eo-eOspx4f0XwN-fYA&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=agvjsILREiP_1D3couGMXQ&_nc_ss=7a3a8&oh=00_Af30nwIK1A6yw9jOerP80Igl8TmrAXdXtPCF6lSRcYCU1g&oe=69ED3F52" alt="Bin Zareen.PVT Logo">
+              <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/549652592_122095933551042358_7149296960295024277_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=UhJZmpzFzJYQ7kNvwEmjdw6&_nc_oc=AdqvE1IHEw3HoN8q03zWoYaAsooHqgcLkt1jTyMrCPp-lERVPub8lyOixPDMnqLOmzlU4q-_LaeaYa6mBaakNSzo&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=hK2nwHcROvb28NIL3U_DpA&_nc_ss=7b2a8&oh=00_Af1NixGkzY3n1SalYCkPD8aF5aD-0-1URmDN_dArPq14-w&oe=69EEE6EF" alt="Bin Zareen Solar Logo">
             </div>
-            <div class="footer-company-name">Bin Zareen.PVT <small>Premium Solar Solutions</small></div>
+            <div class="footer-company-name">Bin . Zareen  <small> Pvt. Ltd.</small></div>
           </div>
           <p class="footer-desc">
             Pakistan ki bharosa mand solar & power solutions company. Ghar, dukaan, aur factory ke liye complete energy solutions.
@@ -2529,7 +2536,7 @@
           <div class="footer-social">
             <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
             <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-            <a href="https://wa.me/923252053313" target="_blank" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
+            <a href="https://wa.me/3252053313" target="_blank" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
             <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96C1 8.15 1 12 1 12s0 3.85.46 5.58a2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.97C23 15.85 23 12 23 12s0-3.85-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
           </div>
         </div>
@@ -2559,11 +2566,11 @@
           <h4>Contact Info</h4>
           <div class="footer-contact-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3.22H6.6a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.9a16 16 0 0 0 6.1 6.1l.94-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>+92 325 2053313 (WhatsApp)</span>
+            <span>+32 52 05 33 13<br>+32 52 05 33 13 (WhatsApp)</span>
           </div>
           <div class="footer-contact-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>Imran Plaza, Near Jillani Stop, In Front of Attock Pump,<br>Main Murree road Bharakahu, Islamabad, Pakistan, 45400</span>
+            <span>Islamabad Branch,<br>04403</span>
           </div>
           <div class="footer-contact-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -2572,7 +2579,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copy">© 2025 Bin Zareen.PVT. All rights reserved.</div>
+        <div class="footer-copy">© 2024 Bin Zareen Pvt. Ltd. All rights reserved.</div>
         <div class="footer-payment">
           <span style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-right:4px;">We Accept:</span>
           <span class="pay-badge">JazzCash</span>
@@ -2587,7 +2594,7 @@
 </div><!-- END APP -->
 
 <!-- WhatsApp Float -->
-<a href="https://wa.me/923252053313" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/3252053313" class="whatsapp-float" target="_blank">
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
 </a>
 
@@ -2595,72 +2602,50 @@
 <div class="toast" id="toast">✓ Added to cart!</div>
 
 <script>
-
 // ============================================================
-// DATA: HARDCODED FALLBACK PRODUCTS (UPDATED WITH NEW IMAGES)
+// DATA: ALL PRODUCTS
 // ============================================================
-window.allProducts = [
+const allProducts = [
   // SOLAR PANELS
-  { 
-    id: 1, name: 'Jinko Solar 550W Mono PERC Panel', cat: 'solar-panels', catLabel: 'Solar Panels', price: 18500, oldPrice: 20000,
-    desc: '550W monocrystalline PERC panel with 25-year performance warranty. Tier 1 brand.', 
-    datasheetText: 'Electrical Characteristics:\n- Maximum Power (Pmax): 550W\n- Maximum Power Voltage (Vmp): 40.90V\n- Maximum Power Current (Imp): 13.45A\n- Open-circuit Voltage (Voc): 49.62V\n- Short-circuit Current (Isc): 14.03A\n- Module Efficiency STC (%): 21.33%\n- Operating Temperature (℃): -40℃~+85℃\n\nMechanical Characteristics:\n- Cell Type: P type Mono-crystalline\n- No. of cells: 144 (6×24)\n- Dimensions: 2274×1134×35mm\n- Weight: 28.9 kg\n- Front Glass: 3.2mm, Anti-Reflection Coating\n- Frame: Anodized Aluminium Alloy\n- Junction Box: IP68 Rated\n- Output Cables: TUV 1×4.0mm2\n\nWarranty:\n12-year product warranty\n25-year linear power warranty.',
-    pdfLink: 'https://www.jinkosolar.com/uploads/550W-Datasheet.pdf',
-    badge: 'Best Seller', brand: 'Jinko Solar', 
-    img: 'https://media.istockphoto.com/id/1681913304/photo/close-up-of-solar-cell.webp?a=1&b=1&s=612x612&w=0&k=20&c=VgZiLWm6zW5u_PfhYeMO013lOrXkbhdmYfrXzZu5IwM=', 
-    specs: { Power: '550W', Type: 'Monocrystalline PERC', Efficiency: '21.3%', Warranty: '25 Years' } 
-  },
-  { 
-    id: 2, name: 'LONGi Green 580W Hi-MO6', cat: 'solar-panels', catLabel: 'Solar Panels', price: 21000, 
-    desc: 'Latest LONGi Hi-MO6 technology with superior low-light performance. Anti-PID.', 
-    datasheetText: 'Advanced N-Type TOPCon cell technology. High efficiency up to 22.1%. Better degradation resistance. Complete protection against harsh weather environments including salt mist and ammonia. Built for long-term reliability.',
-    badge: 'New', brand: 'LONGi', 
-    img: 'https://media.istockphoto.com/id/2169667626/photo/solar-powered-home-close-up.webp?a=1&b=1&s=612x612&w=0&k=20&c=I8rJionDe2nhREMQC-crqQLrjpsOE4vddyDD0Uu8NvU=', 
-    specs: { Power: '580W', Type: 'N-Type TOPCon', Efficiency: '22.1%', Warranty: '25 Years' } 
-  },
-  { 
-    id: 3, name: 'Canadian Solar 540W BiHiKu6', cat: 'solar-panels', catLabel: 'Solar Panels', price: 19500, 
-    desc: 'Bifacial solar panel with up to 30% extra energy gain from rear side reflection.', badge: null, brand: 'Canadian Solar', 
-    img: 'https://plus.unsplash.com/premium_photo-1679917152562-09bb29e555c1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHNvbGFyJTIwcGFuZWx8ZW58MHx8MHx8fDA%3D', 
-    specs: { Power: '540W', Type: 'Bifacial PERC', Efficiency: '20.9%', Warranty: '25 Years' } 
-  },
-  { 
-    id: 4, name: 'Risen Energy 500W RSM Poly', cat: 'solar-panels', catLabel: 'Solar Panels', price: 14000, 
-    desc: 'Reliable polycrystalline panels ideal for budget-conscious installations.', badge: null, brand: 'Risen Energy', 
-    img: 'https://media.istockphoto.com/id/1681913304/photo/close-up-of-solar-cell.webp?a=1&b=1&s=612x612&w=0&k=20&c=VgZiLWm6zW5u_PfhYeMO013lOrXkbhdmYfrXzZu5IwM=', 
-    specs: { Power: '500W', Type: 'Polycrystalline', Efficiency: '18.7%', Warranty: '25 Years' } 
-  },
+  { id: 1, name: 'Jinko Solar 550W Mono PERC Panel', cat: 'solar-panels', catLabel: 'Solar Panels', price: 18500, desc: '550W monocrystalline PERC panel with 25-year performance warranty. Tier 1 brand.', badge: 'Best Seller', brand: 'Jinko Solar', specs: { Power: '550W', Type: 'Monocrystalline PERC', Efficiency: '21.3%', Warranty: '25 Years', 'Max Voltage': '41.8V', Weight: '28kg' }, img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?fm=jpg&q=60&w=600&auto=format&fit=contain&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c29sYXIlMjBwYW5lbHxlbnwwfHwwfHx8MA%3D%3D' },
+  { id: 2, name: 'LONGi Green 580W Hi-MO6', cat: 'solar-panels', catLabel: 'Solar Panels', price: 21000, desc: 'Latest LONGi Hi-MO6 technology with superior low-light performance. Anti-PID.', badge: 'New', brand: 'LONGi', specs: { Power: '580W', Type: 'N-Type TOPCon', Efficiency: '22.1%', Warranty: '25 Years', 'Max Voltage': '43.2V', Weight: '29kg' }, img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?fm=jpg&q=60&w=600&auto=format&fit=contain&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c29sYXIlMjBwYW5lbHN8ZW58MHx8MHx8fDA%3D' },
+  { id: 3, name: 'Canadian Solar 540W BiHiKu6', cat: 'solar-panels', catLabel: 'Solar Panels', price: 19500, desc: 'Bifacial solar panel with up to 30% extra energy gain from rear side reflection. Anti-PID.', badge: null, brand: 'Canadian Solar', specs: { Power: '540W', Type: 'Bifacial PERC', Efficiency: '20.9%', Warranty: '25 Years', 'Max Voltage': '40.5V', Weight: '27.5kg' }, img: 'https://images.unsplash.com/photo-1584277261846-c6a1672ed979?fm=jpg&q=60&w=600&auto=format&fit=contain&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29sYXIlMjBwYW5lbHN8ZW58MHx8MHx8fDA%3D' },
+  { id: 4, name: 'Risen Energy 500W RSM Poly', cat: 'solar-panels', catLabel: 'Solar Panels', price: 14000, desc: 'Reliable polycrystalline panels ideal for budget-conscious installations. Grade A quality.', badge: null, brand: 'Risen Energy', specs: { Power: '500W', Type: 'Polycrystalline', Efficiency: '18.7%', Warranty: '25 Years', 'Max Voltage': '37.6V', Weight: '26.5kg' }, img: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?fm=jpg&q=60&w=600&auto=format&fit=contain&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fHNvbGFyJTIwcGFuZWx8ZW58MHx8MHx8fDA%3D' },
 
   // INVERTERS
-  { id: 5, name: 'Growatt SPH 5000 Hybrid Inverter', cat: 'inverters', catLabel: 'Inverters', price: 95000, oldPrice: 105000, desc: '5kW hybrid solar inverter with built-in MPPT.', datasheetText: 'Max. DC Voltage: 550V\nStart Voltage: 150V\nNominal DC Voltage: 360V\nMPPT Voltage Range: 150V-550V\nNo. of MPP Trackers: 2\nMax. Input Current per Tracker: 12A\nAC Nominal Power: 5000W\nMax. AC Apparent Power: 5000VA\nNominal AC Voltage: 230V\nAC Grid Frequency: 50/60Hz', pdfLink: 'https://example.com/growatt-5kw.pdf', badge: 'Best Seller', brand: 'Growatt', img: 'https://kamalsolar.pk/cdn/shop/files/Knox04KWHybrid_1-min_750x.png?v=1737898390', specs: { Power: '5000W', Type: 'Hybrid', Warranty: '5 Years' } },
-  { id: 6, name: 'SolarEdge SE10K On-Grid Inverter', cat: 'inverters', catLabel: 'Inverters', price: 145000, desc: '10kW premium on-grid inverter with DC optimizers.', badge: 'Premium', brand: 'SolarEdge', img: 'https://kamalsolar.pk/cdn/shop/files/Knox_03KW_Hybrid_1_750x.png?v=1738083132', specs: { Power: '10000W', Type: 'On-Grid', Warranty: '12 Years' } },
-  { id: 8, name: 'Deye 8kW Hybrid 3-Phase', cat: 'inverters', catLabel: 'Inverters', price: 185000, desc: '3-phase hybrid inverter for commercial installations.', badge: 'Commercial', brand: 'Deye', img: 'https://kamalsolar.pk/cdn/shop/files/Knox_03KW_Hybrid_1_750x.png?v=1738083132', specs: { Power: '8000W', Type: 'Hybrid 3-Phase', Warranty: '5 Years' } },
+  { id: 5, name: 'Growatt SPH 5000 Hybrid Inverter', cat: 'inverters', catLabel: 'Inverters', price: 95000, desc: '5kW hybrid solar inverter with built-in MPPT and battery management. Wi-Fi monitoring.', badge: 'Best Seller', brand: 'Growatt', specs: { Power: '5000W', Type: 'Hybrid (On/Off Grid)', 'MPPT Channels': '2', 'Max PV Input': '6500W', Battery: '48V Li/Lead', Warranty: '5 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/Frame_164_1_1_510x.png?v=1737897719' },
+  { id: 6, name: 'SolarEdge SE10K On-Grid Inverter', cat: 'inverters', catLabel: 'Inverters', price: 145000, desc: '10kW premium on-grid inverter with DC optimizers for maximum energy harvest.', badge: 'Premium', brand: 'SolarEdge', specs: { Power: '10000W', Type: 'On-Grid', Efficiency: '99.2%', 'MPPT Range': '200-750V', 'IP Rating': 'IP65', Warranty: '12 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/Fronus6KWPV6000WithNetmeteringOffGridSolarInverter_1066x.png?v=1754204638' },
+  { id: 7, name: 'Solis 3.6kW Off-Grid Inverter', cat: 'inverters', catLabel: 'Inverters', price: 62000, desc: 'Pure sine wave off-grid inverter ideal for rural areas and load shedding protection.', badge: null, brand: 'Solis', specs: { Power: '3600W', Type: 'Off-Grid', 'Output Voltage': '220V AC', 'Battery Voltage': '24V', 'Surge Power': '7200W', Warranty: '5 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/EnvyPV9000_1066x.png?v=1767696239' },
+  { id: 8, name: 'Deye 8kW Hybrid 3-Phase', cat: 'inverters', catLabel: 'Inverters', price: 185000, desc: '3-phase hybrid inverter for commercial and industrial solar installations.', badge: 'Commercial', brand: 'Deye', specs: { Power: '8000W', Type: 'Hybrid 3-Phase', 'MPPT Channels': '2×2', 'Max PV Input': '12000W', Battery: '48V LiFePO4', Warranty: '5 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/Knox6KWpv8000Hybrid_59db06cd-306f-4afd-980a-645934a4a6b7_1066x.png?v=1752058053' },
 
   // BATTERIES
-  { id: 9, name: 'Pylon Tech US3000C 3.5kWh LiFePO4', cat: 'batteries', catLabel: 'Batteries', price: 115000, desc: 'Lithium iron phosphate battery with 6000+ cycles.', badge: 'Premium', brand: 'Pylontech', img: 'https://kamalsolar.pk/cdn/shop/files/Knox_03KW_Hybrid_1_-min_750x.png?v=1737954600', specs: { Capacity: '3.5kWh', Voltage: '48V', Warranty: '10 Years' } },
-  { id: 10, name: 'Volta 200Ah AGM Battery', cat: 'batteries', catLabel: 'Batteries', price: 28000, desc: 'Maintenance-free sealed AGM battery.', badge: 'Popular', brand: 'Volta', img: 'https://t4.ftcdn.net/jpg/04/95/13/69/360_F_495136962_fxansiKO1v1KC15PS8WLAK85aD0Ag1Kq.jpg', specs: { Capacity: '200Ah', Voltage: '12V', Warranty: '2 Years' } },
+  { id: 9, name: 'Pylon Tech US3000C 3.5kWh LiFePO4', cat: 'batteries', catLabel: 'Batteries', price: 115000, desc: 'Lithium iron phosphate battery with 6000+ cycles. Safe, reliable, stackable design.', badge: 'Premium', brand: 'Pylontech', specs: { Capacity: '3.5kWh', Type: 'LiFePO4 Lithium', Cycles: '6000+', Voltage: '48V', 'Depth of Discharge': '95%', Warranty: '10 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/DynessLithiumBattery51.2V100Amp_1066x.png?v=1763548804' },
+  { id: 10, name: 'Volta 200Ah AGM Battery', cat: 'batteries', catLabel: 'Batteries', price: 28000, desc: 'Maintenance-free sealed AGM battery. Deep cycle design for solar applications.', badge: 'Popular', brand: 'Volta', specs: { Capacity: '200Ah', Type: 'AGM Sealed', Voltage: '12V', 'Cycles (50% DoD)': '800+', Weight: '62kg', Warranty: '2 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/Powerwall3.025.6v100A_1066x.png?v=1762176444' },
+  { id: 11, name: 'Tesla Powerwall-Style 10kWh Pack', cat: 'batteries', catLabel: 'Batteries', price: 380000, desc: 'High-capacity wall-mounted lithium battery for whole-home backup power storage.', badge: 'New', brand: 'Generic Li-Ion', specs: { Capacity: '10kWh', Type: 'NMC Lithium', Cycles: '4000+', Voltage: '48V', 'Usable Energy': '9.5kWh', Warranty: '10 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/51.2100AmpIP20_1066x.png?v=1770548600' },
+  { id: 12, name: 'Phoenix 120Ah Gel Battery', cat: 'batteries', catLabel: 'Batteries', price: 16500, desc: 'Budget-friendly gel battery for UPS and small solar systems. Spill-proof design.', badge: null, brand: 'Phoenix', specs: { Capacity: '120Ah', Type: 'GEL', Voltage: '12V', Weight: '38kg', 'Self Discharge': '<3%/month', Warranty: '18 Months' }, img: 'https://kamalsolar.pk/cdn/shop/files/51.2100AmpIP20_1066x.png?v=1770548600' },
 
   // GENERATORS
-  { id: 13, name: 'Honda EP2500 2.5kVA Generator', cat: 'generators', catLabel: 'Generators', price: 85000, desc: 'Reliable Honda petrol generator with OHC engine.', badge: 'Best Seller', brand: 'Honda', img: 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?w=600&auto=format&fit=crop&q=60', specs: { Power: '2500VA', Fuel: 'Petrol', Warranty: '2 Years' } },
-
+  { id: 13, name: 'Honda EP2500 2.5kVA Generator', cat: 'generators', catLabel: 'Generators', price: 85000, desc: 'Reliable Honda petrol generator with OHC engine. Ideal for homes and small shops.', badge: 'Best Seller', brand: 'Honda', specs: { Power: '2500VA', Engine: 'Honda OHC 4-stroke', Fuel: 'Petrol', Runtime: '7 hours (75%)', Weight: '45kg', Warranty: '2 Years' }, img: 'https://www.shutterstock.com/image-photo/backup-power-supply-generator-industrial-260nw-2518137373.jpg' },
+  { id: 14, name: 'Yamaha EF6600DE 6.5kVA Digital', cat: 'generators', catLabel: 'Generators', price: 145000, desc: 'Digital inverter generator with clean power output. Extra quiet with electric start.', badge: 'Premium', brand: 'Yamaha', specs: { Power: '6600VA', Engine: 'Yamaha 4-stroke', Fuel: 'Petrol', Runtime: '9.5 hours', Noise: '68dB', Warranty: '2 Years' }, img: 'https://www.shutterstock.com/image-photo/whole-home-gas-powered-electricity-generator-2565046773?trackingId=60c2f4f5-babc-4a88-be0a-f4ceac10c6d7&listId=searchResults' },
+  { id: 15, name: 'Perkins 10kVA Diesel Generator', cat: 'generators', catLabel: 'Generators', price: 320000, desc: 'Industrial-grade Perkins diesel generator for continuous commercial power backup.', badge: 'Industrial', brand: 'Perkins', specs: { Power: '10000VA', Engine: 'Perkins 403D', Fuel: 'Diesel', Runtime: '14 hours', Alternator: 'Stamford', Warranty: '2 Years' }, img: 'https://www.shutterstock.com/image-3d-object/generator-2297646969?trackingId=60c2f4f5-babc-4a88-be0a-f4ceac10c6d7&listId=searchResults'} ,
+  
   // UPS SYSTEMS
-  { id: 16, name: 'APC Smart-UPS 2kVA Online', cat: 'ups', catLabel: 'UPS Systems', price: 72000, desc: 'True online double-conversion UPS for servers.', badge: 'Best Seller', brand: 'APC', img: 'https://images.unsplash.com/photo-1604251806132-6b149e8e6730?w=600&auto=format&fit=crop&q=60', specs: { Power: '2000VA', Transfer: '0ms', Warranty: '2 Years' } },
+  { id: 16, name: 'APC Smart-UPS 2kVA Online', cat: 'ups', catLabel: 'UPS Systems', price: 72000, desc: 'True online double-conversion UPS for servers and critical equipment. Zero transfer time.', badge: 'Best Seller', brand: 'APC by Schneider', specs: { Power: '2000VA / 1800W', Type: 'True Online (Double Conversion)', Runtime: '15 min (50%)', Transfer: '0ms', 'LCD Display': 'Yes', Warranty: '2 Years' }, img: 'https://media.istockphoto.com/id/2260641873/photo/a-man-installing-a-replacement-battery-pack-for-an-uninterruptible-power-supply-or-ups-unit.webp?a=1&b=1&s=612x612&w=0&k=20&c=kws-aC1Mk-_tlqeRFn7LkqiJgBjd5se7UoBAwiqdsZU=' },
+  { id: 17, name: 'Homage 3kVA Solar UPS', cat: 'ups', catLabel: 'UPS Systems', price: 38000, desc: 'Solar-compatible UPS with built-in MPPT controller. Perfect for solar+grid hybrid setups.', badge: 'Solar Compatible', brand: 'Homage', specs: { Power: '3000VA / 2400W', Type: 'Modified Sine Wave', 'Solar Input': 'MPPT 24V', 'Battery Voltage': '24V', Transfer: '<5ms', Warranty: '1 Year' }, img: 'https://media.istockphoto.com/id/2249502299/photo/a-man-installing-a-replacement-battery-pack-for-an-uninterruptible-power-supply-or-ups-unit.webp?a=1&b=1&s=612x612&w=0&k=20&c=juvbEd6mQRAH67au9N8NqklEQZm6_eHYJeOfOpODDRk=' },
+  { id: 18, name: 'Luminous 5kVA Solar Inverter UPS', cat: 'ups', catLabel: 'UPS Systems', price: 65000, desc: 'Heavy-duty solar UPS for running AC, fridge, fans and full home appliances.', badge: 'Heavy Duty', brand: 'Luminous', specs: { Power: '5000VA / 4000W', Type: 'Pure Sine Wave', 'Solar MPPT': '100A', 'Battery Banks': '48V', Warranty: '2 Years', Output: '220V AC' }, img: 'https://media.istockphoto.com/id/172991219/photo/ups.webp?a=1&b=1&s=612x612&w=0&k=20&c=3ZqJkGHjc8RxKOXuNNeI1bBFzKrJX53oqyGJ1gRUZ7M=' },
 
   // WATER PUMPS
-  { id: 19, name: 'Lorentz PS2 Solar Water Pump', cat: 'water-pumps', catLabel: 'Water Pumps', price: 45000, desc: 'DC solar submersible pump for agricultural use. Works directly on solar panels.', badge: 'Agricultural', brand: 'Lorentz', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwNSNqd3HvUNyb_sxvdXLiwlTREaSquRNu2g&s', specs: { Flow: '3m³/hour', MaxHead: '80m', Warranty: '3 Years' } },
-  { id: 20, name: 'Grundfos SQ Solar Pump System', cat: 'water-pumps', catLabel: 'Water Pumps', price: 68000, desc: 'Complete solar pump system for bore holes up to 100m depth.', badge: 'Complete Kit', brand: 'Grundfos', img: 'https://t3.ftcdn.net/jpg/02/39/23/98/360_F_239239871_989YEqgLnwsEDqoW3GpMXCl0NWxJHLyG.jpg', specs: { Flow: '5m³/hour', MaxHead: '100m', Warranty: '2 Years' } },
+  { id: 19, name: 'Lorentz PS2 Solar Water Pump', cat: 'water-pumps', catLabel: 'Water Pumps', price: 45000, desc: 'DC solar submersible pump for agricultural use. Works directly on solar panels, no battery needed.', badge: 'Agricultural', brand: 'Lorentz', specs: { Flow: '3m³/hour', 'Max Head': '80m', Power: 'DC Solar Direct', Motor: 'Brushless DC', 'Solar Input': '48-150V', Warranty: '3 Years' }, img: 'https://plus.unsplash.com/premium_photo-1661946906973-b9d3ce2c6055?w=600&auto=format&fit=crop' },
+  { id: 20, name: 'Grundfos SQ Solar Pump System', cat: 'water-pumps', catLabel: 'Water Pumps', price: 68000, desc: 'Complete solar pump system with controller, for bore holes up to 100m depth.', badge: 'Complete Kit', brand: 'Grundfos', specs: { Flow: '5m³/hour', 'Max Head': '100m', Depth: '100m Max', Power: 'DC/AC', Protection: 'IP68', Warranty: '2 Years' }, img: 'https://media.istockphoto.com/id/2207376997/photo/water-pumps-in-a-large-power-plant.webp?a=1&b=1&s=612x612&w=0&k=20&c=bFAZXTfXJbYd2x9fuDran_mpTeJkID2UisPndn51Y0Y=' },
 
   // CABLES & WIRES
-  { id: 21, name: 'Copper Wires (10mm)', cat: 'cables-wires', catLabel: 'Cables & Wires', price: 2200, desc: 'High-quality copper wires for solar installations, resistant to heat.', badge: 'Best Seller', brand: 'Generic', img: 'https://www.kei-ind.com/wp-content/uploads/2023/06/benefits-and-types-of-electrical-wire.jpg', specs: { Type: 'Copper', Gauge: '10mm', Length: '100m Roll' } },
-  { id: 22, name: 'Solar DC Cable (4mm² Red/Black)', cat: 'cables-wires', catLabel: 'Cables & Wires', price: 1500, desc: 'UV resistant solar DC cables for connecting panels to inverters.', badge: null, brand: 'Generic', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDQj28oqGt0eDXHXLW3R69L3_n-fd28B6Frw&s', specs: { Type: 'Solar DC', Gauge: '4mm²', UVResistant: 'Yes' } },
-
-  // SERVICES
-  { id: 101, name: 'Home Solar Installation', cat: 'installation', catLabel: 'Installation', price: 50000, desc: 'Professional rooftop installation for standard home systems.', badge: 'Popular', brand: 'ZM Solar', img: 'https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?w=600&auto=format&fit=crop&q=60', isService: true },
-  { id: 102, name: 'Commercial Installation', cat: 'installation', catLabel: 'Installation', price: 150000, desc: 'Large scale commercial solar installations.', badge: null, brand: 'ZM Solar', img: 'https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?w=600&auto=format&fit=crop&q=60', isService: true }
-
+  { id: 21, name: 'Durable Copper Wires (10mm)', cat: 'cables-wires', catLabel: 'Cables & Wires', price: 2200, desc: 'High-quality copper wires for solar installations, resistant to heat and corrosion.', badge: 'Best Seller', brand: 'Generic', specs: { Type: 'Copper', Gauge: '10mm', Length: '100m Roll', 'Max Current': '50A', Insulation: 'PVC', Warranty: '1 Year' }, img: 'https://media.istockphoto.com/id/144349803/photo/cables.webp?a=1&b=1&s=612x612&w=0&k=20&c=lmXY14g60EBdjxuUu1HwePpu8Fzl5kAYf7ZAIG4bXEU=' },
+  { id: 22, name: 'Solar DC Cable (4mm² Red/Black)', cat: 'cables-wires', catLabel: 'Cables & Wires', price: 1500, desc: 'UV resistant solar DC cables for connecting panels to inverters. Sold per meter or roll.', badge: null, brand: 'Generic', specs: { Type: 'Solar DC', Gauge: '4mm²', Color: 'Red/Black', 'UV Resistant': 'Yes', 'Max Voltage': '1000V DC', Warranty: '2 Years' }, img: 'https://media.istockphoto.com/id/144349803/photo/cables.webp?a=1&b=1&s=612x612&w=0&k=20&c=lmXY14g60EBdjxuUu1HwePpu8Fzl5kAYf7ZAIG4bXEU=' },
   
-  
-  
+  // INSTALLATION / SERVICES MOCK PRODUCTS (For Carousel loop)
+  { id: 101, name: 'Home Solar Installation', cat: 'installation', catLabel: 'Installation', price: 50000, desc: 'Professional rooftop installation for standard home systems.', badge: 'Popular', brand: 'Bin Zareen', specs: {}, img: 'https://images.unsplash.com/photo-1584277261846-c6a1672ed979?w=600' },
+  { id: 102, name: 'Commercial Installation', cat: 'installation', catLabel: 'Installation', price: 150000, desc: 'Large scale commercial and factory solar installations.', badge: null, brand: 'Bin Zareen', specs: {}, img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600' },
+  { id: 103, name: 'System Maintenance & Cleaning', cat: 'installation', catLabel: 'Installation', price: 5000, desc: 'Complete system checkup and panel cleaning service.', badge: 'Service', brand: 'Bin Zareen', specs: {}, img: 'https://images.unsplash.com/photo-1697665896701-1b8bd594f860?w=600' }
 ];
 
 // Cart state
@@ -2670,25 +2655,25 @@ let previousPage = 'home';
 let currentCat = null;
 let currentProductId = null;
 
-const ZMLOGO_URL = "https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/600162814_122093707215176825_4713505872281903544_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=fpDuxHgmcOoQ7kNvwHxzahK&_nc_oc=Adpq5effqkiuiIrDTB5bEuM0TPg3k19S5N2qx8mhlx7j-W9qgqnIVFK3Lw1r56L721J2P1Eo-eOspx4f0XwN-fYA&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=agvjsILREiP_1D3couGMXQ&_nc_ss=7a3a8&oh=00_Af30nwIK1A6yw9jOerP80Igl8TmrAXdXtPCF6lSRcYCU1g&oe=69ED3F52";
+const BZ_LOGO_URL = "https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/549652592_122095933551042358_7149296960295024277_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=UhJZmpzFzJYQ7kNvwEmjdw6&_nc_oc=AdqvE1IHEw3HoN8q03zWoYaAsooHqgcLkt1jTyMrCPp-lERVPub8lyOixPDMnqLOmzlU4q-_LaeaYa6mBaakNSzo&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=hK2nwHcROvb28NIL3U_DpA&_nc_ss=7b2a8&oh=00_Af1NixGkzY3n1SalYCkPD8aF5aD-0-1URmDN_dArPq14-w&oe=69EEE6EF";
 
 // Get icon or image for categories (fallback)
 function getCatImageHtml(cat) {
   const images = {
-    'solar-panels': `https://media.istockphoto.com/id/1681913304/photo/close-up-of-solar-cell.webp?a=1&b=1&s=612x612&w=0&k=20&c=VgZiLWm6zW5u_PfhYeMO013lOrXkbhdmYfrXzZu5IwM=`,
-    'inverters': `https://images.unsplash.com/photo-1697665896701-1b8bd594f860?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW52ZXJ0ZXJzfGVufDB8fDB8fHww`,
-    'batteries': `https://media.istockphoto.com/id/2180917478/photo/blade-shape-battery-cells-design-for-modern-electric-vehicle.webp?a=1&b=1&s=612x612&w=0&k=20&c=Ej7JbAb1xUeW9bb3ZvMv69ampOmNhaqhJiLh9aUjG_o=`,
-    'generators': `https://media.istockphoto.com/id/187670777/photo/portable-generator.webp?a=1&b=1&s=612x612&w=0&k=20&c=kMSIf53kwczs-iHbLwLssRYXNAxt2aSbwHIKHKSy958=`,
-    'ups': `https://media.istockphoto.com/id/2266274842/photo/uninterruptible-power-supply-isolated-on-white-background-backup-power-ups.webp?a=1&b=1&s=612x612&w=0&k=20&c=csXrkHt3el_2Y0rCaqcCrQE0U7vbcFYMpzD_nZRLSI=`,
-    'water-pumps': `https://media.istockphoto.com/id/2207376997/photo/water-pumps-in-a-large-power-plant.webp?a=1&b=1&s=612x612&w=0&k=20&c=bFAZXTfXJbYd2x9fuDran_mpTeJkID2UisPndn51Y0Y=`,
-    'cables-wires': `https://media.istockphoto.com/id/144349803/photo/cables.webp?a=1&b=1&s=612x612&w=0&k=20&c=lmXY14g60EBdjxuUu1HwePpu8Fzl5kAYf7ZAIG4bXEU=`,
-    'installation': `https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29tcGxldGUl20step%20installation%20solar|service`,
+    'solar-panels': `https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&auto=format&fit=crop`,
+    'inverters': `https://images.unsplash.com/photo-1697665896701-1b8bd594f860?w=800&auto=format&fit=crop`,
+    'batteries': `https://media.istockphoto.com/id/2180917478/photo/blade-shape-battery-cells-design-for-modern-electric-vehicle.webp?s=612x612`,
+    'generators': `https://media.istockphoto.com/id/187670777/photo/portable-generator.webp?s=612x612`,
+    'ups': `https://media.istockphoto.com/id/2266274842/photo/uninterruptible-power-supply-isolated-on-white-background-backup-power-ups.webp?s=612x612`,
+    'water-pumps': `https://plus.unsplash.com/premium_photo-1661946906973-b9d3ce2c6055?w=800&auto=format&fit=crop`,
+    'cables-wires': `https://media.istockphoto.com/id/144349803/photo/cables.webp?s=612x612`,
+    'installation': `https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?w=800&auto=format&fit=crop`,
   };
   const imgUrl = images[cat];
   if (imgUrl) {
       return `<img class="cat-icon-img" src="${imgUrl}" alt="image">`;
   }
-  return `<svg viewBox="0 0 60 60" fill="none" stroke="var(--red-mid)" stroke-width="2"><rect x="5" y="14" width="50" height="32" rx="3"/><line x1="20" y1="14" x2="20" y2="46"/><line x1="40" y1="14" x2="40" y2="46"/><line x1="5" y1="30" x2="55" y2="30"/></svg>`;
+  return `<svg viewBox="0 0 60 60" fill="none" stroke="var(--blue-mid)" stroke-width="2"><rect x="5" y="14" width="50" height="32" rx="3"/><line x1="20" y1="14" x2="20" y2="46"/><line x1="40" y1="14" x2="40" y2="46"/><line x1="5" y1="30" x2="55" y2="30"/></svg>`;
 }
 
 // Format price
@@ -2896,7 +2881,7 @@ function showProductDetail(id) {
   const p = allProducts.find(x => x.id === id);
   if (!p) return;
 
-  const inCart = cart.find(c => c.id === p.id);
+  const inCart = cart.find(c => c.id === id);
   const specsHTML = Object.entries(p.specs).map(([k,v]) =>
     `<div class="pdp-spec-row"><span class="key">${k}</span><span class="val">${v}</span></div>`
   ).join('');
@@ -2920,9 +2905,9 @@ function showProductDetail(id) {
       <div class="product-cat" style="margin-bottom:8px;">${p.catLabel}</div>
       <h1>${p.name}</h1>
       <div class="pdp-rating">
-        <span style="color:var(--accent-red);font-size:1rem;">★★★★★</span>
+        <span style="color:var(--orange);font-size:1rem;">★★★★★</span>
         <span style="font-size:0.85rem;color:var(--gray-mid);">(48 reviews)</span>
-        ${p.badge ? `<span style="background:var(--accent-red);color:white;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:100px;">${p.badge}</span>` : ''}
+        ${p.badge ? `<span style="background:var(--orange);color:white;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:100px;">${p.badge}</span>` : ''}
       </div>
       <div class="pdp-price-box">
         <div class="pdp-price">${formatPrice(p.price)}</div>
@@ -2937,10 +2922,10 @@ function showProductDetail(id) {
         <button class="qty-btn" onclick="changeQty(1)">+</button>
       </div>
       <div class="pdp-actions">
-        <button class="btn-red" id="pdp-cart-btn" onclick="addToCart(${p.id})" style="flex:1;">
+        <button class="btn-blue" id="pdp-cart-btn" onclick="addToCart(${p.id})" style="flex:1;">
           ${inCart ? '✓ Already in Cart' : '+ Add to Cart'}
         </button>
-        <button class="btn-red-outline" onclick="showPage('contact')">Get Quote</button>
+        <button class="btn-blue-outline" onclick="showPage('contact')">Get Quote</button>
       </div>
       <div style="margin-top:20px;display:flex;gap:16px;font-size:0.83rem;color:var(--gray-mid);">
         <span>🚚 Free delivery Lahore</span>
@@ -3011,7 +2996,7 @@ function renderCart() {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       <h3>Your cart is empty</h3>
       <p>Add some awesome products to get started!</p>
-      <button class="btn-red" onclick="showPage('products')" style="margin-top:20px;">Shop Now</button>
+      <button class="btn-blue" onclick="showPage('products')" style="margin-top:20px;">Shop Now</button>
     </div>`;
     summary.innerHTML = '<p style="color:var(--gray-mid);font-size:0.9rem;text-align:center;padding:20px 0;">No items in cart</p>';
     return;
@@ -3044,7 +3029,7 @@ function renderCart() {
   summary.innerHTML = `
     <div class="summary-row"><span>Subtotal (${cart.reduce((s,c)=>s+c.qty,0)} items)</span><span>${formatPrice(subtotal)}</span></div>
     <div class="summary-row"><span>Delivery</span><span>${delivery === 0 ? '<span style="color:var(--green)">FREE</span>' : formatPrice(delivery)}</span></div>
-    ${delivery > 0 ? '<div style="font-size:0.78rem;color:var(--red-mid);margin:4px 0 8px;">Free delivery on orders over Rs. 50,000</div>' : ''}
+    ${delivery > 0 ? '<div style="font-size:0.78rem;color:var(--blue-mid);margin:4px 0 8px;">Free delivery on orders over Rs. 50,000</div>' : ''}
     <div class="summary-row total"><span>Total</span><span>${formatPrice(total)}</span></div>
   `;
 }
@@ -3190,3 +3175,4 @@ window.onload = function() {
 </script>
 </body>
 </html>
+    
