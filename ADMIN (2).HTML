@@ -1,0 +1,1149 @@
+--- START OF FILE Paste April 28, 2026 - 7:17PM ---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bin Zareen Solar - Admin</title>
+    <link rel="icon" href="favicon.png"> <!-- This line is already correct for the browser tab icon -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <style>
+        :root {
+            --primary: #C0392B;
+            --primary-dark: #7F1D1D;
+            --primary-light: #FDECEA;
+            --accent: #F39C12;
+            --green: #27AE60;
+            --blue: #2980B9;
+            --text: #1a1a2e;
+            --text-soft: #6b7280;
+            --bg: #f4f6f9;
+            --card: #ffffff;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 4px rgba(0,0,0,0.08);
+            --shadow: 0 4px 16px rgba(0,0,0,0.10);
+            --radius: 14px;
+            --radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ===================== LOGIN ===================== */
+        #login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #7F1D1D 0%, #C0392B 60%, #E74C3C 100%);
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 24px;
+            padding: 36px 28px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        /* Updated: Styles for the new image logo in login */
+        .login-logo .logo-img-large {
+            width: 64px; /* Adjust size as needed */
+            height: 64px; /* Adjust size as needed */
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 8px auto; /* Center it and match previous margin */
+        }
+
+        .login-logo h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .login-logo p {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            margin-top: 2px;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-soft);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            color: var(--text);
+        }
+
+        .field input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 8px;
+        }
+
+        .login-btn:hover { background: var(--primary-dark); }
+        .login-btn:active { transform: scale(0.98); }
+
+        .login-error {
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 12px;
+            min-height: 20px;
+        }
+
+        /* ===================== DASHBOARD ===================== */
+        #admin-dashboard { display: none; min-height: 100vh; flex-direction: column; }
+
+        /* Top Header */
+        .top-bar {
+            background: var(--primary-dark);
+            color: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Updated: Styles for the new image logo in top bar */
+        .top-bar-left .logo-img-small {
+            height: 32px; /* Adjust size as needed */
+            width: 32px; /* Adjust size as needed */
+            object-fit: contain;
+        }
+
+        .top-bar-left .brand {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .top-bar-left .brand span {
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.7;
+            display: block;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .logout-btn:hover { background: rgba(255,255,255,0.25); }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .stat-pill {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .stat-pill .num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-pill .lbl {
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Action Bar */
+        .action-bar {
+            padding: 0 16px 16px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-add {
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 13px 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-add:active { transform: scale(0.98); }
+
+        /* Product Cards (Mobile-first) */
+        .products-section {
+            padding: 0 16px 24px;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .product-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .product-card:hover { box-shadow: var(--shadow); }
+
+        .product-card-inner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .product-thumb {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: var(--bg);
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text);
+        }
+
+        .product-meta {
+            font-size: 0.77rem;
+            color: var(--text-soft);
+            margin-top: 2px;
+        }
+
+        .product-price-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .price-current {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-old {
+            font-size: 0.78rem;
+            color: var(--text-soft);
+            text-decoration: line-through;
+        }
+
+        /* OFFER BADGE on card */
+        .offer-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 20px;
+            padding: 2px 8px;
+        }
+
+        .offer-chip.discount {
+            background: #FFF3CD;
+            color: #856404;
+            border: 1px solid #FFD700;
+        }
+
+        .offer-chip.badge-chip {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid #f8d7da;
+        }
+
+        .offer-chip.popup-chip {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .product-card-actions {
+            display: flex;
+            border-top: 1px solid var(--border);
+        }
+
+        .card-action-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .card-action-btn.edit { color: var(--blue); }
+        .card-action-btn.edit:hover { background: #EBF5FB; }
+        .card-action-btn.del { color: var(--primary); }
+        .card-action-btn.del:hover { background: var(--primary-light); }
+        .card-action-btn:not(:last-child) { border-right: 1px solid var(--border); }
+
+        /* ===================== BOTTOM SHEET FORM ===================== */
+        #form-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            align-items: flex-end;
+        }
+
+        #form-overlay.open {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .form-sheet {
+            background: white;
+            border-radius: 24px 24px 0 0;
+            width: 100%;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 0 0 40px;
+            animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .form-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .form-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .form-close {
+            background: var(--bg);
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-soft);
+        }
+
+        .form-body {
+            padding: 20px;
+        }
+
+        .form-row {
+            margin-bottom: 14px;
+        }
+
+        .form-row label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-soft);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.92rem;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s;
+            background: white;
+        }
+
+        .form-row input:focus,
+        .form-row select:focus,
+        .form-row textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .form-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .section-divider {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-soft);
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            margin-bottom: 14px;
+            margin-top: 4px;
+        }
+
+        /* Offer section highlight */
+        .offer-section {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 1.5px solid #FCD34D;
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .offer-section .section-divider {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+            color: #92400e;
+        }
+
+        .offer-section .form-row label {
+            color: #92400e;
+        }
+
+        .offer-section .form-row input,
+        .offer-section .form-row select,
+        .offer-section .form-row textarea {
+            border-color: #FCD34D;
+        }
+
+        .offer-section .form-row input:focus,
+        .offer-section .form-row select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(243,156,18,0.15);
+        }
+
+        /* Offer preview */
+        .offer-preview {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 8px;
+            border: 1px dashed #FCD34D;
+            font-size: 0.82rem;
+            color: #856404;
+        }
+
+        .offer-preview.visible { display: block; }
+
+        .form-save-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .form-save-btn:active { transform: scale(0.98); }
+        .form-save-btn:hover { background: var(--primary-dark); }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-soft);
+        }
+
+        .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+        .empty-state p { font-size: 0.95rem; }
+
+        /* Loading state */
+        .loading-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-soft);
+            font-size: 0.9rem;
+        }
+
+        /* Desktop optimization */
+        @media (min-width: 640px) {
+            .stats-row {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 20px 24px;
+            }
+
+            .action-bar { padding: 0 24px 20px; }
+            .btn-add { flex: none; padding: 13px 24px; }
+            .products-section { padding: 0 24px 32px; }
+
+            .product-card-inner { padding: 16px; }
+            .product-thumb { width: 72px; height: 72px; }
+
+            #form-overlay { align-items: center; justify-content: center; }
+
+            .form-sheet {
+                border-radius: 24px;
+                max-width: 560px;
+                max-height: 88vh;
+            }
+
+            .form-body { padding: 24px; }
+        }
+
+        /* Scrollbar */
+        .form-sheet::-webkit-scrollbar { width: 4px; }
+        .form-sheet::-webkit-scrollbar-track { background: transparent; }
+        .form-sheet::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<!-- ==================== LOGIN ==================== -->
+<div id="login-screen">
+    <div class="login-box">
+        <div class="login-logo">
+            <!-- Replaced ☀️ with favicon.png image -->
+            <img src="favicon.png" alt="Bin Zareen Solar Logo" class="logo-img-large">
+            <h2>Bin Zareen Solar</h2>
+            <p>Admin Panel</p>
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <input type="email" id="admin-email" placeholder="admin@binzareen.com">
+        </div>
+        <div class="field">
+            <label>Password</label>
+            <input type="password" id="admin-password" placeholder="••••••••"
+                onkeydown="if(event.key==='Enter') adminLogin()">
+        </div>
+        <button class="login-btn" onclick="adminLogin()">Login →</button>
+        <div class="login-error" id="login-error"></div>
+    </div>
+</div>
+
+<!-- ==================== DASHBOARD ==================== -->
+<div id="admin-dashboard">
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <!-- Replaced ☀️ with favicon.png image -->
+            <img src="favicon.png" alt="Bin Zareen Solar Logo" class="logo-img-small">
+            <div class="brand">
+                Bin Zareen
+                <span>Admin Panel</span>
+            </div>
+        </div>
+        <button class="logout-btn" onclick="adminLogout()">Logout</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+        <div class="stat-pill">
+            <div class="num" id="stat-total">0</div>
+            <div class="lbl">Products</div>
+        </div>
+        <div class="stat-pill">
+            <div class="num" id="stat-offers">0</div>
+            <div class="lbl">With Offers</div>
+        </div>
+        <div class="stat-pill">
+            <div class="num" id="stat-cats">0</div>
+            <div class="lbl">Categories</div>
+        </div>
+        <div class="stat-pill">
+            <div class="num" id="stat-popups">0</div>
+            <div class="lbl">Popups</div>
+        </div>
+    </div>
+
+    <!-- Action -->
+    <div class="action-bar">
+        <button class="btn-add" onclick="openForm()">
+            <span>＋</span> New Product
+        </button>
+        <input type="text" id="search-input" placeholder="🔍 Search products..."
+            oninput="filterList(this.value)"
+            style="flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;background:var(--card);">
+        <select id="cat-filter" onchange="filterList(document.getElementById('search-input').value)"
+            style="padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:0.85rem;outline:none;background:var(--card);color:var(--text);cursor:pointer;">
+            <option value="">All Categories</option>
+            <option value="solar-panels">☀️ Solar Panels</option>
+            <option value="inverters">🔌 Inverters</option>
+            <option value="batteries">🔋 Batteries</option>
+            <option value="generators">⚙️ Generators</option>
+            <option value="ups">🏢 UPS Systems</option>
+            <option value="water-pumps">💧 Water Pumps</option>
+            <option value="cables-wires">🧰 Cables & Wires</option>
+            <option value="electronics">🔧 Electronics</option>
+            <option value="home-appliances">🏡 Home Appliances</option>
+            <option value="others">📦 Others</option>
+        </select>
+    </div>
+
+    <!-- Products List -->
+    <div class="products-section">
+        <div class="section-label">All Products</div>
+        <div id="products-list">
+            <div class="loading-state">Loading products...</div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== FORM BOTTOM SHEET ==================== -->
+<div id="form-overlay" onclick="overlayClick(event)">
+    <div class="form-sheet">
+        <div class="form-header">
+            <h3 id="form-title">Add Product</h3>
+            <button class="form-close" onclick="closeForm()">✕</button>
+        </div>
+        <div class="form-body">
+            <input type="hidden" id="f-id">
+
+            <!-- ── BASIC INFO ── -->
+            <div class="form-row">
+                <label>Product Name *</label>
+                <input type="text" id="f-name" placeholder="e.g. Jinko 550W Solar Panel">
+            </div>
+
+            <div class="form-2col">
+                <div class="form-row">
+                    <label>Category *</label>
+                    <select id="f-cat" onchange="updateCatLabel()">
+                        <option value="">Select</option>
+                        <option value="solar-panels">☀️ Solar Panels</option>
+                        <option value="inverters">🔌 Inverters</option>
+                        <option value="batteries">🔋 Batteries</option>
+                        <option value="generators">⚙️ Generators</option>
+                        <option value="ups">🏢 UPS Systems</option>
+                        <option value="water-pumps">💧 Water Pumps</option>
+                        <option value="cables-wires">🧰 Cables & Wires</option>
+                        <option value="electronics">🔧 Electronics</option>
+                        <option value="home-appliances">🏡 Home Appliances</option>
+                        <option value="others">📦 Others</option>
+                    </select>
+                    <input type="hidden" id="f-cat-label">
+                </div>
+                <div class="form-row">
+                    <label>Brand</label>
+                    <input type="text" id="f-brand" placeholder="e.g. Jinko, Growatt">
+                </div>
+            </div>
+
+            <div class="form-2col">
+                <div class="form-row">
+                    <label>Price (Rs.) *</label>
+                    <input type="number" id="f-price" placeholder="0" min="0" oninput="calcDiscount()">
+                </div>
+                <div class="form-row">
+                    <label>Old Price (Rs.) — agar sale ho</label>
+                    <input type="number" id="f-old-price" placeholder="0" min="0" oninput="calcDiscount()">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Description *</label>
+                <textarea id="f-desc" rows="2" placeholder="Product ki short description likhen..."></textarea>
+            </div>
+
+            <div class="form-row">
+                <label>Image URL</label>
+                <input type="url" id="f-img" placeholder="https://...">
+            </div>
+
+            <!-- ── SPECIFICATIONS (simple key-value rows) ── -->
+            <div class="section-divider" style="border-top:1px solid var(--border);padding-top:14px;margin-bottom:12px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-soft);">
+                📋 Specifications <span style="font-weight:400;text-transform:none;letter-spacing:0;">(Optional)</span>
+            </div>
+            <div id="specs-rows"></div>
+            <button type="button" onclick="addSpecRow()" style="width:100%;padding:9px;border:1.5px dashed var(--border);background:transparent;border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:0.85rem;color:var(--text-soft);cursor:pointer;margin-bottom:16px;">
+                + Specification add karen (e.g. Power → 550W)
+            </button>
+
+            <!-- ── OFFER SECTION (optional, collapsible) ── -->
+            <div style="border:1.5px solid #FCD34D;border-radius:var(--radius);overflow:hidden;margin-bottom:16px;">
+                <button type="button" onclick="toggleOfferSection()" id="offer-toggle-btn"
+                    style="width:100%;padding:13px 16px;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:none;font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:700;color:#92400e;cursor:pointer;display:flex;align-items:center;justify-content:space-between;text-align:left;">
+                    <span>🏷️ Offer / Discount — Optional</span>
+                    <span id="offer-toggle-arrow" style="font-size:1rem;transition:transform 0.2s;">▼</span>
+                </button>
+                <div id="offer-section-body" style="display:none;padding:14px;background:#fffdf0;border-top:1px solid #FCD34D;">
+                    <div class="form-2col">
+                        <div class="form-row">
+                            <label style="color:#92400e;">Badge Text</label>
+                            <input type="text" id="f-badge" placeholder="Best Seller, New, Hot Deal" oninput="updateOfferPreview()" style="border-color:#FCD34D;">
+                        </div>
+                        <div class="form-row">
+                            <label style="color:#92400e;">Discount %</label>
+                            <input type="number" id="f-discount" placeholder="e.g. 20" min="0" max="99" oninput="updateOfferPreview()" style="border-color:#FCD34D;">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label style="color:#92400e;">Popup Message <span style="font-weight:400;color:#b45309;">(Website pe popup aayega)</span></label>
+                        <input type="text" id="f-popup" placeholder="e.g. 🎉 Eid Sale! 20% off sirf aaj!" oninput="updateOfferPreview()" style="border-color:#FCD34D;">
+                    </div>
+                    <div class="offer-preview" id="offer-preview"></div>
+                </div>
+            </div>
+
+            <button class="form-save-btn" onclick="saveProduct()">✓ Save Product</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============ FIREBASE ============
+const firebaseConfig = {
+    apiKey: "AIzaSyCAQZE5LTpZJxUe36xNrB_r3yghr03THE0",
+    authDomain: "bin-zareen.firebaseapp.com",
+    databaseURL: "https://bin-zareen-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "bin-zareen",
+    storageBucket: "bin-zareen.appspot.com",
+    messagingSenderId: "1032818991945",
+    appId: "1:1032818991945:web:d821b1234567891234567"
+};
+
+const adminApp = firebase.initializeApp(firebaseConfig, "bzAdmin");
+const auth = adminApp.auth();
+const db = adminApp.database();
+const productsRef = db.ref('products');
+
+let products = [];
+
+const catLabels = {
+    'solar-panels': 'Solar Panels',
+    'inverters': 'Inverters',
+    'batteries': 'Batteries',
+    'generators': 'Generators',
+    'ups': 'UPS Systems',
+    'water-pumps': 'Water Pumps',
+    'cables-wires': 'Cables & Wires',
+    'electronics': 'Electronic Components',
+    'home-appliances': 'Home Appliances',
+    'others': 'Others'
+};
+
+// ============ AUTH ============
+auth.onAuthStateChanged(user => {
+    if (user) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'flex';
+        document.getElementById('admin-dashboard').style.flexDirection = 'column';
+        loadProducts();
+    } else {
+        document.getElementById('login-screen').style.display = 'flex';
+        document.getElementById('admin-dashboard').style.display = 'none';
+    }
+});
+
+function adminLogin() {
+    const email = document.getElementById('admin-email').value.trim();
+    const pass = document.getElementById('admin-password').value;
+    const errEl = document.getElementById('login-error');
+    errEl.textContent = '';
+
+    if (!email || !pass) { errEl.textContent = 'Email aur password zaroor daalen.'; return; }
+
+    auth.signInWithEmailAndPassword(email, pass).catch(err => {
+        errEl.textContent = 'Login fail hua. Email ya password galat hai.';
+    });
+}
+
+function adminLogout() {
+    auth.signOut().catch(e => alert('Logout error: ' + e.message));
+}
+
+// ============ LOAD PRODUCTS ============
+function loadProducts() {
+    productsRef.on('value', snap => {
+        const data = snap.val();
+        products = data ? Object.keys(data).map(k => ({ id: k, ...data[k] })) : [];
+        renderProducts();
+        updateStats();
+    }, err => {
+        document.getElementById('products-list').innerHTML =
+            `<div class="empty-state"><p style="color:#C0392B">Error: ${err.message}</p></div>`;
+    });
+}
+
+function updateStats() {
+    const withOffers = products.filter(p => p.discount || p.badge || p.popup).length;
+    const cats = new Set(products.map(p => p.cat)).size;
+    const popups = products.filter(p => p.popup).length;
+    document.getElementById('stat-total').textContent = products.length;
+    document.getElementById('stat-offers').textContent = withOffers;
+    document.getElementById('stat-cats').textContent = cats;
+    document.getElementById('stat-popups').textContent = popups;
+}
+
+function formatRs(n) {
+    if (!n && n !== 0) return '';
+    return 'Rs. ' + parseInt(n).toLocaleString('en-PK');
+}
+
+function renderProducts() {
+    renderList(products);
+}
+
+function filterList(q) {
+    const cat = (document.getElementById('cat-filter') || {}).value || '';
+    const query = (q || '').toLowerCase();
+    const filtered = products.filter(p => {
+        const matchCat = !cat || p.cat === cat;
+        const matchQ = !query || p.name.toLowerCase().includes(query) || (p.brand||'').toLowerCase().includes(query) || (p.catLabel||'').toLowerCase().includes(query);
+        return matchCat && matchQ;
+    });
+    renderList(filtered);
+}
+
+function renderList(list) {
+    const el = document.getElementById('products-list');
+    if (!list || list.length === 0) {
+        el.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><p>Koi product nahi mila.</p></div>`;
+        return;
+    }
+
+    el.innerHTML = list.map(p => {
+        const discountNum = p.discount ? parseInt(p.discount) : 0;
+        const autoDiscount = (!p.discount && p.price && p.oldPrice && p.oldPrice > p.price)
+            ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+        const finalDiscount = discountNum || autoDiscount;
+
+        let chips = '';
+        if (finalDiscount > 0) chips += `<span class="offer-chip discount">🏷️ ${finalDiscount}% OFF</span> `;
+        if (p.badge) chips += `<span class="offer-chip badge-chip">${p.badge}</span> `;
+        if (p.popup) chips += `<span class="offer-chip popup-chip">💬 Popup ON</span>`;
+
+        return `
+        <div class="product-card">
+            <div class="product-card-inner">
+                <img class="product-thumb"
+                    src="${p.img || 'https://via.placeholder.com/64x64/f4f6f9/999?text=No+Img'}"
+                    alt="${p.name}" onerror="this.src='https://via.placeholder.com/64x64/f4f6f9/999?text=No+Img'">
+                <div class="product-info">
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-meta">${catLabels[p.cat] || p.cat || '—'} ${p.brand ? '• ' + p.brand : ''}</div>
+                    <div class="product-price-row">
+                        <span class="price-current">${formatRs(p.price)}</span>
+                        ${p.oldPrice ? `<span class="price-old">${formatRs(p.oldPrice)}</span>` : ''}
+                    </div>
+                    ${chips ? `<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap;">${chips}</div>` : ''}
+                </div>
+            </div>
+            <div class="product-card-actions">
+                <button class="card-action-btn edit" onclick="editProduct('${p.id}')">✏️ Edit</button>
+                <button class="card-action-btn del" onclick="deleteProduct('${p.id}')">🗑️ Delete</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+
+// ============ FORM ============
+function openForm(id = null) {
+    resetForm();
+    if (id) {
+        const p = products.find(x => x.id === id);
+        if (p) {
+            document.getElementById('f-id').value = p.id;
+            document.getElementById('f-name').value = p.name || '';
+            document.getElementById('f-cat').value = p.cat || '';
+            document.getElementById('f-cat-label').value = p.catLabel || catLabels[p.cat] || '';
+            document.getElementById('f-brand').value = p.brand || '';
+            document.getElementById('f-price').value = p.price || '';
+            document.getElementById('f-old-price').value = p.oldPrice || '';
+            document.getElementById('f-desc').value = p.desc || '';
+            document.getElementById('f-img').value = p.img || '';
+            document.getElementById('f-badge').value = p.badge || '';
+            document.getElementById('f-discount').value = p.discount || '';
+            document.getElementById('f-popup').value = p.popup || '';
+            document.getElementById('form-title').textContent = 'Edit Product';
+            // Load specs as key-value rows
+            if (p.specs && typeof p.specs === 'object') {
+                Object.entries(p.specs).forEach(([k, v]) => addSpecRow(k, v));
+            }
+            updateOfferPreview();
+        }
+    } else {
+        document.getElementById('form-title').textContent = 'Add Product';
+    }
+    document.getElementById('form-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function editProduct(id) { openForm(id); }
+
+function closeForm() {
+    document.getElementById('form-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    resetForm();
+}
+
+function overlayClick(e) {
+    if (e.target === document.getElementById('form-overlay')) closeForm();
+}
+
+function resetForm() {
+    ['f-id','f-name','f-brand','f-price','f-old-price','f-desc','f-img',
+     'f-badge','f-discount','f-popup','f-cat-label'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('f-cat').value = '';
+    const prev = document.getElementById('offer-preview');
+    if (prev) { prev.className = 'offer-preview'; prev.innerHTML = ''; }
+    document.getElementById('specs-rows').innerHTML = '';
+    // Close offer section
+    const body = document.getElementById('offer-section-body');
+    const arrow = document.getElementById('offer-toggle-arrow');
+    if (body) body.style.display = 'none';
+    if (arrow) arrow.style.transform = '';
+}
+
+function updateCatLabel() {
+    const sel = document.getElementById('f-cat');
+    document.getElementById('f-cat-label').value = catLabels[sel.value] || sel.value;
+}
+
+// ── SPEC ROWS ──
+function addSpecRow(key='', val='') {
+    const container = document.getElementById('specs-rows');
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:8px;margin-bottom:8px;align-items:center;';
+    row.innerHTML = `
+        <input type="text" placeholder="Key (e.g. Power)" value="${key}"
+            style="flex:1;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;">
+        <input type="text" placeholder="Value (e.g. 550W)" value="${val}"
+            style="flex:1.5;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;">
+        <button type="button" onclick="this.parentElement.remove()"
+            style="width:32px;height:32px;border:none;background:#fee2e2;color:#C0392B;border-radius:6px;cursor:pointer;font-size:1rem;flex-shrink:0;">✕</button>
+    `;
+    container.appendChild(row);
+}
+
+function getSpecsFromRows() {
+    const rows = document.getElementById('specs-rows').querySelectorAll('div');
+    const specs = {};
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll('input');
+        const k = inputs[0]?.value.trim();
+        const v = inputs[1]?.value.trim();
+        if (k && v) specs[k] = v;
+    });
+    return specs;
+}
+
+// ── OFFER SECTION TOGGLE ──
+function toggleOfferSection() {
+    const body = document.getElementById('offer-section-body');
+    const arrow = document.getElementById('offer-toggle-arrow');
+    const isOpen = body.style.display !== 'none';
+    body.style.display = isOpen ? 'none' : 'block';
+    arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+function calcDiscount() {
+    const price = parseFloat(document.getElementById('f-price').value);
+    const old = parseFloat(document.getElementById('f-old-price').value);
+    if (price && old && old > price) {
+        const pct = Math.round((1 - price / old) * 100);
+        const discEl = document.getElementById('f-discount');
+        if (!discEl.value) discEl.value = pct;
+    }
+    updateOfferPreview();
+}
+
+function updateOfferPreview() {
+    const badge = document.getElementById('f-badge').value.trim();
+    const discount = document.getElementById('f-discount').value.trim();
+    const popup = document.getElementById('f-popup').value.trim();
+    const prev = document.getElementById('offer-preview');
+    let parts = [];
+    if (discount) parts.push(`🏷️ <b>${discount}% OFF</b> dikhe ga product card pe`);
+    if (badge) parts.push(`📛 Badge: "<b>${badge}</b>"`);
+    if (popup) parts.push(`💬 Popup: "${popup.substring(0,50)}${popup.length>50?'...':''}"`);
+    if (parts.length > 0) {
+        prev.innerHTML = parts.join('<br>');
+        prev.className = 'offer-preview visible';
+    } else {
+        prev.className = 'offer-preview';
+        prev.innerHTML = '';
+    }
+}
+
+function saveProduct() {
+    const id = document.getElementById('f-id').value;
+    const name = document.getElementById('f-name').value.trim();
+    const cat = document.getElementById('f-cat').value;
+    const catLabel = document.getElementById('f-cat-label').value || catLabels[cat] || cat;
+    const brand = document.getElementById('f-brand').value.trim();
+    const price = parseFloat(document.getElementById('f-price').value);
+    const oldPriceRaw = document.getElementById('f-old-price').value.trim();
+    const oldPrice = oldPriceRaw && !isNaN(+oldPriceRaw) ? parseFloat(oldPriceRaw) : null;
+    const desc = document.getElementById('f-desc').value.trim();
+    const img = document.getElementById('f-img').value.trim();
+    const badge = document.getElementById('f-badge').value.trim() || null;
+    const discountRaw = document.getElementById('f-discount').value.trim();
+    const discount = discountRaw && !isNaN(+discountRaw) ? parseInt(discountRaw) : null;
+    const popup = document.getElementById('f-popup').value.trim() || null;
+    const specs = getSpecsFromRows();
+
+    if (!name || !cat || isNaN(price) || !desc) {
+        alert('⚠️ Name, Category, Price aur Description zaroor bharen.');
+        return;
+    }
+
+    const data = { name, cat, catLabel, brand, price, oldPrice, desc, img, badge, discount, popup, specs };
+
+    const saveBtn = document.querySelector('.form-save-btn');
+    saveBtn.textContent = 'Saving...';
+    saveBtn.disabled = true;
+
+    const ref = id ? productsRef.child(id).update(data) : productsRef.push(data);
+    ref.then(() => {
+        closeForm();
+    }).catch(err => {
+        alert('Error: ' + err.message);
+        saveBtn.textContent = '✓ Save Product';
+        saveBtn.disabled = false;
+    });
+}
+
+function deleteProduct(id) {
+    if (confirm('Yeh product delete karna chahte hain?\nYeh action wapis nahi ho ga.')) {
+        productsRef.child(id).remove().catch(err => alert('Error: ' + err.message));
+    }
+}
+</script>
+</body>
+</html>
