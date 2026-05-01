@@ -353,10 +353,20 @@
   .breadcrumb .sep { color: var(--gray-mid); }
 
   @keyframes colorChange { 0% { color: var(--red-bright); } 33% { color: var(--red-mid); } 66% { color: var(--orange); } 100% { color: var(--red-bright); } }
+  /* Mobile Search Float & Overlay */
+  .mobile-search-float { display: none; position: fixed; bottom: 100px; right: 28px; z-index: 500; width: 58px; height: 58px; background: var(--red-mid); border-radius: 50%; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(185,28,28,0.4); color: white; transition: transform 0.2s; }
+  .mobile-search-float:active { transform: scale(0.95); }
+  .mobile-search-float svg { width: 24px; height: 24px; }
+  
+  .mobile-search-overlay { position: fixed; top: 0; left: 0; right: 0; background: white; padding: 16px 24px; z-index: 1001; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transform: translateY(-100%); transition: transform 0.3s ease; display: flex; gap: 10px; align-items: center; }
+  .mobile-search-overlay.open { transform: translateY(0); }
+  .mobile-search-overlay input { flex: 1; border: 2px solid var(--red-mid); border-radius: 10px; padding: 10px 14px; font-size: 1rem; outline: none; }
+  .mobile-search-overlay button { background: var(--gray-light); border: none; padding: 10px 15px; border-radius: 10px; font-weight: bold; color: var(--red-mid); cursor: pointer; }
 
   /* RESPONSIVE */
   @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .filter-panel { position: static; height: auto; } }
   @media (max-width: 768px) {
+    .mobile-search-float { display: flex; }
     .nav-links { display: none; } .nav-search { display: none; } .hamburger { display: flex; } .topbar { display: none; }
     .hero-grid { grid-template-columns: 1fr; } .hero-visual { display: none; } .hero { padding: 60px 0 50px; min-height: auto; }
     .cat-showcase-row { flex-direction: column; height: auto; } .cat-showcase-left { flex: none; height: 240px; }
@@ -984,6 +994,18 @@
     </div>
   </footer>
 </div>
+<!-- Mobile Search Floating Button -->
+<div class="mobile-search-float" onclick="toggleMobileSearch()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </svg>
+</div>
+
+<!-- Mobile Search Overlay -->
+<div class="mobile-search-overlay" id="mobile-search-overlay">
+  <input type="text" id="mobile-search-input" placeholder="Search products..." onkeyup="searchProducts(this.value)">
+  <button onclick="toggleMobileSearch()">✕</button>
+</div>
 
 <!-- WhatsApp Float -->
 <a href="https://wa.me/923252053313" class="whatsapp-float" target="_blank">
@@ -1395,12 +1417,36 @@ function filterProducts() {
   if (grid) { grid.innerHTML = filtered.length ? filtered.map(renderProductCard).join('') : '<div class="empty-state"><h3>No products match</h3></div>'; document.getElementById('prod-count').textContent = filtered.length; }
 }
 
+// ============================================================
+// SEARCH & MOBILE SEARCH TOGGLE
+// ============================================================
+function toggleMobileSearch() {
+  const overlay = document.getElementById('mobile-search-overlay');
+  overlay.classList.toggle('open');
+  if (overlay.classList.contains('open')) {
+    document.getElementById('mobile-search-input').focus();
+  }
+}
+
 function searchProducts(q) {
   showPage('products');
-  // Set the search input value if not already set, then filter
-  document.querySelector('.nav-search input').value = q;
+  
+  // Desktop input update karein
+  const deskInput = document.querySelector('.nav-search input');
+  if (deskInput && document.activeElement !== deskInput) deskInput.value = q;
+  
+  // Mobile input update karein
+  const mobInput = document.getElementById('mobile-search-input');
+  if (mobInput && document.activeElement !== mobInput) mobInput.value = q;
+  
   setTimeout(filterProducts, 10);
 }
+
+// ============================================================
+// MOBILE MENU
+// ============================================================
+function toggleMobile() { document.getElementById('mobile-menu').classList.toggle('open'); }
+function closeMobileOnBg(e) { if (e.target === document.getElementById('mobile-menu')) toggleMobile(); }
 
 // ============================================================
 // PLACE ORDER → WHATSAPP
