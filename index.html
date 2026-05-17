@@ -373,6 +373,50 @@
     .products-grid { grid-template-columns: repeat(2, 1fr); } .plp-layout { grid-template-columns: 1fr; } .plp-grid { grid-template-columns: repeat(2, 1fr); } .pdp-grid { grid-template-columns: 1fr; } .pdp-actions { flex-direction: column; } .cart-layout { grid-template-columns: 1fr; } .cart-summary { position: static; } .checkout-layout { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr; } .testi-grid { grid-template-columns: 1fr; } .team-grid { grid-template-columns: repeat(2, 1fr); } .services-grid { grid-template-columns: 1fr; } .contact-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; gap: 24px; } .parallax-inner { grid-template-columns: repeat(2, 1fr); } .footer-bottom { flex-direction: column; text-align: center; } .section { padding: 48px 0; }
   }
   @media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } .plp-grid { grid-template-columns: 1fr; } .team-grid { grid-template-columns: 1fr; } .hero-btns { flex-direction: column; } }
+
+  /* ===== SOLAR CALCULATOR ===== */
+  .calc-hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e40af 100%); padding: 48px 0 36px; color: white; position: relative; overflow: hidden; }
+  .calc-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4z'/%3E%3C/g%3E%3C/svg%3E"); }
+  .calc-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 8px; }
+  .calc-hero p { color: rgba(255,255,255,0.75); font-size: 1rem; }
+  .calc-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.4); border: 1px solid rgba(96,165,250,0.5); border-radius: 100px; padding: 6px 16px; font-size: 0.82rem; font-weight: 600; color: #93C5FD; margin-bottom: 16px; }
+  .calc-layout { display: grid; grid-template-columns: 1fr 340px; gap: 32px; padding: 40px 0 60px; align-items: start; }
+  .calc-panel { background: white; border-radius: 20px; padding: 28px; border: 1.5px solid #E2E8F0; }
+  .calc-panel h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--red-deep); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--red-light); display: flex; align-items: center; gap: 10px; }
+  .appliance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+  .appliance-card { background: #F8FAFC; border: 2px solid #E2E8F0; border-radius: 16px; padding: 16px 12px; text-align: center; transition: all 0.25s; cursor: default; position: relative; }
+  .appliance-card.active { border-color: var(--blue-bright); background: #EFF6FF; box-shadow: 0 4px 16px rgba(37,99,235,0.12); }
+  .appliance-img-wrap { width: 72px; height: 72px; margin: 0 auto 10px; border-radius: 14px; overflow: hidden; background: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .appliance-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .appliance-name { font-size: 0.85rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 4px; }
+  .appliance-watts { font-size: 0.78rem; color: var(--blue-bright); font-weight: 600; margin-bottom: 12px; }
+  .qty-control { display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .qty-btn-calc { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--blue-bright); background: white; color: var(--blue-bright); font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.18s; line-height: 1; }
+  .qty-btn-calc:hover { background: var(--blue-bright); color: white; transform: scale(1.1); }
+  .qty-display { font-size: 1.1rem; font-weight: 800; color: var(--text); min-width: 28px; text-align: center; }
+  .calc-result-card { background: white; border-radius: 20px; border: 1.5px solid #E2E8F0; position: sticky; top: 90px; overflow: hidden; }
+  .result-header { background: linear-gradient(135deg, #0f172a, #1e40af); padding: 24px; color: white; text-align: center; }
+  .result-header h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+  .result-header p { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+  .result-body { padding: 20px; }
+  .result-stat { background: #F8FAFC; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .result-stat .label { font-size: 0.83rem; color: var(--gray-mid); font-weight: 600; }
+  .result-stat .value { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--blue-bright); }
+  .result-stat.highlight { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); border: 1.5px solid #BFDBFE; }
+  .result-stat.highlight .value { color: #1D4ED8; font-size: 1.5rem; }
+  .result-items { background: #F8FAFC; border-radius: 12px; padding: 14px; margin-bottom: 12px; max-height: 200px; overflow-y: auto; }
+  .result-item-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.83rem; padding: 5px 0; border-bottom: 1px solid #E2E8F0; }
+  .result-item-row:last-child { border-bottom: none; }
+  .result-item-row .rname { color: var(--gray-dark); font-weight: 600; }
+  .result-item-row .rwatts { color: var(--blue-bright); font-weight: 700; }
+  .empty-calc { text-align: center; color: var(--gray-mid); font-size: 0.85rem; padding: 16px 0; }
+  .calc-submit-btn { width: 100%; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border: none; border-radius: 14px; padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity 0.2s, transform 0.2s; }
+  .calc-submit-btn:hover { opacity: 0.92; transform: translateY(-2px); }
+  .calc-note { font-size: 0.78rem; color: var(--gray-mid); text-align: center; margin-top: 10px; line-height: 1.5; }
+  .system-tag { display: inline-block; background: #DCFCE7; color: #166534; border-radius: 8px; padding: 4px 10px; font-size: 0.78rem; font-weight: 700; margin-top: 6px; }
+  .daytime-note { background: linear-gradient(135deg, #FEF3C7, #FDE68A); border: 1.5px solid #F59E0B; border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; color: #92400E; font-weight: 600; margin-top: 12px; text-align: center; }
+  @media (max-width: 768px) { .calc-layout { grid-template-columns: 1fr; } .calc-result-card { position: static; } .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 400px) { .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -447,6 +491,7 @@
       <a onclick="showPage('services');toggleMobile()">🔧 Services</a>
       <a onclick="showPage('about');toggleMobile()">ℹ️ About Us</a>
       <a onclick="showPage('contact');toggleMobile()">📞 Contact</a>
+      <a onclick="showPage('calculator');toggleMobile()">⚡ Solar Calculator</a>
       <a onclick="showPage('cart');toggleMobile()">🛒 Cart</a>
     </div>
   </div>
@@ -462,7 +507,7 @@
             <p class="hero-desc">Complete solar & power solutions for homes, businesses, and industries across Pakistan. Premium products, expert installation, and 24/7 support.</p>
             <div class="hero-btns">
               <button class="btn-primary" onclick="showPage('products')">Explore Products</button>
-              <button class="btn-outline" onclick="showPage('contact')">Get Free Quote</button>
+              <button class="btn-outline" onclick="showPage('calculator')">⚡ Free Solar Quote</button>
             </div>
           </div>
           <div class="hero-visual">
@@ -913,6 +958,55 @@
     </div>
     <div style="width:100%; height:400px; margin-top: 20px;">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3320.73411009425!2d73.09799857500001!3d33.67921730000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbf1f00000001%3A0x450e7731e96d234b!2sIslamabad%20Capital%20Territory!5e0!3m2!1sen!2s!4v1718535000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- SOLAR CALCULATOR PAGE -->
+  <div class="page" id="page-calculator">
+    <div class="calc-hero">
+      <div class="container" style="position:relative;z-index:1;">
+        <button class="back-btn" onclick="goBack()" style="background:rgba(255,255,255,0.12);color:white;border-color:transparent;">← Back</button>
+        <div class="calc-badge">☀️ Smart Solar Sizing Tool</div>
+        <h1>Free Solar Load Calculator</h1>
+        <p>Apne ghar ki zarorat calculate karein — bilkul free. Result WhatsApp par milega!</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="calc-layout">
+        <!-- APPLIANCE SELECTION -->
+        <div>
+          <div class="calc-panel">
+            <h2>🏠 Apne Appliances Chunain</h2>
+            <div class="appliance-grid" id="appliance-grid"></div>
+          </div>
+          <div class="calc-panel" style="margin-top:20px;">
+            <h2>👤 Apni Details Bharain</h2>
+            <div class="form-group"><label>Aapka Naam *</label><input type="text" id="calc-name" placeholder="e.g. Muhammad Ali"></div>
+            <div class="form-group"><label>WhatsApp Number *</label><input type="tel" id="calc-phone" placeholder="e.g. 03001234567"></div>
+            <div class="form-group"><label>Shehar / City</label><input type="text" id="calc-city" placeholder="e.g. Islamabad"></div>
+            <div class="form-group"><label>Koi Sawaal? (Optional)</label><textarea id="calc-note" rows="2" placeholder="e.g. Budget kya hai? Net metering chahiye?"></textarea></div>
+          </div>
+        </div>
+        <!-- RESULT CARD -->
+        <div class="calc-result-card">
+          <div class="result-header">
+            <h3>⚡ Aapka Solar System</h3>
+            <p>Live calculation — automatically updates</p>
+          </div>
+          <div class="result-body">
+            <div class="result-items" id="result-items-list"><div class="empty-calc">Koi appliance select nahi kiya<br>👆 Upar se select karein</div></div>
+            <div class="result-stat"><span class="label">Total Load</span><span class="value" id="result-watts">0 W</span></div>
+            <div class="result-stat highlight"><span class="label">Panels Needed (450W)</span><span class="value" id="result-panels">0 Panels</span></div>
+            <div id="result-system-tag" style="text-align:center;margin-bottom:12px;"></div>
+            <div class="daytime-note">☀️ Ye calculation <strong>Daytime System</strong> ke liye hai — 1 panel = 450W actual output</div>
+            <button class="calc-submit-btn" onclick="submitCalculator()">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+              WhatsApp par Quote Bhejain
+            </button>
+            <p class="calc-note">Submit karne ke baad WhatsApp khulega — aapka quotation phoran milega! 🚀</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1557,9 +1651,145 @@ function toggleMobile() { document.getElementById('mobile-menu').classList.toggl
 function closeMobileOnBg(e) { if (e.target === document.getElementById('mobile-menu')) toggleMobile(); }
 
 // ============================================================
+// SOLAR CALCULATOR
+// ============================================================
+const APPLIANCES = [
+  { id:'iron',    name:'Istree',          watts:1000, emoji:'🧺', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&auto=format&fit=crop' },
+  { id:'wm',      name:'Washing Machine', watts:400,  emoji:'🫧', img:'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=200&auto=format&fit=crop' },
+  { id:'fridge',  name:'Fridge / Refrig', watts:240,  emoji:'❄️', img:'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=200&auto=format&fit=crop' },
+  { id:'pump',    name:'Water Pump',      watts:1000, emoji:'💧', img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=200&auto=format&fit=crop' },
+  { id:'light',   name:'Light (LED)',     watts:20,   emoji:'💡', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&auto=format&fit=crop' },
+  { id:'fan',     name:'Ceiling Fan',     watts:70,   emoji:'🌀', img:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&auto=format&fit=crop' },
+  { id:'oven',    name:'Electric Oven',   watts:1200, emoji:'🍕', img:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&auto=format&fit=crop' },
+  { id:'ac1t',    name:'1 Ton AC',        watts:1200, emoji:'🌬️', img:'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=200&auto=format&fit=crop' },
+  { id:'ac15t',   name:'1.5 Ton AC',      watts:1800, emoji:'🌬️', img:'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=200&auto=format&fit=crop' },
+  { id:'ac2t',    name:'2 Ton AC',        watts:2500, emoji:'🌬️', img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&auto=format&fit=crop' },
+  { id:'stove',   name:'Electric Stove',  watts:1300, emoji:'🍳', img:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&auto=format&fit=crop' },
+  { id:'geyser',  name:'Water Geyser',    watts:1200, emoji:'🚿', img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&auto=format&fit=crop' }
+];
+
+const calcQty = {};
+APPLIANCES.forEach(a => { calcQty[a.id] = 0; });
+
+function buildApplianceGrid() {
+  const grid = document.getElementById('appliance-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  APPLIANCES.forEach(a => {
+    const card = document.createElement('div');
+    card.className = 'appliance-card';
+    card.id = 'acard-' + a.id;
+    card.innerHTML = `
+      <div class="appliance-img-wrap">
+        <img src="${a.img}" alt="${a.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div style="display:none;font-size:2rem;align-items:center;justify-content:center;width:100%;height:100%;">${a.emoji}</div>
+      </div>
+      <div class="appliance-name">${a.name}</div>
+      <div class="appliance-watts">${a.watts}W</div>
+      <div class="qty-control">
+        <button class="qty-btn-calc" onclick="changeQty('${a.id}',-1)">−</button>
+        <span class="qty-display" id="qty-${a.id}">0</span>
+        <button class="qty-btn-calc" onclick="changeQty('${a.id}',1)">+</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function changeQty(id, delta) {
+  calcQty[id] = Math.max(0, (calcQty[id] || 0) + delta);
+  document.getElementById('qty-' + id).textContent = calcQty[id];
+  const card = document.getElementById('acard-' + id);
+  if (card) card.classList.toggle('active', calcQty[id] > 0);
+  updateCalcResult();
+}
+
+function updateCalcResult() {
+  let totalWatts = 0;
+  const selected = [];
+  APPLIANCES.forEach(a => {
+    const q = calcQty[a.id] || 0;
+    if (q > 0) {
+      const w = a.watts * q;
+      totalWatts += w;
+      selected.push({ name: a.name + (q > 1 ? ' x' + q : ''), watts: w });
+    }
+  });
+
+  const panels = totalWatts > 0 ? Math.ceil(totalWatts / 450) : 0;
+
+  // Update list
+  const listEl = document.getElementById('result-items-list');
+  if (selected.length === 0) {
+    listEl.innerHTML = '<div class="empty-calc">Koi appliance select nahi kiya<br>👆 Upar se select karein</div>';
+  } else {
+    listEl.innerHTML = selected.map(s =>
+      `<div class="result-item-row"><span class="rname">${s.name}</span><span class="rwatts">${s.watts}W</span></div>`
+    ).join('');
+  }
+
+  document.getElementById('result-watts').textContent = totalWatts.toLocaleString() + ' W';
+  document.getElementById('result-panels').textContent = panels + (panels === 1 ? ' Panel' : ' Panels');
+
+  // System size label
+  const tagEl = document.getElementById('result-system-tag');
+  let sysLabel = '';
+  if (panels > 0) {
+    const kw = (panels * 0.45).toFixed(1);
+    sysLabel = `<span class="system-tag">☀️ ~${kw} kW Daytime Solar System</span>`;
+  }
+  tagEl.innerHTML = sysLabel;
+}
+
+function submitCalculator() {
+  const name  = (document.getElementById('calc-name')  || {}).value || '';
+  const phone = (document.getElementById('calc-phone') || {}).value || '';
+  const city  = (document.getElementById('calc-city')  || {}).value || '';
+  const note  = (document.getElementById('calc-note')  || {}).value || '';
+
+  if (!name.trim()) { alert('⚠️ Apna naam zaroor bharain!'); return; }
+  if (!phone.trim()) { alert('⚠️ WhatsApp number zaroor bharain!'); return; }
+
+  // Build selected list
+  const selected = [];
+  let totalWatts = 0;
+  APPLIANCES.forEach(a => {
+    const q = calcQty[a.id] || 0;
+    if (q > 0) {
+      const w = a.watts * q;
+      totalWatts += w;
+      selected.push(`  • ${a.name} x${q} = ${w}W`);
+    }
+  });
+
+  if (selected.length === 0) { alert('⚠️ Kam az kam ek appliance select karein!'); return; }
+
+  const panels = Math.ceil(totalWatts / 450);
+  const kw = (panels * 0.45).toFixed(1);
+
+  let msg = '☀️ *Bin Zareen Solar — Free Quotation Request*\n';
+  msg += '━━━━━━━━━━━━━━━━━━━━━━\n\n';
+  msg += `*Customer Name:* ${name}\n`;
+  msg += `*WhatsApp:* ${phone}\n`;
+  if (city) msg += `*City:* ${city}\n`;
+  msg += '\n*🏠 Selected Appliances:*\n';
+  msg += selected.join('\n') + '\n\n';
+  msg += `*⚡ Total Load:* ${totalWatts.toLocaleString()} Watts\n`;
+  msg += `*☀️ Panels Required:* ${panels} x 450W Panels\n`;
+  msg += `*📦 Estimated System:* ~${kw} kW Daytime Solar\n`;
+  if (note) msg += `\n*Note:* ${note}\n`;
+  msg += '\n━━━━━━━━━━━━━━━━━━━━━━\n';
+  msg += '_Solar Calculator se automatic bheja gaya — Please quote send karein. Jazak Allah!_ 🙏';
+
+  window.open('https://wa.me/923252053313?text=' + encodeURIComponent(msg), '_blank');
+}
+
+// ============================================================
 // INIT
 // ============================================================
-window.onload = function() { loadProductsFromFirebase(); };
+window.onload = function() {
+  loadProductsFromFirebase();
+  buildApplianceGrid();
+};
 </script>
 </body>
 </html>
