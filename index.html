@@ -491,7 +491,7 @@
       <a onclick="showPage('services');toggleMobile()">🔧 Services</a>
       <a onclick="showPage('about');toggleMobile()">ℹ️ About Us</a>
       <a onclick="showPage('contact');toggleMobile()">📞 Contact</a>
-      <a onclick="showPage('calculator');toggleMobile()">⚡ Solar Calculator</a>
+      <a onclick="showPage('calculator');toggleMobile()">⚡ Create Free Quotation</a>
       <a onclick="showPage('cart');toggleMobile()">🛒 Cart</a>
     </div>
   </div>
@@ -507,7 +507,7 @@
             <p class="hero-desc">Complete solar & power solutions for homes, businesses, and industries across Pakistan. Premium products, expert installation, and 24/7 support.</p>
             <div class="hero-btns">
               <button class="btn-primary" onclick="showPage('products')">Explore Products</button>
-              <button class="btn-outline" onclick="showPage('calculator')">⚡ Free Solar Quote</button>
+              <button class="btn-outline" onclick="showPage('calculator')">⚡ Create Free Quotation</button>
             </div>
           </div>
           <div class="hero-visual">
@@ -967,45 +967,113 @@
       <div class="container" style="position:relative;z-index:1;">
         <button class="back-btn" onclick="goBack()" style="background:rgba(255,255,255,0.12);color:white;border-color:transparent;">← Back</button>
         <div class="calc-badge">☀️ Smart Solar Sizing Tool</div>
-        <h1>Free Solar Load Calculator</h1>
-        <p>Apne ghar ki zarorat calculate karein — bilkul free. Result WhatsApp par milega!</p>
+        <h1>Create Free Quotation</h1>
+        <p>Apne ghar ki zarorat aur brands select karein — free invoice quotation hasil karein!</p>
       </div>
     </div>
     <div class="container">
-      <div class="calc-layout">
+      <div class="calc-layout" id="calc-step-1">
         <!-- APPLIANCE SELECTION -->
         <div>
           <div class="calc-panel">
             <h2>🏠 Apne Appliances Chunain</h2>
             <div class="appliance-grid" id="appliance-grid"></div>
           </div>
+        </div>
+        <!-- RESULT CARD -->
+        <div class="calc-result-card">
+          <div class="result-header">
+            <h3>⚡ Aapka Total Load</h3>
+            <p>Live calculation — automatically updates</p>
+          </div>
+          <div class="result-body">
+            <div class="result-items" id="result-items-list"><div class="empty-calc">Koi appliance select nahi kiya<br>👆 Upar se select karein</div></div>
+            <div class="result-stat highlight"><span class="label">Total Load</span><span class="value" id="result-watts">0 W</span></div>
+            <button class="calc-submit-btn" onclick="goToQuotationStep2()" style="background:var(--blue-mid);">
+              Next: Select Brands & Invoice →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: INVOICE QUOTATION CONFIGURATION -->
+      <div class="calc-layout" id="calc-step-2" style="display:none;">
+        <div>
+          <div class="calc-panel">
+            <h2>2️⃣ System & Brands Select Karein</h2>
+            <div class="form-group">
+              <label>System Type *</label>
+              <select id="q-system-type" onchange="generateInvoice()">
+                <option value="daytime">Daytime System (Without Battery)</option>
+                <option value="hybrid">Hybrid System (With Battery)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Solar Panel Wattage *</label>
+              <select id="q-panel-watt" onchange="generateInvoice()">
+                <option value="440|585W">585W Panel (Real 440W)</option>
+                <option value="440|590W">590W Panel (Real 440W)</option>
+                <option value="460|610W">610W Panel (Real 460W)</option>
+                <option value="460|620W">620W Panel (Real 460W)</option>
+                <option value="500|640W">640W Panel (Real 500W)</option>
+                <option value="500|645W">645W Panel (Real 500W)</option>
+                <option value="600|710W">710W Panel (Real 600W)</option>
+                <option value="600|720W">720W Panel (Real 600W)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Solar Panel Brand *</label>
+              <select id="q-panel-brand" onchange="generateInvoice()">
+                <option value="Canadian">Canadian</option>
+                <option value="JA">JA</option>
+                <option value="Jenko">Jenko</option>
+                <option value="Longi">Longi</option>
+                <option value="Longi himo x10">Longi himo x10</option>
+                <option value="Astro energy">Astro energy</option>
+                <option value="Yingli">Yingli</option>
+                <option value="Crown">Crown</option>
+                <option value="Risen">Risen</option>
+                <option value="Inverex">Inverex</option>
+                <option value="Korean">Korean</option>
+                <option value="Aiko">Aiko</option>
+                <option value="Treena">Treena</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Stand Structure *</label>
+              <select id="q-stand" onchange="generateInvoice()">
+                <option value="L2|2500">L2 Stand (Rs. 2500 / Panel)</option>
+                <option value="L3|2500">L3 Stand (Rs. 2500 / Panel)</option>
+                <option value="Pipe structure|8000">Pipe structure (Rs. 8000 / Panel)</option>
+                <option value="Elevated structure H.Beam|10000">Elevated structure H.Beam (Rs. 10000 / Panel)</option>
+              </select>
+            </div>
+          </div>
           <div class="calc-panel" style="margin-top:20px;">
             <h2>👤 Apni Details Bharain</h2>
             <div class="form-group"><label>Aapka Naam *</label><input type="text" id="calc-name" placeholder="e.g. Muhammad Ali"></div>
             <div class="form-group"><label>WhatsApp Number *</label><input type="tel" id="calc-phone" placeholder="e.g. 03001234567"></div>
             <div class="form-group"><label>Shehar / City</label><input type="text" id="calc-city" placeholder="e.g. Islamabad"></div>
-            <div class="form-group"><label>Koi Sawaal? (Optional)</label><textarea id="calc-note" rows="2" placeholder="e.g. Budget kya hai? Net metering chahiye?"></textarea></div>
+            <div class="form-group"><label>Koi Sawaal? (Optional)</label><textarea id="calc-note" rows="2" placeholder="e.g. Budget kya hai?"></textarea></div>
+            <button class="btn-outline" onclick="goBackToStep1()" style="color:var(--red-mid);border-color:var(--red-mid);width:100%;margin-top:10px;">← Back to Load Calculator</button>
           </div>
         </div>
-        <!-- RESULT CARD -->
+        <!-- INVOICE CARD -->
         <div class="calc-result-card">
           <div class="result-header">
-            <h3>⚡ Aapka Solar System</h3>
-            <p>Live calculation — automatically updates</p>
+            <h3>📄 Invoice Quotation</h3>
+            <p>Aapke system ka mukammal hisaab</p>
           </div>
-          <div class="result-body">
-            <div class="result-items" id="result-items-list"><div class="empty-calc">Koi appliance select nahi kiya<br>👆 Upar se select karein</div></div>
-            <div class="result-stat"><span class="label">Total Load</span><span class="value" id="result-watts">0 W</span></div>
-            <div class="result-stat highlight"><span class="label">Panels Needed (450W)</span><span class="value" id="result-panels">0 Panels</span></div>
-            <div id="result-system-tag" style="text-align:center;margin-bottom:12px;"></div>
-            <div class="daytime-note">☀️ Ye calculation <strong>Daytime System</strong> ke liye hai — 1 panel = 450W actual output</div>
-            <button class="calc-submit-btn" onclick="submitCalculator()">
+          <div class="result-body" id="invoice-body">
+            <div id="invoice-table-html"></div>
+            <button class="calc-submit-btn" onclick="submitInvoiceQuotation()" style="margin-top:16px;">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-              WhatsApp par Quote Bhejain
+              WhatsApp par Quotation Bhejain
             </button>
-            <p class="calc-note">Submit karne ke baad WhatsApp khulega — aapka quotation phoran milega! 🚀</p>
+            <p class="calc-note">Aapka customized quotation WhatsApp par foran forward ho jayega! 🚀</p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
@@ -1715,9 +1783,6 @@ function updateCalcResult() {
     }
   });
 
-  const panels = totalWatts > 0 ? Math.ceil(totalWatts / 450) : 0;
-
-  // Update list
   const listEl = document.getElementById('result-items-list');
   if (selected.length === 0) {
     listEl.innerHTML = '<div class="empty-calc">Koi appliance select nahi kiya<br>👆 Upar se select karein</div>';
@@ -1727,20 +1792,142 @@ function updateCalcResult() {
     ).join('');
   }
 
-  document.getElementById('result-watts').textContent = totalWatts.toLocaleString() + ' W';
-  document.getElementById('result-panels').textContent = panels + (panels === 1 ? ' Panel' : ' Panels');
-
-  // System size label
-  const tagEl = document.getElementById('result-system-tag');
-  let sysLabel = '';
-  if (panels > 0) {
-    const kw = (panels * 0.45).toFixed(1);
-    sysLabel = `<span class="system-tag">☀️ ~${kw} kW Daytime Solar System</span>`;
-  }
-  tagEl.innerHTML = sysLabel;
+  const wattsEl = document.getElementById('result-watts');
+  if (wattsEl) wattsEl.textContent = totalWatts.toLocaleString() + ' W';
 }
 
-function submitCalculator() {
+function goToQuotationStep2() {
+  let totalWatts = 0;
+  APPLIANCES.forEach(a => { totalWatts += (calcQty[a.id] || 0) * a.watts; });
+  if (totalWatts === 0) { alert('⚠️ Kam az kam ek appliance select karein!'); return; }
+  
+  document.getElementById('calc-step-1').style.display = 'none';
+  document.getElementById('calc-step-2').style.display = 'grid';
+  generateInvoice();
+}
+
+function goBackToStep1() {
+  document.getElementById('calc-step-2').style.display = 'none';
+  document.getElementById('calc-step-1').style.display = 'grid';
+}
+
+function generateInvoice() {
+  let totalWatts = 0;
+  APPLIANCES.forEach(a => { totalWatts += (calcQty[a.id] || 0) * a.watts; });
+
+  const systemType = document.getElementById('q-system-type').value;
+  const panelWattStr = document.getElementById('q-panel-watt').value.split('|');
+  const realWatts = parseInt(panelWattStr[0]);
+  const panelLabel = panelWattStr[1];
+  const brand = document.getElementById('q-panel-brand').value;
+  const standStr = document.getElementById('q-stand').value.split('|');
+  const standType = standStr[0];
+  const standPrice = parseInt(standStr[1]);
+
+  const panelsNeeded = Math.ceil(totalWatts / realWatts);
+  const kw = (panelsNeeded * realWatts / 1000).toFixed(1);
+
+  // Search for real prices in allProducts
+  let panelProduct = allProducts.find(p => p.cat === 'solar-panels' && p.name.toLowerCase().includes(brand.toLowerCase()) && p.name.toLowerCase().includes(panelLabel.replace('W', '').toLowerCase()));
+  if (!panelProduct) panelProduct = allProducts.find(p => p.cat === 'solar-panels' && p.name.toLowerCase().includes(brand.toLowerCase()));
+  const panelPrice = panelProduct ? panelProduct.price : 0;
+  const totalPanelPrice = panelPrice * panelsNeeded;
+
+  let inverterProduct;
+  if (systemType === 'hybrid') {
+    inverterProduct = allProducts.find(p => p.cat === 'inverters' && p.name.toLowerCase().includes('hybrid')) || allProducts.find(p => p.cat === 'inverters');
+  } else {
+    inverterProduct = allProducts.find(p => p.cat === 'inverters' && (p.name.toLowerCase().includes('on-grid') || p.name.toLowerCase().includes('off-grid'))) || allProducts.find(p => p.cat === 'inverters');
+  }
+  const inverterPrice = inverterProduct ? inverterProduct.price : 0;
+
+  let batteryProduct = null;
+  let batteryPrice = 0;
+  if (systemType === 'hybrid') {
+    batteryProduct = allProducts.find(p => p.cat === 'batteries' && p.name.toLowerCase().includes('lithium')) || allProducts.find(p => p.cat === 'batteries');
+    batteryPrice = batteryProduct ? batteryProduct.price : 0;
+  }
+
+  const totalStandPrice = standPrice * panelsNeeded;
+
+  let dcCableProduct = allProducts.find(p => p.cat === 'cables-wires' && p.name.toLowerCase().includes('dc'));
+  const dcCablePrice = dcCableProduct ? dcCableProduct.price * 10 : 15000;
+
+  let acCableProduct = allProducts.find(p => p.cat === 'cables-wires' && p.name.toLowerCase().includes('ac')) || allProducts.find(p => p.cat === 'cables-wires');
+  const acCablePrice = acCableProduct ? acCableProduct.price * 10 : 22000;
+
+  const dbBoxPrice = 15000; // Assumed basic protection price
+  
+  let grandTotal = totalPanelPrice + totalStandPrice + inverterPrice + batteryPrice + dcCablePrice + acCablePrice + dbBoxPrice;
+
+  const fmtPrice = (price) => price > 0 ? 'Rs. ' + price.toLocaleString('en-PK') : 'Price pending';
+
+  let itemsHtml = `
+    <div style="font-weight:700; color:var(--red-deep); font-size:1.1rem; margin-bottom:12px;">System Size: ${kw} kW</div>
+    <div style="font-weight:700; color:var(--gray-dark); margin-bottom:8px;">Load: ${totalWatts} W</div>
+    <div style="font-size:0.9rem; color:var(--gray-mid); margin-bottom:16px;">Panels Needed: ${panelsNeeded} x ${panelLabel} (Brand: ${brand})</div>
+    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:12px;">
+      <h4 style="font-size:0.85rem; color:var(--gray-dark); margin-bottom:10px; text-transform:uppercase;">Included Items & Estimated Pricing</h4>
+      <ul style="list-style:none; padding:0; margin:0; font-size:0.9rem; color:var(--text);">
+        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
+          <span style="flex:1;">✅ <b>Solar Panels:</b> ${panelsNeeded}x ${panelProduct ? panelProduct.name : brand + ' ' + panelLabel}</span>
+          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(totalPanelPrice)}</strong>
+        </li>
+        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
+          <span style="flex:1;">✅ <b>Structure:</b> ${panelsNeeded}x ${standType}</span>
+          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(totalStandPrice)}</strong>
+        </li>
+        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
+          <span style="flex:1;">✅ <b>Inverter:</b> ${inverterProduct ? inverterProduct.name : (systemType === 'hybrid' ? 'Hybrid Inverter' : 'On-Grid Inverter')}</span>
+          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(inverterPrice)}</strong>
+        </li>
+        ${systemType === 'hybrid' ? `<li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
+          <span style="flex:1;">✅ <b>Battery:</b> ${batteryProduct ? batteryProduct.name : 'Lithium Backup'}</span>
+          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(batteryPrice)}</strong>
+        </li>` : ''}
+        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
+          <span style="flex:1;">✅ <b>DC Cable (10m):</b> ${dcCableProduct ? dcCableProduct.name : 'Solar DC Cable'}</span>
+          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(dcCablePrice)}</strong>
+        </li>
+        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
+          <span style="flex:1;">✅ <b>AC Cable (10m):</b> ${acCableProduct ? acCableProduct.name : 'Standard AC Cable'}</span>
+          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(acCablePrice)}</strong>
+        </li>
+        <li style="padding:6px 0; display:flex; justify-content:space-between; align-items:center;">
+          <span style="flex:1;">✅ <b>DB Box & Protection:</b> Complete Set</span>
+          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(dbBoxPrice)}</strong>
+        </li>
+      </ul>
+      <div style="margin-top:12px; padding-top:12px; border-top:2px dashed #E2E8F0; display:flex; justify-content:space-between; font-weight:bold; font-size:1.1rem; color:var(--red-deep);">
+        <span>Estimated Total:</span>
+        <span>${grandTotal > 0 ? 'Rs. ' + grandTotal.toLocaleString('en-PK') : 'Pending'}</span>
+      </div>
+    </div>
+  `;
+  document.getElementById('invoice-table-html').innerHTML = itemsHtml;
+  
+  // Save for WhatsApp
+  window._lastInvoiceData = {
+    panelName: panelProduct ? panelProduct.name : brand + ' ' + panelLabel,
+    panelPrice: totalPanelPrice,
+    standType: standType,
+    standPrice: totalStandPrice,
+    inverterName: inverterProduct ? inverterProduct.name : (systemType === 'hybrid' ? 'Hybrid Inverter' : 'On-Grid Inverter'),
+    inverterPrice: inverterPrice,
+    batteryName: batteryProduct ? batteryProduct.name : 'Lithium Backup',
+    batteryPrice: batteryPrice,
+    dcName: dcCableProduct ? dcCableProduct.name : 'Solar DC Cable',
+    dcPrice: dcCablePrice,
+    acName: acCableProduct ? acCableProduct.name : 'Standard AC Cable',
+    acPrice: acCablePrice,
+    dbPrice: dbBoxPrice,
+    grandTotal: grandTotal,
+    systemType: systemType,
+    panelsNeeded: panelsNeeded
+  };
+}
+
+function submitInvoiceQuotation() {
   const name  = (document.getElementById('calc-name')  || {}).value || '';
   const phone = (document.getElementById('calc-phone') || {}).value || '';
   const city  = (document.getElementById('calc-city')  || {}).value || '';
@@ -1749,9 +1936,8 @@ function submitCalculator() {
   if (!name.trim()) { alert('⚠️ Apna naam zaroor bharain!'); return; }
   if (!phone.trim()) { alert('⚠️ WhatsApp number zaroor bharain!'); return; }
 
-  // Build selected list
-  const selected = [];
   let totalWatts = 0;
+  const selected = [];
   APPLIANCES.forEach(a => {
     const q = calcQty[a.id] || 0;
     if (q > 0) {
@@ -1761,24 +1947,40 @@ function submitCalculator() {
     }
   });
 
-  if (selected.length === 0) { alert('⚠️ Kam az kam ek appliance select karein!'); return; }
+  const inv = window._lastInvoiceData;
+  if (!inv) return;
 
-  const panels = Math.ceil(totalWatts / 450);
-  const kw = (panels * 0.45).toFixed(1);
+  const fmtPrice = (price) => price > 0 ? 'Rs. ' + price.toLocaleString('en-PK') : 'Price pending';
 
   let msg = '☀️ *Bin Zareen Solar — Free Quotation Request*\n';
   msg += '━━━━━━━━━━━━━━━━━━━━━━\n\n';
   msg += `*Customer Name:* ${name}\n`;
   msg += `*WhatsApp:* ${phone}\n`;
   if (city) msg += `*City:* ${city}\n`;
-  msg += '\n*🏠 Selected Appliances:*\n';
-  msg += selected.join('\n') + '\n\n';
-  msg += `*⚡ Total Load:* ${totalWatts.toLocaleString()} Watts\n`;
-  msg += `*☀️ Panels Required:* ${panels} x 450W Panels\n`;
-  msg += `*📦 Estimated System:* ~${kw} kW Daytime Solar\n`;
+  msg += '\n*🏠 Load Details:*\n';
+  msg += selected.join('\n') + '\n';
+  msg += `*⚡ Total Load:* ${totalWatts.toLocaleString()} Watts\n\n`;
+  
+  msg += '*✅ Included Items & Estimated Pricing:*\n';
+  msg += `1. Solar Panels: ${inv.panelsNeeded}x ${inv.panelName} - *${fmtPrice(inv.panelPrice)}*\n`;
+  msg += `2. Structure: ${inv.panelsNeeded}x ${inv.standType} - *${fmtPrice(inv.standPrice)}*\n`;
+  msg += `3. Inverter: ${inv.inverterName} - *${fmtPrice(inv.inverterPrice)}*\n`;
+  if (inv.systemType === 'hybrid') {
+    msg += `4. Battery: ${inv.batteryName} - *${fmtPrice(inv.batteryPrice)}*\n`;
+    msg += `5. DC Cable (10m): ${inv.dcName} - *${fmtPrice(inv.dcPrice)}*\n`;
+    msg += `6. AC Cable (10m): ${inv.acName} - *${fmtPrice(inv.acPrice)}*\n`;
+    msg += `7. DB Box & Protection - *${fmtPrice(inv.dbPrice)}*\n`;
+  } else {
+    msg += `4. DC Cable (10m): ${inv.dcName} - *${fmtPrice(inv.dcPrice)}*\n`;
+    msg += `5. AC Cable (10m): ${inv.acName} - *${fmtPrice(inv.acPrice)}*\n`;
+    msg += `6. DB Box & Protection - *${fmtPrice(inv.dbPrice)}*\n`;
+  }
+  
+  msg += `\n*💵 ESTIMATED TOTAL: ${fmtPrice(inv.grandTotal)}*\n`;
+  
   if (note) msg += `\n*Note:* ${note}\n`;
   msg += '\n━━━━━━━━━━━━━━━━━━━━━━\n';
-  msg += '_Solar Calculator se automatic bheja gaya — Please quote send karein. Jazak Allah!_ 🙏';
+  msg += '_Aapki pasand ke mutabiq quotation ready hai — Kindly price confirm karein. Jazak Allah!_ 🙏';
 
   window.open('https://wa.me/923252053313?text=' + encodeURIComponent(msg), '_blank');
 }
