@@ -1,3 +1,25 @@
+﻿ ab bus  to ya kar dy k  jo ya details ha na System Size: 1.3 kW (Daytime System)
+Load: 1270 W
+Panels Needed: 3 x 585W (Brand: Canadian)
+Included Items & Estimated Pricing
+✅ Solar Panels: 3x Canadian Solar 540W BiHiKu6
+Rs. 58,500
+✅ Structure: 3x L2 (Canadian)
+Rs. 7,500
+✅ Inverter: Growatt SPH 5000 Hybrid Inverter
+Rs. 95,000
+✅ DC Cable (10m): Solar DC Cable (4mm Red/Black)
+Rs. 15,000
+✅ AC Cable (10m): Solar DC Cable (4mm Red/Black)
+Rs. 15,000
+✅ DB Box & Protection: Complete Set
+Rs. 15,000
+Estimated Total:
+Rs. 206,000  
+ya   ban jay   pdf m aok or  alg sa or na is ko b whatspp per send kia ja say ok or na clik karny sa whatspp open ni ho rehe jo kopen hone  chiy hwer hal ma 1 single clik sa  whatspp open ho or  sare detils  send ho jay or  jo pdf ha wo b ok na  ya kamka r dy to bus ab 
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +29,9 @@
 <title>Bin Zareen Solar Pvt. Ltd. - Solar & Power Solutions Pakistan</title>
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"></noscript>
 <style>
   :root {
     --red-deep: #7F1D1D;
@@ -145,7 +169,7 @@
   .cat-showcase-right::before, .cat-showcase-right::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; }
   .cat-showcase-right::before { left: 0; background: linear-gradient(to right, var(--gray-light) 0%, transparent 100%); }
   .cat-showcase-right::after { right: 0; background: linear-gradient(to left, var(--gray-light) 0%, transparent 100%); }
-  .carousel-track { display: flex; gap: 20px; animation: scrollTrackRight 25s linear infinite; }
+  .carousel-track { display: flex; gap: 20px; animation: scrollTrackRight 25s linear infinite; will-change: transform; }
   .cat-showcase-right:hover .carousel-track { animation-play-state: paused; }
   @keyframes scrollTrackRight { 0% { transform: translateX(calc(-50% - 10px)); } 100% { transform: translateX(0); } }
   .cat-prod-card { flex: 0 0 220px; background: white; border-radius: 16px; padding: 18px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 1.5px solid transparent; text-align: center; display: flex; flex-direction: column; justify-content: space-between; height: 300px; }
@@ -156,7 +180,7 @@
 
   /* PRODUCTS GRID */
   .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .product-card { background: white; border-radius: 18px; overflow: hidden; border: 1.5px solid #E2E8F0; transition: all 0.25s; cursor: pointer; }
+  .product-card { background: white; border-radius: 18px; overflow: hidden; border: 1.5px solid #E2E8F0; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; cursor: pointer; contain: layout; }
   .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--red-light); }
   .product-img { height: 190px; background: var(--red-pale); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
   .product-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
@@ -418,8 +442,15 @@
   @media (max-width: 768px) { .calc-layout { grid-template-columns: 1fr; } .calc-result-card { position: static; } .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 400px) { .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<link rel="dns-prefetch" href="https://www.gstatic.com">
+<link rel="dns-prefetch" href="https://bin-zareen-default-rtdb.asia-southeast1.firebasedatabase.app">
+<script>
+  function toggleSystemType() {
+    const type = document.getElementById('q-system-type').value;
+    const batteryGroup = document.getElementById('q-battery-group');
+    if(batteryGroup) batteryGroup.style.display = (type === 'hybrid') ? 'block' : 'none';
+  }
+</script>
 </head>
 <body>
 
@@ -1003,9 +1034,31 @@
             <h2>2️⃣ System & Brands Select Karein</h2>
             <div class="form-group">
               <label>System Type *</label>
-              <select id="q-system-type" onchange="generateInvoice()">
+              <select id="q-system-type" onchange="toggleSystemType(); generateInvoice()">
                 <option value="daytime">Daytime System (Without Battery)</option>
                 <option value="hybrid">Hybrid System (With Battery)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Inverter Brand *</label>
+              <select id="q-inverter" onchange="generateInvoice()">
+                <option value="Growatt">Growatt</option>
+                <option value="SolarEdge">SolarEdge</option>
+                <option value="Solis">Solis</option>
+                <option value="Deye">Deye</option>
+                <option value="Inverex">Inverex</option>
+                <option value="Knox">Knox</option>
+                <option value="Fronus">Fronus</option>
+              </select>
+            </div>
+            <div class="form-group" id="q-battery-group" style="display:none;">
+              <label>Battery Brand *</label>
+              <select id="q-battery" onchange="generateInvoice()">
+                <option value="Pylontech">Pylontech (Lithium)</option>
+                <option value="Volta">Volta (Tubular/AGM)</option>
+                <option value="Phoenix">Phoenix (Tubular/Gel)</option>
+                <option value="Osaka">Osaka</option>
+                <option value="Tesla">Generic Lithium</option>
               </select>
             </div>
             <div class="form-group">
@@ -1056,6 +1109,17 @@
             <div class="form-group"><label>Shehar / City</label><input type="text" id="calc-city" placeholder="e.g. Islamabad"></div>
             <div class="form-group"><label>Koi Sawaal? (Optional)</label><textarea id="calc-note" rows="2" placeholder="e.g. Budget kya hai?"></textarea></div>
             <button class="btn-outline" onclick="goBackToStep1()" style="color:var(--red-mid);border-color:var(--red-mid);width:100%;margin-top:10px;">← Back to Load Calculator</button>
+          </div>
+          <div class="calc-panel" style="margin-top:20px;">
+            <h2>➕ Apni Custom Items Add Karein</h2>
+            <p style="font-size:0.85rem;color:var(--gray-mid);margin-bottom:12px;">Koi additional material ya service add karna hai?</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;margin-bottom:12px;">
+              <input type="text" id="custom-item-name" placeholder="Item Name" style="padding:10px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9rem;">
+              <input type="number" id="custom-item-qty" placeholder="Qty" min="1" value="1" style="padding:10px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9rem;">
+              <input type="number" id="custom-item-price" placeholder="Price" min="0" style="padding:10px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9rem;">
+              <button onclick="addCustomItem()" style="padding:10px 16px;background:var(--green);color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.9rem;">+ Add</button>
+            </div>
+            <div id="custom-items-list" style="max-height:200px;overflow-y:auto;"></div>
           </div>
         </div>
         <!-- INVOICE CARD -->
@@ -1175,6 +1239,8 @@
 </a>
 <div class="toast" id="toast">✓ Added to cart!</div>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
 // ============================================================
 // FIREBASE CONFIG
@@ -1184,7 +1250,7 @@ const firebaseConfig = {
   authDomain: "bin-zareen.firebaseapp.com",
   databaseURL: "https://bin-zareen-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "bin-zareen",
-  storageBucket: "bin-zareen.firebase-app.com",
+  storageBucket: "bin-zareen.appspot.com",
   messagingSenderId: "1032818991945",
   appId: "1:1032818991945:web:d821b7b2543785283cb098"
 };
@@ -1271,34 +1337,69 @@ function seedDatabaseWithInitialProducts() {
 }
 
 function loadProductsFromFirebase() {
-  seedDatabaseWithInitialProducts();
-  database.ref('products').on('value', snapshot => {
-    const obj = snapshot.val();
-    allProducts = obj ? Object.keys(obj).map(k => ({ id: k, ...obj[k] })) : initialProducts;
-   // Ab hum sab IDs ko String mein convert kar rahay hain taa ke Firebase IDs kharab na hon
-   allProducts = allProducts.map(p => ({ ...p, id: String(p.id) }));
+  try {
+    seedDatabaseWithInitialProducts();
+  } catch (e) {
+    console.error('Seed error:', e);
+  }
+  
+  // Use initial products immediately
+  try {
+    if (initialProducts && initialProducts.length > 0) {
+      allProducts = initialProducts.map(p => ({ ...p, id: parseInt(p.id) }));
+      if (typeof renderCategoryShowcase === 'function') renderCategoryShowcase();
+      if (typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
+      if (typeof updateCartCount === 'function') updateCartCount();
+    }
+  } catch (e) {
+    console.error('Initial products error:', e);
+  }
+  
+  // Try to load from Firebase (non-blocking)
+  try {
+    const splashTimeout = setTimeout(() => {
+      hideSplashScreen();
+    }, 800);
+    
+    database.ref('products').on('value', snapshot => {
+      clearTimeout(splashTimeout);
+      hideSplashScreen();
+      try {
+        const obj = snapshot.val();
+        if (obj) {
+          allProducts = Object.keys(obj).map(k => ({ id: k, ...obj[k] }));
+          allProducts = allProducts.map(p => ({ ...p, id: String(p.id) }));
+          if (typeof renderCategoryShowcase === 'function') renderCategoryShowcase();
+          if (typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
+          if (typeof updateCartCount === 'function') updateCartCount();
+        }
+      } catch (e) {
+        console.error('Firebase data processing error:', e);
+      }
+    }, (error) => {
+      clearTimeout(splashTimeout);
+      hideSplashScreen();
+      console.log('Firebase error:', error);
+    });
+  } catch (e) {
+    console.error('Firebase connection error:', e);
+  }
+}
 
-    renderCategoryShowcase();
-    renderFeaturedProducts();
-    updateCartCount();
-    setTimeout(() => {
-      document.getElementById('splash').classList.add('hide');
-      setTimeout(() => {
-        document.getElementById('splash').style.display = 'none';
-        document.getElementById('app').classList.add('show');
-      }, 400);
-    }, 500);
-  }, () => {
-    // Fallback if Firebase fails
-    allProducts = initialProducts.map(p => ({ ...p, id: parseInt(p.id) }));
-    renderCategoryShowcase();
-    renderFeaturedProducts();
-    updateCartCount();
-    setTimeout(() => {
-      document.getElementById('splash').classList.add('hide');
-      setTimeout(() => { document.getElementById('splash').style.display = 'none'; document.getElementById('app').classList.add('show'); }, 800);
-    }, 2600);
-  });
+function hideSplashScreen() {
+  const splash = document.getElementById('splash');
+  const app = document.getElementById('app');
+  
+  if (splash) {
+    splash.style.opacity = '0';
+    splash.style.pointerEvents = 'none';
+    splash.style.display = 'none';
+  }
+  
+  if (app) {
+    app.style.display = 'block';
+    app.classList.add('show');
+  }
 }
 
 function formatPrice(p) { return 'Rs. ' + parseInt(p).toLocaleString('en-PK'); }
@@ -1349,9 +1450,9 @@ function renderCategoryShowcase() {
         displayProds = displayProds.slice(0, 4);
         const loopProds = [...displayProds, ...displayProds];
         const productsHtml = loopProds.map(p => {
-          return '<div class="cat-prod-card" onclick="showPage(\'services\')"><img src="' + p.img + '" alt="' + p.name + '" class="cat-prod-img"><div class="cat-prod-name">' + p.name + '</div><div class="cat-prod-price">' + formatPrice(p.price) + '</div></div>';
+          return '<div class="cat-prod-card" onclick="showPage(\'services\')"><img src="' + p.img + '" alt="' + p.name + '" class="cat-prod-img" loading="lazy"><div class="cat-prod-name">' + p.name + '</div><div class="cat-prod-price">' + formatPrice(p.price) + '</div></div>';
         }).join('');
-        html += '<div class="cat-showcase-row"><div class="cat-showcase-left" onclick="showPage(\'services\')"><img src="' + cat.img + '" alt="' + cat.name + '" onerror="this.style.objectFit=\'contain\';this.style.background=\'var(--red-pale)\'"><div class="cat-showcase-overlay"><h3 class="cat-showcase-title">' + cat.name + '</h3><div class="cat-showcase-link">View All Services <span>→</span></div></div></div><div class="cat-showcase-right"><div class="carousel-track">' + productsHtml + '</div></div></div>';
+        html += '<div class="cat-showcase-row"><div class="cat-showcase-left" onclick="showPage(\'services\')"><img src="' + cat.img + '" alt="' + cat.name + '" onerror="this.style.objectFit=\'contain\';this.style.background=\'var(--red-pale)\'" loading="lazy"><div class="cat-showcase-overlay"><h3 class="cat-showcase-title">' + cat.name + '</h3><div class="cat-showcase-link">View All Services <span>→</span></div></div></div><div class="cat-showcase-right"><div class="carousel-track">' + productsHtml + '</div></div></div>';
       }
     }
   });
@@ -1365,9 +1466,8 @@ function renderCategoryShowcase() {
 function renderProductCard(p) {
   if (p.cat === 'installation') return ''; // Prevent installation services from showing up in product grids
   const inCart = cart.find(c => c.id === p.id);
- // Naya Code:
   return '<div class="product-card" onclick="showProductDetail(\'' + p.id + '\')"><div class="product-img">' +
-    (p.img ? '<img src="' + p.img + '" alt="' + p.name + '">' : '') +
+    (p.img ? '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' : '') +
     (p.badge ? '<div class="product-badge">' + p.badge + '</div>' : '') +
     '</div><div class="product-body"><div class="product-cat">' + p.catLabel + '</div><div class="product-name">' + p.name + '</div><div class="product-desc">' + p.desc + '</div><div class="product-footer"><div class="product-price">' + formatPrice(p.price) + ' <small>Inc. GST</small></div><button class="add-cart-btn ' + (inCart ? 'added' : '') + '" onclick="event.stopPropagation();addToCart(\'' + p.id + '\')">' + (inCart ? '✓ Added' : 'Add to Cart') + '</button></div></div></div>';
 }
@@ -1605,10 +1705,8 @@ function searchProducts(q) {
 }
 
 // ============================================================
-// MOBILE MENU
+// MOBILE MENU (defined once below)
 // ============================================================
-function toggleMobile() { document.getElementById('mobile-menu').classList.toggle('open'); }
-function closeMobileOnBg(e) { if (e.target === document.getElementById('mobile-menu')) toggleMobile(); }
 
 // ============================================================
 // PLACE ORDER → WHATSAPP
@@ -1796,6 +1894,56 @@ function updateCalcResult() {
   if (wattsEl) wattsEl.textContent = totalWatts.toLocaleString() + ' W';
 }
 
+// Custom Items Management
+window.customItems = [];
+
+function addCustomItem() {
+  const name = document.getElementById('custom-item-name').value.trim();
+  const qty = parseInt(document.getElementById('custom-item-qty').value) || 1;
+  const price = parseInt(document.getElementById('custom-item-price').value) || 0;
+  
+  if (!name) {
+    alert('⚠️ Item ka naam zaroor likhain!');
+    return;
+  }
+  
+  window.customItems.push({ id: Date.now(), name, qty, price });
+  
+  document.getElementById('custom-item-name').value = '';
+  document.getElementById('custom-item-qty').value = '1';
+  document.getElementById('custom-item-price').value = '';
+  
+  renderCustomItems();
+  generateInvoice();
+}
+
+function removeCustomItem(itemId) {
+  window.customItems = window.customItems.filter(item => item.id !== itemId);
+  renderCustomItems();
+  generateInvoice();
+}
+
+function renderCustomItems() {
+  const listEl = document.getElementById('custom-items-list');
+  if (window.customItems.length === 0) {
+    listEl.innerHTML = '';
+    return;
+  }
+  
+  listEl.innerHTML = window.customItems.map(item => `
+    <div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:8px;margin-bottom:8px;border-left:3px solid var(--green);">
+      <div style="flex:1;min-width:0;">
+        <div style="font-weight:600;color:#1a1a2e;font-size:0.9rem;">${item.name}</div>
+        <div style="font-size:0.8rem;color:#6b7280;">Qty: ${item.qty} × Rs. ${item.price.toLocaleString('en-PK')}</div>
+      </div>
+      <div style="text-align:right;min-width:auto;">
+        <div style="font-weight:700;color:var(--primary);font-size:0.9rem;">Rs. ${(item.qty * item.price).toLocaleString('en-PK')}</div>
+        <button onclick="removeCustomItem(${item.id})" style="margin-top:4px;background:transparent;border:none;color:#C0392B;cursor:pointer;font-size:0.8rem;text-decoration:underline;">Remove</button>
+      </div>
+    </div>
+  `).join('');
+}
+
 function goToQuotationStep2() {
   let totalWatts = 0;
   APPLIANCES.forEach(a => { totalWatts += (calcQty[a.id] || 0) * a.watts; });
@@ -1824,31 +1972,40 @@ function generateInvoice() {
   const standType = standStr[0];
   const standPrice = parseInt(standStr[1]);
 
+  // OPTION B: More Panels (30% more)
   const panelsNeeded = Math.ceil(totalWatts / realWatts);
+  const panelsNeededPremium = Math.ceil(panelsNeeded * 1.3);
   const kw = (panelsNeeded * realWatts / 1000).toFixed(1);
+  const kwPremium = (panelsNeededPremium * realWatts / 1000).toFixed(1);
 
   // Search for real prices in allProducts
   let panelProduct = allProducts.find(p => p.cat === 'solar-panels' && p.name.toLowerCase().includes(brand.toLowerCase()) && p.name.toLowerCase().includes(panelLabel.replace('W', '').toLowerCase()));
   if (!panelProduct) panelProduct = allProducts.find(p => p.cat === 'solar-panels' && p.name.toLowerCase().includes(brand.toLowerCase()));
   const panelPrice = panelProduct ? panelProduct.price : 0;
   const totalPanelPrice = panelPrice * panelsNeeded;
+  const totalPanelPricePremium = panelPrice * panelsNeededPremium;
 
-  let inverterProduct;
-  if (systemType === 'hybrid') {
-    inverterProduct = allProducts.find(p => p.cat === 'inverters' && p.name.toLowerCase().includes('hybrid')) || allProducts.find(p => p.cat === 'inverters');
-  } else {
-    inverterProduct = allProducts.find(p => p.cat === 'inverters' && (p.name.toLowerCase().includes('on-grid') || p.name.toLowerCase().includes('off-grid'))) || allProducts.find(p => p.cat === 'inverters');
+  const inverterBrand = document.getElementById('q-inverter').value;
+  let inverterProduct = allProducts.find(p => p.cat === 'inverters' && p.name.toLowerCase().includes(inverterBrand.toLowerCase()));
+  if (!inverterProduct) {
+    inverterProduct = allProducts.find(p => p.cat === 'inverters' && p.name.toLowerCase().includes(systemType === 'hybrid' ? 'hybrid' : 'on-grid')) || allProducts.find(p => p.cat === 'inverters');
   }
   const inverterPrice = inverterProduct ? inverterProduct.price : 0;
 
   let batteryProduct = null;
   let batteryPrice = 0;
+  let batteryBrand = '';
   if (systemType === 'hybrid') {
-    batteryProduct = allProducts.find(p => p.cat === 'batteries' && p.name.toLowerCase().includes('lithium')) || allProducts.find(p => p.cat === 'batteries');
+    batteryBrand = document.getElementById('q-battery').value;
+    batteryProduct = allProducts.find(p => p.cat === 'batteries' && p.name.toLowerCase().includes(batteryBrand.toLowerCase()));
+    if (!batteryProduct) {
+      batteryProduct = allProducts.find(p => p.cat === 'batteries' && p.name.toLowerCase().includes('lithium')) || allProducts.find(p => p.cat === 'batteries');
+    }
     batteryPrice = batteryProduct ? batteryProduct.price : 0;
   }
 
   const totalStandPrice = standPrice * panelsNeeded;
+  const totalStandPricePremium = standPrice * panelsNeededPremium;
 
   let dcCableProduct = allProducts.find(p => p.cat === 'cables-wires' && p.name.toLowerCase().includes('dc'));
   const dcCablePrice = dcCableProduct ? dcCableProduct.price * 10 : 15000;
@@ -1863,7 +2020,16 @@ function generateInvoice() {
   const fmtPrice = (price) => price > 0 ? 'Rs. ' + price.toLocaleString('en-PK') : 'Price pending';
 
   let itemsHtml = `
-    <div style="font-weight:700; color:var(--red-deep); font-size:1.1rem; margin-bottom:12px;">System Size: ${kw} kW</div>
+    <!-- Invoice Logo Header for Screenshot -->
+    <div class="invoice-logo-header" style="display:flex; align-items:center; gap:16px; margin-bottom:20px; padding-bottom:16px; border-bottom:3px double #E2E8F0;">
+      <img src="favicon.png" alt="Bin Zareen Solar Logo" style="width:70px; height:70px; object-fit:contain; border-radius:12px; background:#fff; padding:4px; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #E2E8F0; flex-shrink:0;">
+      <div>
+        <h2 style="font-family:'Playfair Display', serif; font-size:1.6rem; font-weight:800; color:var(--red-deep); margin:0; line-height:1.2;">Bin Zareen Solar</h2>
+        <p style="margin:2px 0 0; font-size:0.8rem; color:var(--red-mid); font-weight:700; letter-spacing:2px; text-transform:uppercase;">Solar Pvt. Ltd.</p>
+        <p style="margin:2px 0 0; font-size:0.75rem; color:var(--gray-mid);">Free Quotation Estimate</p>
+      </div>
+    </div>
+    <div style="font-weight:700; color:var(--red-deep); font-size:1.1rem; margin-bottom:12px;">System Size: ${kw} kW (${systemType === 'hybrid' ? 'Hybrid System' : 'Daytime System'})</div>
     <div style="font-weight:700; color:var(--gray-dark); margin-bottom:8px;">Load: ${totalWatts} W</div>
     <div style="font-size:0.9rem; color:var(--gray-mid); margin-bottom:16px;">Panels Needed: ${panelsNeeded} x ${panelLabel} (Brand: ${brand})</div>
     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:12px;">
@@ -1874,15 +2040,15 @@ function generateInvoice() {
           <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(totalPanelPrice)}</strong>
         </li>
         <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>Structure:</b> ${panelsNeeded}x ${standType}</span>
+          <span style="flex:1;">✅ <b>Structure:</b> ${panelsNeeded}x ${standType} (${brand})</span>
           <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(totalStandPrice)}</strong>
         </li>
         <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>Inverter:</b> ${inverterProduct ? inverterProduct.name : (systemType === 'hybrid' ? 'Hybrid Inverter' : 'On-Grid Inverter')}</span>
+          <span style="flex:1;">✅ <b>Inverter:</b> ${inverterProduct ? inverterProduct.name : inverterBrand + ' Inverter'}</span>
           <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(inverterPrice)}</strong>
         </li>
         ${systemType === 'hybrid' ? `<li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>Battery:</b> ${batteryProduct ? batteryProduct.name : 'Lithium Backup'}</span>
+          <span style="flex:1;">✅ <b>Battery:</b> ${batteryProduct ? batteryProduct.name : batteryBrand + ' Battery'}</span>
           <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(batteryPrice)}</strong>
         </li>` : ''}
         <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
@@ -1906,28 +2072,351 @@ function generateInvoice() {
   `;
   document.getElementById('invoice-table-html').innerHTML = itemsHtml;
   
-  // Save for WhatsApp
+  // Save for WhatsApp - New structure with both options
   window._lastInvoiceData = {
-    panelName: panelProduct ? panelProduct.name : brand + ' ' + panelLabel,
-    panelPrice: totalPanelPrice,
-    standType: standType,
-    standPrice: totalStandPrice,
-    inverterName: inverterProduct ? inverterProduct.name : (systemType === 'hybrid' ? 'Hybrid Inverter' : 'On-Grid Inverter'),
-    inverterPrice: inverterPrice,
-    batteryName: batteryProduct ? batteryProduct.name : 'Lithium Backup',
-    batteryPrice: batteryPrice,
-    dcName: dcCableProduct ? dcCableProduct.name : 'Solar DC Cable',
-    dcPrice: dcCablePrice,
-    acName: acCableProduct ? acCableProduct.name : 'Standard AC Cable',
-    acPrice: acCablePrice,
-    dbPrice: dbBoxPrice,
-    grandTotal: grandTotal,
+    // Option A: Basic System
+    optionA: {
+      panelName: panelProduct ? panelProduct.name : brand + ' ' + panelLabel,
+      panelsNeeded: panelsNeeded,
+      panelPrice: totalPanelPrice,
+      standType: standType,
+      standPrice: totalStandPrice,
+      inverterName: inverterProduct ? inverterProduct.name : inverterBrand + ' Inverter',
+      inverterPrice: inverterPrice,
+      batteryName: batteryProduct ? batteryProduct.name : batteryBrand + ' Battery',
+      batteryPrice: batteryPrice,
+      dcPrice: dcCablePrice,
+      acPrice: acCablePrice,
+      dbPrice: dbBoxPrice,
+      customItems: window.customItems,
+      grandTotal: grandTotal
+    },
+    // Option B: Premium System (30% more panels)
+    optionB: {
+      panelName: panelProduct ? panelProduct.name : brand + ' ' + panelLabel,
+      panelsNeeded: panelsNeededPremium,
+      panelPrice: totalPanelPricePremium,
+      standType: standType,
+      standPrice: totalStandPricePremium,
+      inverterName: inverterProduct ? inverterProduct.name : inverterBrand + ' Inverter',
+      inverterPrice: inverterPrice,
+      batteryName: batteryProduct ? batteryProduct.name : batteryBrand + ' Battery',
+      batteryPrice: batteryPrice,
+      dcPrice: dcCablePrice,
+      acPrice: acCablePrice,
+      dbPrice: dbBoxPrice,
+      customItems: window.customItems,
+      grandTotal: grandTotalPremium
+    },
     systemType: systemType,
-    panelsNeeded: panelsNeeded
+    totalWatts: totalWatts
   };
 }
 
-function submitInvoiceQuotation() {
+function loadScriptOnce(src) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector('script[src="' + src + '"]')) {
+      resolve();
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.body.appendChild(s);
+  });
+}
+
+async function loadPdfLibs() {
+  if (window.html2canvas && window.jspdf) return;
+  await Promise.all([
+    loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
+    loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
+  ]);
+}
+
+async function generatePdfFromInvoice(name, customerData) {
+  // Load required libraries
+  try {
+    await loadPdfLibs();
+  } catch (e) {
+    console.error('PDF libraries failed to load:', e);
+    return false;
+  }
+
+  // Create a beautiful PDF invoice
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const margins = { top: 15, left: 15, right: 15, bottom: 15 };
+  const contentWidth = pageWidth - margins.left - margins.right;
+  
+  let yPos = margins.top;
+  const lineHeight = 7;
+  const sectionGap = 8;
+
+  // Helper functions
+  const addText = (text, size, weight, color, x, y, maxWidth) => {
+    pdf.setFontSize(size);
+    pdf.setFont(undefined, weight);
+    pdf.setTextColor(...color);
+    if (y !== undefined) yPos = y;
+    if (maxWidth) {
+      pdf.text(text, x || margins.left, yPos, { maxWidth });
+      const lines = pdf.splitTextToSize(text, maxWidth);
+      yPos += lines.length * lineHeight;
+    } else {
+      pdf.text(text, x || margins.left, yPos);
+      yPos += lineHeight;
+    }
+  };
+
+  const addTable = (headers, rows) => {
+    const colWidth = contentWidth / headers.length;
+    const headerHeight = 8;
+    const rowHeight = 7;
+    
+    // Header
+    pdf.setFillColor(127, 29, 29); // Red-deep color
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(10);
+    pdf.setFont(undefined, 'bold');
+    
+    headers.forEach((header, i) => {
+      pdf.rect(margins.left + (i * colWidth), yPos, colWidth, headerHeight, 'F');
+      pdf.text(header, margins.left + (i * colWidth) + 2, yPos + headerHeight - 2);
+    });
+    yPos += headerHeight + 1;
+
+    // Rows
+    pdf.setTextColor(50, 50, 50);
+    pdf.setFont(undefined, 'normal');
+    pdf.setFontSize(9);
+    
+    rows.forEach((row, rowIdx) => {
+      let maxLines = 1;
+      row.forEach((cell, colIdx) => {
+        const lines = pdf.splitTextToSize(cell, colWidth - 4);
+        maxLines = Math.max(maxLines, lines.length);
+      });
+      
+      const currentRowHeight = rowHeight * maxLines;
+      
+      // Alternate row background
+      if (rowIdx % 2 === 0) {
+        pdf.setFillColor(248, 250, 252);
+        pdf.rect(margins.left, yPos, contentWidth, currentRowHeight, 'F');
+      }
+      
+      // Cell content
+      row.forEach((cell, colIdx) => {
+        const x = margins.left + (colIdx * colWidth) + 2;
+        const lines = pdf.splitTextToSize(cell, colWidth - 4);
+        lines.forEach((line, lineIdx) => {
+          pdf.text(line, x, yPos + 2 + (lineIdx * rowHeight));
+        });
+      });
+      
+      // Cell borders
+      headers.forEach((_, colIdx) => {
+        pdf.rect(margins.left + (colIdx * colWidth), yPos, colWidth, currentRowHeight);
+      });
+      
+      yPos += currentRowHeight + 1;
+    });
+  };
+
+  // Check page space
+  const checkNewPage = (spaceNeeded) => {
+    if (yPos + spaceNeeded > pageHeight - margins.bottom) {
+      pdf.addPage();
+      yPos = margins.top;
+    }
+  };
+
+  // HEADER WITH LOGO
+  const logoSize = 18;
+  pdf.addImage('favicon.png', 'PNG', margins.left, yPos - 2, logoSize, logoSize);
+  
+  pdf.setFontSize(18);
+  pdf.setFont(undefined, 'bold');
+  pdf.setTextColor(127, 29, 29); // Red-deep
+  pdf.text('BIN ZAREEN SOLAR', margins.left + logoSize + 5, yPos + 5);
+  
+  pdf.setFontSize(9);
+  pdf.setFont(undefined, 'normal');
+  pdf.setTextColor(180, 28, 28); // Red-mid
+  pdf.text('Pvt. Ltd. — Solar & Power Solutions', margins.left + logoSize + 5, yPos + 10);
+  
+  pdf.setFontSize(8);
+  pdf.setTextColor(107, 114, 128); // Gray
+  pdf.text('Free Quotation Estimate', margins.left + logoSize + 5, yPos + 14);
+  
+  yPos += logoSize + 5;
+
+  // Divider
+  pdf.setDrawColor(226, 232, 240);
+  pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
+  yPos += 5;
+
+  // CUSTOMER DETAILS
+  checkNewPage(15);
+  pdf.setFontSize(11);
+  pdf.setFont(undefined, 'bold');
+  pdf.setTextColor(127, 29, 29);
+  pdf.text('CUSTOMER DETAILS', margins.left, yPos);
+  yPos += 6;
+
+  pdf.setFontSize(9);
+  pdf.setFont(undefined, 'normal');
+  pdf.setTextColor(50, 50, 50);
+  pdf.text(`Name: ${customerData.name}`, margins.left, yPos);
+  yPos += lineHeight;
+  pdf.text(`WhatsApp: ${customerData.phone}`, margins.left, yPos);
+  yPos += lineHeight;
+  if (customerData.city) {
+    pdf.text(`City: ${customerData.city}`, margins.left, yPos);
+    yPos += lineHeight;
+  }
+  yPos += sectionGap;
+
+  // SYSTEM SUMMARY
+  checkNewPage(12);
+  pdf.setFontSize(11);
+  pdf.setFont(undefined, 'bold');
+  pdf.setTextColor(127, 29, 29);
+  pdf.text('SYSTEM SUMMARY', margins.left, yPos);
+  yPos += 6;
+
+  const inv = window._lastInvoiceData;
+  pdf.setFontSize(9);
+  pdf.setFont(undefined, 'normal');
+  pdf.setTextColor(50, 50, 50);
+  
+  const systemTypeLabel = inv.systemType === 'hybrid' ? 'Hybrid (With Battery)' : 'Daytime (Without Battery)';
+  pdf.text(`System Type: ${systemTypeLabel}`, margins.left, yPos);
+  yPos += lineHeight;
+  pdf.text(`Total Load: ${inv.totalWatts} Watts`, margins.left, yPos);
+  yPos += lineHeight;
+  pdf.text(`Panels Required: ${inv.optionA.panelsNeeded}x (Standard) / ${inv.optionB.panelsNeeded}x (Premium +30%)`, margins.left, yPos);
+  yPos += sectionGap + 2;
+
+  // QUOTATION TABLE
+  checkNewPage(25);
+  pdf.setFontSize(11);
+  pdf.setFont(undefined, 'bold');
+  pdf.setTextColor(127, 29, 29);
+  pdf.text('DETAILED QUOTATION', margins.left, yPos);
+  yPos += 6;
+
+  // Create table rows
+  const tableRows = [
+    ['Description', 'Quantity', 'Unit Price', 'Total'],
+    [`Solar Panels (${inv.optionA.panelName})`, `${inv.optionA.panelsNeeded}x`, `Rs. ${(inv.optionA.panelPrice / inv.optionA.panelsNeeded).toLocaleString('en-PK')}`, `Rs. ${inv.optionA.panelPrice.toLocaleString('en-PK')}`],
+    [`Structure/Stand (${inv.optionA.standType})`, `${inv.optionA.panelsNeeded}x`, `Rs. ${(inv.optionA.standPrice / inv.optionA.panelsNeeded).toLocaleString('en-PK')}`, `Rs. ${inv.optionA.standPrice.toLocaleString('en-PK')}`],
+    [`Inverter (${inv.optionA.inverterName})`, '1x', `Rs. ${inv.optionA.inverterPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.inverterPrice.toLocaleString('en-PK')}`],
+  ];
+
+  if (inv.systemType === 'hybrid') {
+    tableRows.push([`Battery (${inv.optionA.batteryName})`, '1x', `Rs. ${inv.optionA.batteryPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.batteryPrice.toLocaleString('en-PK')}`]);
+  }
+
+  tableRows.push(
+    [`DC Cables (10m)`, '1x', `Rs. ${inv.optionA.dcPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.dcPrice.toLocaleString('en-PK')}`],
+    [`AC Cables (10m)`, '1x', `Rs. ${inv.optionA.acPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.acPrice.toLocaleString('en-PK')}`],
+    [`DB Box & Protection`, '1x', `Rs. ${inv.optionA.dbPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.dbPrice.toLocaleString('en-PK')}`]
+  );
+
+  if (inv.optionA.customItems && inv.optionA.customItems.length > 0) {
+    inv.optionA.customItems.forEach(item => {
+      tableRows.push([item.name, `${item.qty}x`, `Rs. ${item.price.toLocaleString('en-PK')}`, `Rs. ${(item.qty * item.price).toLocaleString('en-PK')}`]);
+    });
+  }
+
+  addTable(tableRows[0], tableRows.slice(1));
+
+  // GRAND TOTAL
+  checkNewPage(15);
+  yPos += 3;
+  pdf.setDrawColor(226, 232, 240);
+  pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
+  yPos += 4;
+
+  pdf.setFontSize(12);
+  pdf.setFont(undefined, 'bold');
+  pdf.setTextColor(127, 29, 29);
+  pdf.rect(margins.left, yPos - 2, contentWidth, 8, 'F'); // Light red background
+  pdf.setFillColor(127, 29, 29);
+  pdf.text('ESTIMATED TOTAL COST:', margins.left + 2, yPos + 2);
+  pdf.setTextColor(255, 255, 255);
+  pdf.text(`Rs. ${inv.optionA.grandTotal.toLocaleString('en-PK')}`, pageWidth - margins.right - 30, yPos + 2);
+  
+  yPos += 10;
+
+  // NOTES
+  if (customerData.note) {
+    checkNewPage(10);
+    pdf.setFontSize(10);
+    pdf.setFont(undefined, 'bold');
+    pdf.setTextColor(127, 29, 29);
+    pdf.text('CUSTOMER NOTES:', margins.left, yPos);
+    yPos += 5;
+    
+    pdf.setFontSize(9);
+    pdf.setFont(undefined, 'normal');
+    pdf.setTextColor(50, 50, 50);
+    const noteLines = pdf.splitTextToSize(customerData.note, contentWidth);
+    noteLines.forEach(line => {
+      pdf.text(line, margins.left, yPos);
+      yPos += lineHeight;
+    });
+    yPos += sectionGap;
+  }
+
+  // FOOTER
+  checkNewPage(20);
+  pdf.setDrawColor(226, 232, 240);
+  pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
+  yPos += 5;
+
+  pdf.setFontSize(9);
+  pdf.setFont(undefined, 'bold');
+  pdf.setTextColor(127, 29, 29);
+  pdf.text('NEXT STEPS:', margins.left, yPos);
+  yPos += 5;
+
+  pdf.setFontSize(8);
+  pdf.setFont(undefined, 'normal');
+  pdf.setTextColor(107, 114, 128);
+  const steps = [
+    '✓ Review this quotation carefully',
+    '✓ Contact us for site survey and installation date',
+    '✓ We provide 5-year warranty on all systems',
+    '✓ Free after-sales support and maintenance'
+  ];
+  steps.forEach(step => {
+    pdf.text(step, margins.left, yPos);
+    yPos += 4;
+  });
+
+  yPos += 5;
+  pdf.setFontSize(8);
+  pdf.setTextColor(180, 28, 28);
+  pdf.text('📞 Call: 03252053313 | 📧 WhatsApp: 03252053313', margins.left, yPos);
+  
+  // Save PDF
+  try {
+    const filename = `BinZareen_Solar_Quotation_${name.replace(/\s+/g, '_')}_${new Date().getTime()}.pdf`;
+    pdf.save(filename);
+    return true;
+  } catch (e) {
+    console.error('Error saving PDF:', e);
+    return false;
+  }
+}
+
+async function submitInvoiceQuotation() {
   const name  = (document.getElementById('calc-name')  || {}).value || '';
   const phone = (document.getElementById('calc-phone') || {}).value || '';
   const city  = (document.getElementById('calc-city')  || {}).value || '';
@@ -1936,61 +2425,73 @@ function submitInvoiceQuotation() {
   if (!name.trim()) { alert('⚠️ Apna naam zaroor bharain!'); return; }
   if (!phone.trim()) { alert('⚠️ WhatsApp number zaroor bharain!'); return; }
 
-  let totalWatts = 0;
-  const selected = [];
-  APPLIANCES.forEach(a => {
-    const q = calcQty[a.id] || 0;
-    if (q > 0) {
-      const w = a.watts * q;
-      totalWatts += w;
-      selected.push(`  • ${a.name} x${q} = ${w}W`);
-    }
-  });
-
   const inv = window._lastInvoiceData;
   if (!inv) return;
 
-  const fmtPrice = (price) => price > 0 ? 'Rs. ' + price.toLocaleString('en-PK') : 'Price pending';
+  // Generate and download PDF
+  const pdfGenerated = await generatePdfFromInvoice(name, { name, phone, city, note });
 
-  let msg = '☀️ *Bin Zareen Solar — Free Quotation Request*\n';
-  msg += '━━━━━━━━━━━━━━━━━━━━━━\n\n';
-  msg += `*Customer Name:* ${name}\n`;
-  msg += `*WhatsApp:* ${phone}\n`;
-  if (city) msg += `*City:* ${city}\n`;
-  msg += '\n*🏠 Load Details:*\n';
-  msg += selected.join('\n') + '\n';
-  msg += `*⚡ Total Load:* ${totalWatts.toLocaleString()} Watts\n\n`;
-  
-  msg += '*✅ Included Items & Estimated Pricing:*\n';
-  msg += `1. Solar Panels: ${inv.panelsNeeded}x ${inv.panelName} - *${fmtPrice(inv.panelPrice)}*\n`;
-  msg += `2. Structure: ${inv.panelsNeeded}x ${inv.standType} - *${fmtPrice(inv.standPrice)}*\n`;
-  msg += `3. Inverter: ${inv.inverterName} - *${fmtPrice(inv.inverterPrice)}*\n`;
-  if (inv.systemType === 'hybrid') {
-    msg += `4. Battery: ${inv.batteryName} - *${fmtPrice(inv.batteryPrice)}*\n`;
-    msg += `5. DC Cable (10m): ${inv.dcName} - *${fmtPrice(inv.dcPrice)}*\n`;
-    msg += `6. AC Cable (10m): ${inv.acName} - *${fmtPrice(inv.acPrice)}*\n`;
-    msg += `7. DB Box & Protection - *${fmtPrice(inv.dbPrice)}*\n`;
-  } else {
-    msg += `4. DC Cable (10m): ${inv.dcName} - *${fmtPrice(inv.dcPrice)}*\n`;
-    msg += `5. AC Cable (10m): ${inv.acName} - *${fmtPrice(inv.acPrice)}*\n`;
-    msg += `6. DB Box & Protection - *${fmtPrice(inv.dbPrice)}*\n`;
+  if (!pdfGenerated) {
+    alert('⚠️ PDF generation failed. Please try again.');
+    return;
   }
-  
-  msg += `\n*💵 ESTIMATED TOTAL: ${fmtPrice(inv.grandTotal)}*\n`;
-  
-  if (note) msg += `\n*Note:* ${note}\n`;
-  msg += '\n━━━━━━━━━━━━━━━━━━━━━━\n';
-  msg += '_Aapki pasand ke mutabiq quotation ready hai — Kindly price confirm karein. Jazak Allah!_ 🙏';
 
-  window.open('https://wa.me/923252053313?text=' + encodeURIComponent(msg), '_blank');
+  // Generate WhatsApp message
+  let msg = '☀️ *BIN ZAREEN SOLAR* — Complete Quotation\n';
+  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+  msg += `👤 *Customer:* ${name}\n`;
+  msg += `📱 *WhatsApp:* ${phone}\n`;
+  if (city) msg += `📍 *City:* ${city}\n`;
+  msg += '\n';
+  
+  // System Summary
+  const systemTypeLabel = inv.systemType === 'hybrid' ? 'Hybrid (Battery)' : 'Daytime';
+  msg += `⚡ *System Type:* ${systemTypeLabel}\n`;
+  msg += `📊 *Load:* ${inv.totalWatts}W\n`;
+  msg += `☀️ *Panels:* ${inv.optionA.panelsNeeded}x (Standard)\n`;
+  msg += `💰 *Total Cost:* Rs. ${inv.optionA.grandTotal.toLocaleString('en-PK')}\n\n`;
+  
+  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+  msg += '✅ *PDF Downloaded Successfully!*\n';
+  msg += '📄 Aapka detailed quotation PDF download ho gaya hai\n';
+  msg += '📲 Is PDF ko hume send karein for confirmation\n';
+  msg += '_Shukriya! Hum jaldi contact karengy_ 🙏\n';
+  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+
+  // Open WhatsApp with message
+  const whatsappLink = 'https://wa.me/923252053313?text=' + encodeURIComponent(msg);
+  window.open(whatsappLink, '_blank');
+  
+  // Show success message
+  alert('✅ PDF downloaded!\n📲 WhatsApp message ready.\n\nAab pdf ko apne WhatsApp par attach karke hume bhej dein!');
 }
 
 // ============================================================
 // INIT
 // ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  // Hide splash immediately on DOM ready
+  setTimeout(() => {
+    hideSplashScreen();
+  }, 500);
+  
+  // Load products in background
+  try {
+    loadProductsFromFirebase();
+  } catch (e) {
+    console.error('Error loading products:', e);
+  }
+  
+  try {
+    buildApplianceGrid();
+  } catch (e) {
+    console.error('Error building appliance grid:', e);
+  }
+});
+
 window.onload = function() {
-  loadProductsFromFirebase();
-  buildApplianceGrid();
+  // Secondary safety net
+  hideSplashScreen();
 };
 </script>
 </body>

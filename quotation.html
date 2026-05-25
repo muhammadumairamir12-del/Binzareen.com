@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System Quotation - Bin Zareen Solar</title>
+    <link rel="icon" href="favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #B91C1C;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .quotation-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+            border: 2px solid #FEE2E2;
+        }
+        
+        .quotation-header {
+            border-bottom: 3px solid #B91C1C;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .quotation-header h2 {
+            color: #7F1D1D;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .quotation-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .system-info {
+            background: #FEF2F2;
+            border-left: 5px solid #DC2626;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .system-info h3 {
+            color: #7F1D1D;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .system-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .system-item label {
+            color: #666;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .system-item .value {
+            color: #1E293B;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 5px;
+            color: #B91C1C;
+        }
+        
+        .items-section {
+            margin-bottom: 30px;
+        }
+        
+        .items-section h3 {
+            color: #7F1D1D;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .items-table thead {
+            background: linear-gradient(135deg, #7F1D1D, #B91C1C);
+            color: white;
+        }
+        
+        .items-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        
+        .items-table td {
+            padding: 12px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .items-table tr:hover {
+            background: #FEF2F2;
+        }
+        
+        .items-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .item-name {
+            font-weight: 600;
+            color: #1E293B;
+        }
+        
+        .item-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 3px;
+        }
+        
+        .price {
+            text-align: right;
+            color: #B91C1C;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .qty {
+            text-align: center;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .total-row {
+            background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
+            font-weight: 700;
+            border-top: 2px solid #B91C1C;
+        }
+        
+        .total-row td {
+            padding: 16px 12px;
+            font-size: 1.2rem;
+        }
+        
+        .total-amount {
+            color: #7F1D1D;
+            text-align: right;
+        }
+        
+        .pricing-summary {
+            background: white;
+            border: 2px solid #B91C1C;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #E2E8F0;
+            color: #333;
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-item.total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #7F1D1D;
+            border-top: 2px solid #B91C1C;
+            padding-top: 15px;
+            padding-bottom: 0;
+        }
+        
+        .summary-item.total .label {
+            color: #B91C1C;
+        }
+        
+        .summary-item.total .amount {
+            color: #7F1D1D;
+            font-size: 1.6rem;
+        }
+        
+        .note-box {
+            background: #FEF3C7;
+            border-left: 5px solid #F59E0B;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: #92400E;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .btn-pdf {
+            background: linear-gradient(135deg, #DC2626, #B91C1C);
+            color: white;
+        }
+        
+        .btn-pdf:hover {
+            background: linear-gradient(135deg, #B91C1C, #7F1D1D);
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: linear-gradient(135deg, #128C7E, #0d5f5b);
+        }
+        
+        .footer-text {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        .company-info {
+            background: linear-gradient(135deg, #7F1D1D, #B91C1C);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .company-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .company-info p {
+            font-size: 0.9rem;
+            margin: 4px 0;
+            opacity: 0.95;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        
+        .contact-info div {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .contact-info div strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .stamp-badge {
+            display: inline-block;
+            background: #DCFCE7;
+            color: #166534;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 15px;
+            border: 2px solid #86EFAC;
+        }
+        
+        .print-footer {
+            display: none;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .buttons {
+                display: none;
+            }
+            
+            .print-footer {
+                display: block;
+                text-align: center;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 2px solid #E2E8F0;
+                color: #666;
+                font-size: 0.85rem;
+            }
+            
+            .quotation-card {
+                box-shadow: none;
+                border: 1px solid #E2E8F0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .quotation-card {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .items-table {
+                font-size: 0.85rem;
+            }
+            
+            .items-table th,
+            .items-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>☀️ Solar System Quotation</h1>
+            <p>Bin Zareen Solar Pvt. Ltd. - Islamabad, Pakistan</p>
+        </div>
+        
+        <!-- Quotation Card -->
+        <div class="quotation-card" id="quotationContent">
+            <!-- Company Header -->
+            <div class="company-info">
+                <h4>Bin Zareen Solar Pvt. Ltd.</h4>
+                <p>🌍 Pakistan's Trusted Solar Partner | 10+ Years of Experience</p>
+                <div class="contact-info">
+                    <div>
+                        <strong>📞 Phone:</strong>
+                        03252053313
+                    </div>
+                    <div>
+                        <strong>📍 Location:</strong>
+                        Islamabad
+                    </div>
+                    <div>
+                        <strong>💼 Email:</strong>
+                        binzareensolar@gmail.com
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quotation Header -->
+            <div class="quotation-header">
+                <h2>System Quotation</h2>
+                <p>Daytime Solar System - Complete Installed Solution</p>
+            </div>
+            
+            <!-- System Information -->
+            <div class="system-info">
+                <h3>⚡ System Specifications</h3>
+                <div class="system-grid">
+                    <div class="system-item">
+                        <label>System Size</label>
+                        <div class="value">1.3 kW</div>
+                    </div>
+                    <div class="system-item">
+                        <label>System Type</label>
+                        <div class="value">Daytime</div>
+                    </div>
+                    <div class="system-item">
+                        <label>Load Capacity</label>
+                        <div class="value">1270 W</div>
+                    </div>
+                    <div class="system-item">
+                        <label>Panels Required</label>
+                        <div class="value">3 x 585W</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Items Table -->
+            <div class="items-section">
+                <h3>✅ Included Items & Pricing</h3>
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>Item Description</th>
+                            <th class="qty">Qty</th>
+                            <th class="price">Unit Price</th>
+                            <th class="price">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="item-name">Solar Panels: 3x Canadian Solar 540W BiHiKu6</div>
+                                <div class="item-desc">High-efficiency bifacial panels with 25-year warranty</div>
+                            </td>
+                            <td class="qty">3</td>
+                            <td class="price">Rs. 19,500</td>
+                            <td class="price">Rs. 58,500</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="item-name">Structure: 3x L2 (Canadian) Mounting System</div>
+                                <div class="item-desc">Roof/ground mounting system with hardware</div>
+                            </td>
+                            <td class="qty">3</td>
+                            <td class="price">Rs. 2,500</td>
+                            <td class="price">Rs. 7,500</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="item-name">Inverter: Growatt SPH 5000 Hybrid Inverter</div>
+                                <div class="item-desc">5kW hybrid inverter with MPPT & battery management</div>
+                            </td>
+                            <td class="qty">1</td>
+                            <td class="price">Rs. 95,000</td>
+                            <td class="price">Rs. 95,000</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="item-name">DC Cable (10m): Solar DC Cable 4mm Red/Black</div>
+                                <div class="item-desc">UV-resistant solar DC cables with MC4 connectors</div>
+                            </td>
+                            <td class="qty">1</td>
+                            <td class="price">Rs. 15,000</td>
+                            <td class="price">Rs. 15,000</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="item-name">AC Cable (10m): Solar AC Cable 4mm</div>
+                                <div class="item-desc">Commercial-grade AC cables with protection</div>
+                            </td>
+                            <td class="qty">1</td>
+                            <td class="price">Rs. 15,000</td>
+                            <td class="price">Rs. 15,000</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="item-name">DB Box & Protection: Complete Set</div>
+                                <div class="item-desc">DC disconnect, AC disconnect, surge protection, safety switches</div>
+                            </td>
+                            <td class="qty">1</td>
+                            <td class="price">Rs. 15,000</td>
+                            <td class="price">Rs. 15,000</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3" style="text-align: left; font-size: 1.2rem;">
+                                <strong>Estimated Total (System Only):</strong>
+                            </td>
+                            <td class="total-amount">Rs. 206,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pricing Summary -->
+            <div class="pricing-summary">
+                <h3 style="margin-bottom: 20px; color: #7F1D1D;">💰 Price Breakdown</h3>
+                <div class="summary-item">
+                    <span class="label">Solar Panels (3 x 540W)</span>
+                    <span class="amount">Rs. 58,500</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Mounting Structure</span>
+                    <span class="amount">Rs. 7,500</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Inverter & Electronics</span>
+                    <span class="amount">Rs. 110,000</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Cables & Protection</span>
+                    <span class="amount">Rs. 30,000</span>
+                </div>
+                <div class="summary-item total">
+                    <span class="label">Estimated Total Price</span>
+                    <span class="amount">Rs. 206,000</span>
+                </div>
+            </div>
+            
+            <!-- Important Notes -->
+            <div class="note-box">
+                <strong>📋 Important Notes:</strong><br>
+                ✓ This is a preliminary quotation for a 1.3 kW daytime solar system<br>
+                ✓ Final pricing subject to site survey and exact site conditions<br>
+                ✓ Installation labor cost NOT included (typically Rs. 10,000-20,000 depending on complexity)<br>
+                ✓ All panels come with 25-year performance warranty<br>
+                ✓ Inverter comes with 5-year manufacturer warranty<br>
+                ✓ Free net metering consultation and support provided<br>
+                ✓ Flexible payment options available: Bank Transfer, JazzCash, EasyPaisa, COD
+            </div>
+            
+            <!-- Benefits Section -->
+            <div style="background: #EFF6FF; border-left: 5px solid #2563EB; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                <h3 style="color: #1E3A8A; margin-bottom: 15px;">🌟 Expected Benefits</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div>
+                        <strong style="color: #1E40AF;">Bill Reduction:</strong><br>
+                        <span style="color: #1E3A8A; font-size: 1.3rem; font-weight: bold;">70-85%</span>
+                    </div>
+                    <div>
+                        <strong style="color: #1E40AF;">Monthly Savings:</strong><br>
+                        <span style="color: #1E3A8A; font-size: 1.3rem; font-weight: bold;">Rs. 15,000-20,000</span>
+                    </div>
+                    <div>
+                        <strong style="color: #1E40AF;">ROI Period:</strong><br>
+                        <span style="color: #1E3A8A; font-size: 1.3rem; font-weight: bold;">3-4 Years</span>
+                    </div>
+                    <div>
+                        <strong style="color: #1E40AF;">System Life:</strong><br>
+                        <span style="color: #1E3A8A; font-size: 1.3rem; font-weight: bold;">25+ Years</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Company Stamp -->
+            <div style="text-align: center;">
+                <span class="stamp-badge">✓ Official Quotation - Valid for 30 Days</span>
+            </div>
+            
+            <!-- Print Footer -->
+            <div class="print-footer">
+                Printed on: <span id="printDate"></span> | Page 1 of 1 | Bin Zareen Solar Pvt. Ltd.
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="buttons">
+            <button class="btn btn-pdf" onclick="downloadPDF()">
+                <span>📥</span> Download as PDF
+            </button>
+            <button class="btn btn-whatsapp" onclick="shareOnWhatsApp()">
+                <span>💬</span> Send on WhatsApp
+            </button>
+        </div>
+        
+        <div class="footer-text">
+            <p>Questions? Contact us now for free consultation and site survey! 📞 03252053313</p>
+        </div>
+    </div>
+    
+    <script>
+        // Set current date
+        document.getElementById('printDate').textContent = new Date().toLocaleDateString('en-PK', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // Download as PDF
+        function downloadPDF() {
+            const element = document.getElementById('quotationContent');
+            const opt = {
+                margin: 10,
+                filename: 'Solar_System_Quotation_' + new Date().toISOString().slice(0,10) + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+        
+        // Share on WhatsApp
+        function shareOnWhatsApp() {
+            // Prepare the quotation text
+            const quotationText = `
+*☀️ SOLAR SYSTEM QUOTATION - Bin Zareen Solar*
+
+*System Details:*
+• System Size: 1.3 kW (Daytime System)
+• Load: 1270 W
+• Panels: 3 x 585W (Canadian Solar)
+
+*Included Items & Pricing:*
+✅ Solar Panels: 3x Canadian Solar 540W BiHiKu6
+   Rs. 58,500
+
+✅ Structure: 3x L2 (Canadian)
+   Rs. 7,500
+
+✅ Inverter: Growatt SPH 5000 Hybrid Inverter
+   Rs. 95,000
+
+✅ DC Cable (10m): Solar DC Cable (4mm Red/Black)
+   Rs. 15,000
+
+✅ AC Cable (10m): Solar AC Cable (4mm Red/Black)
+   Rs. 15,000
+
+✅ DB Box & Protection: Complete Set
+   Rs. 15,000
+
+*ESTIMATED TOTAL: Rs. 206,000* 💰
+
+*Expected Benefits:*
+📊 Bill Reduction: 70-85%
+💵 Monthly Savings: Rs. 15,000-20,000
+⏱️ ROI Period: 3-4 Years
+🔆 System Life: 25+ Years
+
+*Important Notes:*
+✓ Preliminary quotation for 1.3 kW daytime system
+✓ Final pricing subject to site survey
+✓ Installation labor NOT included (Rs. 10,000-20,000)
+✓ 25-year panel warranty & 5-year inverter warranty
+✓ Free net metering consultation provided
+✓ Flexible payment options available
+
+*Contact Details:*
+📞 Phone: 03252053313 (WhatsApp Available)
+📧 Email: binzareensolar@gmail.com
+📍 Location: Islamabad, Pakistan
+🌐 Website: binzareensolar.com
+
+_Valid for 30 Days | For consultation call now!_
+            `;
+            
+            // Encode the message for WhatsApp
+            const encodedMessage = encodeURIComponent(quotationText.trim());
+            
+            // WhatsApp API URL (using the company's WhatsApp number)
+            const whatsappURL = `https://wa.me/923252053313?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+</body>
+</html>

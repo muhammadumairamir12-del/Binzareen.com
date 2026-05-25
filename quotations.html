@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Quotation Tools - Bin Zareen Solar</title>
+    <link rel="icon" href="favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 50%, #DC2626 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+        
+        .header .tagline {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-color: #B91C1C;
+        }
+        
+        .tool-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .tool-card h2 {
+            color: #7F1D1D;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+        
+        .tool-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .tool-features {
+            text-align: left;
+            background: #FEF2F2;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .tool-features li {
+            color: #333;
+            margin: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .tool-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #B91C1C;
+            font-weight: 700;
+        }
+        
+        .tool-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #DC2626, #B91C1C);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .tool-btn:hover {
+            background: linear-gradient(135deg, #B91C1C, #7F1D1D);
+            transform: scale(1.02);
+        }
+        
+        .features-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        
+        .features-section h2 {
+            color: #7F1D1D;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: #FEF2F2;
+            border: 2px solid #FEE2E2;
+        }
+        
+        .feature-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .feature-item h3 {
+            color: #7F1D1D;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        
+        .feature-item p {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        .contact-banner {
+            background: linear-gradient(135deg, #1E3A8A, #1E40AF);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .contact-banner h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .contact-banner p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info div {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-info strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .contact-info span {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .tool-card {
+                padding: 25px 20px;
+            }
+            
+            .tool-icon {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>☀️ Solar Quotation Tools</h1>
+            <p>Bin Zareen Solar Pvt. Ltd.</p>
+            <p class="tagline">Create, Download & Share Solar Quotations with One Click!</p>
+        </div>
+        
+        <!-- Tools Grid -->
+        <div class="tools-grid">
+            <!-- Tool 1: Fixed Quotation -->
+            <div class="tool-card">
+                <div class="tool-icon">📋</div>
+                <h2>1.3 kW System Quote</h2>
+                <p>Pre-built quotation for our popular 1.3 kW daytime solar system with all details included.</p>
+                <ul class="tool-features">
+                    <li>System Size: 1.3 kW</li>
+                    <li>Load: 1270 W</li>
+                    <li>3x Canadian 540W Panels</li>
+                    <li>Total: Rs. 206,000</li>
+                </ul>
+                <a href="quotation.html" class="tool-btn">View Quotation →</a>
+            </div>
+            
+            <!-- Tool 2: Custom Generator -->
+            <div class="tool-card">
+                <div class="tool-icon">⚙️</div>
+                <h2>Custom Quotation Builder</h2>
+                <p>Create your own customized solar quotation with flexible system specifications and items.</p>
+                <ul class="tool-features">
+                    <li>Custom System Size</li>
+                    <li>Add/Remove Items</li>
+                    <li>Adjust Pricing</li>
+                    <li>Your Details</li>
+                </ul>
+                <a href="quotation-generator.html" class="tool-btn">Create Quote →</a>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features-section">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon">📥</div>
+                    <h3>Download PDF</h3>
+                    <p>Export quotation as professional PDF with one click</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">💬</div>
+                    <h3>Share on WhatsApp</h3>
+                    <p>Send quotation directly to WhatsApp in seconds</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🎨</div>
+                    <h3>Professional Design</h3>
+                    <p>Beautiful, branded quotations ready to impress</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">⚡</div>
+                    <h3>Instant Generation</h3>
+                    <p>Create quotations in minutes, not hours</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Banner -->
+        <div class="contact-banner">
+            <h3>📞 Need Assistance?</h3>
+            <p>Our solar experts are ready to help you find the perfect system</p>
+            <div class="contact-info">
+                <div>
+                    <strong>☎️ Phone</strong>
+                    <span>03252053313</span>
+                </div>
+                <div>
+                    <strong>💬 WhatsApp</strong>
+                    <span>03252053313</span>
+                </div>
+                <div>
+                    <strong>📍 Location</strong>
+                    <span>Islamabad</span>
+                </div>
+                <div>
+                    <strong>📧 Email</strong>
+                    <span>binzareensolar@gmail.com</span>
+                </div>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.9;">Free site survey & consultation available • Available Monday-Saturday 9AM-6PM</p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024-2025 Bin Zareen Solar Pvt. Ltd. | All rights reserved | Pakistan's Trusted Solar Partner</p>
+        </div>
+    </div>
+</body>
+</html>

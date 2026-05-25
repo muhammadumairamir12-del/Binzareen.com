@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Solar Quotation Generator - Bin Zareen Solar</title>
+    <link rel="icon" href="favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #B91C1C;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+            border: 2px solid #FEE2E2;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section h2 {
+            color: #7F1D1D;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FEE2E2;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            color: #7F1D1D;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Arial', sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #B91C1C;
+            box-shadow: 0 0 0 3px rgba(185,28,28,0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .items-list {
+            background: #FEF2F2;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .item-row {
+            display: grid;
+            grid-template-columns: 1fr 100px 120px 40px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .item-row input {
+            padding: 8px 10px;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .remove-btn {
+            background: #FEE2E2;
+            color: #DC2626;
+            border: none;
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+        
+        .remove-btn:hover {
+            background: #FCA5A5;
+            color: white;
+        }
+        
+        .add-item-btn {
+            background: #DCFCE7;
+            color: #166534;
+            border: 2px solid #86EFAC;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .add-item-btn:hover {
+            background: #86EFAC;
+            color: white;
+        }
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .item-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #DC2626, #B91C1C);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #B91C1C, #7F1D1D);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #F3F4F6, #E5E7EB);
+            color: #333;
+            border: 2px solid #D1D5DB;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #E5E7EB, #D1D5DB);
+        }
+        
+        .preview-section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+        
+        .preview-section.active {
+            display: block;
+        }
+        
+        .total-box {
+            background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
+            border: 3px solid #B91C1C;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .total-box h3 {
+            color: #7F1D1D;
+            margin-bottom: 10px;
+        }
+        
+        .total-box .amount {
+            color: #B91C1C;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .info-box {
+            background: #EFF6FF;
+            border-left: 5px solid #2563EB;
+            padding: 15px;
+            border-radius: 8px;
+            color: #1E40AF;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>⚡ Custom Solar Quotation Generator</h1>
+            <p>Create your personalized solar system quotation in minutes!</p>
+        </div>
+        
+        <!-- Info Box -->
+        <div class="info-box" style="margin-bottom: 30px;">
+            <strong>📋 How it works:</strong> Fill in your system details, customize items & pricing, then download as PDF or share on WhatsApp with one click!
+        </div>
+        
+        <!-- Form Container -->
+        <form class="form-container" id="quotationForm">
+            <!-- System Details Section -->
+            <div class="form-section">
+                <h2>⚡ System Details</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>System Type *</label>
+                        <select id="systemType" required>
+                            <option value="Daytime (On-Grid)">Daytime System (On-Grid)</option>
+                            <option value="Hybrid">Hybrid System (With Battery)</option>
+                            <option value="Off-Grid">Off-Grid System (Full Battery)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>System Size (kW) *</label>
+                        <input type="number" id="systemSize" step="0.1" min="0.5" value="1.3" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Load (Watts) *</label>
+                        <input type="number" id="loadWatts" step="100" min="100" value="1270" required>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Items Section -->
+            <div class="form-section">
+                <h2>✅ System Items & Pricing</h2>
+                <div class="items-list" id="itemsList"></div>
+                <button type="button" class="add-item-btn" onclick="addItemRow()">+ Add Item</button>
+            </div>
+            
+            <!-- Customer Details Section -->
+            <div class="form-section">
+                <h2>👤 Your Details</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Your Name *</label>
+                        <input type="text" id="customerName" placeholder="Muhammad Ali" required>
+                    </div>
+                    <div class="form-group">
+                        <label>WhatsApp Number *</label>
+                        <input type="tel" id="whatsappNumber" placeholder="03001234567" required>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Email (Optional)</label>
+                        <input type="email" id="customerEmail" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>City/Location</label>
+                        <input type="text" id="customerCity" placeholder="Islamabad" value="Islamabad">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Additional Notes (Optional)</label>
+                    <textarea id="notes" placeholder="Any special requirements..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" onclick="generatePreview()">
+                    <span>👁️</span> Preview Quotation
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                    <span>🔄</span> Clear Form
+                </button>
+            </div>
+        </form>
+        
+        <!-- Preview Section -->
+        <div class="preview-section" id="previewSection">
+            <!-- This will be filled dynamically -->
+            <div id="quotationPreview"></div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="downloadQuotationPDF()">
+                    <span>📥</span> Download as PDF
+                </button>
+                <button class="btn btn-primary" style="background: linear-gradient(135deg, #25D366, #128C7E);" onclick="shareQuotationOnWhatsApp()">
+                    <span>💬</span> Send on WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Default Items -->
+    <script>
+        const defaultItems = [
+            { name: 'Solar Panels: Canadian Solar 540W BiHiKu6 (3 units)', qty: 3, price: 19500 },
+            { name: 'Structure: L2 Mounting System (3 units)', qty: 3, price: 2500 },
+            { name: 'Inverter: Growatt SPH 5000 Hybrid', qty: 1, price: 95000 },
+            { name: 'DC Cable (10m): 4mm Red/Black', qty: 1, price: 15000 },
+            { name: 'AC Cable (10m): 4mm', qty: 1, price: 15000 },
+            { name: 'DB Box & Protection: Complete Set', qty: 1, price: 15000 }
+        ];
+        
+        let items = [];
+        
+        function initializeForm() {
+            items = [...defaultItems];
+            renderItemsList();
+        }
+        
+        function renderItemsList() {
+            const container = document.getElementById('itemsList');
+            container.innerHTML = items.map((item, index) => `
+                <div class="item-row">
+                    <input type="text" value="${item.name}" placeholder="Item name" onchange="items[${index}].name = this.value">
+                    <input type="number" value="${item.qty}" min="1" placeholder="Qty" onchange="items[${index}].qty = parseInt(this.value)">
+                    <input type="number" value="${item.price}" placeholder="Price" onchange="items[${index}].price = parseInt(this.value)">
+                    <button type="button" class="remove-btn" onclick="removeItem(${index})">✕</button>
+                </div>
+            `).join('');
+        }
+        
+        function addItemRow() {
+            items.push({ name: 'New Item', qty: 1, price: 0 });
+            renderItemsList();
+        }
+        
+        function removeItem(index) {
+            items.splice(index, 1);
+            renderItemsList();
+        }
+        
+        function formatPrice(price) {
+            return 'Rs. ' + parseInt(price).toLocaleString('en-PK');
+        }
+        
+        function calculateTotal() {
+            return items.reduce((sum, item) => sum + (item.qty * item.price), 0);
+        }
+        
+        function generatePreview() {
+            // Validate form
+            const customerName = document.getElementById('customerName').value;
+            const whatsappNumber = document.getElementById('whatsappNumber').value;
+            
+            if (!customerName || !whatsappNumber) {
+                alert('Please fill in your name and WhatsApp number');
+                return;
+            }
+            
+            if (items.length === 0) {
+                alert('Please add at least one item');
+                return;
+            }
+            
+            const systemType = document.getElementById('systemType').value;
+            const systemSize = document.getElementById('systemSize').value;
+            const loadWatts = document.getElementById('loadWatts').value;
+            const total = calculateTotal();
+            
+            // Generate preview HTML
+            const previewHTML = `
+                <div id="quotationContent">
+                    <div style="background: linear-gradient(135deg, #7F1D1D, #B91C1C); color: white; padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 25px;">
+                        <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Bin Zareen Solar Pvt. Ltd.</h2>
+                        <p style="opacity: 0.9; margin-bottom: 10px;">Pakistan's Trusted Solar Partner | 10+ Years of Experience</p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; font-size: 0.9rem;">
+                            <div><strong>📞</strong> 03252053313</div>
+                            <div><strong>📍</strong> Islamabad, Pakistan</div>
+                            <div><strong>💼</strong> binzareensolar@gmail.com</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #FEF2F2; border-left: 5px solid #B91C1C; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+                        <h3 style="color: #7F1D1D; margin-bottom: 12px;">⚡ System Specifications</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                            <div><strong>System Type:</strong> ${systemType}</div>
+                            <div><strong>System Size:</strong> ${systemSize} kW</div>
+                            <div><strong>Load:</strong> ${loadWatts} W</div>
+                            <div><strong>Date:</strong> ${new Date().toLocaleDateString('en-PK')}</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="color: #7F1D1D; margin-bottom: 15px; margin-top: 25px;">✅ Items Included</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
+                        <thead style="background: linear-gradient(135deg, #7F1D1D, #B91C1C); color: white;">
+                            <tr>
+                                <th style="padding: 12px; text-align: left; font-weight: 700;">Item Description</th>
+                                <th style="padding: 12px; text-align: center; font-weight: 700;">Qty</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 700;">Unit Price</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 700;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${items.map(item => `
+                                <tr style="border-bottom: 1px solid #E2E8F0;">
+                                    <td style="padding: 12px; text-align: left;">${item.name}</td>
+                                    <td style="padding: 12px; text-align: center; font-weight: 600;">${item.qty}</td>
+                                    <td style="padding: 12px; text-align: right; color: #B91C1C; font-weight: 600;">${formatPrice(item.price)}</td>
+                                    <td style="padding: 12px; text-align: right; color: #B91C1C; font-weight: 700;">${formatPrice(item.qty * item.price)}</td>
+                                </tr>
+                            `).join('')}
+                            <tr style="background: linear-gradient(135deg, #FEF2F2, #FEE2E2); font-weight: 700; font-size: 1.1rem;">
+                                <td colspan="3" style="padding: 16px; text-align: left; color: #7F1D1D;">TOTAL ESTIMATED COST:</td>
+                                <td style="padding: 16px; text-align: right; color: #7F1D1D; font-size: 1.3rem;">${formatPrice(total)}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div style="background: #FYE3C7; border-left: 5px solid #F59E0B; padding: 15px; border-radius: 8px; color: #92400E; font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px;">
+                        <strong>📋 Important Notes:</strong><br>
+                        ✓ Preliminary quotation subject to site survey<br>
+                        ✓ Installation labor NOT included<br>
+                        ✓ All products come with manufacturer warranty<br>
+                        ✓ Flexible payment options available<br>
+                        ✓ Free net metering assistance<br>
+                        ✓ Valid for 30 days
+                    </div>
+                    
+                    <div style="text-align: center; padding-top: 20px; border-top: 2px solid #E2E8F0;">
+                        <p style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Generated for: <strong>${customerName}</strong></p>
+                        <p style="color: #666; font-size: 0.9rem;">Contact: <strong>${whatsappNumber}</strong> | City: <strong>${document.getElementById('customerCity').value}</strong></p>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('quotationPreview').innerHTML = previewHTML;
+            document.getElementById('previewSection').classList.add('active');
+            document.querySelector('.preview-section').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function downloadQuotationPDF() {
+            const element = document.getElementById('quotationContent');
+            const opt = {
+                margin: 10,
+                filename: `Solar_Quotation_${document.getElementById('customerName').value}_${new Date().toISOString().slice(0,10)}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+        
+        function shareQuotationOnWhatsApp() {
+            const systemType = document.getElementById('systemType').value;
+            const systemSize = document.getElementById('systemSize').value;
+            const loadWatts = document.getElementById('loadWatts').value;
+            const customerName = document.getElementById('customerName').value;
+            const whatsappNumber = document.getElementById('whatsappNumber').value;
+            const total = calculateTotal();
+            
+            let itemsText = items.map(item => `✅ ${item.name}\n   Qty: ${item.qty} × Rs. ${item.price.toLocaleString()} = Rs. ${(item.qty * item.price).toLocaleString()}`).join('\n\n');
+            
+            const quotationText = `
+*☀️ CUSTOM SOLAR SYSTEM QUOTATION - Bin Zareen Solar*
+
+*For: ${customerName}*
+*Contact: ${whatsappNumber}*
+
+*System Details:*
+• Type: ${systemType}
+• Size: ${systemSize} kW
+• Load: ${loadWatts} W
+
+*System Items & Pricing:*
+${itemsText}
+
+*ESTIMATED TOTAL: Rs. ${total.toLocaleString('en-PK')}* 💰
+
+*Important Notes:*
+✓ Preliminary quotation subject to site survey
+✓ Installation labor NOT included
+✓ All products with manufacturer warranty
+✓ Flexible payment options: Bank, JazzCash, EasyPaisa, COD
+✓ Free net metering assistance
+✓ Valid for 30 days
+
+*📞 Contact Details:*
+Phone: 03252053313 (WhatsApp Available)
+Email: binzareensolar@gmail.com
+Location: Islamabad, Pakistan
+
+_For consultation & site survey, call now!_
+            `;
+            
+            const encodedMessage = encodeURIComponent(quotationText.trim());
+            const whatsappURL = `https://wa.me/923252053313?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+        }
+        
+        // Initialize on page load
+        window.addEventListener('load', initializeForm);
+    </script>
+</body>
+</html>
