@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -381,7 +382,7 @@
   .calc-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 8px; }
   .calc-hero p { color: rgba(255,255,255,0.75); font-size: 1rem; }
   .calc-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.4); border: 1px solid rgba(96,165,250,0.5); border-radius: 100px; padding: 6px 16px; font-size: 0.82rem; font-weight: 600; color: #93C5FD; margin-bottom: 16px; }
-  .calc-layout { display: grid; grid-template-columns: 1fr 340px; gap: 32px; padding: 40px 0 60px; align-items: start; }
+  .calc-layout { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; gap: 32px; padding: 40px 0 60px; align-items: stretch; }
   .calc-panel { background: white; border-radius: 20px; padding: 28px; border: 1.5px solid #E2E8F0; }
   .calc-panel h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--red-deep); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--red-light); display: flex; align-items: center; gap: 10px; }
   .appliance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
@@ -395,7 +396,7 @@
   .qty-btn-calc { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--blue-bright); background: white; color: var(--blue-bright); font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.18s; line-height: 1; }
   .qty-btn-calc:hover { background: var(--blue-bright); color: white; transform: scale(1.1); }
   .qty-display { font-size: 1.1rem; font-weight: 800; color: var(--text); min-width: 28px; text-align: center; }
-  .calc-result-card { background: white; border-radius: 20px; border: 1.5px solid #E2E8F0; position: sticky; top: 90px; overflow: hidden; }
+  .calc-result-card { background: white; border-radius: 20px; border: 1.5px solid #E2E8F0; position: static; overflow: hidden; }
   .result-header { background: linear-gradient(135deg, #0f172a, #1e40af); padding: 24px; color: white; text-align: center; }
   .result-header h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
   .result-header p { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
@@ -416,7 +417,7 @@
   .calc-note { font-size: 0.78rem; color: var(--gray-mid); text-align: center; margin-top: 10px; line-height: 1.5; }
   .system-tag { display: inline-block; background: #DCFCE7; color: #166534; border-radius: 8px; padding: 4px 10px; font-size: 0.78rem; font-weight: 700; margin-top: 6px; }
   .daytime-note { background: linear-gradient(135deg, #FEF3C7, #FDE68A); border: 1.5px solid #F59E0B; border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; color: #92400E; font-weight: 600; margin-top: 12px; text-align: center; }
-  @media (max-width: 768px) { .calc-layout { grid-template-columns: 1fr; } .calc-result-card { position: static; } .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) { .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 400px) { .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 <link rel="dns-prefetch" href="https://www.gstatic.com">
@@ -2083,7 +2084,7 @@ function generateInvoice() {
       acPrice: acCablePrice,
       dbPrice: dbBoxPrice,
       customItems: window.customItems,
-      grandTotal: grandTotalPremium
+      grandTotal: (totalPanelPricePremium + totalStandPricePremium + inverterPrice + batteryPrice + dcCablePrice + acCablePrice + dbBoxPrice)
     },
     systemType: systemType,
     totalWatts: totalWatts
@@ -2113,7 +2114,6 @@ async function loadPdfLibs() {
 }
 
 async function generatePdfFromInvoice(name, customerData) {
-  // Load required libraries
   try {
     await loadPdfLibs();
   } catch (e) {
@@ -2121,7 +2121,6 @@ async function generatePdfFromInvoice(name, customerData) {
     return false;
   }
 
-  // Create a beautiful PDF invoice
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF('p', 'mm', 'a4');
   const pageWidth = pdf.internal.pageSize.getWidth();
@@ -2133,29 +2132,12 @@ async function generatePdfFromInvoice(name, customerData) {
   const lineHeight = 7;
   const sectionGap = 8;
 
-  // Helper functions
-  const addText = (text, size, weight, color, x, y, maxWidth) => {
-    pdf.setFontSize(size);
-    pdf.setFont(undefined, weight);
-    pdf.setTextColor(...color);
-    if (y !== undefined) yPos = y;
-    if (maxWidth) {
-      pdf.text(text, x || margins.left, yPos, { maxWidth });
-      const lines = pdf.splitTextToSize(text, maxWidth);
-      yPos += lines.length * lineHeight;
-    } else {
-      pdf.text(text, x || margins.left, yPos);
-      yPos += lineHeight;
-    }
-  };
-
   const addTable = (headers, rows) => {
     const colWidth = contentWidth / headers.length;
     const headerHeight = 8;
     const rowHeight = 7;
     
-    // Header
-    pdf.setFillColor(127, 29, 29); // Red-deep color
+    pdf.setFillColor(127, 29, 29);
     pdf.setTextColor(255, 255, 255);
     pdf.setFontSize(10);
     pdf.setFont(undefined, 'bold');
@@ -2166,7 +2148,6 @@ async function generatePdfFromInvoice(name, customerData) {
     });
     yPos += headerHeight + 1;
 
-    // Rows
     pdf.setTextColor(50, 50, 50);
     pdf.setFont(undefined, 'normal');
     pdf.setFontSize(9);
@@ -2180,13 +2161,11 @@ async function generatePdfFromInvoice(name, customerData) {
       
       const currentRowHeight = rowHeight * maxLines;
       
-      // Alternate row background
       if (rowIdx % 2 === 0) {
         pdf.setFillColor(248, 250, 252);
         pdf.rect(margins.left, yPos, contentWidth, currentRowHeight, 'F');
       }
       
-      // Cell content
       row.forEach((cell, colIdx) => {
         const x = margins.left + (colIdx * colWidth) + 2;
         const lines = pdf.splitTextToSize(cell, colWidth - 4);
@@ -2195,7 +2174,6 @@ async function generatePdfFromInvoice(name, customerData) {
         });
       });
       
-      // Cell borders
       headers.forEach((_, colIdx) => {
         pdf.rect(margins.left + (colIdx * colWidth), yPos, colWidth, currentRowHeight);
       });
@@ -2204,7 +2182,6 @@ async function generatePdfFromInvoice(name, customerData) {
     });
   };
 
-  // Check page space
   const checkNewPage = (spaceNeeded) => {
     if (yPos + spaceNeeded > pageHeight - margins.bottom) {
       pdf.addPage();
@@ -2212,59 +2189,98 @@ async function generatePdfFromInvoice(name, customerData) {
     }
   };
 
-  // HEADER WITH LOGO
-  const logoSize = 18;
-  pdf.addImage('favicon.png', 'PNG', margins.left, yPos - 2, logoSize, logoSize);
-  
+  const logoSize = 20;
+  const logoX = margins.left;
+  const logoY = yPos - 2;
+
+  try {
+    const logoDataUrl = await new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 80;
+        canvas.height = 80;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#7F1D1D';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(0, 0, 80, 80, 12);
+        else ctx.rect(0, 0, 80, 80);
+        ctx.fill();
+        ctx.drawImage(img, 4, 4, 72, 72);
+        resolve(canvas.toDataURL('image/png'));
+      };
+      img.onerror = () => reject();
+      img.src = 'favicon.png';
+    });
+    pdf.addImage(logoDataUrl, 'PNG', logoX, logoY, logoSize, logoSize);
+  } catch(e) {
+    pdf.setFillColor(127, 29, 29);
+    pdf.rect(logoX, logoY, logoSize, logoSize, 'F');
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(8);
+    pdf.setFont(undefined, 'bold');
+    pdf.text('BZ', logoX + 4, logoY + 13);
+  }
+
   pdf.setFontSize(18);
   pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(127, 29, 29); // Red-deep
-  pdf.text('BIN ZAREEN SOLAR', margins.left + logoSize + 5, yPos + 5);
+  pdf.setTextColor(127, 29, 29);
+  pdf.text('BIN ZAREEN SOLAR', margins.left + logoSize + 5, yPos + 6);
   
   pdf.setFontSize(9);
   pdf.setFont(undefined, 'normal');
-  pdf.setTextColor(180, 28, 28); // Red-mid
-  pdf.text('Pvt. Ltd. — Solar & Power Solutions', margins.left + logoSize + 5, yPos + 10);
+  pdf.setTextColor(180, 28, 28);
+  pdf.text('Pvt. Ltd. — Solar & Power Solutions Pakistan', margins.left + logoSize + 5, yPos + 11);
   
   pdf.setFontSize(8);
-  pdf.setTextColor(107, 114, 128); // Gray
-  pdf.text('Free Quotation Estimate', margins.left + logoSize + 5, yPos + 14);
+  pdf.setTextColor(107, 114, 128);
+  pdf.text('Free Quotation Estimate | Tel: 03252053313', margins.left + logoSize + 5, yPos + 16);
+
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-PK', { day:'2-digit', month:'short', year:'numeric' });
+  pdf.setFontSize(8);
+  pdf.setTextColor(107, 114, 128);
+  pdf.text(`Date: ${dateStr}`, pageWidth - margins.right - 35, yPos + 6);
   
-  yPos += logoSize + 5;
+  yPos += logoSize + 6;
 
-  // Divider
-  pdf.setDrawColor(226, 232, 240);
+  pdf.setDrawColor(127, 29, 29);
+  pdf.setLineWidth(0.8);
   pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
-  yPos += 5;
+  pdf.setLineWidth(0.2);
+  yPos += 6;
 
-  // CUSTOMER DETAILS
-  checkNewPage(15);
+  checkNewPage(20);
+  pdf.setFillColor(254, 242, 242);
+  pdf.rect(margins.left, yPos - 2, contentWidth, 6, 'F');
   pdf.setFontSize(11);
   pdf.setFont(undefined, 'bold');
   pdf.setTextColor(127, 29, 29);
-  pdf.text('CUSTOMER DETAILS', margins.left, yPos);
-  yPos += 6;
+  pdf.text('CUSTOMER DETAILS', margins.left + 2, yPos + 2);
+  yPos += 8;
 
   pdf.setFontSize(9);
   pdf.setFont(undefined, 'normal');
   pdf.setTextColor(50, 50, 50);
-  pdf.text(`Name: ${customerData.name}`, margins.left, yPos);
+  pdf.text(`Name:        ${customerData.name}`, margins.left + 2, yPos);
   yPos += lineHeight;
-  pdf.text(`WhatsApp: ${customerData.phone}`, margins.left, yPos);
+  pdf.text(`WhatsApp:    ${customerData.phone}`, margins.left + 2, yPos);
   yPos += lineHeight;
   if (customerData.city) {
-    pdf.text(`City: ${customerData.city}`, margins.left, yPos);
+    pdf.text(`City:        ${customerData.city}`, margins.left + 2, yPos);
     yPos += lineHeight;
   }
   yPos += sectionGap;
 
-  // SYSTEM SUMMARY
-  checkNewPage(12);
+  checkNewPage(20);
+  pdf.setFillColor(254, 242, 242);
+  pdf.rect(margins.left, yPos - 2, contentWidth, 6, 'F');
   pdf.setFontSize(11);
   pdf.setFont(undefined, 'bold');
   pdf.setTextColor(127, 29, 29);
-  pdf.text('SYSTEM SUMMARY', margins.left, yPos);
-  yPos += 6;
+  pdf.text('SYSTEM SUMMARY', margins.left + 2, yPos + 2);
+  yPos += 8;
 
   const inv = window._lastInvoiceData;
   pdf.setFontSize(9);
@@ -2272,26 +2288,28 @@ async function generatePdfFromInvoice(name, customerData) {
   pdf.setTextColor(50, 50, 50);
   
   const systemTypeLabel = inv.systemType === 'hybrid' ? 'Hybrid (With Battery)' : 'Daytime (Without Battery)';
-  pdf.text(`System Type: ${systemTypeLabel}`, margins.left, yPos);
+  pdf.text(`System Type:      ${systemTypeLabel}`, margins.left + 2, yPos);
   yPos += lineHeight;
-  pdf.text(`Total Load: ${inv.totalWatts} Watts`, margins.left, yPos);
+  pdf.text(`Total Load:       ${inv.totalWatts} Watts`, margins.left + 2, yPos);
   yPos += lineHeight;
-  pdf.text(`Panels Required: ${inv.optionA.panelsNeeded}x (Standard) / ${inv.optionB.panelsNeeded}x (Premium +30%)`, margins.left, yPos);
+  pdf.text(`System Size:      ${(inv.totalWatts / 1000).toFixed(1)} kW`, margins.left + 2, yPos);
+  yPos += lineHeight;
+  pdf.text(`Panels Required:  ${inv.optionA.panelsNeeded} panels`, margins.left + 2, yPos);
   yPos += sectionGap + 2;
 
-  // QUOTATION TABLE
-  checkNewPage(25);
+  checkNewPage(30);
+  pdf.setFillColor(254, 242, 242);
+  pdf.rect(margins.left, yPos - 2, contentWidth, 6, 'F');
   pdf.setFontSize(11);
   pdf.setFont(undefined, 'bold');
   pdf.setTextColor(127, 29, 29);
-  pdf.text('DETAILED QUOTATION', margins.left, yPos);
-  yPos += 6;
+  pdf.text('DETAILED QUOTATION', margins.left + 2, yPos + 2);
+  yPos += 8;
 
-  // Create table rows
   const tableRows = [
-    ['Description', 'Quantity', 'Unit Price', 'Total'],
-    [`Solar Panels (${inv.optionA.panelName})`, `${inv.optionA.panelsNeeded}x`, `Rs. ${(inv.optionA.panelPrice / inv.optionA.panelsNeeded).toLocaleString('en-PK')}`, `Rs. ${inv.optionA.panelPrice.toLocaleString('en-PK')}`],
-    [`Structure/Stand (${inv.optionA.standType})`, `${inv.optionA.panelsNeeded}x`, `Rs. ${(inv.optionA.standPrice / inv.optionA.panelsNeeded).toLocaleString('en-PK')}`, `Rs. ${inv.optionA.standPrice.toLocaleString('en-PK')}`],
+    ['Description', 'Qty', 'Unit Price', 'Total'],
+    [`Solar Panels (${inv.optionA.panelName})`, `${inv.optionA.panelsNeeded}x`, `Rs. ${Math.round(inv.optionA.panelPrice / inv.optionA.panelsNeeded).toLocaleString('en-PK')}`, `Rs. ${inv.optionA.panelPrice.toLocaleString('en-PK')}`],
+    [`Structure/Stand (${inv.optionA.standType})`, `${inv.optionA.panelsNeeded}x`, `Rs. ${Math.round(inv.optionA.standPrice / inv.optionA.panelsNeeded).toLocaleString('en-PK')}`, `Rs. ${inv.optionA.standPrice.toLocaleString('en-PK')}`],
     [`Inverter (${inv.optionA.inverterName})`, '1x', `Rs. ${inv.optionA.inverterPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.inverterPrice.toLocaleString('en-PK')}`],
   ];
 
@@ -2300,8 +2318,8 @@ async function generatePdfFromInvoice(name, customerData) {
   }
 
   tableRows.push(
-    [`DC Cables (10m)`, '1x', `Rs. ${inv.optionA.dcPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.dcPrice.toLocaleString('en-PK')}`],
-    [`AC Cables (10m)`, '1x', `Rs. ${inv.optionA.acPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.acPrice.toLocaleString('en-PK')}`],
+    [`DC Cable (10m)`, '1x', `Rs. ${inv.optionA.dcPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.dcPrice.toLocaleString('en-PK')}`],
+    [`AC Cable (10m)`, '1x', `Rs. ${inv.optionA.acPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.acPrice.toLocaleString('en-PK')}`],
     [`DB Box & Protection`, '1x', `Rs. ${inv.optionA.dbPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.dbPrice.toLocaleString('en-PK')}`]
   );
 
@@ -2313,47 +2331,41 @@ async function generatePdfFromInvoice(name, customerData) {
 
   addTable(tableRows[0], tableRows.slice(1));
 
-  // GRAND TOTAL
-  checkNewPage(15);
-  yPos += 3;
-  pdf.setDrawColor(226, 232, 240);
-  pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
+  checkNewPage(20);
   yPos += 4;
-
+  pdf.setFillColor(127, 29, 29);
+  pdf.rect(margins.left, yPos - 2, contentWidth, 10, 'F');
   pdf.setFontSize(12);
   pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(127, 29, 29);
-  pdf.rect(margins.left, yPos - 2, contentWidth, 8, 'F'); // Light red background
-  pdf.setFillColor(127, 29, 29);
-  pdf.text('ESTIMATED TOTAL COST:', margins.left + 2, yPos + 2);
   pdf.setTextColor(255, 255, 255);
-  pdf.text(`Rs. ${inv.optionA.grandTotal.toLocaleString('en-PK')}`, pageWidth - margins.right - 30, yPos + 2);
-  
-  yPos += 10;
+  pdf.text('ESTIMATED TOTAL:', margins.left + 4, yPos + 4);
+  pdf.text(`Rs. ${inv.optionA.grandTotal.toLocaleString('en-PK')}`, pageWidth - margins.right - 48, yPos + 4);
+  yPos += 14;
 
-  // NOTES
   if (customerData.note) {
-    checkNewPage(10);
+    checkNewPage(15);
+    pdf.setFillColor(254, 242, 242);
+    pdf.rect(margins.left, yPos - 2, contentWidth, 6, 'F');
     pdf.setFontSize(10);
     pdf.setFont(undefined, 'bold');
     pdf.setTextColor(127, 29, 29);
-    pdf.text('CUSTOMER NOTES:', margins.left, yPos);
-    yPos += 5;
+    pdf.text('CUSTOMER NOTES:', margins.left + 2, yPos + 2);
+    yPos += 8;
     
     pdf.setFontSize(9);
     pdf.setFont(undefined, 'normal');
     pdf.setTextColor(50, 50, 50);
-    const noteLines = pdf.splitTextToSize(customerData.note, contentWidth);
+    const noteLines = pdf.splitTextToSize(customerData.note, contentWidth - 4);
     noteLines.forEach(line => {
-      pdf.text(line, margins.left, yPos);
+      pdf.text(line, margins.left + 2, yPos);
       yPos += lineHeight;
     });
     yPos += sectionGap;
   }
 
-  // FOOTER
-  checkNewPage(20);
+  checkNewPage(30);
   pdf.setDrawColor(226, 232, 240);
+  pdf.setLineWidth(0.5);
   pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
   yPos += 5;
 
@@ -2367,22 +2379,22 @@ async function generatePdfFromInvoice(name, customerData) {
   pdf.setFont(undefined, 'normal');
   pdf.setTextColor(107, 114, 128);
   const steps = [
-    '✓ Review this quotation carefully',
-    '✓ Contact us for site survey and installation date',
-    '✓ We provide 5-year warranty on all systems',
-    '✓ Free after-sales support and maintenance'
+    '* Review this quotation carefully',
+    '* Contact us for site survey and installation date',
+    '* We provide 5-year warranty on all systems',
+    '* Free after-sales support and maintenance'
   ];
   steps.forEach(step => {
     pdf.text(step, margins.left, yPos);
-    yPos += 4;
+    yPos += 4.5;
   });
 
   yPos += 5;
-  pdf.setFontSize(8);
+  pdf.setFontSize(9);
+  pdf.setFont(undefined, 'bold');
   pdf.setTextColor(180, 28, 28);
-  pdf.text('📞 Call: 03252053313 | 📧 WhatsApp: 03252053313', margins.left, yPos);
-  
-  // Save PDF
+  pdf.text('Call/WhatsApp: 03252053313  |  Email: binzareensolar@gmail.com', margins.left, yPos);
+
   try {
     const filename = `BinZareen_Solar_Quotation_${name.replace(/\s+/g, '_')}_${new Date().getTime()}.pdf`;
     pdf.save(filename);
@@ -2403,44 +2415,36 @@ async function submitInvoiceQuotation() {
   if (!phone.trim()) { alert('⚠️ WhatsApp number zaroor bharain!'); return; }
 
   const inv = window._lastInvoiceData;
-  if (!inv) return;
+  if (!inv) { alert('⚠️ Pehle appliances select karein!'); return; }
 
-  // Generate and download PDF
-  const pdfGenerated = await generatePdfFromInvoice(name, { name, phone, city, note });
-
-  if (!pdfGenerated) {
-    alert('⚠️ PDF generation failed. Please try again.');
-    return;
-  }
-
-  // Generate WhatsApp message
-  let msg = '☀️ *BIN ZAREEN SOLAR* — Complete Quotation\n';
-  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
-  msg += `👤 *Customer:* ${name}\n`;
-  msg += `📱 *WhatsApp:* ${phone}\n`;
-  if (city) msg += `📍 *City:* ${city}\n`;
+  // ── 1. WHATSAPP SEEDHA OPEN KAR (no delay) ──
+  const systemTypeLabelWA = inv.systemType === 'hybrid' ? 'Hybrid (Battery)' : 'Daytime (No Battery)';
+  let msg = '\u2600\ufe0f *BIN ZAREEN SOLAR* \u2014 Free Quotation Request\n';
+  msg += '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n';
+  msg += `\ud83d\udc64 *Naam:* ${name}\n`;
+  msg += `\ud83d\udcf1 *WhatsApp:* ${phone}\n`;
+  if (city) msg += `\ud83d\udccd *Shehar:* ${city}\n`;
   msg += '\n';
-  
-  // System Summary
-  const systemTypeLabel = inv.systemType === 'hybrid' ? 'Hybrid (Battery)' : 'Daytime';
-  msg += `⚡ *System Type:* ${systemTypeLabel}\n`;
-  msg += `📊 *Load:* ${inv.totalWatts}W\n`;
-  msg += `☀️ *Panels:* ${inv.optionA.panelsNeeded}x (Standard)\n`;
-  msg += `💰 *Total Cost:* Rs. ${inv.optionA.grandTotal.toLocaleString('en-PK')}\n\n`;
-  
-  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
-  msg += '✅ *PDF Downloaded Successfully!*\n';
-  msg += '📄 Aapka detailed quotation PDF download ho gaya hai\n';
-  msg += '📲 Is PDF ko hume send karein for confirmation\n';
-  msg += '_Shukriya! Hum jaldi contact karengy_ 🙏\n';
-  msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+  msg += `\u26a1 *System Type:* ${systemTypeLabelWA}\n`;
+  msg += `\ud83d\udcca *Total Load:* ${inv.totalWatts} W\n`;
+  msg += `\u2600\ufe0f *Panels:* ${inv.optionA.panelsNeeded}x ${inv.optionA.panelName}\n`;
+  msg += `\ud83d\udd27 *Inverter:* ${inv.optionA.inverterName}\n`;
+  msg += `\ud83d\udcd0 *Stand:* ${inv.optionA.standType}\n`;
+  msg += '\n';
+  msg += `\ud83d\udcb0 *Estimated Total:* Rs. ${inv.optionA.grandTotal.toLocaleString('en-PK')}\n\n`;
+  if (note) msg += `\ud83d\udcdd *Note:* ${note}\n\n`;
+  msg += '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n';
+  msg += '_Shukriya! Hum jaldi contact karengy_ \ud83d\ude4f';
 
-  // Open WhatsApp with message
   const whatsappLink = 'https://wa.me/923252053313?text=' + encodeURIComponent(msg);
   window.open(whatsappLink, '_blank');
-  
-  // Show success message
-  alert('✅ PDF downloaded!\n📲 WhatsApp message ready.\n\nAab pdf ko apne WhatsApp par attach karke hume bhej dein!');
+
+  // ── 2. PDF GENERATE KAR (logo ke saath) ──
+  try {
+    await generatePdfFromInvoice(name, { name, phone, city, note });
+  } catch(e) {
+    console.error('PDF error:', e);
+  }
 }
 
 // ============================================================
