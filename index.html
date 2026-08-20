@@ -377,59 +377,104 @@
   }
   @media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } .plp-grid { grid-template-columns: 1fr; } .team-grid { grid-template-columns: 1fr; } .hero-btns { flex-direction: column; } }
 
-  /* ===== SOLAR CALCULATOR ===== */
-  .calc-hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e40af 100%); padding: 48px 0 36px; color: white; position: relative; overflow: hidden; }
-  .calc-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4z'/%3E%3C/g%3E%3C/svg%3E"); }
-  .calc-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 8px; }
-  .calc-hero p { color: rgba(255,255,255,0.75); font-size: 1rem; }
-  .calc-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.4); border: 1px solid rgba(96,165,250,0.5); border-radius: 100px; padding: 6px 16px; font-size: 0.82rem; font-weight: 600; color: #93C5FD; margin-bottom: 16px; }
-  .calc-layout { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; gap: 32px; padding: 40px 0 60px; align-items: stretch; }
-  .calc-panel { background: white; border-radius: 20px; padding: 28px; border: 1.5px solid #E2E8F0; }
-  .calc-panel h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--red-deep); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--red-light); display: flex; align-items: center; gap: 10px; }
-  .appliance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
-  .appliance-card { background: #F8FAFC; border: 2px solid #E2E8F0; border-radius: 16px; padding: 16px 12px; text-align: center; transition: all 0.25s; cursor: default; position: relative; }
-  .appliance-card.active { border-color: var(--blue-bright); background: #EFF6FF; box-shadow: 0 4px 16px rgba(37,99,235,0.12); }
-  .appliance-img-wrap { width: 72px; height: 72px; margin: 0 auto 10px; border-radius: 14px; overflow: hidden; background: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-  .appliance-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-  .appliance-name { font-size: 0.85rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 4px; }
-  .appliance-watts { font-size: 0.78rem; color: var(--blue-bright); font-weight: 600; margin-bottom: 12px; }
-  .qty-control { display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .qty-btn-calc { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--blue-bright); background: white; color: var(--blue-bright); font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.18s; line-height: 1; }
-  .qty-btn-calc:hover { background: var(--blue-bright); color: white; transform: scale(1.1); }
-  .qty-display { font-size: 1.1rem; font-weight: 800; color: var(--text); min-width: 28px; text-align: center; }
-  .calc-result-card { background: white; border-radius: 20px; border: 1.5px solid #E2E8F0; position: static; overflow: hidden; }
-  .result-header { background: linear-gradient(135deg, #0f172a, #1e40af); padding: 24px; color: white; text-align: center; }
-  .result-header h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
-  .result-header p { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
-  .result-body { padding: 20px; }
-  .result-stat { background: #F8FAFC; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-  .result-stat .label { font-size: 0.83rem; color: var(--gray-mid); font-weight: 600; }
-  .result-stat .value { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--blue-bright); }
-  .result-stat.highlight { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); border: 1.5px solid #BFDBFE; }
-  .result-stat.highlight .value { color: #1D4ED8; font-size: 1.5rem; }
-  .result-items { background: #F8FAFC; border-radius: 12px; padding: 14px; margin-bottom: 12px; max-height: 200px; overflow-y: auto; }
-  .result-item-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.83rem; padding: 5px 0; border-bottom: 1px solid #E2E8F0; }
-  .result-item-row:last-child { border-bottom: none; }
-  .result-item-row .rname { color: var(--gray-dark); font-weight: 600; }
-  .result-item-row .rwatts { color: var(--blue-bright); font-weight: 700; }
-  .empty-calc { text-align: center; color: var(--gray-mid); font-size: 0.85rem; padding: 16px 0; }
-  .calc-submit-btn { width: 100%; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border: none; border-radius: 14px; padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: opacity 0.2s, transform 0.2s; }
-  .calc-submit-btn:hover { opacity: 0.92; transform: translateY(-2px); }
-  .calc-note { font-size: 0.78rem; color: var(--gray-mid); text-align: center; margin-top: 10px; line-height: 1.5; }
-  .system-tag { display: inline-block; background: #DCFCE7; color: #166534; border-radius: 8px; padding: 4px 10px; font-size: 0.78rem; font-weight: 700; margin-top: 6px; }
-  .daytime-note { background: linear-gradient(135deg, #FEF3C7, #FDE68A); border: 1.5px solid #F59E0B; border-radius: 10px; padding: 12px 14px; font-size: 0.82rem; color: #92400E; font-weight: 600; margin-top: 12px; text-align: center; }
-  @media (max-width: 768px) { .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 400px) { .appliance-grid { grid-template-columns: repeat(2, 1fr); } }
+  /* ===== MODERN SOLAR CALCULATOR STYLES ===== */
+  .calc-hero { background: linear-gradient(135deg, #090E1F 0%, #151F38 45%, #7F1D1D 90%, #B91C1C 100%); padding: 48px 0 36px; color: white; position: relative; overflow: hidden; }
+  .calc-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E"); }
+  .calc-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; padding: 6px 16px; font-size: 0.82rem; font-weight: 700; color: #FEE2E2; margin-bottom: 12px; }
+  .calc-urdu-title { font-family: 'Noto Nastaliq Urdu', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: #FFFFFF; line-height: 1.4; margin-bottom: 6px; }
+  .calc-eng-title { font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 700; color: #FDE047; margin-bottom: 8px; }
+  .calc-hero p { color: rgba(255,255,255,0.85); font-size: 0.96rem; max-width: 680px; }
+  
+  .calc-main-layout { display: grid; grid-template-columns: 1fr 420px; gap: 28px; padding: 40px 0 60px; align-items: start; }
+  .calc-appliances-box { background: white; border-radius: 20px; border: 1.5px solid #E2E8F0; padding: 26px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+  .calc-controls-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+  .calc-search-input { flex: 1; min-width: 200px; padding: 9px 14px; border: 1.5px solid #E2E8F0; border-radius: 8px; font-size: 0.88rem; outline: none; }
+  .calc-search-input:focus { border-color: var(--red-mid); }
+  
+  .calc-category-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+  .calc-tab-btn { background: #F8FAFC; border: 1px solid #E2E8F0; padding: 6px 12px; border-radius: 100px; font-size: 0.78rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .calc-tab-btn.active { background: #0F172A; color: white; border-color: #0F172A; }
+  
+  .calc-grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+  .calc-item-card { background: white; border: 1.5px solid #E2E8F0; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s; }
+  .calc-item-card:hover { transform: translateY(-2px); border-color: #CBD5E1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .calc-item-card.has-qty { border-color: var(--red-mid); background: #FFFDFD; box-shadow: 0 4px 14px rgba(185, 28, 28, 0.08); }
+  
+  .calc-item-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+  .calc-item-icon { width: 40px; height: 40px; border-radius: 10px; background: #FEF2F2; color: #B91C1C; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .calc-item-card.has-qty .calc-item-icon { background: linear-gradient(135deg, #B91C1C, #DC2626); color: white; }
+  .calc-item-names { flex: 1; min-width: 0; }
+  .calc-name-en { font-size: 0.9rem; font-weight: 700; color: #0F172A; line-height: 1.2; }
+  .calc-name-ur { font-family: 'Noto Nastaliq Urdu', serif; font-size: 0.82rem; color: #B91C1C; margin-top: 1px; display: block; }
+  .calc-watt-spec { font-size: 0.75rem; color: #64748B; background: #F8FAFC; padding: 4px 8px; border-radius: 6px; margin-bottom: 10px; display: flex; justify-content: space-between; }
+  
+  .calc-stepper-wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px dashed #E2E8F0; }
+  .calc-stepper { display: inline-flex; align-items: center; border: 1.5px solid #E2E8F0; border-radius: 8px; background: #F8FAFC; overflow: hidden; }
+  .btn-calc-step { width: 30px; height: 30px; border: none; background: white; color: #0F172A; font-weight: 800; font-size: 1rem; cursor: pointer; transition: background 0.15s; }
+  .btn-calc-step:hover:not(:disabled) { background: #B91C1C; color: white; }
+  .btn-calc-step:disabled { color: #CBD5E1; cursor: not-allowed; }
+  .calc-qty-num { min-width: 30px; text-align: center; font-size: 0.9rem; font-weight: 800; color: #0F172A; }
+  .calc-item-subtotal { font-size: 0.8rem; font-weight: 700; color: #64748B; }
+  .calc-item-card.has-qty .calc-item-subtotal { color: #B91C1C; }
+  
+  .calc-sidebar-sticky { position: sticky; top: 90px; display: flex; flex-direction: column; gap: 18px; }
+  .calc-summary-panel { background: white; border-radius: 18px; border: 1.5px solid #E2E8F0; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow: hidden; }
+  .calc-summary-top { background: linear-gradient(135deg, #0B132B, #1E293B); color: white; padding: 18px 20px; }
+  .calc-summary-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px 20px; background: #FAFBFD; border-bottom: 1px solid #E2E8F0; }
+  .calc-metric-card { background: white; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 10px 14px; text-align: center; }
+  .calc-metric-val { font-size: 1.4rem; font-weight: 800; color: #DC2626; line-height: 1.1; }
+  .calc-metric-lbl { font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase; margin-bottom: 2px; }
+  
+  .calc-tier-badge { margin: 14px 20px; padding: 10px 14px; border-radius: 8px; font-size: 0.84rem; font-weight: 700; display: flex; justify-content: space-between; }
+  .tier-green { background: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
+  .tier-amber { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+  .tier-red { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+  .tier-none { background: #F1F5F9; color: #64748B; border: 1px dashed #CBD5E1; }
+  
+  .calc-rec-wrap { padding: 14px 20px; border-top: 1px solid #E2E8F0; font-size: 0.82rem; }
+  .calc-rec-row { display: flex; justify-content: space-between; padding: 4px 0; }
+  .calc-rec-row span { color: #64748B; }
+  .calc-rec-row strong { color: #0F172A; }
+  
+  .calc-selected-preview { padding: 12px 20px; max-height: 140px; overflow-y: auto; background: #FAFBFD; border-top: 1px solid #E2E8F0; font-size: 0.8rem; }
+  .calc-preview-row { display: flex; justify-content: space-between; padding: 3px 0; }
+  
+  .calc-form-panel { background: white; border-radius: 18px; border: 1.5px solid #E2E8F0; padding: 22px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .calc-form-title { font-size: 1.15rem; font-weight: 700; color: #0F172A; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1.5px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; }
+  .calc-input-group { margin-bottom: 12px; }
+  .calc-input-group label { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; color: #0F172A; margin-bottom: 4px; }
+  .calc-input-group input, .calc-input-group select, .calc-input-group textarea { width: 100%; padding: 9px 12px; border: 1.5px solid #E2E8F0; border-radius: 8px; font-size: 0.88rem; font-family: inherit; }
+  .calc-input-group input:focus, .calc-input-group select:focus, .calc-input-group textarea:focus { outline: none; border-color: #B91C1C; }
+  
+  .calc-btn-generate { width: 100%; background: linear-gradient(135deg, #B91C1C, #DC2626); color: white; border: none; border-radius: 10px; padding: 13px; font-size: 0.96rem; font-weight: 800; cursor: pointer; transition: all 0.2s; margin-top: 8px; box-shadow: 0 4px 14px rgba(220,38,38,0.25); }
+  .calc-btn-generate:hover:not(:disabled) { transform: translateY(-1px); opacity: 0.95; }
+  .calc-btn-generate:disabled { opacity: 0.6; cursor: not-allowed; }
+  
+  .calc-actions-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .calc-btn-sec { background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 8px; padding: 9px 12px; font-size: 0.8rem; font-weight: 700; color: #0F172A; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .calc-btn-sec:hover:not(:disabled) { background: white; border-color: #0F172A; }
+  .calc-btn-sec:disabled { opacity: 0.5; cursor: not-allowed; }
+  
+  .calc-btn-whatsapp { width: 100%; background: #25D366; color: white; border: none; border-radius: 10px; padding: 13px; font-size: 0.95rem; font-weight: 800; cursor: pointer; transition: all 0.2s; margin-top: 8px; box-shadow: 0 4px 14px rgba(37,211,102,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .calc-btn-whatsapp:hover:not(:disabled) { background: #20BA56; transform: translateY(-1px); }
+  .calc-btn-whatsapp:disabled { background: #94A3B8; box-shadow: none; opacity: 0.6; cursor: not-allowed; }
+  
+  .calc-wa-guide-box { display: none; background: #F0FDF4; border: 1.5px solid #BBF7D0; border-radius: 8px; padding: 12px; margin-top: 12px; font-size: 0.8rem; color: #166534; line-height: 1.5; }
+  .calc-wa-guide-box.show { display: block; }
+  
+  @media (max-width: 1024px) {
+    .calc-main-layout { grid-template-columns: 1fr; }
+    .calc-sidebar-sticky { position: static; }
+  }
+  @media (max-width: 600px) {
+    .calc-grid-container { grid-template-columns: 1fr; }
+    .calc-summary-metrics { grid-template-columns: 1fr; }
+    .calc-actions-2col { grid-template-columns: 1fr; }
+  }
 </style>
 <link rel="dns-prefetch" href="https://www.gstatic.com">
 <link rel="dns-prefetch" href="https://bin-zareen-default-rtdb.asia-southeast1.firebasedatabase.app">
-<script>
-  function toggleSystemType() {
-    const type = document.getElementById('q-system-type').value;
-    const batteryGroup = document.getElementById('q-battery-group');
-    if(batteryGroup) batteryGroup.style.display = (type === 'hybrid') ? 'block' : 'none';
-  }
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -465,6 +510,7 @@
         <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
         <li><a onclick="showPage('products')">Products</a></li>
         <li><a onclick="showPage('services')">Services</a></li>
+        <li><a onclick="showPage('calculator')" id="nav-calculator" style="color:var(--red-bright);font-weight:700;">⚡ Load Calculator</a></li>
         <li><a onclick="showPage('about')">About Us</a></li>
         <li><a onclick="showPage('contact')">Contact</a></li>
       </ul>
@@ -971,152 +1017,178 @@
     </div>
   </div>
 
-  <!-- SOLAR CALCULATOR PAGE -->
+  <!-- SOLAR CALCULATOR PAGE (MODERN UNIFIED SINGLE-PAGE APP) -->
   <div class="page" id="page-calculator">
     <div class="calc-hero">
       <div class="container" style="position:relative;z-index:1;">
-        <button class="back-btn" onclick="goBack()" style="background:rgba(255,255,255,0.12);color:white;border-color:transparent;">← Back</button>
-        <div class="calc-badge">☀️ Smart Solar Sizing Tool</div>
-        <h1>Create Free Quotation</h1>
-        <p>Apne ghar ki zarorat aur brands select karein — free invoice quotation hasil karein!</p>
+        <button class="back-btn" onclick="goBack()" style="background:rgba(255,255,255,0.15);color:white;border:none;margin-bottom:12px;cursor:pointer;padding:6px 14px;border-radius:6px;font-weight:700;">← Back</button>
+        <div class="calc-badge">⚡ Instant Solar Sizing & Official Estimate</div>
+        <h1 class="calc-urdu-title">لوڈ کا انتخاب اور سولر کوٹیشن</h1>
+        <div class="calc-eng-title">Home Load Calculator & Solar Quotation</div>
+        <p>Select your household appliances below to calculate your estimated electrical load instantly. Generate an official bilingual PDF quotation and connect directly with our engineering team via WhatsApp.</p>
       </div>
     </div>
-    <div class="container">
-      <div class="calc-layout" id="calc-step-1">
-        <!-- APPLIANCE SELECTION -->
-        <div>
-          <div class="calc-panel">
-            <h2>🏠 Apne Appliances Chunain</h2>
-            <div class="appliance-grid" id="appliance-grid"></div>
-          </div>
-        </div>
-        <!-- RESULT CARD -->
-        <div class="calc-result-card">
-          <div class="result-header">
-            <h3>⚡ Aapka Total Load</h3>
-            <p>Live calculation — automatically updates</p>
-          </div>
-          <div class="result-body">
-            <div class="result-items" id="result-items-list"><div class="empty-calc">Koi appliance select nahi kiya<br>👆 Upar se select karein</div></div>
-            <div class="result-stat highlight"><span class="label">Total Load</span><span class="value" id="result-watts">0 W</span></div>
-            <button class="calc-submit-btn" onclick="goToQuotationStep2()" style="background:var(--blue-mid);">
-              Next: Select Brands & Invoice →
-            </button>
-          </div>
-        </div>
-      </div>
 
-      <!-- STEP 2: INVOICE QUOTATION CONFIGURATION -->
-      <div class="calc-layout" id="calc-step-2" style="display:none;">
-        <div>
-          <div class="calc-panel">
-            <h2>2️⃣ System & Brands Select Karein</h2>
-            <div class="form-group">
-              <label>System Type *</label>
-              <select id="q-system-type" onchange="toggleSystemType(); generateInvoice()">
-                <option value="daytime">Daytime System (Without Battery)</option>
-                <option value="hybrid">Hybrid System (With Battery)</option>
-              </select>
+    <div class="container">
+      <div class="calc-main-layout">
+        
+        <!-- LEFT: APPLIANCE SELECTION & SEARCH -->
+        <div class="calc-appliances-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1.5px solid #E2E8F0;flex-wrap:wrap;gap:10px;">
+            <div>
+              <h2 style="font-size:1.3rem;font-weight:800;color:#0F172A;margin:0;">Select Your Home Appliances</h2>
+              <p style="font-size:0.84rem;color:#64748B;margin:2px 0 0;">Adjust quantities using (+) and (−). Real-time load calculations update instantly.</p>
             </div>
-            <div class="form-group">
-              <label>Inverter Brand *</label>
-              <select id="q-inverter" onchange="generateInvoice()">
-                <option value="Growatt">Growatt</option>
-                <option value="SolarEdge">SolarEdge</option>
-                <option value="Solis">Solis</option>
-                <option value="Deye">Deye</option>
-                <option value="Inverex">Inverex</option>
-                <option value="Knox">Knox</option>
-                <option value="Fronus">Fronus</option>
-              </select>
-            </div>
-            <div class="form-group" id="q-battery-group" style="display:none;">
-              <label>Battery Brand *</label>
-              <select id="q-battery" onchange="generateInvoice()">
-                <option value="Pylontech">Pylontech (Lithium)</option>
-                <option value="Volta">Volta (Tubular/AGM)</option>
-                <option value="Phoenix">Phoenix (Tubular/Gel)</option>
-                <option value="Osaka">Osaka</option>
-                <option value="Tesla">Generic Lithium</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Solar Panel Wattage *</label>
-              <select id="q-panel-watt" onchange="generateInvoice()">
-                <option value="440|585W">585W Panel (Real 440W)</option>
-                <option value="440|590W">590W Panel (Real 440W)</option>
-                <option value="460|610W">610W Panel (Real 460W)</option>
-                <option value="460|620W">620W Panel (Real 460W)</option>
-                <option value="500|640W">640W Panel (Real 500W)</option>
-                <option value="500|645W">645W Panel (Real 500W)</option>
-                <option value="600|710W">710W Panel (Real 600W)</option>
-                <option value="600|720W">720W Panel (Real 600W)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Solar Panel Brand *</label>
-              <select id="q-panel-brand" onchange="generateInvoice()">
-                <option value="Canadian">Canadian</option>
-                <option value="JA">JA</option>
-                <option value="Jenko">Jenko</option>
-                <option value="Longi">Longi</option>
-                <option value="Longi himo x10">Longi himo x10</option>
-                <option value="Astro energy">Astro energy</option>
-                <option value="Yingli">Yingli</option>
-                <option value="Crown">Crown</option>
-                <option value="Risen">Risen</option>
-                <option value="Inverex">Inverex</option>
-                <option value="Korean">Korean</option>
-                <option value="Aiko">Aiko</option>
-                <option value="Treena">Treena</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Stand Structure *</label>
-              <select id="q-stand" onchange="generateInvoice()">
-                <option value="L2|2500">L2 Stand (Rs. 2500 / Panel)</option>
-                <option value="L3|2500">L3 Stand (Rs. 2500 / Panel)</option>
-                <option value="Pipe structure|8000">Pipe structure (Rs. 8000 / Panel)</option>
-                <option value="Elevated structure H.Beam|10000">Elevated structure H.Beam (Rs. 10000 / Panel)</option>
-              </select>
+            <button onclick="resetIndexCalculator()" style="background:#FEF2F2;color:#DC2626;border:1px solid #FEE2E2;padding:6px 12px;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">Reset Selection</button>
+          </div>
+
+          <!-- CONTROLS -->
+          <div class="calc-controls-bar">
+            <input type="text" id="idx-calc-search" class="calc-search-input" placeholder="Search appliances (e.g. Inverter AC, Fridge, Fan)..." oninput="filterIndexAppliances()">
+            <div class="calc-category-tabs" id="idx-category-tabs">
+              <button class="calc-tab-btn active" onclick="setIndexCategory('all', this)">All Appliances</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Cooling & AC', this)">Cooling & AC</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Kitchen', this)">Kitchen</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Living & Home', this)">Living & Home</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Heavy Load', this)">Heavy Load</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Lighting & Tech', this)">Lighting & Tech</button>
             </div>
           </div>
-          <div class="calc-panel" style="margin-top:20px;">
-            <h2>👤 Apni Details Bharain</h2>
-            <div class="form-group"><label>Aapka Naam *</label><input type="text" id="calc-name" placeholder="e.g. Muhammad Ali"></div>
-            <div class="form-group"><label>WhatsApp Number *</label><input type="tel" id="calc-phone" placeholder="e.g. 03001234567"></div>
-            <div class="form-group"><label>Shehar / City</label><input type="text" id="calc-city" placeholder="e.g. Islamabad"></div>
-            <div class="form-group"><label>Koi Sawaal? (Optional)</label><textarea id="calc-note" rows="2" placeholder="e.g. Budget kya hai?"></textarea></div>
-            <button class="btn-outline" onclick="goBackToStep1()" style="color:var(--red-mid);border-color:var(--red-mid);width:100%;margin-top:10px;">← Back to Load Calculator</button>
+
+          <!-- APPLIANCES GRID -->
+          <div class="calc-grid-container" id="idx-appliances-grid">
+            <!-- Dynamic items rendered via JS -->
           </div>
-          <div class="calc-panel" style="margin-top:20px;">
-            <h2>➕ Apni Custom Items Add Karein</h2>
-            <p style="font-size:0.85rem;color:var(--gray-mid);margin-bottom:12px;">Koi additional material ya service add karna hai?</p>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;margin-bottom:12px;">
-              <input type="text" id="custom-item-name" placeholder="Item Name" style="padding:10px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9rem;">
-              <input type="number" id="custom-item-qty" placeholder="Qty" min="1" value="1" style="padding:10px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9rem;">
-              <input type="number" id="custom-item-price" placeholder="Price" min="0" style="padding:10px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.9rem;">
-              <button onclick="addCustomItem()" style="padding:10px 16px;background:var(--green);color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.9rem;">+ Add</button>
+
+          <!-- CUSTOM ITEM ROW -->
+          <div style="margin-top:20px;padding:16px;background:#F8FAFC;border:1.5px dashed #CBD5E1;border-radius:12px;">
+            <div style="font-size:0.88rem;font-weight:700;color:#0F172A;margin-bottom:10px;">➕ Add Custom Appliance or Wattage</div>
+            <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr auto;gap:8px;" class="custom-inputs-row">
+              <input type="text" id="idx-custom-name" placeholder="Item Name (e.g. Deep Well Pump)" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
+              <input type="number" id="idx-custom-watts" placeholder="Watts (e.g. 1500)" min="1" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
+              <input type="number" id="idx-custom-qty" placeholder="Qty" min="1" value="1" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
+              <button onclick="addIndexCustomAppliance()" style="background:#0F172A;color:white;border:none;padding:8px 14px;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.85rem;">+ Add</button>
             </div>
-            <div id="custom-items-list" style="max-height:200px;overflow-y:auto;"></div>
           </div>
         </div>
-        <!-- INVOICE CARD -->
-        <div class="calc-result-card">
-          <div class="result-header">
-            <h3>📄 Invoice Quotation</h3>
-            <p>Aapke system ka mukammal hisaab</p>
+
+        <!-- RIGHT: STICKY LOAD SUMMARY & QUOTATION FORM -->
+        <div class="calc-sidebar-sticky">
+
+          <!-- LOAD SUMMARY CARD -->
+          <div class="calc-summary-panel">
+            <div class="calc-summary-top">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-weight:800;font-size:1.15rem;">Total Load Summary</span>
+                <span style="font-family:'Noto Nastaliq Urdu',serif;color:#FDE047;font-size:0.9rem;">کل لوڈ کا خلاصہ</span>
+              </div>
+              <small style="color:#94A3B8;display:block;margin-top:2px;">Real-time electrical consumption</small>
+            </div>
+
+            <div class="calc-summary-metrics">
+              <div class="calc-metric-card">
+                <div class="calc-metric-lbl">Total Appliances</div>
+                <div class="calc-metric-val" id="idx-sum-qty">0 <small style="font-size:0.75rem;color:#64748B;">items</small></div>
+              </div>
+              <div class="calc-metric-card" style="background:#FEF2F2;border-color:#FEE2E2;">
+                <div class="calc-metric-lbl">Total Peak Load</div>
+                <div class="calc-metric-val" id="idx-sum-watts" style="color:#B91C1C;">0 <small style="font-size:0.75rem;color:#64748B;">Watts</small></div>
+              </div>
+            </div>
+
+            <div class="calc-tier-badge tier-none" id="idx-tier-badge">
+              <span>Status: No Appliances Selected</span>
+              <span>0.0 kW</span>
+            </div>
+
+            <div class="calc-rec-wrap" id="idx-rec-box">
+              <div style="font-weight:700;color:#0F172A;margin-bottom:8px;text-transform:uppercase;font-size:0.78rem;letter-spacing:0.5px;">Recommended Solar Sizing</div>
+              <div class="calc-rec-row"><span>Inverter:</span><strong id="idx-rec-inverter">Pending selection</strong></div>
+              <div class="calc-rec-row"><span>Solar Panels:</span><strong id="idx-rec-panels">Pending selection</strong></div>
+              <div class="calc-rec-row"><span>Battery Storage:</span><strong id="idx-rec-battery">Pending selection</strong></div>
+            </div>
+
+            <div class="calc-selected-preview" id="idx-selected-preview">
+              <div style="text-align:center;padding:10px;color:#64748B;">
+                Please select at least one appliance from the left.
+                <div style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;font-size:0.88rem;margin-top:4px;">براہ کرم کم از کم ایک اپلائنس منتخب کریں</div>
+              </div>
+            </div>
           </div>
-          <div class="result-body" id="invoice-body">
-            <div id="invoice-table-html"></div>
-            <button class="calc-submit-btn" onclick="submitInvoiceQuotation()" style="margin-top:16px;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-              WhatsApp par Quotation Bhejain
-            </button>
-            <p class="calc-note">Aapka customized quotation WhatsApp par foran forward ho jayega! 🚀</p>
+
+          <!-- CUSTOMER QUOTATION FORM -->
+          <div class="calc-form-panel">
+            <div class="calc-form-title">
+              <span>Request Your Solar Quotation</span>
+              <span style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;font-size:0.88rem;">اپنا سولر کوٹیشن حاصل کریں</span>
+            </div>
+
+            <form id="idx-quotation-form" onsubmit="handleIndexFormSubmit(event)">
+              <div class="calc-input-group">
+                <label><span>Full Name *</span><span style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;">پورا نام</span></label>
+                <input type="text" id="idx-cust-name" placeholder="e.g. Muhammad Usman" required>
+              </div>
+
+              <div class="calc-input-group">
+                <label><span>City in Pakistan *</span><span style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;">شہر</span></label>
+                <input type="text" id="idx-cust-city" placeholder="e.g. Islamabad, Lahore, Karachi..." list="pk-cities-list-idx" required>
+                <datalist id="pk-cities-list-idx">
+                  <option value="Islamabad"><option value="Rawalpindi"><option value="Lahore"><option value="Karachi"><option value="Faisalabad"><option value="Multan"><option value="Peshawar"><option value="Gujranwala"><option value="Sialkot"><option value="Quetta"><option value="Hyderabad"><option value="Abbottabad">
+                </datalist>
+              </div>
+
+              <div class="calc-input-group">
+                <label><span>WhatsApp Number *</span><span style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;">واٹس ایپ نمبر</span></label>
+                <div style="position:relative;display:flex;align-items:center;">
+                  <span style="position:absolute;left:10px;font-size:0.85rem;font-weight:700;color:#0F172A;pointer-events:none;">🇵🇰 +92</span>
+                  <input type="tel" id="idx-cust-phone" style="padding-left:60px;" placeholder="300 1234567" required>
+                </div>
+              </div>
+
+              <div class="calc-input-group">
+                <label><span>Preferred Contact Time</span></label>
+                <select id="idx-cust-time">
+                  <option value="Anytime (9:00 AM – 8:00 PM)">Anytime (9:00 AM – 8:00 PM)</option>
+                  <option value="Morning (9:00 AM – 1:00 PM)">Morning (9:00 AM – 1:00 PM)</option>
+                  <option value="Afternoon (1:00 PM – 5:00 PM)">Afternoon (1:00 PM – 5:00 PM)</option>
+                  <option value="Evening (5:00 PM – 9:00 PM)">Evening (5:00 PM – 9:00 PM)</option>
+                </select>
+              </div>
+
+              <!-- ACTION BUTTONS -->
+              <button type="submit" class="calc-btn-generate" id="idx-btn-generate">
+                📄 Generate PDF Quotation
+              </button>
+
+              <div class="calc-actions-2col">
+                <button type="button" class="calc-btn-sec" id="idx-btn-preview" onclick="openIndexPdfPreview()" disabled>
+                  👁️ Preview PDF
+                </button>
+                <button type="button" class="calc-btn-sec" id="idx-btn-download" onclick="triggerIndexPdfDownload()" disabled>
+                  📥 Download PDF
+                </button>
+              </div>
+
+              <button type="button" class="calc-btn-sec" id="idx-btn-share" onclick="handleIndexNativeShare()" disabled style="width:100%;margin-top:8px;">
+                🔗 Share PDF (Native Share)
+              </button>
+
+              <button type="button" class="calc-btn-whatsapp" id="idx-btn-whatsapp" onclick="handleIndexSendWhatsApp()" disabled>
+                💬 Send PDF via WhatsApp
+              </button>
+
+              <!-- WHATSAPP ATTACHMENT INSTRUCTION CARD -->
+              <div class="calc-wa-guide-box" id="idx-wa-guide">
+                <strong>📲 WhatsApp Instruction:</strong>
+                WhatsApp has been opened with Bin Zareen Solar (0325-2053313). 
+                <br><br>
+                Please tap the <b>attachment (📎 / +) icon</b> in WhatsApp and attach your downloaded PDF quotation before sending.
+              </div>
+            </form>
           </div>
+
         </div>
-      </div>
+
       </div>
     </div>
   </div>
@@ -1471,6 +1543,7 @@ function showPage(page, param) {
   else if (page === 'cat') renderCategoryPage(param);
   else if (page === 'cart') renderCart();
   else if (page === 'checkout') renderCheckoutSummary();
+  else if (page === 'calculator') initModernCalculator();
   else if (page === 'home') renderFeaturedProducts(); // Re-render featured products on home page load
 }
 
@@ -1796,656 +1869,567 @@ function toggleMobile() { document.getElementById('mobile-menu').classList.toggl
 function closeMobileOnBg(e) { if (e.target === document.getElementById('mobile-menu')) toggleMobile(); }
 
 // ============================================================
-// SOLAR CALCULATOR
+// MODERN SOLAR HOME LOAD CALCULATOR & QUOTATION SYSTEM
 // ============================================================
-const APPLIANCES = [
-  { id:'iron',    name:'Istree',          watts:1000, emoji:'🧺', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&auto=format&fit=crop' },
-  { id:'wm',      name:'Washing Machine', watts:400,  emoji:'🫧', img:'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=200&auto=format&fit=crop' },
-  { id:'fridge',  name:'Fridge / Refrig', watts:240,  emoji:'❄️', img:'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=200&auto=format&fit=crop' },
-  { id:'pump',    name:'Water Pump',      watts:1000, emoji:'💧', img:'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=200&auto=format&fit=crop' },
-  { id:'light',   name:'Light (LED)',     watts:20,   emoji:'💡', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&auto=format&fit=crop' },
-  { id:'fan',     name:'Ceiling Fan',     watts:70,   emoji:'🌀', img:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&auto=format&fit=crop' },
-  { id:'oven',    name:'Electric Oven',   watts:1200, emoji:'🍕', img:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&auto=format&fit=crop' },
-  { id:'ac1t',    name:'1 Ton AC',        watts:1200, emoji:'🌬️', img:'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=200&auto=format&fit=crop' },
-  { id:'ac15t',   name:'1.5 Ton AC',      watts:1800, emoji:'🌬️', img:'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=200&auto=format&fit=crop' },
-  { id:'ac2t',    name:'2 Ton AC',        watts:2500, emoji:'🌬️', img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&auto=format&fit=crop' },
-  { id:'stove',   name:'Electric Stove',  watts:1300, emoji:'🍳', img:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&auto=format&fit=crop' },
-  { id:'geyser',  name:'Water Geyser',    watts:1200, emoji:'🚿', img:'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&auto=format&fit=crop' }
+const IDX_APPLIANCES_DATA = [
+  { id: 'iron', nameEn: 'Iron', nameUr: 'استری', category: 'Living & Home', range: '1000W–1200W', defaultWatts: 1100, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H4"/><path d="M2 14v4"/><path d="M12 6v4"/></svg>` },
+  { id: 'ac_1_5_ton', nameEn: 'AC 1.5 Ton Inverter', nameUr: 'AC 1.5 ٹن انورٹر', category: 'Cooling & AC', range: '1500W–1800W', defaultWatts: 1650, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7v10H4V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z"/><path d="M8 12h8"/><path d="M6 17v2"/><path d="M18 17v2"/></svg>` },
+  { id: 'ac_1_ton', nameEn: 'AC 1 Ton Inverter', nameUr: 'AC 1 ٹن انورٹر', category: 'Cooling & AC', range: '1000W–1200W', defaultWatts: 1100, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7v10H4V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z"/><path d="M8 12h8"/><path d="M6 17v2"/><path d="M18 17v2"/></svg>` },
+  { id: 'electric_stove', nameEn: 'Electric Stove', nameUr: 'الیکٹرک چولہا', category: 'Kitchen', range: '1500W–2000W', defaultWatts: 1750, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2"/><path d="M12 20v2"/></svg>` },
+  { id: 'microwave_oven', nameEn: 'Microwave Oven', nameUr: 'مائیکروویو اوون', category: 'Kitchen', range: '1000W–1400W', defaultWatts: 1200, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="15" x="2" y="4" rx="2"/><rect width="10" height="9" x="5" y="7" rx="1"/><path d="M18 8v1"/><path d="M18 12v1"/></svg>` },
+  { id: 'water_pump', nameEn: 'Water Pump / Motor 1HP', nameUr: 'واٹر پمپ / موٹر 1HP', category: 'Heavy Load', range: '750W–800W', defaultWatts: 775, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>` },
+  { id: 'washing_machine', nameEn: 'Washing Machine', nameUr: 'واشنگ مشین', category: 'Living & Home', range: '400W–600W', defaultWatts: 500, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="5"/></svg>` },
+  { id: 'refrigerator', nameEn: 'Refrigerator / Deep Freezer', nameUr: 'فریج / ڈیپ فریزر', category: 'Kitchen', range: '300W–400W', defaultWatts: 350, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="4" x2="20" y1="10" y2="10"/></svg>` },
+  { id: 'water_dispenser', nameEn: 'Water Dispenser', nameUr: 'واٹر ڈسپنسر', category: 'Kitchen', range: '350W–450W', defaultWatts: 400, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v7H6z"/><path d="M7 9v11a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9"/></svg>` },
+  { id: 'tv', nameEn: 'LCD / LED TV', nameUr: 'LCD / LED ٹی وی', category: 'Lighting & Tech', range: '80W–150W', defaultWatts: 115, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="15" x="2" y="3" rx="2"/><polyline points="17 21 12 18 7 21"/></svg>` },
+  { id: 'ceiling_fan', nameEn: 'Ceiling Fan', nameUr: 'چھت کا پنکھا', category: 'Cooling & AC', range: '75W–80W', defaultWatts: 78, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/><path d="M12 12 7 3a4 4 0 0 0-4 4l9 5"/><path d="M12 12l9 5a4 4 0 0 0 4-4l-9-5"/></svg>` },
+  { id: 'inverter_fan', nameEn: 'Inverter Fan', nameUr: 'انورٹر پنکھا', category: 'Cooling & AC', range: '30W–40W', defaultWatts: 35, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/></svg>` },
+  { id: 'led_light', nameEn: 'LED Light / Bulb', nameUr: 'LED لائٹ / بلب', category: 'Lighting & Tech', range: '12W–18W', defaultWatts: 15, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/></svg>` },
+  { id: 'laptop_pc', nameEn: 'Laptop / PC', nameUr: 'لیپ ٹاپ / پی سی', category: 'Lighting & Tech', range: '50W–90W', defaultWatts: 70, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>` }
 ];
 
-const calcQty = {};
-APPLIANCES.forEach(a => { calcQty[a.id] = 0; });
+const idxAppQuantities = {};
+IDX_APPLIANCES_DATA.forEach(a => { idxAppQuantities[a.id] = 0; });
+let idxCustomAppliances = [];
+let idxCategory = 'all';
+let idxSearchTerm = '';
+let idxQuotationData = null;
+let idxPdfBlob = null;
+let idxPdfBlobUrl = null;
+let idxPdfFile = null;
 
-function buildApplianceGrid() {
-  const grid = document.getElementById('appliance-grid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  APPLIANCES.forEach(a => {
+function renderIndexApplianceGrid() {
+  const container = document.getElementById('idx-appliances-grid');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const filtered = IDX_APPLIANCES_DATA.filter(app => {
+    const matchesCat = idxCategory === 'all' || app.category === idxCategory;
+    const matchesSearch = !idxSearchTerm || app.nameEn.toLowerCase().includes(idxSearchTerm.toLowerCase()) || app.nameUr.includes(idxSearchTerm);
+    return matchesCat && matchesSearch;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px;color:#64748B;">No appliances found matching your search.</div>`;
+    return;
+  }
+
+  filtered.forEach(app => {
+    const qty = idxAppQuantities[app.id] || 0;
+    const totalW = qty * app.defaultWatts;
+
     const card = document.createElement('div');
-    card.className = 'appliance-card';
-    card.id = 'acard-' + a.id;
+    card.className = `calc-item-card ${qty > 0 ? 'has-qty' : ''}`;
+    card.id = `idx-card-${app.id}`;
     card.innerHTML = `
-      <div class="appliance-img-wrap">
-        <img src="${a.img}" alt="${a.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div style="display:none;font-size:2rem;align-items:center;justify-content:center;width:100%;height:100%;">${a.emoji}</div>
-      </div>
-      <div class="appliance-name">${a.name}</div>
-      <div class="appliance-watts">${a.watts}W</div>
-      <div class="qty-control">
-        <button class="qty-btn-calc" onclick="changeQty('${a.id}',-1)">−</button>
-        <span class="qty-display" id="qty-${a.id}">0</span>
-        <button class="qty-btn-calc" onclick="changeQty('${a.id}',1)">+</button>
-      </div>`;
-    grid.appendChild(card);
-  });
-}
-
-function changeQty(id, delta) {
-  calcQty[id] = Math.max(0, (calcQty[id] || 0) + delta);
-  document.getElementById('qty-' + id).textContent = calcQty[id];
-  const card = document.getElementById('acard-' + id);
-  if (card) card.classList.toggle('active', calcQty[id] > 0);
-  updateCalcResult();
-}
-
-function updateCalcResult() {
-  let totalWatts = 0;
-  const selected = [];
-  APPLIANCES.forEach(a => {
-    const q = calcQty[a.id] || 0;
-    if (q > 0) {
-      const w = a.watts * q;
-      totalWatts += w;
-      selected.push({ name: a.name + (q > 1 ? ' x' + q : ''), watts: w });
-    }
-  });
-
-  const listEl = document.getElementById('result-items-list');
-  if (selected.length === 0) {
-    listEl.innerHTML = '<div class="empty-calc">Koi appliance select nahi kiya<br>👆 Upar se select karein</div>';
-  } else {
-    listEl.innerHTML = selected.map(s =>
-      `<div class="result-item-row"><span class="rname">${s.name}</span><span class="rwatts">${s.watts}W</span></div>`
-    ).join('');
-  }
-
-  const wattsEl = document.getElementById('result-watts');
-  if (wattsEl) wattsEl.textContent = totalWatts.toLocaleString() + ' W';
-}
-
-// Custom Items Management
-window.customItems = [];
-
-function addCustomItem() {
-  const name = document.getElementById('custom-item-name').value.trim();
-  const qty = parseInt(document.getElementById('custom-item-qty').value) || 1;
-  const price = parseInt(document.getElementById('custom-item-price').value) || 0;
-  
-  if (!name) {
-    alert('⚠️ Item ka naam zaroor likhain!');
-    return;
-  }
-  
-  window.customItems.push({ id: Date.now(), name, qty, price });
-  
-  document.getElementById('custom-item-name').value = '';
-  document.getElementById('custom-item-qty').value = '1';
-  document.getElementById('custom-item-price').value = '';
-  
-  renderCustomItems();
-  generateInvoice();
-}
-
-function removeCustomItem(itemId) {
-  window.customItems = window.customItems.filter(item => item.id !== itemId);
-  renderCustomItems();
-  generateInvoice();
-}
-
-function renderCustomItems() {
-  const listEl = document.getElementById('custom-items-list');
-  if (window.customItems.length === 0) {
-    listEl.innerHTML = '';
-    return;
-  }
-  
-  listEl.innerHTML = window.customItems.map(item => `
-    <div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:8px;margin-bottom:8px;border-left:3px solid var(--green);">
-      <div style="flex:1;min-width:0;">
-        <div style="font-weight:600;color:#1a1a2e;font-size:0.9rem;">${item.name}</div>
-        <div style="font-size:0.8rem;color:#6b7280;">Qty: ${item.qty} × Rs. ${item.price.toLocaleString('en-PK')}</div>
-      </div>
-      <div style="text-align:right;min-width:auto;">
-        <div style="font-weight:700;color:var(--primary);font-size:0.9rem;">Rs. ${(item.qty * item.price).toLocaleString('en-PK')}</div>
-        <button onclick="removeCustomItem(${item.id})" style="margin-top:4px;background:transparent;border:none;color:#C0392B;cursor:pointer;font-size:0.8rem;text-decoration:underline;">Remove</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function goToQuotationStep2() {
-  let totalWatts = 0;
-  APPLIANCES.forEach(a => { totalWatts += (calcQty[a.id] || 0) * a.watts; });
-  if (totalWatts === 0) { alert('⚠️ Kam az kam ek appliance select karein!'); return; }
-  
-  document.getElementById('calc-step-1').style.display = 'none';
-  document.getElementById('calc-step-2').style.display = 'grid';
-  generateInvoice();
-}
-
-function goBackToStep1() {
-  document.getElementById('calc-step-2').style.display = 'none';
-  document.getElementById('calc-step-1').style.display = 'grid';
-}
-
-function generateInvoice() {
-  let totalWatts = 0;
-  APPLIANCES.forEach(a => { totalWatts += (calcQty[a.id] || 0) * a.watts; });
-
-  const systemType = document.getElementById('q-system-type').value;
-  const panelWattStr = document.getElementById('q-panel-watt').value.split('|');
-  const realWatts = parseInt(panelWattStr[0]);
-  const panelLabel = panelWattStr[1];
-  const brand = document.getElementById('q-panel-brand').value;
-  const standStr = document.getElementById('q-stand').value.split('|');
-  const standType = standStr[0];
-  const standPrice = parseInt(standStr[1]);
-
-  // OPTION B: More Panels (30% more)
-  const panelsNeeded = Math.ceil(totalWatts / realWatts);
-  const panelsNeededPremium = Math.ceil(panelsNeeded * 1.3);
-  const kw = (panelsNeeded * realWatts / 1000).toFixed(1);
-  const kwPremium = (panelsNeededPremium * realWatts / 1000).toFixed(1);
-
-  // Search for real prices in allProducts
-  let panelProduct = allProducts.find(p => p.cat === 'solar-panels' && p.name.toLowerCase().includes(brand.toLowerCase()) && p.name.toLowerCase().includes(panelLabel.replace('W', '').toLowerCase()));
-  if (!panelProduct) panelProduct = allProducts.find(p => p.cat === 'solar-panels' && p.name.toLowerCase().includes(brand.toLowerCase()));
-  const panelPrice = panelProduct ? panelProduct.price : 0;
-  const totalPanelPrice = panelPrice * panelsNeeded;
-  const totalPanelPricePremium = panelPrice * panelsNeededPremium;
-
-  const inverterBrand = document.getElementById('q-inverter').value;
-  let inverterProduct = allProducts.find(p => p.cat === 'inverters' && p.name.toLowerCase().includes(inverterBrand.toLowerCase()));
-  if (!inverterProduct) {
-    inverterProduct = allProducts.find(p => p.cat === 'inverters' && p.name.toLowerCase().includes(systemType === 'hybrid' ? 'hybrid' : 'on-grid')) || allProducts.find(p => p.cat === 'inverters');
-  }
-  const inverterPrice = inverterProduct ? inverterProduct.price : 0;
-
-  let batteryProduct = null;
-  let batteryPrice = 0;
-  let batteryBrand = '';
-  if (systemType === 'hybrid') {
-    batteryBrand = document.getElementById('q-battery').value;
-    batteryProduct = allProducts.find(p => p.cat === 'batteries' && p.name.toLowerCase().includes(batteryBrand.toLowerCase()));
-    if (!batteryProduct) {
-      batteryProduct = allProducts.find(p => p.cat === 'batteries' && p.name.toLowerCase().includes('lithium')) || allProducts.find(p => p.cat === 'batteries');
-    }
-    batteryPrice = batteryProduct ? batteryProduct.price : 0;
-  }
-
-  const totalStandPrice = standPrice * panelsNeeded;
-  const totalStandPricePremium = standPrice * panelsNeededPremium;
-
-  let dcCableProduct = allProducts.find(p => p.cat === 'cables-wires' && p.name.toLowerCase().includes('dc'));
-  const dcCablePrice = dcCableProduct ? dcCableProduct.price * 10 : 15000;
-
-  let acCableProduct = allProducts.find(p => p.cat === 'cables-wires' && p.name.toLowerCase().includes('ac')) || allProducts.find(p => p.cat === 'cables-wires');
-  const acCablePrice = acCableProduct ? acCableProduct.price * 10 : 22000;
-
-  const dbBoxPrice = 15000; // Assumed basic protection price
-  
-  let grandTotal = totalPanelPrice + totalStandPrice + inverterPrice + batteryPrice + dcCablePrice + acCablePrice + dbBoxPrice;
-
-  const fmtPrice = (price) => price > 0 ? 'Rs. ' + price.toLocaleString('en-PK') : 'Price pending';
-
-  let itemsHtml = `
-    <!-- Invoice Logo Header for Screenshot -->
-    <div class="invoice-logo-header" style="display:flex; align-items:center; gap:16px; margin-bottom:20px; padding-bottom:16px; border-bottom:3px double #E2E8F0;">
-      <img src="favicon.png" alt="Bin Zareen Solar Logo" style="width:70px; height:70px; object-fit:contain; border-radius:12px; background:#fff; padding:4px; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #E2E8F0; flex-shrink:0;">
       <div>
-        <h2 style="font-family:'Playfair Display', serif; font-size:1.6rem; font-weight:800; color:var(--red-deep); margin:0; line-height:1.2;">Bin Zareen Solar</h2>
-        <p style="margin:2px 0 0; font-size:0.8rem; color:var(--red-mid); font-weight:700; letter-spacing:2px; text-transform:uppercase;">Solar Pvt. Ltd.</p>
-        <p style="margin:2px 0 0; font-size:0.75rem; color:var(--gray-mid);">Free Quotation Estimate</p>
+        <div class="calc-item-top">
+          <div class="calc-item-icon">${app.iconSvg}</div>
+          <div class="calc-item-names">
+            <div class="calc-name-en">${app.nameEn}</div>
+            <span class="calc-name-ur">${app.nameUr}</span>
+          </div>
+        </div>
+        <div class="calc-watt-spec">
+          <span>Range: <b>${app.range}</b></span>
+          <span>Def: <b>${app.defaultWatts}W</b></span>
+        </div>
       </div>
-    </div>
-    <div style="font-weight:700; color:var(--red-deep); font-size:1.1rem; margin-bottom:12px;">System Size: ${kw} kW (${systemType === 'hybrid' ? 'Hybrid System' : 'Daytime System'})</div>
-    <div style="font-weight:700; color:var(--gray-dark); margin-bottom:8px;">Load: ${totalWatts} W</div>
-    <div style="font-size:0.9rem; color:var(--gray-mid); margin-bottom:16px;">Panels Needed: ${panelsNeeded} x ${panelLabel} (Brand: ${brand})</div>
-    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:12px;">
-      <h4 style="font-size:0.85rem; color:var(--gray-dark); margin-bottom:10px; text-transform:uppercase;">Included Items & Estimated Pricing</h4>
-      <ul style="list-style:none; padding:0; margin:0; font-size:0.9rem; color:var(--text);">
-        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>Solar Panels:</b> ${panelsNeeded}x ${panelProduct ? panelProduct.name : brand + ' ' + panelLabel}</span>
-          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(totalPanelPrice)}</strong>
-        </li>
-        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>Structure:</b> ${panelsNeeded}x ${standType} (${brand})</span>
-          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(totalStandPrice)}</strong>
-        </li>
-        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>Inverter:</b> ${inverterProduct ? inverterProduct.name : inverterBrand + ' Inverter'}</span>
-          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(inverterPrice)}</strong>
-        </li>
-        ${systemType === 'hybrid' ? `<li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>Battery:</b> ${batteryProduct ? batteryProduct.name : batteryBrand + ' Battery'}</span>
-          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(batteryPrice)}</strong>
-        </li>` : ''}
-        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>DC Cable (10m):</b> ${dcCableProduct ? dcCableProduct.name : 'Solar DC Cable'}</span>
-          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(dcCablePrice)}</strong>
-        </li>
-        <li style="padding:6px 0; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>AC Cable (10m):</b> ${acCableProduct ? acCableProduct.name : 'Standard AC Cable'}</span>
-          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(acCablePrice)}</strong>
-        </li>
-        <li style="padding:6px 0; display:flex; justify-content:space-between; align-items:center;">
-          <span style="flex:1;">✅ <b>DB Box & Protection:</b> Complete Set</span>
-          <strong style="white-space:nowrap; margin-left:10px;">${fmtPrice(dbBoxPrice)}</strong>
-        </li>
-      </ul>
-      <div style="margin-top:12px; padding-top:12px; border-top:2px dashed #E2E8F0; display:flex; justify-content:space-between; font-weight:bold; font-size:1.1rem; color:var(--red-deep);">
-        <span>Estimated Total:</span>
-        <span>${grandTotal > 0 ? 'Rs. ' + grandTotal.toLocaleString('en-PK') : 'Pending'}</span>
+      <div class="calc-stepper-wrap">
+        <div class="calc-stepper">
+          <button type="button" class="btn-calc-step" onclick="adjustIndexQty('${app.id}', -1)" ${qty === 0 ? 'disabled' : ''}>−</button>
+          <span class="calc-qty-num" id="idx-qty-${app.id}">${qty}</span>
+          <button type="button" class="btn-calc-step" onclick="adjustIndexQty('${app.id}', 1)">+</button>
+        </div>
+        <div class="calc-item-subtotal" id="idx-sub-${app.id}">${qty > 0 ? `${totalW.toLocaleString()} W` : '0 W'}</div>
       </div>
-    </div>
-  `;
-  document.getElementById('invoice-table-html').innerHTML = itemsHtml;
-  
-  // Save for WhatsApp - New structure with both options
-  window._lastInvoiceData = {
-    // Option A: Basic System
-    optionA: {
-      panelName: panelProduct ? panelProduct.name : brand + ' ' + panelLabel,
-      panelsNeeded: panelsNeeded,
-      panelPrice: totalPanelPrice,
-      standType: standType,
-      standPrice: totalStandPrice,
-      inverterName: inverterProduct ? inverterProduct.name : inverterBrand + ' Inverter',
-      inverterPrice: inverterPrice,
-      batteryName: batteryProduct ? batteryProduct.name : batteryBrand + ' Battery',
-      batteryPrice: batteryPrice,
-      dcPrice: dcCablePrice,
-      acPrice: acCablePrice,
-      dbPrice: dbBoxPrice,
-      customItems: window.customItems,
-      grandTotal: grandTotal
-    },
-    // Option B: Premium System (30% more panels)
-    optionB: {
-      panelName: panelProduct ? panelProduct.name : brand + ' ' + panelLabel,
-      panelsNeeded: panelsNeededPremium,
-      panelPrice: totalPanelPricePremium,
-      standType: standType,
-      standPrice: totalStandPricePremium,
-      inverterName: inverterProduct ? inverterProduct.name : inverterBrand + ' Inverter',
-      inverterPrice: inverterPrice,
-      batteryName: batteryProduct ? batteryProduct.name : batteryBrand + ' Battery',
-      batteryPrice: batteryPrice,
-      dcPrice: dcCablePrice,
-      acPrice: acCablePrice,
-      dbPrice: dbBoxPrice,
-      customItems: window.customItems,
-      grandTotal: (totalPanelPricePremium + totalStandPricePremium + inverterPrice + batteryPrice + dcCablePrice + acCablePrice + dbBoxPrice)
-    },
-    systemType: systemType,
-    totalWatts: totalWatts
-  };
-}
-
-function loadScriptOnce(src) {
-  return new Promise((resolve, reject) => {
-    if (document.querySelector('script[src="' + src + '"]')) {
-      resolve();
-      return;
-    }
-    const s = document.createElement('script');
-    s.src = src;
-    s.onload = resolve;
-    s.onerror = reject;
-    document.body.appendChild(s);
+    `;
+    container.appendChild(card);
   });
 }
 
-async function loadPdfLibs() {
-  if (window.html2canvas && window.jspdf) return;
-  await Promise.all([
-    loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
-    loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
-  ]);
-}
+function adjustIndexQty(appId, delta) {
+  const cur = idxAppQuantities[appId] || 0;
+  const next = Math.max(0, cur + delta);
+  idxAppQuantities[appId] = next;
 
-async function generatePdfFromInvoice(name, customerData) {
-  try {
-    await loadPdfLibs();
-  } catch (e) {
-    console.error('PDF libraries failed to load:', e);
-    return false;
+  const qtyEl = document.getElementById(`idx-qty-${appId}`);
+  if (qtyEl) qtyEl.textContent = next;
+
+  const appObj = IDX_APPLIANCES_DATA.find(a => a.id === appId);
+  const subEl = document.getElementById(`idx-sub-${appId}`);
+  if (subEl && appObj) {
+    subEl.textContent = next > 0 ? `${(next * appObj.defaultWatts).toLocaleString()} W` : '0 W';
   }
 
+  const card = document.getElementById(`idx-card-${appId}`);
+  if (card) {
+    card.classList.toggle('has-qty', next > 0);
+    const minusBtn = card.querySelector('.btn-calc-step');
+    if (minusBtn) minusBtn.disabled = (next === 0);
+  }
+
+  resetIndexGeneratedPdf();
+  calculateIndexTotals();
+}
+
+function resetIndexCalculator() {
+  if (confirm('Reset all appliance counts to zero?')) {
+    IDX_APPLIANCES_DATA.forEach(a => { idxAppQuantities[a.id] = 0; });
+    idxCustomAppliances = [];
+    renderIndexApplianceGrid();
+    resetIndexGeneratedPdf();
+    calculateIndexTotals();
+  }
+}
+
+function addIndexCustomAppliance() {
+  const nameEl = document.getElementById('idx-custom-name');
+  const wattEl = document.getElementById('idx-custom-watts');
+  const qtyEl = document.getElementById('idx-custom-qty');
+
+  const name = nameEl.value.trim();
+  const watts = parseInt(wattEl.value, 10);
+  const qty = parseInt(qtyEl.value, 10) || 1;
+
+  if (!name || !watts || watts <= 0) {
+    alert('Please enter a valid custom item name and watt rating.');
+    return;
+  }
+
+  idxCustomAppliances.push({ id: 'idx_c_' + Date.now(), nameEn: name, nameUr: 'کسٹم آئٹم', range: `${watts}W`, defaultWatts: watts, qty });
+  nameEl.value = ''; wattEl.value = ''; qtyEl.value = '1';
+  resetIndexGeneratedPdf();
+  calculateIndexTotals();
+}
+
+function removeIndexCustomAppliance(id) {
+  idxCustomAppliances = idxCustomAppliances.filter(c => c.id !== id);
+  resetIndexGeneratedPdf();
+  calculateIndexTotals();
+}
+
+function setIndexCategory(cat, btn) {
+  idxCategory = cat;
+  document.querySelectorAll('.calc-tab-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderIndexApplianceGrid();
+}
+
+function filterIndexAppliances() {
+  idxSearchTerm = document.getElementById('idx-calc-search').value.trim();
+  renderIndexApplianceGrid();
+}
+
+function calculateIndexTotals() {
+  let totalQty = 0;
+  let totalWatts = 0;
+  const selectedList = [];
+
+  IDX_APPLIANCES_DATA.forEach(app => {
+    const q = idxAppQuantities[app.id] || 0;
+    if (q > 0) {
+      const w = q * app.defaultWatts;
+      totalQty += q;
+      totalWatts += w;
+      selectedList.push({ nameEn: app.nameEn, nameUr: app.nameUr, range: app.range, defaultWatts: app.defaultWatts, qty: q, totalWatts: w });
+    }
+  });
+
+  idxCustomAppliances.forEach(c => {
+    const w = c.qty * c.defaultWatts;
+    totalQty += c.qty;
+    totalWatts += w;
+    selectedList.push({ nameEn: c.nameEn, nameUr: c.nameUr, range: c.range, defaultWatts: c.defaultWatts, qty: c.qty, totalWatts: w, isCustom: true, id: c.id });
+  });
+
+  const totalKw = (totalWatts / 1000).toFixed(2);
+
+  const sumQty = document.getElementById('idx-sum-qty');
+  const sumWatts = document.getElementById('idx-sum-watts');
+  if (sumQty) sumQty.innerHTML = `${totalQty} <small style="font-size:0.75rem;color:#64748B;">items</small>`;
+  if (sumWatts) sumWatts.innerHTML = `${totalWatts.toLocaleString()} <small style="font-size:0.75rem;color:#64748B;">W (${totalKw} kW)</small>`;
+
+  const tierEl = document.getElementById('idx-tier-badge');
+  const recInverter = document.getElementById('idx-rec-inverter');
+  const recPanels = document.getElementById('idx-rec-panels');
+  const recBattery = document.getElementById('idx-rec-battery');
+
+  let statusTier = 'No Appliances Selected';
+
+  if (tierEl && recInverter && recPanels && recBattery) {
+    if (totalWatts === 0) {
+      tierEl.className = 'calc-tier-badge tier-none';
+      tierEl.innerHTML = `<span>Status: No Appliances Selected</span><span>0.0 kW</span>`;
+      recInverter.textContent = 'Pending selection';
+      recPanels.textContent = 'Pending selection';
+      recBattery.textContent = 'Pending selection';
+    } else if (totalWatts <= 3000) {
+      tierEl.className = 'calc-tier-badge tier-green';
+      tierEl.innerHTML = `<span>Status: Small Load (Residential)</span><span>${totalKw} kW</span>`;
+      recInverter.textContent = '3.2 kW – 4.2 kW Solar Inverter';
+      const pc = Math.max(4, Math.ceil(totalWatts / 450));
+      recPanels.textContent = `${pc} × 585W Tier-1 Panels (${(pc * 0.585).toFixed(1)} kWp)`;
+      recBattery.textContent = '1x 24V/48V Lithium or 2x Tubular';
+      statusTier = 'Small Load';
+    } else if (totalWatts <= 6000) {
+      tierEl.className = 'calc-tier-badge tier-amber';
+      tierEl.innerHTML = `<span>Status: Medium Load (Standard Home)</span><span>${totalKw} kW</span>`;
+      recInverter.textContent = '6 kW Hybrid Inverter (Growatt / Solis)';
+      const pc = Math.max(8, Math.ceil(totalWatts / 480));
+      recPanels.textContent = `${pc} × 585W Bi-Facial Panels (${(pc * 0.585).toFixed(1)} kWp)`;
+      recBattery.textContent = '1x 48V 100Ah Lithium Wallmount';
+      statusTier = 'Medium Load';
+    } else {
+      tierEl.className = 'calc-tier-badge tier-red';
+      tierEl.innerHTML = `<span>Status: High Load (Heavy / Commercial)</span><span>${totalKw} kW</span>`;
+      recInverter.textContent = '10 kW – 15 kW Three-Phase Hybrid';
+      const pc = Math.max(14, Math.ceil(totalWatts / 500));
+      recPanels.textContent = `${pc} × 585W–620W Panels (${(pc * 0.585).toFixed(1)} kWp)`;
+      recBattery.textContent = '2x 48V 100Ah Lithium Battery Rack';
+      statusTier = 'High Load';
+    }
+  }
+
+  const prevEl = document.getElementById('idx-selected-preview');
+  if (prevEl) {
+    if (selectedList.length === 0) {
+      prevEl.innerHTML = `<div style="text-align:center;padding:10px;color:#64748B;">Please select at least one appliance.<div style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;font-size:0.88rem;margin-top:4px;">براہ کرم کم از کم ایک اپلائنس منتخب کریں</div></div>`;
+    } else {
+      prevEl.innerHTML = selectedList.map(item => `
+        <div class="calc-preview-row">
+          <span><b>${item.nameEn}</b> (${item.nameUr}) × ${item.qty} ${item.isCustom ? `<button onclick="removeIndexCustomAppliance('${item.id}')" style="border:none;background:none;color:#DC2626;cursor:pointer;">✕</button>` : ''}</span>
+          <b style="color:#0F172A;">${item.totalWatts.toLocaleString()} W</b>
+        </div>
+      `).join('');
+    }
+  }
+
+  return { totalQty, totalWatts, totalKw, statusTier, selectedList };
+}
+
+function resetIndexGeneratedPdf() {
+  idxQuotationData = null;
+  idxPdfBlob = null;
+  idxPdfBlobUrl = null;
+  idxPdfFile = null;
+  const pBtn = document.getElementById('idx-btn-preview');
+  const dBtn = document.getElementById('idx-btn-download');
+  const sBtn = document.getElementById('idx-btn-share');
+  const wBtn = document.getElementById('idx-btn-whatsapp');
+  const gBox = document.getElementById('idx-wa-guide');
+  if (pBtn) pBtn.disabled = true;
+  if (dBtn) dBtn.disabled = true;
+  if (sBtn) sBtn.disabled = true;
+  if (wBtn) wBtn.disabled = true;
+  if (gBox) gBox.classList.remove('show');
+}
+
+async function createIndexPdfDocument(data) {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF('p', 'mm', 'a4');
   const pageWidth = pdf.internal.pageSize.getWidth();
   const pageHeight = pdf.internal.pageSize.getHeight();
-  const margins = { top: 15, left: 15, right: 15, bottom: 15 };
+  const margins = { top: 14, left: 14, right: 14, bottom: 14 };
   const contentWidth = pageWidth - margins.left - margins.right;
-  
   let yPos = margins.top;
-  const lineHeight = 7;
-  const sectionGap = 8;
 
-  const addTable = (headers, rows) => {
-    const colWidth = contentWidth / headers.length;
-    const headerHeight = 8;
-    const rowHeight = 7;
-    
-    pdf.setFillColor(127, 29, 29);
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(10);
-    pdf.setFont(undefined, 'bold');
-    
-    headers.forEach((header, i) => {
-      pdf.rect(margins.left + (i * colWidth), yPos, colWidth, headerHeight, 'F');
-      pdf.text(header, margins.left + (i * colWidth) + 2, yPos + headerHeight - 2);
-    });
-    yPos += headerHeight + 1;
+  // Header Bar
+  pdf.setFillColor(11, 19, 43);
+  pdf.rect(0, 0, pageWidth, 5, 'F');
 
-    pdf.setTextColor(50, 50, 50);
-    pdf.setFont(undefined, 'normal');
-    pdf.setFontSize(9);
-    
-    rows.forEach((row, rowIdx) => {
-      let maxLines = 1;
-      row.forEach((cell, colIdx) => {
-        const lines = pdf.splitTextToSize(cell, colWidth - 4);
-        maxLines = Math.max(maxLines, lines.length);
-      });
-      
-      const currentRowHeight = rowHeight * maxLines;
-      
-      if (rowIdx % 2 === 0) {
-        pdf.setFillColor(248, 250, 252);
-        pdf.rect(margins.left, yPos, contentWidth, currentRowHeight, 'F');
-      }
-      
-      row.forEach((cell, colIdx) => {
-        const x = margins.left + (colIdx * colWidth) + 2;
-        const lines = pdf.splitTextToSize(cell, colWidth - 4);
-        lines.forEach((line, lineIdx) => {
-          pdf.text(line, x, yPos + 2 + (lineIdx * rowHeight));
-        });
-      });
-      
-      headers.forEach((_, colIdx) => {
-        pdf.rect(margins.left + (colIdx * colWidth), yPos, colWidth, currentRowHeight);
-      });
-      
-      yPos += currentRowHeight + 1;
-    });
-  };
+  // Logo Box
+  pdf.setFillColor(185, 28, 28);
+  pdf.roundedRect(margins.left, yPos, 18, 18, 3, 3, 'F');
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFont('helvetica', 'bold');
+  pdf.setFontSize(11);
+  pdf.text('BZ', margins.left + 5.5, yPos + 11.5);
 
-  const checkNewPage = (spaceNeeded) => {
-    if (yPos + spaceNeeded > pageHeight - margins.bottom) {
-      pdf.addPage();
-      yPos = margins.top;
-    }
-  };
-
-  const logoSize = 20;
-  const logoX = margins.left;
-  const logoY = yPos - 2;
-
-  try {
-    const logoDataUrl = await new Promise((resolve, reject) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = function() {
-        const canvas = document.createElement('canvas');
-        canvas.width = 80;
-        canvas.height = 80;
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#7F1D1D';
-        ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(0, 0, 80, 80, 12);
-        else ctx.rect(0, 0, 80, 80);
-        ctx.fill();
-        ctx.drawImage(img, 4, 4, 72, 72);
-        resolve(canvas.toDataURL('image/png'));
-      };
-      img.onerror = () => reject();
-      img.src = 'favicon.png';
-    });
-    pdf.addImage(logoDataUrl, 'PNG', logoX, logoY, logoSize, logoSize);
-  } catch(e) {
-    pdf.setFillColor(127, 29, 29);
-    pdf.rect(logoX, logoY, logoSize, logoSize, 'F');
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(8);
-    pdf.setFont(undefined, 'bold');
-    pdf.text('BZ', logoX + 4, logoY + 13);
-  }
-
-  pdf.setFontSize(18);
-  pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(127, 29, 29);
-  pdf.text('BIN ZAREEN SOLAR', margins.left + logoSize + 5, yPos + 6);
-  
-  pdf.setFontSize(9);
-  pdf.setFont(undefined, 'normal');
-  pdf.setTextColor(180, 28, 28);
-  pdf.text('Pvt. Ltd. — Solar & Power Solutions Pakistan', margins.left + logoSize + 5, yPos + 11);
-  
+  // Title
+  pdf.setTextColor(11, 19, 43);
+  pdf.setFontSize(16);
+  pdf.text('BIN ZAREEN SOLAR PVT LTD', margins.left + 22, yPos + 6);
+  pdf.setFontSize(8.5);
+  pdf.setFont('helvetica', 'normal');
+  pdf.setTextColor(185, 28, 28);
+  pdf.text('Pakistan Registered Solar Engineering & EPC Solutions | BinZareen.com', margins.left + 22, yPos + 11);
   pdf.setFontSize(8);
-  pdf.setTextColor(107, 114, 128);
-  pdf.text('Free Quotation Estimate | Tel: 03252053313', margins.left + logoSize + 5, yPos + 16);
+  pdf.setTextColor(100, 116, 139);
+  pdf.text('WhatsApp & Tel: +92 325 2053313 | Email: contact@binzareen.com', margins.left + 22, yPos + 16);
 
-  const today = new Date();
-  const dateStr = today.toLocaleDateString('en-PK', { day:'2-digit', month:'short', year:'numeric' });
+  // Reference Badge
+  pdf.setFillColor(254, 242, 242);
+  pdf.roundedRect(pageWidth - margins.right - 62, yPos, 62, 18, 2, 2, 'F');
+  pdf.setFontSize(7.5);
+  pdf.setFont('helvetica', 'bold');
+  pdf.setTextColor(185, 28, 28);
+  pdf.text('ESTIMATE QUOTATION', pageWidth - margins.right - 60, yPos + 5);
   pdf.setFontSize(8);
-  pdf.setTextColor(107, 114, 128);
-  pdf.text(`Date: ${dateStr}`, pageWidth - margins.right - 35, yPos + 6);
-  
-  yPos += logoSize + 6;
+  pdf.setFont('helvetica', 'normal');
+  pdf.setTextColor(51, 65, 85);
+  pdf.text(`No: ${data.quotationNumber}`, pageWidth - margins.right - 60, yPos + 10);
+  pdf.text(`Date: ${data.dateFormatted}`, pageWidth - margins.right - 60, yPos + 14.5);
 
-  pdf.setDrawColor(127, 29, 29);
-  pdf.setLineWidth(0.8);
+  yPos += 26;
+  pdf.setDrawColor(185, 28, 28);
+  pdf.setLineWidth(0.7);
   pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
-  pdf.setLineWidth(0.2);
   yPos += 6;
 
-  checkNewPage(20);
-  pdf.setFillColor(254, 242, 242);
-  pdf.rect(margins.left, yPos - 2, contentWidth, 6, 'F');
-  pdf.setFontSize(11);
-  pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(127, 29, 29);
-  pdf.text('CUSTOMER DETAILS', margins.left + 2, yPos + 2);
-  yPos += 8;
-
-  pdf.setFontSize(9);
-  pdf.setFont(undefined, 'normal');
-  pdf.setTextColor(50, 50, 50);
-  pdf.text(`Name:        ${customerData.name}`, margins.left + 2, yPos);
-  yPos += lineHeight;
-  pdf.text(`WhatsApp:    ${customerData.phone}`, margins.left + 2, yPos);
-  yPos += lineHeight;
-  if (customerData.city) {
-    pdf.text(`City:        ${customerData.city}`, margins.left + 2, yPos);
-    yPos += lineHeight;
-  }
-  yPos += sectionGap;
-
-  checkNewPage(20);
-  pdf.setFillColor(254, 242, 242);
-  pdf.rect(margins.left, yPos - 2, contentWidth, 6, 'F');
-  pdf.setFontSize(11);
-  pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(127, 29, 29);
-  pdf.text('SYSTEM SUMMARY', margins.left + 2, yPos + 2);
-  yPos += 8;
-
-  const inv = window._lastInvoiceData;
-  pdf.setFontSize(9);
-  pdf.setFont(undefined, 'normal');
-  pdf.setTextColor(50, 50, 50);
-  
-  const systemTypeLabel = inv.systemType === 'hybrid' ? 'Hybrid (With Battery)' : 'Daytime (Without Battery)';
-  pdf.text(`System Type:      ${systemTypeLabel}`, margins.left + 2, yPos);
-  yPos += lineHeight;
-  pdf.text(`Total Load:       ${inv.totalWatts} Watts`, margins.left + 2, yPos);
-  yPos += lineHeight;
-  pdf.text(`System Size:      ${(inv.totalWatts / 1000).toFixed(1)} kW`, margins.left + 2, yPos);
-  yPos += lineHeight;
-  pdf.text(`Panels Required:  ${inv.optionA.panelsNeeded} panels`, margins.left + 2, yPos);
-  yPos += sectionGap + 2;
-
-  checkNewPage(30);
-  pdf.setFillColor(254, 242, 242);
-  pdf.rect(margins.left, yPos - 2, contentWidth, 6, 'F');
-  pdf.setFontSize(11);
-  pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(127, 29, 29);
-  pdf.text('DETAILED QUOTATION', margins.left + 2, yPos + 2);
-  yPos += 8;
-
-  const tableRows = [
-    ['Description', 'Qty', 'Unit Price', 'Total'],
-    [`Solar Panels (${inv.optionA.panelName})`, `${inv.optionA.panelsNeeded}x`, `Rs. ${Math.round(inv.optionA.panelPrice / inv.optionA.panelsNeeded).toLocaleString('en-PK')}`, `Rs. ${inv.optionA.panelPrice.toLocaleString('en-PK')}`],
-    [`Structure/Stand (${inv.optionA.standType})`, `${inv.optionA.panelsNeeded}x`, `Rs. ${Math.round(inv.optionA.standPrice / inv.optionA.panelsNeeded).toLocaleString('en-PK')}`, `Rs. ${inv.optionA.standPrice.toLocaleString('en-PK')}`],
-    [`Inverter (${inv.optionA.inverterName})`, '1x', `Rs. ${inv.optionA.inverterPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.inverterPrice.toLocaleString('en-PK')}`],
-  ];
-
-  if (inv.systemType === 'hybrid') {
-    tableRows.push([`Battery (${inv.optionA.batteryName})`, '1x', `Rs. ${inv.optionA.batteryPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.batteryPrice.toLocaleString('en-PK')}`]);
-  }
-
-  tableRows.push(
-    [`DC Cable (10m)`, '1x', `Rs. ${inv.optionA.dcPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.dcPrice.toLocaleString('en-PK')}`],
-    [`AC Cable (10m)`, '1x', `Rs. ${inv.optionA.acPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.acPrice.toLocaleString('en-PK')}`],
-    [`DB Box & Protection`, '1x', `Rs. ${inv.optionA.dbPrice.toLocaleString('en-PK')}`, `Rs. ${inv.optionA.dbPrice.toLocaleString('en-PK')}`]
-  );
-
-  if (inv.optionA.customItems && inv.optionA.customItems.length > 0) {
-    inv.optionA.customItems.forEach(item => {
-      tableRows.push([item.name, `${item.qty}x`, `Rs. ${item.price.toLocaleString('en-PK')}`, `Rs. ${(item.qty * item.price).toLocaleString('en-PK')}`]);
-    });
-  }
-
-  addTable(tableRows[0], tableRows.slice(1));
-
-  checkNewPage(20);
-  yPos += 4;
-  pdf.setFillColor(127, 29, 29);
-  pdf.rect(margins.left, yPos - 2, contentWidth, 10, 'F');
-  pdf.setFontSize(12);
-  pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(255, 255, 255);
-  pdf.text('ESTIMATED TOTAL:', margins.left + 4, yPos + 4);
-  pdf.text(`Rs. ${inv.optionA.grandTotal.toLocaleString('en-PK')}`, pageWidth - margins.right - 48, yPos + 4);
-  yPos += 14;
-
-  if (customerData.note) {
-    checkNewPage(15);
-    pdf.setFillColor(254, 242, 242);
-    pdf.rect(margins.left, yPos - 2, contentWidth, 6, 'F');
-    pdf.setFontSize(10);
-    pdf.setFont(undefined, 'bold');
-    pdf.setTextColor(127, 29, 29);
-    pdf.text('CUSTOMER NOTES:', margins.left + 2, yPos + 2);
-    yPos += 8;
-    
-    pdf.setFontSize(9);
-    pdf.setFont(undefined, 'normal');
-    pdf.setTextColor(50, 50, 50);
-    const noteLines = pdf.splitTextToSize(customerData.note, contentWidth - 4);
-    noteLines.forEach(line => {
-      pdf.text(line, margins.left + 2, yPos);
-      yPos += lineHeight;
-    });
-    yPos += sectionGap;
-  }
-
-  checkNewPage(30);
-  pdf.setDrawColor(226, 232, 240);
-  pdf.setLineWidth(0.5);
-  pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
-  yPos += 5;
-
-  pdf.setFontSize(9);
-  pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(127, 29, 29);
-  pdf.text('NEXT STEPS:', margins.left, yPos);
-  yPos += 5;
-
+  // Customer Card
+  pdf.setFillColor(248, 250, 252);
+  pdf.roundedRect(margins.left, yPos, contentWidth, 22, 2, 2, 'F');
+  pdf.setFontSize(8.5);
+  pdf.setFont('helvetica', 'bold');
+  pdf.setTextColor(11, 19, 43);
+  pdf.text('CUSTOMER SPECIFICATIONS', margins.left + 6, yPos + 5.5);
   pdf.setFontSize(8);
-  pdf.setFont(undefined, 'normal');
-  pdf.setTextColor(107, 114, 128);
-  const steps = [
-    '* Review this quotation carefully',
-    '* Contact us for site survey and installation date',
-    '* We provide 5-year warranty on all systems',
-    '* Free after-sales support and maintenance'
-  ];
-  steps.forEach(step => {
-    pdf.text(step, margins.left, yPos);
-    yPos += 4.5;
+  pdf.setFont('helvetica', 'normal');
+  pdf.setTextColor(51, 65, 85);
+  pdf.text(`Customer Name: ${data.customer.name}`, margins.left + 6, yPos + 11.5);
+  pdf.text(`City: ${data.customer.city}, Pakistan`, margins.left + 6, yPos + 17);
+  pdf.text(`WhatsApp: ${data.customer.phone}`, margins.left + 90, yPos + 11.5);
+  pdf.text(`Preferred Time: ${data.customer.contactTime}`, margins.left + 90, yPos + 17);
+
+  yPos += 28;
+
+  // Table Header
+  pdf.setFontSize(9);
+  pdf.setFont('helvetica', 'bold');
+  pdf.setTextColor(185, 28, 28);
+  pdf.text('ELECTRICAL LOAD BREAKDOWN (SELECTED APPLIANCES)', margins.left, yPos);
+  yPos += 4;
+
+  const colWidths = [10, 58, 36, 26, 20, 32];
+  const tableHeaders = ['Sr.', 'Appliance Description', 'Urdu Name', 'Est. Range', 'Qty', 'Total Watts'];
+  pdf.setFillColor(11, 19, 43);
+  pdf.rect(margins.left, yPos, contentWidth, 7, 'F');
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFontSize(7.5);
+  pdf.setFont('helvetica', 'bold');
+
+  let curX = margins.left;
+  tableHeaders.forEach((h, idx) => {
+    pdf.text(h, curX + 2, yPos + 4.8);
+    curX += colWidths[idx];
+  });
+  yPos += 7;
+
+  // Rows
+  pdf.setTextColor(51, 65, 85);
+  pdf.setFontSize(7.5);
+  pdf.setFont('helvetica', 'normal');
+
+  data.selectedList.forEach((item, idx) => {
+    if (idx % 2 === 0) {
+      pdf.setFillColor(248, 250, 252);
+      pdf.rect(margins.left, yPos, contentWidth, 6.2, 'F');
+    }
+    curX = margins.left;
+    pdf.text(String(idx + 1), curX + 2, yPos + 4.2); curX += colWidths[0];
+    pdf.setFont('helvetica', 'bold');
+    pdf.text(item.nameEn.substring(0, 32), curX + 2, yPos + 4.2); curX += colWidths[1];
+    pdf.setFont('helvetica', 'normal');
+    pdf.text(item.nameUr ? item.nameUr.substring(0, 24) : '—', curX + 2, yPos + 4.2); curX += colWidths[2];
+    pdf.text(item.range, curX + 2, yPos + 4.2); curX += colWidths[3];
+    pdf.text(`${item.qty}x`, curX + 6, yPos + 4.2); curX += colWidths[4];
+    pdf.setFont('helvetica', 'bold');
+    pdf.setTextColor(185, 28, 28);
+    pdf.text(`${item.totalWatts.toLocaleString()} W`, curX + 4, yPos + 4.2);
+    pdf.setTextColor(51, 65, 85);
+    pdf.setFont('helvetica', 'normal');
+
+    yPos += 6.2;
   });
 
-  yPos += 5;
-  pdf.setFontSize(9);
-  pdf.setFont(undefined, 'bold');
-  pdf.setTextColor(180, 28, 28);
-  pdf.text('Call/WhatsApp: 03252053313  |  Email: binzareensolar@gmail.com', margins.left, yPos);
+  // Table Total Footer
+  yPos += 2;
+  pdf.setFillColor(185, 28, 28);
+  pdf.roundedRect(margins.left, yPos, contentWidth, 8.5, 1.5, 1.5, 'F');
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFontSize(8.5);
+  pdf.setFont('helvetica', 'bold');
+  pdf.text(`TOTAL CALCULATED HOME LOAD:`, margins.left + 4, yPos + 5.5);
+  pdf.text(`${data.totalWatts.toLocaleString()} Watts (${data.totalKw} kW)`, margins.left + 78, yPos + 5.5);
+  pdf.text(`Tier: ${data.statusTier}`, margins.left + contentWidth - 45, yPos + 5.5);
+
+  yPos += 14;
+
+  // System Recommendations
+  pdf.setFillColor(248, 250, 252);
+  pdf.roundedRect(margins.left, yPos, contentWidth, 20, 2, 2, 'F');
+  pdf.setFontSize(8.5);
+  pdf.setFont('helvetica', 'bold');
+  pdf.setTextColor(11, 19, 43);
+  pdf.text('RECOMMENDED SOLAR SIZING', margins.left + 6, yPos + 5);
+  pdf.setFontSize(7.5);
+  pdf.setFont('helvetica', 'normal');
+  pdf.setTextColor(51, 65, 85);
+  pdf.text(`• Inverter: ${document.getElementById('idx-rec-inverter').textContent}`, margins.left + 6, yPos + 10);
+  pdf.text(`• Panels: ${document.getElementById('idx-rec-panels').textContent}`, margins.left + 6, yPos + 15);
+  pdf.text(`• Battery: ${document.getElementById('idx-rec-battery').textContent}`, margins.left + 105, yPos + 10);
+
+  yPos += 24;
+
+  // Bilingual Disclaimer Notice
+  pdf.setFillColor(254, 242, 242);
+  pdf.roundedRect(margins.left, yPos, contentWidth, 18, 2, 2, 'F');
+  pdf.setFontSize(7);
+  pdf.setFont('helvetica', 'bold');
+  pdf.setTextColor(185, 28, 28);
+  pdf.text('OFFICIAL SIZING NOTICE / اہم ہدایات:', margins.left + 4, yPos + 4.5);
+  pdf.setFontSize(6.8);
+  pdf.setFont('helvetica', 'normal');
+  pdf.setTextColor(51, 65, 85);
+  pdf.text('This is an approximate load estimate. Final battery, inverter and solar panel sizing will be confirmed by our solar experts after reviewing your usage.', margins.left + 4, yPos + 8.5);
+  pdf.text('یہ ایک تخمینہ لوڈ ہے، بیٹری، انورٹر اور سولر پینل کا حتمی سائز ہمارے سولر ماہرین جائزہ لینے کے بعد طے کریں گے۔', margins.left + 4, yPos + 13);
+
+  // Footer
+  const footerY = pageHeight - margins.bottom - 4;
+  pdf.setDrawColor(226, 232, 240);
+  pdf.setLineWidth(0.3);
+  pdf.line(margins.left, footerY - 4, pageWidth - margins.right, footerY - 4);
+  pdf.setFontSize(7);
+  pdf.setTextColor(148, 163, 184);
+  pdf.text(`Bin Zareen Solar Pvt Ltd Pakistan | Helpline: 0325-2053313 | Quotation #${data.quotationNumber}`, margins.left, footerY);
+
+  const blob = pdf.output('blob');
+  const filename = `BinZareen-Solar-Quotation-${data.quotationNumber}.pdf`;
+  const file = new File([blob], filename, { type: 'application/pdf' });
+  return { blob, file, filename };
+}
+
+async function handleIndexFormSubmit(e) {
+  if (e) e.preventDefault();
+  const totals = calculateIndexTotals();
+  if (totals.totalWatts === 0) {
+    alert('Please select at least one appliance before generating quotation.\nبراہ کرم کم از کم ایک اپلائنس منتخب کریں۔');
+    return;
+  }
+
+  const name = document.getElementById('idx-cust-name').value.trim();
+  const city = document.getElementById('idx-cust-city').value.trim();
+  const rawPhone = document.getElementById('idx-cust-phone').value.trim();
+
+  if (!name || !city) {
+    alert('Please enter your Name and City.');
+    return;
+  }
+
+  let cleanedPhone = rawPhone.replace(/\D/g, '');
+  if (cleanedPhone.startsWith('0092')) cleanedPhone = cleanedPhone.substring(4);
+  else if (cleanedPhone.startsWith('92')) cleanedPhone = cleanedPhone.substring(2);
+  else if (cleanedPhone.startsWith('0')) cleanedPhone = cleanedPhone.substring(1);
+
+  if (!/^3\d{9}$/.test(cleanedPhone)) {
+    alert('Please enter a valid Pakistani WhatsApp number (e.g. 03001234567 or 3001234567).');
+    return;
+  }
+
+  const genBtn = document.getElementById('idx-btn-generate');
+  genBtn.disabled = true;
+  genBtn.textContent = 'Generating PDF...';
 
   try {
-    const filename = `BinZareen_Solar_Quotation_${name.replace(/\s+/g, '_')}_${new Date().getTime()}.pdf`;
-    pdf.save(filename);
-    return true;
-  } catch (e) {
-    console.error('Error saving PDF:', e);
-    return false;
+    const now = new Date();
+    const qNum = `BZ-SOLAR-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${Math.floor(1000+Math.random()*9000)}`;
+    const dateFormatted = now.toLocaleDateString('en-PK', { day: '2-digit', month: 'short', year: 'numeric' });
+
+    const payload = {
+      quotationNumber: qNum,
+      dateFormatted,
+      customer: {
+        name,
+        city,
+        phone: `92${cleanedPhone}`,
+        contactTime: document.getElementById('idx-cust-time').value
+      },
+      ...totals
+    };
+
+    const { blob, file, filename } = await createIndexPdfDocument(payload);
+    idxQuotationData = payload;
+    idxPdfBlob = blob;
+    idxPdfFile = file;
+    if (idxPdfBlobUrl) URL.revokeObjectURL(idxPdfBlobUrl);
+    idxPdfBlobUrl = URL.createObjectURL(blob);
+
+    document.getElementById('idx-btn-preview').disabled = false;
+    document.getElementById('idx-btn-download').disabled = false;
+    document.getElementById('idx-btn-share').disabled = false;
+    document.getElementById('idx-btn-whatsapp').disabled = false;
+
+    triggerIndexPdfDownload();
+    alert(`Quotation ${qNum} generated and downloaded successfully!`);
+  } catch (err) {
+    console.error('PDF error:', err);
+    alert('Could not generate PDF. Please try again.');
+  } finally {
+    genBtn.disabled = false;
+    genBtn.textContent = '📄 Re-Generate PDF Quotation';
   }
 }
 
-async function submitInvoiceQuotation() {
-  const name  = (document.getElementById('calc-name')  || {}).value || '';
-  const phone = (document.getElementById('calc-phone') || {}).value || '';
-  const city  = (document.getElementById('calc-city')  || {}).value || '';
-  const note  = (document.getElementById('calc-note')  || {}).value || '';
+function openIndexPdfPreview() {
+  if (!idxPdfBlobUrl) return;
+  window.open(idxPdfBlobUrl, '_blank');
+}
 
-  if (!name.trim()) { alert('⚠️ Apna naam zaroor bharain!'); return; }
-  if (!phone.trim()) { alert('⚠️ WhatsApp number zaroor bharain!'); return; }
+function triggerIndexPdfDownload() {
+  if (!idxPdfBlob || !idxQuotationData) return;
+  const a = document.createElement('a');
+  a.href = idxPdfBlobUrl;
+  a.download = `BinZareen-Solar-Quotation-${idxQuotationData.quotationNumber}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
 
-  const inv = window._lastInvoiceData;
-  if (!inv) { alert('⚠️ Pehle appliances select karein!'); return; }
-
-  // ── 1. WHATSAPP SEEDHA OPEN KAR (no delay) ──
-  const systemTypeLabelWA = inv.systemType === 'hybrid' ? 'Hybrid (Battery)' : 'Daytime (No Battery)';
-  let msg = '\u2600\ufe0f *BIN ZAREEN SOLAR* \u2014 Free Quotation Request\n';
-  msg += '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n';
-  msg += `\ud83d\udc64 *Naam:* ${name}\n`;
-  msg += `\ud83d\udcf1 *WhatsApp:* ${phone}\n`;
-  if (city) msg += `\ud83d\udccd *Shehar:* ${city}\n`;
-  msg += '\n';
-  msg += `\u26a1 *System Type:* ${systemTypeLabelWA}\n`;
-  msg += `\ud83d\udcca *Total Load:* ${inv.totalWatts} W\n`;
-  msg += `\u2600\ufe0f *Panels:* ${inv.optionA.panelsNeeded}x ${inv.optionA.panelName}\n`;
-  msg += `\ud83d\udd27 *Inverter:* ${inv.optionA.inverterName}\n`;
-  msg += `\ud83d\udcd0 *Stand:* ${inv.optionA.standType}\n`;
-  msg += '\n';
-  msg += `\ud83d\udcb0 *Estimated Total:* Rs. ${inv.optionA.grandTotal.toLocaleString('en-PK')}\n\n`;
-  if (note) msg += `\ud83d\udcdd *Note:* ${note}\n\n`;
-  msg += '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n';
-  msg += '_Shukriya! Hum jaldi contact karengy_ \ud83d\ude4f';
-
-  const whatsappLink = 'https://wa.me/923252053313?text=' + encodeURIComponent(msg);
-  window.open(whatsappLink, '_blank');
-
-  // ── 2. PDF GENERATE KAR (logo ke saath) ──
-  try {
-    await generatePdfFromInvoice(name, { name, phone, city, note });
-  } catch(e) {
-    console.error('PDF error:', e);
+async function handleIndexNativeShare() {
+  if (!idxPdfFile) return;
+  const shareData = { files: [idxPdfFile], title: 'Bin Zareen Solar Quotation', text: `Solar quotation ${idxQuotationData.quotationNumber}` };
+  if (navigator.canShare && navigator.canShare({ files: [idxPdfFile] })) {
+    try {
+      await navigator.share(shareData);
+    } catch (e) {
+      if (e.name !== 'AbortError') console.warn(e);
+    }
+  } else {
+    alert('Native file share is not supported on this device. Please download the PDF and attach it manually in WhatsApp.');
   }
+}
+
+async function handleIndexSendWhatsApp() {
+  if (!idxQuotationData || !idxPdfBlob) {
+    await handleIndexFormSubmit();
+    if (!idxQuotationData) return;
+  }
+
+  triggerIndexPdfDownload();
+
+  const qNum = idxQuotationData.quotationNumber;
+  const message = [
+    "Hello Bin Zareen Solar,",
+    "",
+    "I have generated my solar load quotation.",
+    `Quotation No: ${qNum}`,
+    "",
+    "Please find the attached PDF quotation."
+  ].join("\n");
+
+  const waUrl = `https://wa.me/923252053313?text=${encodeURIComponent(message)}`;
+  const guide = document.getElementById('idx-wa-guide');
+  if (guide) guide.classList.add('show');
+
+  setTimeout(() => {
+    window.open(waUrl, '_blank');
+  }, 350);
+}
+
+function initModernCalculator() {
+  renderIndexApplianceGrid();
+  calculateIndexTotals();
 }
 
 // ============================================================
@@ -2465,9 +2449,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   try {
-    buildApplianceGrid();
+    initModernCalculator();
   } catch (e) {
-    console.error('Error building appliance grid:', e);
+    console.error('Error initializing modern calculator:', e);
   }
 });
 
