@@ -2,21 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Home Load Calculator & Solar Quotation — Bin Zareen Solar Pakistan</title>
   <link rel="icon" href="favicon.png">
-
-  <!-- Google Fonts: Outfit, Plus Jakarta Sans, Playfair Display & Noto Nastaliq Urdu -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- jsPDF for 100% Client-Side PDF Generation -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
   <style>
     :root {
-      --navy-dark: #0B132B;
+      --navy-dark: #090E1F;
       --navy-deep: #0F172A;
       --navy-card: #1E293B;
       --red-deep: #7F1D1D;
@@ -34,38 +29,23 @@
       --gray-text: #64748B;
       --gray-dark: #334155;
       --white: #FFFFFF;
-      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
       --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
       --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
-      --shadow-red: 0 8px 24px rgba(220, 38, 38, 0.25);
-      --shadow-wa: 0 8px 24px rgba(37, 211, 102, 0.35);
       --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--gray-bg);
+      background-color: #F1F5F9;
       color: var(--gray-dark);
-      line-height: 1.6;
+      line-height: 1.5;
       overflow-x: hidden;
+      padding-bottom: 75px;
     }
-
-    .urdu-text {
-      font-family: 'Noto Nastaliq Urdu', serif;
-      direction: rtl;
-      unicode-bidi: isolate;
-    }
-
-    /* HEADER & NAV */
     .top-bar {
       background: var(--navy-dark);
       color: #94A3B8;
@@ -74,23 +54,17 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .top-bar .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
-    .top-bar a {
-      color: #F8FAFC;
-      text-decoration: none;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .top-bar a:hover {
-      color: var(--amber-gold);
-    }
+    .top-bar a { color: #F8FAFC; text-decoration: none; transition: var(--transition); display: inline-flex; align-items: center; gap: 6px; }
+    .top-bar a:hover { color: var(--amber-gold); }
 
     .main-nav {
       background: var(--white);
@@ -103,101 +77,64 @@
     .nav-container {
       max-width: 1320px;
       margin: 0 auto;
-      padding: 12px 24px;
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-    }
+    .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo-img-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--red-deep), var(--red-bright));
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(185, 28, 28, 0.3);
-      padding: 4px;
+      border: 2px solid var(--red-bright);
+      box-shadow: 0 0 0 2px var(--red-light);
     }
-    .logo-img-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .brand-title {
+    .logo-img-box img { width: 100%; height: 100%; object-fit: contain; }
+    .brand-text h1 {
       font-family: 'Outfit', sans-serif;
-      font-weight: 800;
-      font-size: 1.35rem;
-      color: var(--navy-deep);
-      line-height: 1.15;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--red-mid);
+      line-height: 1.1;
     }
-    .brand-title span {
-      color: var(--red-bright);
-    }
-    .brand-subtitle {
+    .brand-text p {
       font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      color: var(--red-bright);
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--gray-text);
-      display: block;
     }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .btn-nav-home {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      border-radius: var(--radius-sm);
-      background: var(--gray-bg);
-      color: var(--navy-deep);
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-decoration: none;
-      border: 1px solid var(--gray-border);
-      transition: var(--transition);
-    }
-    .btn-nav-home:hover {
-      background: var(--red-pale);
-      color: var(--red-mid);
-      border-color: var(--red-light);
-    }
-    .btn-nav-wa {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 18px;
-      border-radius: var(--radius-sm);
-      background: var(--green-wa);
-      color: var(--white);
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+    .nav-link {
+      padding: 8px 14px;
       font-size: 0.88rem;
       font-weight: 700;
+      color: var(--gray-dark);
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+      border-radius: 8px;
       transition: var(--transition);
     }
-    .btn-nav-wa:hover {
-      background: #20BA56;
-      transform: translateY(-1px);
+    .nav-link:hover { background: var(--red-pale); color: var(--red-mid); }
+    .btn-nav-quote {
+      background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
+      color: white !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
     }
 
-    /* HERO SECTION */
     .hero-banner {
       background: linear-gradient(135deg, #090E1F 0%, #151F38 45%, #7F1D1D 90%, #B91C1C 100%);
-      color: var(--white);
-      padding: 44px 0 40px;
+      color: white;
+      padding: 44px 0 36px;
       position: relative;
       overflow: hidden;
     }
@@ -210,228 +147,156 @@
     .hero-container {
       max-width: 1320px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;
       position: relative;
       z-index: 1;
-      text-align: center;
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(10px);
-      padding: 6px 18px;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: 100px;
-      font-size: 0.82rem;
+      padding: 5px 14px;
+      font-size: 0.8rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
       color: #FEE2E2;
-      margin-bottom: 16px;
-    }
-    .hero-urdu-title {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 700;
-      color: #FFFFFF;
-      line-height: 1.5;
-      margin-bottom: 6px;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.4);
-    }
-    .hero-eng-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      font-weight: 700;
-      color: #FDE047;
-      letter-spacing: 0.5px;
       margin-bottom: 12px;
     }
-    .hero-desc {
-      font-size: 0.98rem;
-      color: rgba(255, 255, 255, 0.85);
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .hero-sub {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.96rem;
       max-width: 720px;
-      margin: 0 auto 20px;
-      line-height: 1.6;
-    }
-    .hero-steps-ribbon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 100px;
-      padding: 8px 24px;
-      font-size: 0.82rem;
-      color: #E2E8F0;
-    }
-    .hero-step-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .hero-step-num {
-      width: 20px;
-      height: 20px;
-      background: var(--red-bright);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 800;
+      line-height: 1.5;
     }
 
-    /* MAIN SINGLE PAGE LAYOUT */
-    .main-app-section {
+    .app-container {
       max-width: 1320px;
-      margin: -24px auto 60px;
-      padding: 0 24px;
-      position: relative;
-      z-index: 2;
+      margin: 0 auto;
+      padding: 30px 20px 50px;
     }
-    .app-layout-grid {
+    .calculator-layout {
       display: grid;
-      grid-template-columns: 1fr 440px;
-      gap: 28px;
+      grid-template-columns: 1fr 430px;
+      gap: 26px;
       align-items: start;
     }
 
-    /* LEFT COLUMN: APPLIANCE SELECTION */
     .appliances-panel {
       background: var(--white);
       border-radius: var(--radius-lg);
       border: 1.5px solid var(--gray-border);
-      box-shadow: var(--shadow-md);
-      padding: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
     }
-    .panel-header {
+    .panel-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 20px;
+      gap: 12px;
       padding-bottom: 16px;
       border-bottom: 1.5px solid var(--gray-border);
+      margin-bottom: 18px;
     }
-    .panel-title-wrap h2 {
+    .panel-title h2 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.45rem;
-      font-weight: 700;
+      font-size: 1.35rem;
+      font-weight: 800;
       color: var(--navy-deep);
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
-    .panel-title-wrap p {
-      font-size: 0.86rem;
+    .panel-title p {
+      font-size: 0.84rem;
       color: var(--gray-text);
       margin-top: 2px;
     }
-    .selection-quick-tools {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .btn-tool-reset {
+    .btn-reset {
       background: var(--red-pale);
-      color: var(--red-bright);
+      color: var(--red-mid);
       border: 1px solid var(--red-light);
       padding: 7px 14px;
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       transition: var(--transition);
     }
-    .btn-tool-reset:hover {
-      background: #FEE2E2;
-      transform: translateY(-1px);
-    }
+    .btn-reset:hover { background: var(--red-mid); color: white; }
 
-    /* FILTER TABS & SEARCH */
-    .controls-bar {
+    .search-filter-box {
+      margin-bottom: 20px;
       display: flex;
+      flex-direction: column;
       gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
     }
-    .search-box {
-      flex: 1;
-      min-width: 220px;
-      position: relative;
-    }
-    .search-box input {
+    .search-bar { position: relative; width: 100%; }
+    .search-bar input {
       width: 100%;
       padding: 10px 14px 10px 38px;
       border: 1.5px solid var(--gray-border);
       border-radius: var(--radius-sm);
-      font-size: 0.88rem;
-      font-family: inherit;
-      background: var(--gray-bg);
-      transition: var(--transition);
-    }
-    .search-box input:focus {
+      font-size: 0.9rem;
       outline: none;
+      transition: var(--transition);
+      background: #F8FAFC;
+    }
+    .search-bar input:focus {
       border-color: var(--red-mid);
-      background: var(--white);
+      background: white;
       box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
     }
-    .search-icon-svg {
+    .search-icon {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--gray-text);
+      color: #94A3B8;
       pointer-events: none;
     }
     .category-pills {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
       padding-bottom: 4px;
-      scrollbar-width: thin;
     }
-    .category-pill {
-      background: var(--gray-bg);
-      color: var(--gray-dark);
-      border: 1px solid var(--gray-border);
-      padding: 8px 14px;
+    .cat-pill {
+      background: #F8FAFC;
+      border: 1.5px solid var(--gray-border);
+      padding: 6px 14px;
       border-radius: 100px;
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 700;
+      color: var(--gray-dark);
       cursor: pointer;
       white-space: nowrap;
       transition: var(--transition);
     }
-    .category-pill:hover {
-      background: #EDF2F7;
-      border-color: #CBD5E1;
-    }
-    .category-pill.active {
+    .cat-pill:hover { border-color: var(--navy-deep); }
+    .cat-pill.active {
       background: var(--navy-deep);
-      color: var(--white);
+      color: white;
       border-color: var(--navy-deep);
     }
 
-    /* APPLIANCE GRID */
     .appliances-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 14px;
     }
     .appliance-card {
-      background: var(--white);
+      background: white;
       border: 1.5px solid var(--gray-border);
       border-radius: var(--radius-md);
-      padding: 16px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -440,882 +305,313 @@
     }
     .appliance-card:hover {
       border-color: #CBD5E1;
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       box-shadow: var(--shadow-sm);
     }
-    .appliance-card.has-qty {
+    .appliance-card.active-selected {
       border-color: var(--red-mid);
       background: #FFFDFD;
-      box-shadow: 0 6px 18px rgba(185, 28, 28, 0.08);
+      box-shadow: 0 4px 14px rgba(185, 28, 28, 0.08);
     }
 
-    .app-top-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .app-icon-badge {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--red-pale);
-      border: 1px solid var(--red-light);
-      color: var(--red-mid);
+    .card-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+    .app-thumbnail {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: #F8FAFC;
+      border: 1px solid var(--gray-border);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       flex-shrink: 0;
-      transition: var(--transition);
     }
-    .appliance-card.has-qty .app-icon-badge {
-      background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
-      color: var(--white);
-      border-color: transparent;
-      box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
-    }
-    .app-titles {
-      flex: 1;
-      min-width: 0;
-    }
-    .app-name-en {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      line-height: 1.3;
-    }
-    .app-name-ur {
-      font-size: 0.85rem;
-      color: var(--red-mid);
-      font-weight: 600;
-      display: block;
-      margin-top: 1px;
-    }
-
-    .app-specs-row {
+    .app-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+    .app-thumbnail .icon-fallback { display: none; color: var(--red-mid); }
+    .appliance-card.active-selected .app-thumbnail { border-color: var(--red-light); }
+    .app-info { flex: 1; min-width: 0; }
+    .app-name { font-size: 0.88rem; font-weight: 800; color: var(--navy-deep); line-height: 1.25; margin-bottom: 2px; }
+    .app-category-tag { font-size: 0.7rem; font-weight: 600; color: var(--gray-text); text-transform: uppercase; letter-spacing: 0.4px; }
+    .wattage-badge-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--gray-bg);
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 0.76rem;
-      color: var(--gray-text);
-      margin-bottom: 14px;
-    }
-    .app-specs-row strong {
+      background: #F8FAFC;
+      border: 1px solid #EEF2F6;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.74rem;
       color: var(--gray-dark);
+      margin-bottom: 10px;
     }
-    .app-default-watt {
-      color: var(--navy-deep);
-      font-weight: 700;
-    }
+    .wattage-badge-row b { color: var(--navy-deep); }
 
-    .app-bottom-stepper {
+    .card-bottom-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      padding-top: 10px;
+      padding-top: 8px;
       border-top: 1px dashed var(--gray-border);
     }
-    .stepper-controls {
+    .stepper-box {
       display: inline-flex;
       align-items: center;
-      background: var(--gray-bg);
       border: 1.5px solid var(--gray-border);
-      border-radius: 10px;
+      border-radius: 8px;
+      background: #F8FAFC;
       overflow: hidden;
     }
-    .btn-step {
-      width: 34px;
-      height: 34px;
-      background: var(--white);
+    .step-btn {
+      width: 30px;
+      height: 30px;
       border: none;
+      background: white;
       color: var(--navy-deep);
-      font-size: 1.1rem;
       font-weight: 800;
+      font-size: 1rem;
       cursor: pointer;
+      transition: background 0.15s;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition);
     }
-    .btn-step:hover:not(:disabled) {
-      background: var(--red-mid);
-      color: var(--white);
-    }
-    .btn-step:disabled {
-      color: #CBD5E1;
-      cursor: not-allowed;
-      background: var(--gray-bg);
-    }
-    .step-qty-val {
-      min-width: 34px;
-      text-align: center;
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--navy-deep);
-      padding: 0 4px;
-    }
-    .app-subtotal-watt {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--gray-text);
-      text-align: right;
-    }
-    .appliance-card.has-qty .app-subtotal-watt {
-      color: var(--red-mid);
-      font-size: 0.85rem;
-    }
+    .step-btn:hover:not(:disabled) { background: var(--red-mid); color: white; }
+    .step-btn:disabled { color: #CBD5E1; cursor: not-allowed; }
+    .step-qty { min-width: 32px; text-align: center; font-size: 0.92rem; font-weight: 800; color: var(--navy-deep); }
+    .card-subtotal { font-size: 0.8rem; font-weight: 800; color: #94A3B8; }
+    .appliance-card.active-selected .card-subtotal { color: var(--red-bright); }
 
-    /* CUSTOM APPLIANCE BOX */
-    .custom-appliance-box {
-      margin-top: 24px;
-      padding: 18px 20px;
+    .custom-app-box {
+      margin-top: 20px;
+      padding: 16px;
       background: #F8FAFC;
       border: 1.5px dashed #CBD5E1;
       border-radius: var(--radius-md);
     }
-    .custom-box-title {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .custom-inputs-row {
-      display: grid;
-      grid-template-columns: 2fr 1.2fr 1fr auto;
-      gap: 10px;
-      align-items: center;
-    }
-    .custom-inputs-row input {
-      padding: 8px 12px;
-      border: 1.5px solid var(--gray-border);
-      border-radius: var(--radius-sm);
-      font-size: 0.85rem;
-      font-family: inherit;
-      background: var(--white);
-    }
-    .custom-inputs-row input:focus {
-      outline: none;
-      border-color: var(--red-mid);
-    }
+    .custom-app-title { font-size: 0.88rem; font-weight: 800; color: var(--navy-deep); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .custom-inputs-row { display: grid; grid-template-columns: 2fr 1.2fr 1fr auto; gap: 8px; }
+    .custom-inputs-row input { padding: 8px 10px; border: 1.5px solid var(--gray-border); border-radius: 6px; font-size: 0.85rem; outline: none; }
+    .custom-inputs-row input:focus { border-color: var(--red-mid); }
     .btn-add-custom {
       background: var(--navy-deep);
-      color: var(--white);
+      color: white;
       border: none;
       padding: 8px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      border-radius: 6px;
       font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
-      transition: var(--transition);
-    }
-    .btn-add-custom:hover {
-      background: var(--red-mid);
-    }
-
-    /* RIGHT COLUMN: STICKY LOAD SUMMARY & QUOTATION FORM */
-    .sticky-sidebar {
-      position: sticky;
-      top: 90px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    /* LOAD SUMMARY CARD */
-    .summary-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      border: 1.5px solid var(--gray-border);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-    }
-    .summary-header {
-      background: linear-gradient(135deg, var(--navy-dark), #1E293B);
-      color: var(--white);
-      padding: 20px 24px;
-    }
-    .summary-header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-    .summary-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--white);
-    }
-    .summary-urdu {
-      font-size: 0.95rem;
-      color: #FDE047;
-      font-weight: 600;
-    }
-    .summary-subtext {
-      font-size: 0.78rem;
-      color: #94A3B8;
-    }
-
-    .summary-metrics-grid {
-      padding: 20px 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      background: #FAFBFD;
-      border-bottom: 1px solid var(--gray-border);
-    }
-    .metric-box {
-      background: var(--white);
-      border: 1.5px solid var(--gray-border);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      text-align: center;
-      transition: var(--transition);
-    }
-    .metric-label {
-      font-size: 0.76rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--gray-text);
-      margin-bottom: 4px;
-    }
-    .metric-value-large {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.65rem;
-      font-weight: 800;
-      color: var(--red-bright);
-      line-height: 1.1;
-    }
-    .metric-value-large small {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--gray-text);
-    }
-    .metric-box.kw-box {
-      background: linear-gradient(135deg, #FEF2F2, #FFFDFD);
-      border-color: var(--red-light);
-    }
-    .metric-box.kw-box .metric-value-large {
-      color: var(--red-deep);
-    }
-
-    /* LOAD STATUS TIER BADGE */
-    .status-tier-container {
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--gray-border);
-    }
-    .tier-badge {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      border-radius: var(--radius-sm);
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-    .tier-badge.tier-empty {
-      background: #F1F5F9;
-      color: #64748B;
-      border: 1px dashed #CBD5E1;
-    }
-    .tier-badge.tier-small {
-      background: #DCFCE7;
-      color: #166534;
-      border: 1px solid #BBF7D0;
-    }
-    .tier-badge.tier-medium {
-      background: #FEF3C7;
-      color: #92400E;
-      border: 1px solid #FDE68A;
-    }
-    .tier-badge.tier-high {
-      background: #FEE2E2;
-      color: #991B1B;
-      border: 1px solid #FECACA;
-    }
-
-    /* SOLAR SYSTEM RECOMMENDATION */
-    .recommendation-box {
-      padding: 18px 24px;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-border);
-    }
-    .rec-title {
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .rec-item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       font-size: 0.85rem;
-      padding: 6px 0;
-      border-bottom: 1px dashed #F1F5F9;
+      transition: var(--transition);
     }
-    .rec-item-row:last-child {
-      border-bottom: none;
-    }
-    .rec-item-row span {
-      color: var(--gray-text);
-    }
-    .rec-item-row strong {
-      color: var(--navy-deep);
-      font-weight: 700;
-    }
+    .btn-add-custom:hover { background: var(--red-mid); }
 
-    /* SELECTED ITEMS PREVIEW IN SUMMARY */
-    .selected-preview-list {
-      padding: 14px 24px;
-      max-height: 160px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      background: #FAFBFD;
-    }
-    .selected-pill-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.82rem;
-      padding: 5px 0;
-      border-bottom: 1px solid #F1F5F9;
-    }
-    .selected-pill-row:last-child {
-      border-bottom: none;
-    }
-    .empty-state-notice {
-      text-align: center;
-      padding: 16px;
-      color: var(--gray-text);
-      font-size: 0.86rem;
-    }
-    .empty-state-notice .urdu-text {
-      display: block;
-      color: var(--red-mid);
-      font-size: 0.95rem;
-      margin-top: 4px;
-    }
+    .sidebar-wrapper { position: sticky; top: 85px; display: flex; flex-direction: column; gap: 20px; }
+    .summary-card { background: white; border-radius: var(--radius-lg); border: 1.5px solid var(--gray-border); box-shadow: var(--shadow-sm); overflow: hidden; }
+    .summary-card-header { background: linear-gradient(135deg, var(--navy-dark), var(--navy-card)); color: white; padding: 18px 20px; }
+    .summary-card-header h3 { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 800; }
+    .summary-card-header p { font-size: 0.78rem; color: #94A3B8; margin-top: 2px; }
 
-    /* QUOTATION FORM CARD */
-    .form-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      border: 1.5px solid var(--gray-border);
-      box-shadow: var(--shadow-md);
-      padding: 24px;
-    }
-    .form-card-header {
-      margin-bottom: 18px;
-      padding-bottom: 12px;
-      border-bottom: 1.5px solid var(--gray-border);
-    }
-    .form-card-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .form-card-urdu {
-      font-size: 0.92rem;
-      color: var(--red-mid);
-      font-weight: 600;
-      display: block;
-      margin-top: 2px;
-    }
+    .summary-metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px 20px; background: #FAFBFD; border-bottom: 1px solid var(--gray-border); }
+    .metric-item { background: white; border: 1.5px solid var(--gray-border); border-radius: var(--radius-sm); padding: 10px 12px; text-align: center; }
+    .metric-label { font-size: 0.72rem; font-weight: 700; color: var(--gray-text); text-transform: uppercase; margin-bottom: 2px; }
+    .metric-value { font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 900; color: var(--red-bright); line-height: 1.1; }
 
-    .form-fields-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .form-label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .form-label small {
-      font-weight: 400;
-      color: var(--gray-text);
-    }
-    .form-label-urdu {
-      font-family: 'Noto Nastaliq Urdu', serif;
-      color: var(--red-mid);
-      font-size: 0.8rem;
-    }
-    .form-input, .form-select, .form-textarea {
+    .load-tier-badge { margin: 14px 20px; padding: 10px 14px; border-radius: 8px; font-size: 0.84rem; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+    .tier-none { background: #F1F5F9; color: var(--gray-text); border: 1px dashed #CBD5E1; }
+    .tier-green { background: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
+    .tier-amber { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+    .tier-red { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+
+    .recommendations-box { padding: 14px 20px; border-top: 1px solid var(--gray-border); font-size: 0.82rem; }
+    .rec-heading { font-weight: 800; color: var(--navy-deep); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .rec-item { display: flex; justify-content: space-between; padding: 4px 0; }
+    .rec-item span { color: var(--gray-text); }
+    .rec-item strong { color: var(--navy-deep); }
+
+    .selected-items-preview { padding: 12px 20px; max-height: 140px; overflow-y: auto; background: #FAFBFD; border-top: 1px solid var(--gray-border); font-size: 0.8rem; }
+    .preview-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; }
+    .preview-row span { color: var(--navy-deep); font-weight: 600; }
+
+    .form-panel { background: white; border-radius: var(--radius-lg); border: 1.5px solid var(--gray-border); padding: 22px; box-shadow: var(--shadow-sm); }
+    .form-panel-header { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--navy-deep); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1.5px solid var(--gray-border); display: flex; justify-content: space-between; align-items: center; }
+    .input-field-group { margin-bottom: 12px; }
+    .input-field-group label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--navy-deep); margin-bottom: 4px; }
+    .input-field-group input, .input-field-group select {
       width: 100%;
-      padding: 10px 14px;
+      padding: 9px 12px;
       border: 1.5px solid var(--gray-border);
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       font-size: 0.88rem;
       font-family: inherit;
-      color: var(--navy-deep);
-      background: var(--white);
+      outline: none;
       transition: var(--transition);
     }
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
-      outline: none;
+    .input-field-group input:focus, .input-field-group select:focus {
       border-color: var(--red-mid);
       box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.08);
     }
-    .input-with-flag {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .flag-prefix {
-      position: absolute;
-      left: 12px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      pointer-events: none;
-    }
-    .input-with-flag input {
-      padding-left: 64px;
-    }
 
-    .form-optional-toggle {
-      background: #F8FAFC;
-      border: 1px solid var(--gray-border);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 4px;
-      transition: var(--transition);
-    }
-    .form-optional-toggle:hover {
-      background: #EDF2F7;
-    }
-    .optional-fields-wrap {
-      display: none;
-      flex-direction: column;
-      gap: 12px;
-      padding-top: 10px;
-    }
-    .optional-fields-wrap.show {
-      display: flex;
-    }
-
-    /* ACTION BUTTONS SUITE */
-    .form-actions-suite {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .btn-main-generate {
+    .btn-action-generate {
       width: 100%;
       background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
-      color: var(--white);
+      color: white;
       border: none;
-      border-radius: var(--radius-sm);
-      padding: 14px 20px;
-      font-size: 1rem;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 0.96rem;
       font-weight: 800;
-      font-family: 'Outfit', sans-serif;
-      letter-spacing: 0.3px;
       cursor: pointer;
+      transition: var(--transition);
+      margin-top: 8px;
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: var(--shadow-red);
-      transition: var(--transition);
-    }
-    .btn-main-generate:hover:not(:disabled) {
-      background: linear-gradient(135deg, var(--red-deep), var(--red-mid));
-      transform: translateY(-2px);
-    }
-    .btn-main-generate:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .pdf-actions-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       gap: 8px;
     }
-    .btn-action-sec {
-      background: var(--gray-bg);
+    .btn-action-generate:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(220, 38, 38, 0.35); }
+    .btn-action-generate:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .btn-action-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .btn-sec-action {
+      background: #F8FAFC;
       border: 1.5px solid var(--gray-border);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      font-size: 0.82rem;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--navy-deep);
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       transition: var(--transition);
     }
-    .btn-action-sec:hover:not(:disabled) {
-      background: var(--white);
-      border-color: var(--navy-deep);
-      transform: translateY(-1px);
-    }
-    .btn-action-sec:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    .btn-sec-action:hover:not(:disabled) { background: white; border-color: var(--navy-deep); }
+    .btn-sec-action:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    .btn-action-wa {
+    .btn-whatsapp-action {
       width: 100%;
       background: var(--green-wa);
-      color: var(--white);
+      color: white;
       border: none;
-      border-radius: var(--radius-sm);
-      padding: 13px 20px;
+      border-radius: 10px;
+      padding: 13px;
       font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
+      transition: var(--transition);
+      margin-top: 8px;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: var(--shadow-wa);
-      transition: var(--transition);
+      gap: 8px;
     }
-    .btn-action-wa:hover:not(:disabled) {
-      background: #20BA56;
-      transform: translateY(-2px);
-    }
-    .btn-action-wa:disabled {
-      background: #94A3B8;
-      box-shadow: none;
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
+    .btn-whatsapp-action:hover:not(:disabled) { background: #20BA56; transform: translateY(-1px); }
+    .btn-whatsapp-action:disabled { background: #94A3B8; box-shadow: none; opacity: 0.6; cursor: not-allowed; }
 
-    /* INSTRUCTION BANNER */
     .wa-instruction-card {
       display: none;
       background: #F0FDF4;
       border: 1.5px solid #BBF7D0;
-      border-radius: var(--radius-sm);
-      padding: 14px;
-      margin-top: 14px;
-      font-size: 0.82rem;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 0.8rem;
       color: #166534;
-      animation: fadeIn 0.3s ease;
+      line-height: 1.5;
     }
-    .wa-instruction-card.show {
-      display: block;
-    }
-    .wa-instruction-card strong {
-      display: block;
-      color: #14532D;
-      font-size: 0.88rem;
-      margin-bottom: 4px;
-    }
+    .wa-instruction-card.show { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* MODAL POPUPS */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(11, 19, 43, 0.75);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal-overlay.open {
-      display: flex;
-    }
-    .modal-box {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 850px;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
-      animation: modalSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .modal-header {
-      padding: 18px 24px;
-      background: var(--navy-dark);
-      color: var(--white);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .modal-header h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-modal-close {
-      background: rgba(255,255,255,0.15);
-      color: white;
-      border: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-body {
-      padding: 20px;
-      overflow-y: auto;
-      flex: 1;
-      background: #F1F5F9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-body iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      border-radius: 8px;
-      background: white;
-      box-shadow: var(--shadow-sm);
-    }
-    .modal-footer {
-      padding: 16px 24px;
-      background: var(--white);
-      border-top: 1px solid var(--gray-border);
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-    }
-
-    /* TOAST BANNER */
-    .toast-popup {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--navy-deep);
-      color: var(--white);
-      padding: 14px 20px;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      border-left: 4px solid var(--green-wa);
-      z-index: 9999;
-      font-size: 0.88rem;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transform: translateY(120%);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .toast-popup.show {
-      transform: translateY(0);
-    }
-
-    /* MOBILE STICKY BOTTOM BAR */
-    .mobile-bottom-bar {
+    .mobile-floating-bar {
       display: none;
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--navy-deep);
-      color: var(--white);
-      padding: 12px 20px;
-      z-index: 90;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .mobile-bottom-inner {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      color: white;
+      padding: 10px 16px;
+      z-index: 99;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
       align-items: center;
+      justify-content: space-between;
     }
-    .mobile-load-stat {
+    .mobile-floating-load { display: flex; flex-direction: column; }
+    .mobile-floating-load small { font-size: 0.72rem; color: #94A3B8; text-transform: uppercase; font-weight: 700; }
+    .mobile-floating-load strong { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 900; color: #FDE047; line-height: 1.1; }
+    .mobile-floating-btn {
+      background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(220,38,38,0.4);
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 800px;
+      height: 85vh;
+      border-radius: var(--radius-lg);
       display: flex;
       flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
     }
-    .mobile-load-label {
-      font-size: 0.72rem;
-      color: #94A3B8;
-      text-transform: uppercase;
-    }
-    .mobile-load-val {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #FDE047;
-    }
-    .btn-mobile-scroll {
-      background: linear-gradient(135deg, var(--red-mid), var(--red-bright));
-      color: var(--white);
+    .modal-header { padding: 16px 20px; background: var(--navy-dark); color: white; display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { flex: 1; background: #E2E8F0; }
+    .modal-body iframe { width: 100%; height: 100%; border: none; }
+    .btn-close-modal {
+      background: rgba(255,255,255,0.15);
+      color: white;
       border: none;
-      padding: 10px 18px;
-      border-radius: var(--radius-sm);
-      font-size: 0.88rem;
-      font-weight: 700;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.1rem;
       cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* FOOTER */
-    .main-footer {
-      background: var(--navy-dark);
-      color: #94A3B8;
-      padding: 48px 0 24px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.88rem;
-    }
-    .footer-container {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 36px;
-    }
-    .footer-brand h4 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-    .footer-brand p {
-      font-size: 0.85rem;
-      line-height: 1.6;
-      max-width: 340px;
-    }
-    .footer-disclaimer-box {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-sm);
-      padding: 14px 18px;
-      margin-top: 16px;
-      font-size: 0.8rem;
-      color: #CBD5E1;
-    }
-    .footer-bottom-bar {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 0.8rem;
+      justify-content: center;
     }
 
-    /* ANIMATIONS */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes modalSlide {
-      from { opacity: 0; transform: scale(0.95) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    /* RESPONSIVE BREAKPOINTS */
     @media (max-width: 1024px) {
-      .app-layout-grid {
-        grid-template-columns: 1fr;
-      }
-      .sticky-sidebar {
-        position: static;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+      .calculator-layout { grid-template-columns: 1fr; }
+      .sidebar-wrapper { position: static; }
     }
     @media (max-width: 768px) {
-      .hero-banner {
-        padding: 32px 0 28px;
-      }
-      .appliances-panel, .form-card {
-        padding: 20px 16px;
-      }
-      .appliances-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      .appliance-card {
-        padding: 12px;
-      }
-      .custom-inputs-row {
-        grid-template-columns: 1fr;
-      }
-      .mobile-bottom-bar {
-        display: block;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      body {
-        padding-bottom: 70px;
-      }
+      .mobile-floating-bar { display: flex; }
+      .nav-links { display: none; }
+      .appliances-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .custom-inputs-row { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 480px) {
-      .appliances-grid {
-        grid-template-columns: 1fr;
-      }
-      .nav-container {
-        padding: 10px 16px;
-      }
-      .summary-metrics-grid {
-        grid-template-columns: 1fr;
-      }
-      .pdf-actions-grid {
-        grid-template-columns: 1fr;
-      }
+      .appliances-grid { grid-template-columns: 1fr; }
+      .custom-inputs-row { grid-template-columns: 1fr; }
+      .btn-action-grid-2 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1323,15 +619,9 @@
 
   <!-- TOP BAR -->
   <div class="top-bar">
-    <div class="container" style="max-width: 1320px; margin: 0 auto; padding: 0 24px;">
-      <div style="display:flex; align-items:center; gap:16px;">
-        <span>☀️ Bin Zareen Solar Pvt Ltd Pakistan</span>
-        <span>📍 Authorized Solar Engineering & Procurement</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:16px;">
-        <a href="tel:03252053313">📞 0325-2053313</a>
-        <a href="https://wa.me/923252053313" target="_blank">💬 WhatsApp Support</a>
-      </div>
+    <div class="container">
+      <div>📍 Head Office: Islamabad, Pakistan | Helpline: <b>0325-2053313</b></div>
+      <div>⚡ Free Solar Consultations & Technical Site Surveys Across Pakistan</div>
     </div>
   </div>
 
@@ -1340,22 +630,17 @@
     <div class="nav-container">
       <a href="index.html" class="brand-logo">
         <div class="logo-img-box">
-          <img src="favicon.png" alt="Bin Zareen Solar" onerror="this.outerHTML='<span style=\'color:white;font-weight:900;\'>BZ</span>'">
+          <img src="favicon.png" alt="Bin Zareen Solar Logo">
         </div>
-        <div>
-          <div class="brand-title">Bin Zareen <span>Solar</span></div>
-          <span class="brand-subtitle">Pvt. Ltd. Pakistan</span>
+        <div class="brand-text">
+          <h1>Bin Zareen Solar</h1>
+          <p>Pvt. Ltd. Pakistan</p>
         </div>
       </a>
-      <div class="nav-actions">
-        <a href="index.html" class="btn-nav-home">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Main Website
-        </a>
-        <a href="https://wa.me/923252053313" target="_blank" class="btn-nav-wa">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-          0325-2053313
-        </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quotations.html" class="nav-link">All Quotation Tools</a>
+        <a href="#customer-form-section" class="nav-link btn-nav-quote">Generate Solar Quote</a>
       </div>
     </div>
   </nav>
@@ -1363,675 +648,339 @@
   <!-- HERO SECTION -->
   <header class="hero-banner">
     <div class="hero-container">
-      <div class="hero-badge">
-        <span>⚡</span> Instant Solar Sizing & Official Estimate
-      </div>
-      <h1 class="hero-urdu-title urdu-text">لوڈ کا انتخاب اور سولر کوٹیشن</h1>
-      <div class="hero-eng-title">Home Load Calculator & Solar Quotation</div>
-      <p class="hero-desc">
-        Select your household appliances below to calculate your estimated electrical load instantly. Generate an official bilingual PDF quotation and connect directly with our engineering team via WhatsApp.
-      </p>
-      <div class="hero-steps-ribbon">
-        <div class="hero-step-item"><span class="hero-step-num">1</span> Select Appliances</div>
-        <span style="opacity:0.4;">→</span>
-        <div class="hero-step-item"><span class="hero-step-num">2</span> Live Load Sizing</div>
-        <span style="opacity:0.4;">→</span>
-        <div class="hero-step-item"><span class="hero-step-num">3</span> Fill Customer Info</div>
-        <span style="opacity:0.4;">→</span>
-        <div class="hero-step-item"><span class="hero-step-num">4</span> Generate & Share PDF</div>
-      </div>
+      <div class="hero-badge">⚡ Official Solar Engineering Sizing & Instant Quotation</div>
+      <h1 class="hero-title">Home Load Calculator & Solar Quotation</h1>
+      <p class="hero-sub">Select your electrical appliances below to instantly calculate your total home power demand in Watts and kW. Download an official PDF quotation and connect with our solar experts on WhatsApp.</p>
     </div>
   </header>
 
-  <!-- MAIN UNIFIED SINGLE PAGE SECTION -->
-  <main class="main-app-section">
-    <div class="app-layout-grid">
+  <!-- MAIN APP CONTAINER -->
+  <main class="app-container">
+    <div class="calculator-layout">
 
-      <!-- LEFT COLUMN: APPLIANCE GRID & FILTERS -->
-      <section class="appliances-panel" aria-label="Appliance Selection">
-        <div class="panel-header">
-          <div class="panel-title-wrap">
-            <h2>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM9 9h6v6H9z"/></svg>
-              Select Your Home Appliances
-            </h2>
-            <p>Adjust quantities using (+) and (−) buttons. Power calculations update in real time.</p>
+      <!-- LEFT: APPLIANCE SELECTION -->
+      <section class="appliances-panel">
+        
+        <div class="panel-header-row">
+          <div class="panel-title">
+            <h2>Select Household Appliances</h2>
+            <p>Use (+) and (−) buttons to adjust quantities. Real-time calculations update instantly.</p>
           </div>
-          <div class="selection-quick-tools">
-            <button class="btn-tool-reset" onclick="resetAllQuantities()" title="Reset all counts to zero">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              Reset Selection
-            </button>
+          <button class="btn-reset" onclick="resetAllQuantities()">↺ Reset All</button>
+        </div>
+
+        <!-- SEARCH & CATEGORY FILTER -->
+        <div class="search-filter-box">
+          <div class="search-bar">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="appliance-search-input" placeholder="Search appliances (e.g. Inverter AC, Refrigerator, Fan, Pump, Iron)..." oninput="handleSearchChange()">
+          </div>
+          <div class="category-pills" id="category-pills-container">
+            <button class="cat-pill active" onclick="setCategoryFilter('all', this)">All Appliances</button>
+            <button class="cat-pill" onclick="setCategoryFilter('Cooling & Heating', this)">Cooling & Heating</button>
+            <button class="cat-pill" onclick="setCategoryFilter('Kitchen', this)">Kitchen</button>
+            <button class="cat-pill" onclick="setCategoryFilter('Home & Laundry', this)">Home & Laundry</button>
+            <button class="cat-pill" onclick="setCategoryFilter('Heavy Pumps', this)">Heavy Pumps</button>
+            <button class="cat-pill" onclick="setCategoryFilter('Lighting & Tech', this)">Lighting & Tech</button>
+            <button class="cat-pill" onclick="setCategoryFilter('Fitness & Other', this)">Fitness & Other</button>
           </div>
         </div>
 
-        <!-- CONTROLS: SEARCH & CATEGORIES -->
-        <div class="controls-bar">
-          <div class="search-box">
-            <svg class="search-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" id="appliance-search" placeholder="Search appliances (e.g. Inverter AC, Fridge, Fan)..." oninput="filterAppliances()">
-          </div>
-          <div class="category-pills" id="category-pills">
-            <button class="category-pill active" onclick="setCategory('all', this)">All Appliances</button>
-            <button class="category-pill" onclick="setCategory('Cooling & AC', this)">Cooling & AC</button>
-            <button class="category-pill" onclick="setCategory('Kitchen', this)">Kitchen</button>
-            <button class="category-pill" onclick="setCategory('Living & Home', this)">Living & Home</button>
-            <button class="category-pill" onclick="setCategory('Heavy Load', this)">Heavy Load</button>
-            <button class="category-pill" onclick="setCategory('Lighting & Tech', this)">Lighting & Tech</button>
-          </div>
-        </div>
-
-        <!-- 14 APPLIANCES GRID -->
-        <div class="appliances-grid" id="appliances-grid-container">
-          <!-- Rendered dynamically via JavaScript -->
+        <!-- APPLIANCE CARDS GRID -->
+        <div class="appliances-grid" id="appliances-cards-grid">
+          <!-- Dynamic Items Rendered by JS -->
         </div>
 
         <!-- CUSTOM APPLIANCE ADDITION -->
-        <div class="custom-appliance-box">
-          <div class="custom-box-title">
-            <span>➕ Have a custom appliance or unique rating?</span>
-            <small style="color:var(--gray-text);font-weight:400;">Optional</small>
-          </div>
+        <div class="custom-app-box">
+          <div class="custom-app-title">➕ Add Custom Appliance or Machinery</div>
           <div class="custom-inputs-row">
-            <input type="text" id="custom-app-name" placeholder="Appliance Name (e.g. Deep Well Pump, Air Fryer)">
-            <input type="number" id="custom-app-watts" placeholder="Watts (e.g. 1500)" min="1">
+            <input type="text" id="custom-app-name" placeholder="Appliance Name (e.g. Deep Well Pump)">
+            <input type="number" id="custom-app-watts" placeholder="Watt Rating (W)" min="1">
             <input type="number" id="custom-app-qty" placeholder="Qty" min="1" value="1">
             <button type="button" class="btn-add-custom" onclick="addCustomAppliance()">+ Add Item</button>
           </div>
         </div>
+
       </section>
 
-      <!-- RIGHT COLUMN: STICKY SUMMARY & QUOTATION FORM -->
-      <aside class="sticky-sidebar" id="quotation-sidebar">
+      <!-- RIGHT: SUMMARY & QUOTATION FORM -->
+      <aside class="sidebar-wrapper">
 
-        <!-- 1. LIVE LOAD SUMMARY CARD -->
-        <div class="summary-card" aria-label="Load Summary">
-          <div class="summary-header">
-            <div class="summary-header-top">
-              <span class="summary-title">Total Load Summary</span>
-              <span class="summary-urdu urdu-text">کل لوڈ کا خلاصہ</span>
-            </div>
-            <p class="summary-subtext">Real-time electrical consumption & solar sizing</p>
+        <!-- REAL-TIME LOAD SUMMARY -->
+        <div class="summary-card">
+          <div class="summary-card-header">
+            <h3>Total Load Summary</h3>
+            <p>Real-time electrical consumption estimate</p>
           </div>
 
-          <!-- METRICS GRID -->
           <div class="summary-metrics-grid">
-            <div class="metric-box">
-              <div class="metric-label">Total Selected</div>
-              <div class="metric-value-large" id="sum-total-qty">0 <small>items</small></div>
+            <div class="metric-item">
+              <div class="metric-label">Total Appliances</div>
+              <div class="metric-value" id="summary-total-qty">0 <small style="font-size:0.75rem;color:#64748B;">items</small></div>
             </div>
-            <div class="metric-box kw-box">
-              <div class="metric-label">Estimated Load</div>
-              <div class="metric-value-large" id="sum-total-watts">0 <small>Watts</small></div>
-            </div>
-          </div>
-
-          <!-- TIER STATUS BADGE -->
-          <div class="status-tier-container">
-            <div class="tier-badge tier-empty" id="load-tier-badge">
-              <span>Status: No Appliances Selected</span>
-              <span>0 kW</span>
+            <div class="metric-item" style="background:#FEF2F2;border-color:#FEE2E2;">
+              <div class="metric-label">Total Peak Load</div>
+              <div class="metric-value" id="summary-total-watts">0 <small style="font-size:0.75rem;color:#64748B;">Watts</small></div>
             </div>
           </div>
 
-          <!-- SOLAR SYSTEM RECOMMENDATION -->
-          <div class="recommendation-box" id="rec-box-container">
-            <div class="rec-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-              Recommended Solar Architecture
-            </div>
-            <div class="rec-item-row">
-              <span>Recommended Inverter:</span>
-              <strong id="rec-inverter">Pending selection</strong>
-            </div>
-            <div class="rec-item-row">
-              <span>Solar Panel Capacity:</span>
-              <strong id="rec-panels">Pending selection</strong>
-            </div>
-            <div class="rec-item-row">
-              <span>Battery Storage:</span>
-              <strong id="rec-battery">Pending selection</strong>
-            </div>
+          <!-- LOAD STATUS TIER -->
+          <div class="load-tier-badge tier-none" id="summary-tier-badge">
+            <span>Status: No Appliances Selected</span>
+            <span>0.0 kW</span>
+          </div>
+
+          <!-- SIZING RECOMMENDATIONS -->
+          <div class="recommendations-box">
+            <div class="rec-heading">Recommended Solar Sizing</div>
+            <div class="rec-item"><span>Inverter Capacity:</span><strong id="rec-inverter">Pending selection</strong></div>
+            <div class="rec-item"><span>Solar Panels (585W):</span><strong id="rec-panels">Pending selection</strong></div>
+            <div class="rec-item"><span>Battery Storage:</span><strong id="rec-battery">Pending selection</strong></div>
           </div>
 
           <!-- SELECTED ITEMS LIST PREVIEW -->
-          <div class="selected-preview-list" id="selected-items-preview">
-            <div class="empty-state-notice">
+          <div class="selected-items-preview" id="selected-preview-list">
+            <div style="text-align:center;padding:12px;color:#64748B;">
               Please select at least one appliance from the left.
-              <span class="urdu-text">براہ کرم کم از کم ایک اپلائنس منتخب کریں</span>
             </div>
           </div>
         </div>
 
-        <!-- 2. CUSTOMER QUOTATION FORM CARD -->
-        <div class="form-card" aria-label="Customer Quotation Form">
-          <div class="form-card-header">
-            <div class="form-card-title">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-              Request Your Solar Quotation
-            </div>
-            <span class="form-card-urdu urdu-text">اپنا سولر کوٹیشن حاصل کریں</span>
+        <!-- CUSTOMER QUOTATION FORM -->
+        <div class="form-panel" id="customer-form-section">
+          <div class="form-panel-header">
+            <span>Request Your Solar Quotation</span>
           </div>
 
-          <form id="solar-quotation-form" onsubmit="handleFormSubmit(event)">
-            <div class="form-fields-grid">
-
-              <!-- FULL NAME -->
-              <div class="form-group">
-                <label class="form-label" for="cust-name">
-                  <span>Full Name *</span>
-                  <span class="form-label-urdu">پورا نام</span>
-                </label>
-                <input type="text" id="cust-name" class="form-input" placeholder="e.g. Muhammad Usman" required>
-              </div>
-
-              <!-- CITY (WITH QUICK PK AUTOCOMPLETE) -->
-              <div class="form-group">
-                <label class="form-label" for="cust-city">
-                  <span>City in Pakistan *</span>
-                  <span class="form-label-urdu">شہر</span>
-                </label>
-                <input type="text" id="cust-city" class="form-input" list="pk-cities-list" placeholder="e.g. Islamabad, Lahore, Karachi..." required>
-                <datalist id="pk-cities-list">
-                  <option value="Islamabad">
-                  <option value="Rawalpindi">
-                  <option value="Lahore">
-                  <option value="Karachi">
-                  <option value="Faisalabad">
-                  <option value="Multan">
-                  <option value="Peshawar">
-                  <option value="Gujranwala">
-                  <option value="Sialkot">
-                  <option value="Quetta">
-                  <option value="Hyderabad">
-                  <option value="Abbottabad">
-                  <option value="Sargodha">
-                  <option value="Bahawalpur">
-                  <option value="Sukkur">
-                  <option value="Gujrat">
-                  <option value="Mardan">
-                  <option value="Wah Cantt">
-                </datalist>
-              </div>
-
-              <!-- PAKISTANI WHATSAPP NUMBER -->
-              <div class="form-group">
-                <label class="form-label" for="cust-phone">
-                  <span>WhatsApp Number *</span>
-                  <span class="form-label-urdu">واٹس ایپ نمبر</span>
-                </label>
-                <div class="input-with-flag">
-                  <span class="flag-prefix">🇵🇰 +92</span>
-                  <input type="tel" id="cust-phone" class="form-input" placeholder="300 1234567" required>
-                </div>
-                <small style="font-size:0.72rem;color:var(--gray-text);margin-top:2px;">Format: 03001234567 or 3001234567</small>
-              </div>
-
-              <!-- PREFERRED CONTACT TIME -->
-              <div class="form-group">
-                <label class="form-label" for="cust-time">
-                  <span>Preferred Contact Time</span>
-                  <span class="form-label-urdu">رابطے کا وقت</span>
-                </label>
-                <select id="cust-time" class="form-select">
-                  <option value="Anytime (9:00 AM – 8:00 PM)">Anytime (9:00 AM – 8:00 PM)</option>
-                  <option value="Morning (9:00 AM – 1:00 PM)">Morning (9:00 AM – 1:00 PM)</option>
-                  <option value="Afternoon (1:00 PM – 5:00 PM)">Afternoon (1:00 PM – 5:00 PM)</option>
-                  <option value="Evening (5:00 PM – 9:00 PM)">Evening (5:00 PM – 9:00 PM)</option>
-                </select>
-              </div>
-
-              <!-- OPTIONAL PROFILE TOGGLE -->
-              <div class="form-optional-toggle" onclick="toggleOptionalFields()">
-                <span>⚙️ Additional System & Roof Details</span>
-                <span id="optional-toggle-icon">▼</span>
-              </div>
-
-              <!-- EXPANDABLE OPTIONAL FIELDS -->
-              <div class="optional-fields-wrap" id="optional-fields-container">
-                <div class="form-group">
-                  <label class="form-label" for="cust-bill">Monthly Electricity Bill (PKR)</label>
-                  <select id="cust-bill" class="form-select">
-                    <option value="Not Specified">Select Bill Range</option>
-                    <option value="Under Rs. 15,000">Under Rs. 15,000</option>
-                    <option value="Rs. 15,000 – Rs. 30,000">Rs. 15,000 – Rs. 30,000</option>
-                    <option value="Rs. 30,000 – Rs. 60,000">Rs. 30,000 – Rs. 60,000</option>
-                    <option value="Rs. 60,000 – Rs. 100,000">Rs. 60,000 – Rs. 100,000</option>
-                    <option value="Above Rs. 100,000">Above Rs. 100,000</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="cust-roof">Roof / Site Type</label>
-                  <select id="cust-roof" class="form-select">
-                    <option value="Concrete Flat Roof">Concrete Flat Roof</option>
-                    <option value="Metallic / Tin Shed">Metallic / Tin Shed</option>
-                    <option value="Slanted Clay Tile Roof">Slanted Clay Tile Roof</option>
-                    <option value="Open Ground / Commercial Yard">Open Ground / Commercial Yard</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="cust-backup">Required Battery Backup</label>
-                  <select id="cust-backup" class="form-select">
-                    <option value="Standard Daytime (No Battery)">Daytime Solar (No Battery)</option>
-                    <option value="2 to 4 Hours Backup">2 to 4 Hours (Standard Hybrid)</option>
-                    <option value="6 to 8 Hours Backup">6 to 8 Hours (Night Backup)</option>
-                    <option value="Full Off-Grid / Continuous">Full Off-Grid / Continuous 24/7</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="cust-notes">Additional Questions or Notes</label>
-                  <textarea id="cust-notes" class="form-textarea" rows="2" placeholder="e.g. Interested in Longi 585W panels, net-metering support required..."></textarea>
-                </div>
-              </div>
-
-              <!-- ACTION BUTTONS SUITE -->
-              <div class="form-actions-suite">
-                <button type="submit" class="btn-main-generate" id="btn-generate-pdf">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                  Generate PDF Quotation
-                </button>
-
-                <div class="pdf-actions-grid">
-                  <button type="button" class="btn-action-sec" id="btn-preview-pdf" onclick="openPdfPreviewModal()" disabled>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                    Preview PDF
-                  </button>
-
-                  <button type="button" class="btn-action-sec" id="btn-download-pdf" onclick="triggerPdfDownloadDirect()" disabled>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Download PDF
-                  </button>
-                </div>
-
-                <button type="button" class="btn-action-sec" id="btn-share-pdf" onclick="handleNativeSharePdf()" disabled style="width:100%;">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                  Share PDF (Native Share)
-                </button>
-
-                <!-- WHATSAPP SUBMIT BUTTON -->
-                <button type="button" class="btn-action-wa" id="btn-send-whatsapp" onclick="handleSendViaWhatsApp()" disabled>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                  Send PDF via WhatsApp
-                </button>
-              </div>
-
-              <!-- CLEAR WHATSAPP MANUAL ATTACHMENT INSTRUCTION -->
-              <div class="wa-instruction-card" id="wa-instruction-notice">
-                <strong>📲 WhatsApp Instruction:</strong>
-                WhatsApp has been opened with Bin Zareen Solar (0325-2053313). 
-                <br><br>
-                Please tap the <b>attachment (📎 / +) icon</b> in your WhatsApp chat and attach your downloaded PDF quotation before pressing send.
-                <br><br>
-                <small style="color:#047857;"><i>Note: Standard WhatsApp links do not support automatic file attachments. Manual attachment ensures our solar engineers receive your complete technical specification document.</i></small>
-              </div>
-
+          <form id="solar-quotation-form" onsubmit="handleFormSubmission(event)">
+            
+            <div class="input-field-group">
+              <label>Customer Full Name *</label>
+              <input type="text" id="cust-name" placeholder="e.g. Muhammad Usman" required>
             </div>
+
+            <div class="input-field-group">
+              <label>City in Pakistan *</label>
+              <input type="text" id="cust-city" placeholder="e.g. Islamabad, Rawalpindi, Lahore..." list="pk-cities-list" required>
+              <datalist id="pk-cities-list">
+                <option value="Islamabad"><option value="Rawalpindi"><option value="Lahore"><option value="Karachi"><option value="Faisalabad"><option value="Multan"><option value="Peshawar"><option value="Gujranwala"><option value="Sialkot"><option value="Quetta"><option value="Hyderabad"><option value="Abbottabad"><option value="Wah Cantt"><option value="Taxila"><option value="Bahawalpur">
+              </datalist>
+            </div>
+
+            <div class="input-field-group">
+              <label>WhatsApp Number *</label>
+              <div style="position:relative;display:flex;align-items:center;">
+                <span style="position:absolute;left:10px;font-size:0.85rem;font-weight:700;color:var(--navy-deep);pointer-events:none;">🇵🇰 +92</span>
+                <input type="tel" id="cust-phone" style="padding-left:60px;" placeholder="300 1234567" required>
+              </div>
+            </div>
+
+            <div class="input-field-group">
+              <label>Preferred Contact Time</label>
+              <select id="cust-contact-time">
+                <option value="Anytime (9:00 AM – 8:00 PM)">Anytime (9:00 AM – 8:00 PM)</option>
+                <option value="Morning (9:00 AM – 1:00 PM)">Morning (9:00 AM – 1:00 PM)</option>
+                <option value="Afternoon (1:00 PM – 5:00 PM)">Afternoon (1:00 PM – 5:00 PM)</option>
+                <option value="Evening (5:00 PM – 9:00 PM)">Evening (5:00 PM – 9:00 PM)</option>
+              </select>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <button type="submit" class="btn-action-generate" id="btn-generate-pdf">
+              📄 Generate PDF Quotation
+            </button>
+
+            <div class="btn-action-grid-2">
+              <button type="button" class="btn-sec-action" id="btn-preview-pdf" onclick="openPdfPreviewModal()" disabled>
+                👁️ Preview PDF
+              </button>
+              <button type="button" class="btn-sec-action" id="btn-download-pdf" onclick="triggerPdfDirectDownload()" disabled>
+                📥 Download PDF
+              </button>
+            </div>
+
+            <button type="button" class="btn-sec-action" id="btn-share-pdf" onclick="handleNativeShare()" disabled style="width:100%;margin-top:8px;">
+              🔗 Share PDF (Native Share)
+            </button>
+
+            <button type="button" class="btn-whatsapp-action" id="btn-send-whatsapp" onclick="handleWhatsAppSend()" disabled>
+              💬 Send PDF via WhatsApp
+            </button>
+
+            <!-- WHATSAPP ATTACHMENT INSTRUCTION BANNER -->
+            <div class="wa-instruction-card" id="wa-attachment-instruction">
+              <strong>📲 WhatsApp Instructions:</strong>
+              WhatsApp has been opened with Bin Zareen Solar (0325-2053313). 
+              <br><br>
+              Please tap the <b>attachment (📎 / +) icon</b> in WhatsApp and attach your downloaded PDF quotation before sending.
+            </div>
+
           </form>
         </div>
 
       </aside>
+
     </div>
   </main>
 
-  <!-- MOBILE STICKY BOTTOM BAR -->
-  <div class="mobile-bottom-bar">
-    <div class="mobile-bottom-inner">
-      <div class="mobile-load-stat">
-        <span class="mobile-load-label">Total Load</span>
-        <span class="mobile-load-val" id="mob-watts-display">0 W (0.0 kW)</span>
-      </div>
-      <a href="#quotation-sidebar" class="btn-mobile-scroll" onclick="scrollToQuotationForm(event)">
-        Get Quotation →
-      </a>
+  <!-- MOBILE FLOATING STICKY BOTTOM BAR -->
+  <div class="mobile-floating-bar" id="mobile-bottom-bar">
+    <div class="mobile-floating-load">
+      <small>Total Estimated Load</small>
+      <strong id="mobile-bar-watts">0 W (0.0 kW)</strong>
     </div>
+    <button class="mobile-floating-btn" onclick="scrollToQuotationForm()">Get Quotation ↓</button>
   </div>
 
-  <!-- PDF PREVIEW MODAL -->
-  <div class="modal-overlay" id="pdf-preview-modal" onclick="closeModalOnBg(event)">
-    <div class="modal-box">
+  <!-- MODAL PDF PREVIEW -->
+  <div class="modal-overlay" id="pdf-preview-modal" onclick="closePdfModalOnBg(event)">
+    <div class="modal-content">
       <div class="modal-header">
-        <h3>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Quotation PDF Preview
-        </h3>
-        <button class="btn-modal-close" onclick="closePdfPreviewModal()">✕</button>
+        <h4 style="font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;">Quotation PDF Preview</h4>
+        <button class="btn-close-modal" onclick="closePdfPreviewModal()">✕</button>
       </div>
-      <div class="modal-body">
-        <iframe id="pdf-preview-iframe" title="PDF Quotation Preview"></iframe>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-action-sec" onclick="triggerPdfDownloadDirect()">Download PDF</button>
-        <button class="btn-action-wa" style="width:auto;padding:9px 18px;" onclick="handleSendViaWhatsApp()">Send on WhatsApp</button>
-      </div>
+      <div class="modal-body" id="modal-iframe-container"></div>
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION -->
-  <div class="toast-popup" id="toast-banner">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-    <span id="toast-message">Action successful</span>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h4>Bin Zareen Solar Pvt Ltd Pakistan</h4>
-          <p>Premier provider of residential, commercial, and agricultural solar energy systems, Tier-1 inverters, Canadian/Longi solar panels, and smart net-metering solutions across Pakistan.</p>
-          <div class="footer-disclaimer-box">
-            <b>Disclaimer:</b> Wattages shown are standard residential averages. Actual peak load and battery sizing will be finalized during site survey by Bin Zareen Solar engineers.
-          </div>
-        </div>
-        <div>
-          <h5 style="color:white;font-weight:700;margin-bottom:12px;font-size:0.95rem;">Direct Contact</h5>
-          <p style="margin-bottom:6px;">📍 Head Office: Islamabad / Rawalpindi, Pakistan</p>
-          <p style="margin-bottom:6px;">📞 Phone: <a href="tel:03252053313" style="color:#FDE047;text-decoration:none;">0325-2053313</a></p>
-          <p style="margin-bottom:6px;">💬 WhatsApp: <a href="https://wa.me/923252053313" style="color:#4ADE80;text-decoration:none;">+92 325 2053313</a></p>
-          <p>🌐 Web: <a href="https://BinZareen.com" style="color:white;text-decoration:none;">BinZareen.com</a></p>
-        </div>
-        <div>
-          <h5 style="color:white;font-weight:700;margin-bottom:12px;font-size:0.95rem;">Quick Tools</h5>
-          <p style="margin-bottom:8px;"><a href="index.html" style="color:#94A3B8;text-decoration:none;">Home Page</a></p>
-          <p style="margin-bottom:8px;"><a href="quotations.html" style="color:#94A3B8;text-decoration:none;">Pre-Configured Systems</a></p>
-          <p style="margin-bottom:8px;"><a href="quotation-generator.html" style="color:#94A3B8;text-decoration:none;">Custom System Builder</a></p>
-        </div>
-      </div>
-      <div class="footer-bottom-bar">
-        <span>© <span id="cur-year">2026</span> Bin Zareen Solar Pvt Ltd Pakistan. All Rights Reserved.</span>
-        <span>Built for Pakistani Residential & Commercial Solar Customers</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- APPLICATION LOGIC & DATA -->
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // ============================================================
-    // CONFIGURABLE CONSTANTS
-    // ============================================================
-    const BUSINESS_NAME = "Bin Zareen Solar Pvt Ltd Pakistan";
-    const WEBSITE_URL = "https://BinZareen.com";
-    const WHATSAPP_BUSINESS_NUMBER = "923252053313";
-    const BUSINESS_PHONE = "923252053313";
-
-    // Set current year
-    document.getElementById('cur-year').textContent = new Date().getFullYear();
-
-    // ============================================================
-    // 14 STANDARD PREDEFINED APPLIANCES DATA MODEL
-    // ============================================================
     const APPLIANCES_DATA = [
-      {
-        id: 'iron',
-        nameEn: 'Iron',
-        nameUr: 'استری',
-        category: 'Living & Home',
-        range: '1000W–1200W',
-        minWatts: 1000,
-        maxWatts: 1200,
-        defaultWatts: 1100,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H4"/><path d="M2 14v4"/><path d="M12 6v4"/><circle cx="16" cy="11" r="1"/></svg>`
-      },
-      {
-        id: 'ac_1_5_ton',
-        nameEn: 'AC 1.5 Ton Inverter',
-        nameUr: 'AC 1.5 ٹن انورٹر',
-        category: 'Cooling & AC',
-        range: '1500W–1800W',
-        minWatts: 1500,
-        maxWatts: 1800,
-        defaultWatts: 1650,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7v10H4V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z"/><path d="M8 12h8"/><path d="M6 17v2"/><path d="M18 17v2"/></svg>`
-      },
-      {
-        id: 'ac_1_ton',
-        nameEn: 'AC 1 Ton Inverter',
-        nameUr: 'AC 1 ٹن انورٹر',
-        category: 'Cooling & AC',
-        range: '1000W–1200W',
-        minWatts: 1000,
-        maxWatts: 1200,
-        defaultWatts: 1100,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7v10H4V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z"/><path d="M8 12h8"/><path d="M6 17v2"/><path d="M18 17v2"/></svg>`
-      },
-      {
-        id: 'electric_stove',
-        nameEn: 'Electric Stove',
-        nameUr: 'الیکٹرک چولہا',
-        category: 'Kitchen',
-        range: '1500W–2000W',
-        minWatts: 1500,
-        maxWatts: 2000,
-        defaultWatts: 1750,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/></svg>`
-      },
-      {
-        id: 'microwave_oven',
-        nameEn: 'Microwave Oven',
-        nameUr: 'مائیکروویو اوون',
-        category: 'Kitchen',
-        range: '1000W–1400W',
-        minWatts: 1000,
-        maxWatts: 1400,
-        defaultWatts: 1200,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="15" x="2" y="4" rx="2"/><rect width="10" height="9" x="5" y="7" rx="1"/><path d="M18 8v1"/><path d="M18 12v1"/><path d="M18 15v1"/></svg>`
-      },
-      {
-        id: 'water_pump',
-        nameEn: 'Water Pump / Motor 1HP',
-        nameUr: 'واٹر پمپ / موٹر 1HP',
-        category: 'Heavy Load',
-        range: '750W–800W',
-        minWatts: 750,
-        maxWatts: 800,
-        defaultWatts: 775,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`
-      },
-      {
-        id: 'washing_machine',
-        nameEn: 'Washing Machine',
-        nameUr: 'واشنگ مشین',
-        category: 'Living & Home',
-        range: '400W–600W',
-        minWatts: 400,
-        maxWatts: 600,
-        defaultWatts: 500,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5"/><circle cx="7.5" cy="5.5" r=".5"/></svg>`
-      },
-      {
-        id: 'refrigerator',
-        nameEn: 'Refrigerator / Deep Freezer',
-        nameUr: 'فریج / ڈیپ فریزر',
-        category: 'Kitchen',
-        range: '300W–400W',
-        minWatts: 300,
-        maxWatts: 400,
-        defaultWatts: 350,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="4" x2="20" y1="10" y2="10"/><line x1="9" x2="9" y1="6" y2="8"/><line x1="9" x2="9" y1="14" y2="17"/></svg>`
-      },
-      {
-        id: 'water_dispenser',
-        nameEn: 'Water Dispenser',
-        nameUr: 'واٹر ڈسپنسر',
-        category: 'Kitchen',
-        range: '350W–450W',
-        minWatts: 350,
-        maxWatts: 450,
-        defaultWatts: 400,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v7H6z"/><path d="M7 9v11a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9"/><path d="M10 14h4"/></svg>`
-      },
-      {
-        id: 'tv',
-        nameEn: 'LCD / LED TV',
-        nameUr: 'LCD / LED ٹی وی',
-        category: 'Lighting & Tech',
-        range: '80W–150W',
-        minWatts: 80,
-        maxWatts: 150,
-        defaultWatts: 115,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="15" x="2" y="3" rx="2"/><polyline points="17 21 12 18 7 21"/></svg>`
-      },
-      {
-        id: 'ceiling_fan',
-        nameEn: 'Ceiling Fan',
-        nameUr: 'چھت کا پنکھا',
-        category: 'Cooling & AC',
-        range: '75W–80W',
-        minWatts: 75,
-        maxWatts: 80,
-        defaultWatts: 78,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 12 7 3a4 4 0 0 0-4 4l9 5"/><path d="M12 12l9 5a4 4 0 0 0 4-4l-9-5"/><path d="M12 12l-5 9a4 4 0 0 0 4 4l5-9"/><circle cx="12" cy="12" r="2"/></svg>`
-      },
-      {
-        id: 'inverter_fan',
-        nameEn: 'Inverter Fan',
-        nameUr: 'انورٹر پنکھا',
-        category: 'Cooling & AC',
-        range: '30W–40W',
-        minWatts: 30,
-        maxWatts: 40,
-        defaultWatts: 35,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`
-      },
-      {
-        id: 'led_light',
-        nameEn: 'LED Light / Bulb',
-        nameUr: 'LED لائٹ / بلب',
-        category: 'Lighting & Tech',
-        range: '12W–18W',
-        minWatts: 12,
-        maxWatts: 18,
-        defaultWatts: 15,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`
-      },
-      {
-        id: 'laptop_pc',
-        nameEn: 'Laptop / PC',
-        nameUr: 'لیپ ٹاپ / پی سی',
-        category: 'Lighting & Tech',
-        range: '50W–90W',
-        minWatts: 50,
-        maxWatts: 90,
-        defaultWatts: 70,
-        iconSvg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>`
-      }
+      { id: 'ac_2_ton', name: 'AC 2 Ton Inverter', category: 'Cooling & Heating', range: '2000W-2500W', defaultWatts: 2200, img: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=160&auto=format&fit=crop&q=80', icon: '❄️' },
+      { id: 'ac_1_5_ton', name: 'AC 1.5 Ton Inverter', category: 'Cooling & Heating', range: '1500W-1800W', defaultWatts: 1650, img: 'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=160&auto=format&fit=crop&q=80', icon: '❄️' },
+      { id: 'ac_1_ton', name: 'AC 1 Ton Inverter', category: 'Cooling & Heating', range: '1000W-1200W', defaultWatts: 1100, img: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=160&auto=format&fit=crop&q=80', icon: '❄️' },
+      { id: 'air_cooler', name: 'Desert / Room Air Cooler', category: 'Cooling & Heating', range: '150W-300W', defaultWatts: 200, img: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=160&auto=format&fit=crop&q=80', icon: '💨' },
+      { id: 'ceiling_fan', name: 'Ceiling Fan (Standard)', category: 'Cooling & Heating', range: '75W-80W', defaultWatts: 78, img: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=160&auto=format&fit=crop&q=80', icon: '🌀' },
+      { id: 'inverter_fan', name: 'Inverter Ceiling Fan (BLDC)', category: 'Cooling & Heating', range: '30W-45W', defaultWatts: 35, img: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=160&auto=format&fit=crop&q=80', icon: '🌀' },
+      { id: 'pedestal_fan', name: 'Pedestal / Stand Fan', category: 'Cooling & Heating', range: '60W-100W', defaultWatts: 80, img: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=160&auto=format&fit=crop&q=80', icon: '🌀' },
+      { id: 'exhaust_fan', name: 'Exhaust Fan', category: 'Cooling & Heating', range: '40W-70W', defaultWatts: 50, img: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=160&auto=format&fit=crop&q=80', icon: '💨' },
+      { id: 'electric_heater', name: 'Electric Room Heater', category: 'Cooling & Heating', range: '1000W-2000W', defaultWatts: 1500, img: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=160&auto=format&fit=crop&q=80', icon: '🔥' },
+      { id: 'water_geyser', name: 'Electric Geyser / Water Heater', category: 'Cooling & Heating', range: '1500W-2500W', defaultWatts: 2000, img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=160&auto=format&fit=crop&q=80', icon: '🚿' },
+      { id: 'refrigerator', name: 'Refrigerator / Fridge', category: 'Kitchen', range: '200W-350W', defaultWatts: 250, img: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=160&auto=format&fit=crop&q=80', icon: '🧊' },
+      { id: 'deep_freezer', name: 'Deep Freezer (Chest/Upright)', category: 'Kitchen', range: '300W-500W', defaultWatts: 380, img: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=160&auto=format&fit=crop&q=80', icon: '❄️' },
+      { id: 'microwave_oven', name: 'Microwave Oven', category: 'Kitchen', range: '1000W-1400W', defaultWatts: 1200, img: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=160&auto=format&fit=crop&q=80', icon: '📻' },
+      { id: 'electric_stove', name: 'Electric Stove / Induction', category: 'Kitchen', range: '1500W-2200W', defaultWatts: 1800, img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=160&auto=format&fit=crop&q=80', icon: '🍳' },
+      { id: 'electric_kettle', name: 'Electric Kettle', category: 'Kitchen', range: '1200W-1800W', defaultWatts: 1500, img: 'https://images.unsplash.com/photo-1594213114663-ddf3f2a02126?w=160&auto=format&fit=crop&q=80', icon: '🫖' },
+      { id: 'air_fryer', name: 'Air Fryer', category: 'Kitchen', range: '1200W-1800W', defaultWatts: 1500, img: 'https://images.unsplash.com/photo-1586208958839-06c17cacdf08?w=160&auto=format&fit=crop&q=80', icon: '🍟' },
+      { id: 'blender_juicer', name: 'Blender / Juicer / Grinder', category: 'Kitchen', range: '350W-600W', defaultWatts: 450, img: 'https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=160&auto=format&fit=crop&q=80', icon: '🍹' },
+      { id: 'toaster', name: 'Bread Toaster / Sandwich Maker', category: 'Kitchen', range: '700W-1000W', defaultWatts: 800, img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=160&auto=format&fit=crop&q=80', icon: '🥪' },
+      { id: 'water_dispenser', name: 'Water Dispenser (Hot & Cold)', category: 'Kitchen', range: '350W-550W', defaultWatts: 450, img: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=160&auto=format&fit=crop&q=80', icon: '💧' },
+      { id: 'dishwasher', name: 'Automatic Dishwasher', category: 'Kitchen', range: '1200W-1800W', defaultWatts: 1400, img: 'https://images.unsplash.com/photo-1585837575652-267c041d77d4?w=160&auto=format&fit=crop&q=80', icon: '🍽️' },
+      { id: 'ro_water_filter', name: 'RO Water Filter Plant', category: 'Kitchen', range: '40W-80W', defaultWatts: 60, img: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=160&auto=format&fit=crop&q=80', icon: '🚰' },
+      { id: 'electric_iron', name: 'Electric Iron (Istree)', category: 'Home & Laundry', range: '1000W-1400W', defaultWatts: 1100, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=160&auto=format&fit=crop&q=80', icon: '👔' },
+      { id: 'washing_machine', name: 'Automatic Washing Machine', category: 'Home & Laundry', range: '400W-700W', defaultWatts: 500, img: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=160&auto=format&fit=crop&q=80', icon: '🫧' },
+      { id: 'spin_dryer', name: 'Spin Dryer / Spinner', category: 'Home & Laundry', range: '250W-400W', defaultWatts: 300, img: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=160&auto=format&fit=crop&q=80', icon: '🌀' },
+      { id: 'vacuum_cleaner', name: 'Vacuum Cleaner', category: 'Home & Laundry', range: '1000W-1600W', defaultWatts: 1200, img: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=160&auto=format&fit=crop&q=80', icon: '🧹' },
+      { id: 'water_pump_1hp', name: 'Water Pump / Motor 1 HP', category: 'Heavy Pumps', range: '750W-900W', defaultWatts: 800, img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=160&auto=format&fit=crop&q=80', icon: '⚙️' },
+      { id: 'water_pump_half_hp', name: 'Water Pump / Motor 0.5 HP', category: 'Heavy Pumps', range: '370W-500W', defaultWatts: 400, img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=160&auto=format&fit=crop&q=80', icon: '⚙️' },
+      { id: 'boring_submersible', name: 'Submersible Boring Pump (2HP)', category: 'Heavy Pumps', range: '1500W-2500W', defaultWatts: 1800, img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=160&auto=format&fit=crop&q=80', icon: '🚰' },
+      { id: 'led_light', name: 'LED Light / Bulb', category: 'Lighting & Tech', range: '10W-18W', defaultWatts: 12, img: 'https://images.unsplash.com/photo-1550985543-f47f38aeee65?w=160&auto=format&fit=crop&q=80', icon: '💡' },
+      { id: 'tube_light', name: 'LED Tube Light / Batten', category: 'Lighting & Tech', range: '18W-36W', defaultWatts: 24, img: 'https://images.unsplash.com/photo-1550985543-f47f38aeee65?w=160&auto=format&fit=crop&q=80', icon: '💡' },
+      { id: 'led_tv', name: 'LCD / LED Smart TV (32"-65")', category: 'Lighting & Tech', range: '60W-150W', defaultWatts: 100, img: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=160&auto=format&fit=crop&q=80', icon: '📺' },
+      { id: 'home_theater', name: 'Home Theater / Soundbar', category: 'Lighting & Tech', range: '50W-150W', defaultWatts: 80, img: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=160&auto=format&fit=crop&q=80', icon: '🔊' },
+      { id: 'laptop', name: 'Laptop / Notebook Computer', category: 'Lighting & Tech', range: '50W-90W', defaultWatts: 65, img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=160&auto=format&fit=crop&q=80', icon: '💻' },
+      { id: 'gaming_pc', name: 'Desktop Gaming PC / Workstation', category: 'Lighting & Tech', range: '250W-500W', defaultWatts: 350, img: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=160&auto=format&fit=crop&q=80', icon: '🖥️' },
+      { id: 'wifi_router', name: 'Wi-Fi Router / Modem / ONT', category: 'Lighting & Tech', range: '10W-20W', defaultWatts: 15, img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=160&auto=format&fit=crop&q=80', icon: '📶' },
+      { id: 'cctv_system', name: 'CCTV Cameras & DVR System', category: 'Lighting & Tech', range: '40W-100W', defaultWatts: 60, img: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=160&auto=format&fit=crop&q=80', icon: '📹' },
+      { id: 'mobile_charger', name: 'Mobile / Fast Charger', category: 'Lighting & Tech', range: '20W-65W', defaultWatts: 33, img: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=160&auto=format&fit=crop&q=80', icon: '🔌' },
+      { id: 'treadmill', name: 'Treadmill / Fitness Machine', category: 'Fitness & Other', range: '800W-1800W', defaultWatts: 1200, img: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=160&auto=format&fit=crop&q=80', icon: '🏃' }
     ];
 
-    // State Tracking
-    const applianceQuantities = {};
-    APPLIANCES_DATA.forEach(a => { applianceQuantities[a.id] = 0; });
-
+    const appQuantities = {};
+    APPLIANCES_DATA.forEach(a => { appQuantities[a.id] = 0; });
     let customAppliances = [];
     let currentCategory = 'all';
-    let currentSearchTerm = '';
-    let generatedQuotationData = null;
+    let currentSearchQuery = '';
+    let generatedQuotation = null;
     let generatedPdfBlob = null;
-    let generatedPdfBlobUrl = null;
+    let generatedPdfUrl = null;
     let generatedPdfFile = null;
 
-    // ============================================================
-    // INITIALIZATION & RENDERING
-    // ============================================================
-    function renderApplianceGrid() {
-      const container = document.getElementById('appliances-grid-container');
+    function renderAppliances() {
+      const container = document.getElementById('appliances-cards-grid');
       if (!container) return;
-
       container.innerHTML = '';
 
       const filtered = APPLIANCES_DATA.filter(app => {
-        const matchesCat = currentCategory === 'all' || app.category === currentCategory;
-        const matchesSearch = !currentSearchTerm || 
-          app.nameEn.toLowerCase().includes(currentSearchTerm.toLowerCase()) || 
-          app.nameUr.includes(currentSearchTerm);
-        return matchesCat && matchesSearch;
+        const matchCat = (currentCategory === 'all' || app.category === currentCategory);
+        const matchSearch = (!currentSearchQuery || app.name.toLowerCase().includes(currentSearchQuery.toLowerCase()) || app.category.toLowerCase().includes(currentSearchQuery.toLowerCase()));
+        return matchCat && matchSearch;
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = `
-          <div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--gray-text);">
-            <p>No appliances found matching "<b>${escapeHtml(currentSearchTerm)}</b>".</p>
-            <button onclick="clearSearch()" style="margin-top:10px;background:var(--navy-deep);color:white;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;">Clear Search</button>
-          </div>
-        `;
+        container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#64748B;">No appliances found matching "<b>' + currentSearchQuery + '</b>".</div>';
         return;
       }
 
       filtered.forEach(app => {
-        const qty = applianceQuantities[app.id] || 0;
-        const totalWatt = qty * app.defaultWatts;
+        const qty = appQuantities[app.id] || 0;
+        const subtotalWatts = qty * app.defaultWatts;
 
         const card = document.createElement('div');
-        card.className = `appliance-card ${qty > 0 ? 'has-qty' : ''}`;
-        card.id = `card-${app.id}`;
-        card.innerHTML = `
-          <div>
-            <div class="app-top-row">
-              <div class="app-icon-badge">${app.iconSvg}</div>
-              <div class="app-titles">
-                <div class="app-name-en">${app.nameEn}</div>
-                <div class="app-name-ur urdu-text">${app.nameUr}</div>
-              </div>
-            </div>
-            <div class="app-specs-row">
-              <span>Range: <strong>${app.range}</strong></span>
-              <span class="app-default-watt">Default: ${app.defaultWatts}W</span>
-            </div>
-          </div>
-          <div class="app-bottom-stepper">
-            <div class="stepper-controls">
-              <button type="button" class="btn-step" aria-label="Decrease ${app.nameEn}" onclick="adjustQty('${app.id}', -1)" ${qty === 0 ? 'disabled' : ''}>−</button>
-              <span class="step-qty-val" id="qty-val-${app.id}">${qty}</span>
-              <button type="button" class="btn-step" aria-label="Increase ${app.nameEn}" onclick="adjustQty('${app.id}', 1)">+</button>
-            </div>
-            <div class="app-subtotal-watt" id="subtotal-${app.id}">
-              ${qty > 0 ? `${totalWatt.toLocaleString()} W` : '0 W'}
-            </div>
-          </div>
-        `;
+        card.className = 'appliance-card ' + (qty > 0 ? 'active-selected' : '');
+        card.id = 'card-' + app.id;
+        card.innerHTML = 
+          '<div>' +
+            '<div class="card-top">' +
+              '<div class="app-thumbnail">' +
+                '<img src="' + app.img + '" alt="' + app.name + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\';">' +
+                '<div class="icon-fallback" style="font-size:1.6rem;">' + app.icon + '</div>' +
+              '</div>' +
+              '<div class="app-info">' +
+                '<div class="app-name">' + app.name + '</div>' +
+                '<div class="app-category-tag">' + app.category + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="wattage-badge-row">' +
+              '<span>Range: <b>' + app.range + '</b></span>' +
+              '<span>Avg: <b>' + app.defaultWatts + 'W</b></span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card-bottom-row">' +
+            '<div class="stepper-box">' +
+              '<button type="button" class="step-btn" onclick="updateApplianceQuantity(\'' + app.id + '\', -1)" ' + (qty === 0 ? 'disabled' : '') + ' aria-label="Decrease quantity">−</button>' +
+              '<span class="step-qty" id="qty-val-' + app.id + '">' + qty + '</span>' +
+              '<button type="button" class="step-btn" onclick="updateApplianceQuantity(\'' + app.id + '\', 1)" aria-label="Increase quantity">+</button>' +
+            '</div>' +
+            '<div class="card-subtotal" id="subtotal-val-' + app.id + '">' + (qty > 0 ? subtotalWatts.toLocaleString() + ' W' : '0 W') + '</div>' +
+          '</div>';
         container.appendChild(card);
       });
     }
 
-    // ============================================================
-    // QUANTITY ADJUSTMENTS & TOTALS RECALCULATION
-    // ============================================================
-    function adjustQty(appId, delta) {
-      const current = applianceQuantities[appId] || 0;
+    function updateApplianceQuantity(id, delta) {
+      const current = appQuantities[id] || 0;
       const next = Math.max(0, current + delta);
-      applianceQuantities[appId] = next;
+      appQuantities[id] = next;
 
-      // Update UI elements
-      const qtyEl = document.getElementById(`qty-val-${appId}`);
+      const qtyEl = document.getElementById('qty-val-' + id);
       if (qtyEl) qtyEl.textContent = next;
 
-      const appObj = APPLIANCES_DATA.find(a => a.id === appId);
-      const subtotalEl = document.getElementById(`subtotal-${appId}`);
-      if (subtotalEl && appObj) {
-        subtotalEl.textContent = next > 0 ? `${(next * appObj.defaultWatts).toLocaleString()} W` : '0 W';
+      const app = APPLIANCES_DATA.find(a => a.id === id);
+      const subEl = document.getElementById('subtotal-val-' + id);
+      if (subEl && app) {
+        subEl.textContent = next > 0 ? (next * app.defaultWatts).toLocaleString() + ' W' : '0 W';
       }
 
-      const card = document.getElementById(`card-${appId}`);
+      const card = document.getElementById('card-' + id);
       if (card) {
-        card.classList.toggle('has-qty', next > 0);
-        const minusBtn = card.querySelector('.btn-step');
+        card.classList.toggle('active-selected', next > 0);
+        const minusBtn = card.querySelector('.step-btn');
         if (minusBtn) minusBtn.disabled = (next === 0);
       }
 
-      invalidateGeneratedPdf();
-      calculateLiveTotals();
+      resetQuotationPdfState();
+      calculateLoadTotals();
     }
 
     function resetAllQuantities() {
-      if (confirm('Are you sure you want to reset all selected appliance quantities to 0?')) {
-        APPLIANCES_DATA.forEach(a => { applianceQuantities[a.id] = 0; });
+      if (confirm('Reset all selected appliances to 0?')) {
+        APPLIANCES_DATA.forEach(a => { appQuantities[a.id] = 0; });
         customAppliances = [];
-        renderApplianceGrid();
-        invalidateGeneratedPdf();
-        calculateLiveTotals();
-        showToast('Selection has been reset to zero.');
+        renderAppliances();
+        resetQuotationPdfState();
+        calculateLoadTotals();
       }
     }
 
@@ -2044,22 +993,15 @@
       const watts = parseInt(wattsInput.value, 10);
       const qty = parseInt(qtyInput.value, 10) || 1;
 
-      if (!name) {
-        alert('Please enter a name for your custom appliance.');
-        nameInput.focus();
-        return;
-      }
-      if (!watts || watts <= 0) {
-        alert('Please enter a valid wattage rating (e.g. 1500).');
-        wattsInput.focus();
+      if (!name || !watts || watts <= 0) {
+        alert('Please enter a valid appliance name and watt rating.');
         return;
       }
 
       customAppliances.push({
         id: 'custom_' + Date.now(),
-        nameEn: name,
-        nameUr: 'کسٹم آئٹم',
-        range: `${watts}W`,
+        name: name,
+        range: watts + 'W',
         defaultWatts: watts,
         qty: qty
       });
@@ -2068,72 +1010,77 @@
       wattsInput.value = '';
       qtyInput.value = '1';
 
-      invalidateGeneratedPdf();
-      calculateLiveTotals();
-      showToast(`Added custom item: ${name} (${watts}W × ${qty})`);
+      resetQuotationPdfState();
+      calculateLoadTotals();
     }
 
     function removeCustomAppliance(id) {
       customAppliances = customAppliances.filter(c => c.id !== id);
-      invalidateGeneratedPdf();
-      calculateLiveTotals();
+      resetQuotationPdfState();
+      calculateLoadTotals();
     }
 
-    // ============================================================
-    // LIVE LOAD CALCULATION & SOLAR RECOMMENDATION LOGIC
-    // ============================================================
-    function calculateLiveTotals() {
+    function setCategoryFilter(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderAppliances();
+    }
+
+    function handleSearchChange() {
+      currentSearchQuery = document.getElementById('appliance-search-input').value.trim();
+      renderAppliances();
+    }
+
+    function calculateLoadTotals() {
       let totalQty = 0;
       let totalWatts = 0;
-      const selectedList = [];
+      const selectedItems = [];
 
-      // 1. Standard appliances
       APPLIANCES_DATA.forEach(app => {
-        const qty = applianceQuantities[app.id] || 0;
-        if (qty > 0) {
-          const w = qty * app.defaultWatts;
-          totalQty += qty;
+        const q = appQuantities[app.id] || 0;
+        if (q > 0) {
+          const w = q * app.defaultWatts;
+          totalQty += q;
           totalWatts += w;
-          selectedList.push({
-            nameEn: app.nameEn,
-            nameUr: app.nameUr,
+          selectedItems.push({
+            name: app.name,
+            category: app.category,
             range: app.range,
             defaultWatts: app.defaultWatts,
-            qty: qty,
+            qty: q,
             totalWatts: w
           });
         }
       });
 
-      // 2. Custom appliances
-      customAppliances.forEach(custom => {
-        const w = custom.qty * custom.defaultWatts;
-        totalQty += custom.qty;
+      customAppliances.forEach(c => {
+        const w = c.qty * c.defaultWatts;
+        totalQty += c.qty;
         totalWatts += w;
-        selectedList.push({
-          nameEn: custom.nameEn,
-          nameUr: custom.nameUr,
-          range: custom.range,
-          defaultWatts: custom.defaultWatts,
-          qty: custom.qty,
+        selectedItems.push({
+          name: c.name,
+          category: 'Custom Item',
+          range: c.range,
+          defaultWatts: c.defaultWatts,
+          qty: c.qty,
           totalWatts: w,
           isCustom: true,
-          id: custom.id
+          id: c.id
         });
       });
 
       const totalKw = (totalWatts / 1000).toFixed(2);
 
-      // Update Header Summary Metrics
-      document.getElementById('sum-total-qty').innerHTML = `${totalQty} <small>items</small>`;
-      document.getElementById('sum-total-watts').innerHTML = `${totalWatts.toLocaleString()} <small>Watts (${totalKw} kW)</small>`;
-      
-      // Update Mobile Bar
-      const mobDisplay = document.getElementById('mob-watts-display');
-      if (mobDisplay) mobDisplay.textContent = `${totalWatts.toLocaleString()} W (${totalKw} kW)`;
+      const sumQty = document.getElementById('summary-total-qty');
+      const sumWatts = document.getElementById('summary-total-watts');
+      if (sumQty) sumQty.innerHTML = totalQty + ' <small style="font-size:0.75rem;color:#64748B;">items</small>';
+      if (sumWatts) sumWatts.innerHTML = totalWatts.toLocaleString() + ' <small style="font-size:0.75rem;color:#64748B;">W (' + totalKw + ' kW)</small>';
 
-      // Tier Badge & Recommendations
-      const badge = document.getElementById('load-tier-badge');
+      const mobWatts = document.getElementById('mobile-bar-watts');
+      if (mobWatts) mobWatts.textContent = totalWatts.toLocaleString() + ' W (' + totalKw + ' kW)';
+
+      const tierBadge = document.getElementById('summary-tier-badge');
       const recInverter = document.getElementById('rec-inverter');
       const recPanels = document.getElementById('rec-panels');
       const recBattery = document.getElementById('rec-battery');
@@ -2141,295 +1088,143 @@
       let statusTier = 'No Appliances Selected';
 
       if (totalWatts === 0) {
-        badge.className = 'tier-badge tier-empty';
-        badge.innerHTML = `<span>Status: No Appliances Selected</span><span>0.0 kW</span>`;
+        tierBadge.className = 'load-tier-badge tier-none';
+        tierBadge.innerHTML = '<span>Status: No Appliances Selected</span><span>0.0 kW</span>';
         recInverter.textContent = 'Pending selection';
         recPanels.textContent = 'Pending selection';
         recBattery.textContent = 'Pending selection';
-        statusTier = 'No Appliances Selected';
       } else if (totalWatts <= 3000) {
-        badge.className = 'tier-badge tier-small';
-        badge.innerHTML = `<span>Status: Small Load (Residential)</span><span>${totalKw} kW</span>`;
-        recInverter.textContent = '3.2 kW – 4.2 kW Solar Inverter';
+        tierBadge.className = 'load-tier-badge tier-green';
+        tierBadge.innerHTML = '<span>Status: Small Load (Residential)</span><span>' + totalKw + ' kW</span>';
+        recInverter.textContent = '3.2 kW - 4.2 kW Solar Inverter';
         const panelCount = Math.max(4, Math.ceil(totalWatts / 450));
-        recPanels.textContent = `${panelCount} × 585W Tier-1 Panels (${(panelCount * 0.585).toFixed(1)} kWp)`;
-        recBattery.textContent = '1x 24V / 48V Lithium or 2x Tubular';
-        statusTier = 'Small Load';
+        recPanels.textContent = panelCount + ' × 585W Tier-1 Panels (' + (panelCount * 0.585).toFixed(1) + ' kWp)';
+        recBattery.textContent = '1x 24V/48V Lithium or 2x Tubular';
+        statusTier = 'Small Load (Residential)';
       } else if (totalWatts <= 6000) {
-        badge.className = 'tier-badge tier-medium';
-        badge.innerHTML = `<span>Status: Medium Load (Standard Home)</span><span>${totalKw} kW</span>`;
-        recInverter.textContent = '6 kW Hybrid Inverter (Growatt / Inverex / Solis)';
+        tierBadge.className = 'load-tier-badge tier-amber';
+        tierBadge.innerHTML = '<span>Status: Medium Load (Standard Home)</span><span>' + totalKw + ' kW</span>';
+        recInverter.textContent = '6 kW Hybrid Inverter (Growatt / Solis)';
         const panelCount = Math.max(8, Math.ceil(totalWatts / 480));
-        recPanels.textContent = `${panelCount} × 585W Bi-Facial Panels (${(panelCount * 0.585).toFixed(1)} kWp)`;
-        recBattery.textContent = '1x 48V 100Ah Lithium Wallmount Battery';
-        statusTier = 'Medium Load';
+        recPanels.textContent = panelCount + ' × 585W Bi-Facial Panels (' + (panelCount * 0.585).toFixed(1) + ' kWp)';
+        recBattery.textContent = '1x 48V 100Ah Lithium Wallmount';
+        statusTier = 'Medium Load (Standard Home)';
       } else {
-        badge.className = 'tier-badge tier-high';
-        badge.innerHTML = `<span>Status: High Load (Heavy Residential/Commercial)</span><span>${totalKw} kW</span>`;
-        recInverter.textContent = '10 kW – 15 kW Three-Phase Hybrid / On-Grid';
+        tierBadge.className = 'load-tier-badge tier-red';
+        tierBadge.innerHTML = '<span>Status: High Load (Heavy / Commercial)</span><span>' + totalKw + ' kW</span>';
+        recInverter.textContent = '10 kW - 15 kW Three-Phase Hybrid';
         const panelCount = Math.max(14, Math.ceil(totalWatts / 500));
-        recPanels.textContent = `${panelCount} × 585W–620W Panels (${(panelCount * 0.585).toFixed(1)} kWp)`;
+        recPanels.textContent = panelCount + ' × 585W-620W Panels (' + (panelCount * 0.585).toFixed(1) + ' kWp)';
         recBattery.textContent = '2x 48V 100Ah Lithium Battery Rack';
-        statusTier = 'High Load';
+        statusTier = 'High Load (Commercial / Heavy)';
       }
 
-      // Render Selected Items List
-      const previewList = document.getElementById('selected-items-preview');
-      if (selectedList.length === 0) {
-        previewList.innerHTML = `
-          <div class="empty-state-notice">
-            Please select at least one appliance from the left.
-            <span class="urdu-text">براہ کرم کم از کم ایک اپلائنس منتخب کریں</span>
-          </div>
-        `;
-      } else {
-        previewList.innerHTML = selectedList.map(item => `
-          <div class="selected-pill-row">
-            <div>
-              <strong>${item.nameEn}</strong> <small style="color:var(--gray-text);">(${item.nameUr})</small>
-              <span style="color:var(--gray-text);font-size:0.75rem;"> × ${item.qty}</span>
-              ${item.isCustom ? `<button onclick="removeCustomAppliance('${item.id}')" style="background:none;border:none;color:var(--red-bright);cursor:pointer;font-size:0.75rem;margin-left:4px;" title="Remove">✕</button>` : ''}
-            </div>
-            <strong style="color:var(--navy-deep);">${item.totalWatts.toLocaleString()} W</strong>
-          </div>
-        `).join('');
+      const previewList = document.getElementById('selected-preview-list');
+      if (previewList) {
+        if (selectedItems.length === 0) {
+          previewList.innerHTML = '<div style="text-align:center;padding:12px;color:#64748B;">Please select at least one appliance from the left.</div>';
+        } else {
+          previewList.innerHTML = selectedItems.map(item => 
+            '<div class="preview-row">' +
+              '<span>' + item.name + ' × <b>' + item.qty + '</b> ' + (item.isCustom ? '<button onclick="removeCustomAppliance(\'' + item.id + '\')" style="border:none;background:none;color:#DC2626;cursor:pointer;margin-left:4px;">✕</button>' : '') + '</span>' +
+              '<strong style="color:var(--navy-deep);">' + item.totalWatts.toLocaleString() + ' W</strong>' +
+            '</div>'
+          ).join('');
+        }
       }
 
-      return { totalQty, totalWatts, totalKw, statusTier, selectedList };
+      return { totalQty, totalWatts, totalKw, statusTier, selectedItems };
     }
 
-    // ============================================================
-    // FILTERING & SEARCH
-    // ============================================================
-    function setCategory(cat, btn) {
-      currentCategory = cat;
-      document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-      renderApplianceGrid();
-    }
-
-    function filterAppliances() {
-      currentSearchTerm = document.getElementById('appliance-search').value.trim();
-      renderApplianceGrid();
-    }
-
-    function clearSearch() {
-      document.getElementById('appliance-search').value = '';
-      currentSearchTerm = '';
-      renderApplianceGrid();
-    }
-
-    function toggleOptionalFields() {
-      const container = document.getElementById('optional-fields-container');
-      const icon = document.getElementById('optional-toggle-icon');
-      if (container) {
-        const isShown = container.classList.toggle('show');
-        if (icon) icon.textContent = isShown ? '▲' : '▼';
-      }
-    }
-
-    function scrollToQuotationForm(e) {
-      if (e) e.preventDefault();
-      const sidebar = document.getElementById('quotation-sidebar');
-      if (sidebar) {
-        sidebar.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
-    // ============================================================
-    // FORM VALIDATION & NORMALIZATION
-    // ============================================================
-    function normalizePakistaniPhone(raw) {
-      let cleaned = raw.replace(/\D/g, ''); // strip non-digits
-      if (cleaned.startsWith('0092')) cleaned = cleaned.substring(4);
-      else if (cleaned.startsWith('92')) cleaned = cleaned.substring(2);
-      else if (cleaned.startsWith('0')) cleaned = cleaned.substring(1);
-
-      // Validate that it's a 10 digit number starting with 3 (e.g. 3001234567)
-      if (/^3\d{9}$/.test(cleaned)) {
-        return { valid: true, international: `92${cleaned}`, local: `0${cleaned}` };
-      }
-      return { valid: false, raw: raw };
-    }
-
-    function generateQuotationNumber() {
-      const now = new Date();
-      const y = now.getFullYear();
-      const m = String(now.getMonth() + 1).padStart(2, '0');
-      const d = String(now.getDate()).padStart(2, '0');
-      const rand = Math.floor(1000 + Math.random() * 9000);
-      return `BZ-SOLAR-${y}${m}${d}-${rand}`;
-    }
-
-    function invalidateGeneratedPdf() {
-      generatedQuotationData = null;
+    function resetQuotationPdfState() {
+      generatedQuotation = null;
       generatedPdfBlob = null;
-      generatedPdfBlobUrl = null;
+      generatedPdfUrl = null;
       generatedPdfFile = null;
+
       document.getElementById('btn-preview-pdf').disabled = true;
       document.getElementById('btn-download-pdf').disabled = true;
       document.getElementById('btn-share-pdf').disabled = true;
       document.getElementById('btn-send-whatsapp').disabled = true;
-      document.getElementById('wa-instruction-notice').classList.remove('show');
+      document.getElementById('wa-attachment-instruction').classList.remove('show');
     }
 
-    // ============================================================
-    // 100% CLIENT-SIDE PDF GENERATION (jsPDF)
-    // ============================================================
-    async function createQuotationPdfBlob(data) {
+    async function createPureEnglishPdfDocument(data) {
       const { jsPDF } = window.jspdf;
       const pdf = new jsPDF('p', 'mm', 'a4');
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
       const margins = { top: 14, left: 14, right: 14, bottom: 14 };
       const contentWidth = pageWidth - margins.left - margins.right;
-
       let yPos = margins.top;
 
-      // Color Palette
-      const primaryNavy = [11, 19, 43];
-      const deepRed = [185, 28, 28];
-      const slateDark = [51, 65, 85];
-      const grayLine = [226, 232, 240];
-      const tableStripe = [248, 250, 252];
-
-      // Helper: check page break
-      const checkPageBreak = (needed) => {
-        if (yPos + needed > pageHeight - margins.bottom) {
-          pdf.addPage();
-          yPos = margins.top + 6;
-        }
-      };
-
-      // ── 1. HEADER WITH BRAND LOGO & INFO ──
-      // Navy Top Bar Accent
-      pdf.setFillColor(...primaryNavy);
+      pdf.setFillColor(9, 14, 31);
       pdf.rect(0, 0, pageWidth, 5, 'F');
 
-      // Logo Icon Box
-      const logoBoxSize = 18;
-      pdf.setFillColor(...deepRed);
-      pdf.roundedRect(margins.left, yPos, logoBoxSize, logoBoxSize, 3, 3, 'F');
+      pdf.setFillColor(185, 28, 28);
+      pdf.roundedRect(margins.left, yPos, 18, 18, 3, 3, 'F');
       pdf.setTextColor(255, 255, 255);
       pdf.setFont('helvetica', 'bold');
       pdf.setFontSize(11);
       pdf.text('BZ', margins.left + 5.5, yPos + 11.5);
 
-      // Company Title & Info
-      pdf.setTextColor(...primaryNavy);
+      pdf.setTextColor(9, 14, 31);
       pdf.setFontSize(16);
       pdf.setFont('helvetica', 'bold');
-      pdf.text('BIN ZAREEN SOLAR PVT LTD', margins.left + logoBoxSize + 4, yPos + 6);
-
+      pdf.text('BIN ZAREEN SOLAR PVT LTD', margins.left + 22, yPos + 6);
       pdf.setFontSize(8.5);
       pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(...deepRed);
-      pdf.text('Pakistan Registered Solar Engineering & EPC Solutions | BinZareen.com', margins.left + logoBoxSize + 4, yPos + 11);
-
+      pdf.setTextColor(185, 28, 28);
+      pdf.text('Certified Solar EPC & Clean Power Engineering | BinZareen.com', margins.left + 22, yPos + 11);
       pdf.setFontSize(8);
       pdf.setTextColor(100, 116, 139);
-      pdf.text('WhatsApp & Tel: +92 325 2053313 | Email: contact@binzareen.com', margins.left + logoBoxSize + 4, yPos + 16);
+      pdf.text('Head Office: Islamabad, Pakistan | Helpline: +92 325 2053313 | Email: contact@binzareen.com', margins.left + 22, yPos + 16);
 
-      // Quotation Reference Badge (Right Aligned)
       pdf.setFillColor(254, 242, 242);
       pdf.roundedRect(pageWidth - margins.right - 62, yPos, 62, 18, 2, 2, 'F');
-      pdf.setDrawColor(254, 202, 202);
-      pdf.setLineWidth(0.3);
-      pdf.roundedRect(pageWidth - margins.right - 62, yPos, 62, 18, 2, 2, 'S');
-
       pdf.setFontSize(7.5);
       pdf.setFont('helvetica', 'bold');
-      pdf.setTextColor(...deepRed);
+      pdf.setTextColor(185, 28, 28);
       pdf.text('ESTIMATE QUOTATION', pageWidth - margins.right - 60, yPos + 5);
-
       pdf.setFontSize(8);
       pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(...slateDark);
-      pdf.text(`No: ${data.quotationNumber}`, pageWidth - margins.right - 60, yPos + 10);
-      pdf.text(`Date: ${data.dateFormatted}`, pageWidth - margins.right - 60, yPos + 14.5);
+      pdf.setTextColor(51, 65, 85);
+      pdf.text('Ref No: ' + data.quotationNumber, pageWidth - margins.right - 60, yPos + 10);
+      pdf.text('Date: ' + data.dateFormatted, pageWidth - margins.right - 60, yPos + 14.5);
 
-      yPos += logoBoxSize + 8;
-
-      // Divider Line
-      pdf.setDrawColor(...deepRed);
+      yPos += 26;
+      pdf.setDrawColor(185, 28, 28);
       pdf.setLineWidth(0.7);
       pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
       yPos += 6;
 
-      // ── 2. CUSTOMER DETAILS & SYSTEM PROFILE CARD ──
-      checkPageBreak(30);
-      pdf.setFillColor(...tableStripe);
-      pdf.roundedRect(margins.left, yPos, contentWidth, 24, 2, 2, 'F');
-      pdf.setDrawColor(...grayLine);
-      pdf.setLineWidth(0.3);
-      pdf.roundedRect(margins.left, yPos, contentWidth, 24, 2, 2, 'S');
-
-      // Customer section header
-      pdf.setFillColor(...deepRed);
-      pdf.rect(margins.left, yPos, 3, 24, 'F');
-
+      pdf.setFillColor(248, 250, 252);
+      pdf.roundedRect(margins.left, yPos, contentWidth, 22, 2, 2, 'F');
       pdf.setFontSize(8.5);
       pdf.setFont('helvetica', 'bold');
-      pdf.setTextColor(...primaryNavy);
-      pdf.text('CUSTOMER & SITE SPECIFICATIONS', margins.left + 6, yPos + 5.5);
-
+      pdf.setTextColor(9, 14, 31);
+      pdf.text('CUSTOMER SPECIFICATIONS', margins.left + 6, yPos + 5.5);
       pdf.setFontSize(8);
       pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(...slateDark);
-
-      // Col 1
-      pdf.text(`Customer Name:`, margins.left + 6, yPos + 11.5);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(`${data.customer.name}`, margins.left + 34, yPos + 11.5);
-      pdf.setFont('helvetica', 'normal');
-
-      pdf.text(`City:`, margins.left + 6, yPos + 17);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(`${data.customer.city}, Pakistan`, margins.left + 34, yPos + 17);
-      pdf.setFont('helvetica', 'normal');
-
-      // Col 2
-      const midCol = margins.left + 80;
-      pdf.text(`WhatsApp:`, midCol, yPos + 11.5);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(`${data.customer.phone}`, midCol + 20, yPos + 11.5);
-      pdf.setFont('helvetica', 'normal');
-
-      pdf.text(`Roof Type:`, midCol, yPos + 17);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(`${data.customer.roofType || 'Standard Roof'}`, midCol + 20, yPos + 17);
-      pdf.setFont('helvetica', 'normal');
-
-      // Col 3
-      const rightCol = margins.left + 140;
-      pdf.text(`Monthly Bill:`, rightCol, yPos + 11.5);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(`${data.customer.monthlyBill || 'Standard'}`, rightCol + 20, yPos + 11.5);
-      pdf.setFont('helvetica', 'normal');
-
-      pdf.text(`Backup Req:`, rightCol, yPos + 17);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(`${data.customer.backupReq || 'Standard'}`, rightCol + 20, yPos + 17);
-      pdf.setFont('helvetica', 'normal');
+      pdf.setTextColor(51, 65, 85);
+      pdf.text('Customer Name: ' + data.customer.name, margins.left + 6, yPos + 11.5);
+      pdf.text('City: ' + data.customer.city + ', Pakistan', margins.left + 6, yPos + 17);
+      pdf.text('WhatsApp Phone: ' + data.customer.phone, margins.left + 90, yPos + 11.5);
+      pdf.text('Preferred Contact Time: ' + data.customer.contactTime, margins.left + 90, yPos + 17);
 
       yPos += 28;
 
-      // ── 3. SELECTED APPLIANCES BREAKDOWN TABLE ──
-      checkPageBreak(30);
       pdf.setFontSize(9);
       pdf.setFont('helvetica', 'bold');
-      pdf.setTextColor(...deepRed);
+      pdf.setTextColor(185, 28, 28);
       pdf.text('ELECTRICAL LOAD BREAKDOWN (SELECTED APPLIANCES)', margins.left, yPos);
       yPos += 4;
 
-      // Table Column Headers
-      const colWidths = [10, 58, 36, 26, 20, 32];
-      const tableHeaders = ['Sr.', 'Appliance Description', 'Urdu Name', 'Est. Range', 'Qty', 'Total Watts'];
-      const headerHeight = 7;
-      const rowHeight = 6.2;
-
-      pdf.setFillColor(...primaryNavy);
-      pdf.rect(margins.left, yPos, contentWidth, headerHeight, 'F');
+      const colWidths = [10, 72, 38, 28, 34];
+      const tableHeaders = ['Sr.', 'Appliance Description', 'Category', 'Quantity', 'Total Peak Watts'];
+      
+      pdf.setFillColor(9, 14, 31);
+      pdf.rect(margins.left, yPos, contentWidth, 7, 'F');
       pdf.setTextColor(255, 255, 255);
       pdf.setFontSize(7.5);
       pdf.setFont('helvetica', 'bold');
@@ -2439,159 +1234,92 @@
         pdf.text(h, curX + 2, yPos + 4.8);
         curX += colWidths[idx];
       });
-      yPos += headerHeight;
+      yPos += 7;
 
-      // Table Rows
-      pdf.setTextColor(...slateDark);
+      pdf.setTextColor(51, 65, 85);
       pdf.setFontSize(7.5);
       pdf.setFont('helvetica', 'normal');
 
-      data.selectedList.forEach((item, idx) => {
-        checkPageBreak(rowHeight + 2);
-
+      data.selectedItems.forEach((item, idx) => {
         if (idx % 2 === 0) {
-          pdf.setFillColor(...tableStripe);
-          pdf.rect(margins.left, yPos, contentWidth, rowHeight, 'F');
+          pdf.setFillColor(248, 250, 252);
+          pdf.rect(margins.left, yPos, contentWidth, 6, 'F');
         }
-
-        pdf.setDrawColor(...grayLine);
-        pdf.setLineWidth(0.2);
-        pdf.line(margins.left, yPos + rowHeight, margins.left + contentWidth, yPos + rowHeight);
-
         curX = margins.left;
-        // 1. Sr
-        pdf.text(String(idx + 1), curX + 2, yPos + 4.2);
-        curX += colWidths[0];
-
-        // 2. English Name
+        pdf.text(String(idx + 1), curX + 2, yPos + 4.2); curX += colWidths[0];
         pdf.setFont('helvetica', 'bold');
-        pdf.text(item.nameEn.substring(0, 32), curX + 2, yPos + 4.2);
+        pdf.text(item.name.substring(0, 40), curX + 2, yPos + 4.2); curX += colWidths[1];
         pdf.setFont('helvetica', 'normal');
-        curX += colWidths[1];
-
-        // 3. Urdu transliteration / name
-        pdf.text(item.nameUr ? item.nameUr.substring(0, 24) : '—', curX + 2, yPos + 4.2);
-        curX += colWidths[2];
-
-        // 4. Range
-        pdf.text(item.range, curX + 2, yPos + 4.2);
-        curX += colWidths[3];
-
-        // 5. Qty
-        pdf.text(`${item.qty}x`, curX + 6, yPos + 4.2);
-        curX += colWidths[4];
-
-        // 6. Total Watts
+        pdf.text(item.category || 'Home Appliance', curX + 2, yPos + 4.2); curX += colWidths[2];
+        pdf.text(item.qty + ' Unit' + (item.qty > 1 ? 's' : ''), curX + 4, yPos + 4.2); curX += colWidths[3];
         pdf.setFont('helvetica', 'bold');
-        pdf.setTextColor(...deepRed);
-        pdf.text(`${item.totalWatts.toLocaleString()} W`, curX + 4, yPos + 4.2);
-        pdf.setTextColor(...slateDark);
+        pdf.setTextColor(185, 28, 28);
+        pdf.text(item.totalWatts.toLocaleString() + ' W', curX + 4, yPos + 4.2);
+        pdf.setTextColor(51, 65, 85);
         pdf.setFont('helvetica', 'normal');
 
-        yPos += rowHeight;
+        yPos += 6;
       });
 
-      // Table Total Footer Row
       yPos += 2;
-      checkPageBreak(18);
-      pdf.setFillColor(...deepRed);
+      pdf.setFillColor(185, 28, 28);
       pdf.roundedRect(margins.left, yPos, contentWidth, 8.5, 1.5, 1.5, 'F');
       pdf.setTextColor(255, 255, 255);
       pdf.setFontSize(8.5);
       pdf.setFont('helvetica', 'bold');
-      pdf.text(`TOTAL CALCULATED HOME LOAD:`, margins.left + 4, yPos + 5.5);
-      pdf.text(`${data.totalWatts.toLocaleString()} Watts  (${data.totalKw} kW)`, margins.left + 80, yPos + 5.5);
-      pdf.text(`Tier: ${data.statusTier}`, margins.left + contentWidth - 45, yPos + 5.5);
+      pdf.text('TOTAL CALCULATED HOME LOAD:', margins.left + 4, yPos + 5.5);
+      pdf.text(data.totalWatts.toLocaleString() + ' Watts (' + data.totalKw + ' kW)', margins.left + 80, yPos + 5.5);
+      pdf.text('Tier: ' + data.statusTier, margins.left + contentWidth - 55, yPos + 5.5);
 
-      yPos += 13;
+      yPos += 14;
 
-      // ── 4. RECOMMENDED SOLAR SYSTEM ARCHITECTURE ──
-      checkPageBreak(30);
-      pdf.setFillColor(...tableStripe);
-      pdf.roundedRect(margins.left, yPos, contentWidth, 22, 2, 2, 'F');
-      pdf.setDrawColor(203, 213, 225);
-      pdf.setLineWidth(0.3);
-      pdf.roundedRect(margins.left, yPos, contentWidth, 22, 2, 2, 'S');
-
-      pdf.setFillColor(...primaryNavy);
-      pdf.rect(margins.left, yPos, 3, 22, 'F');
-
+      pdf.setFillColor(248, 250, 252);
+      pdf.roundedRect(margins.left, yPos, contentWidth, 20, 2, 2, 'F');
       pdf.setFontSize(8.5);
       pdf.setFont('helvetica', 'bold');
-      pdf.setTextColor(...primaryNavy);
-      pdf.text('RECOMMENDED SOLAR SYSTEM SIZING & HARDWARE', margins.left + 6, yPos + 5.5);
-
+      pdf.setTextColor(9, 14, 31);
+      pdf.text('RECOMMENDED SOLAR SIZING', margins.left + 6, yPos + 5);
       pdf.setFontSize(7.5);
       pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(...slateDark);
-
-      pdf.text(`• Recommended Inverter:`, margins.left + 6, yPos + 11);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(document.getElementById('rec-inverter').textContent, margins.left + 44, yPos + 11);
-      pdf.setFont('helvetica', 'normal');
-
-      pdf.text(`• Solar Panels Needed:`, margins.left + 6, yPos + 16.5);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(document.getElementById('rec-panels').textContent, margins.left + 44, yPos + 16.5);
-      pdf.setFont('helvetica', 'normal');
-
-      pdf.text(`• Battery Backup:`, margins.left + 105, yPos + 11);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(document.getElementById('rec-battery').textContent, margins.left + 132, yPos + 11);
-      pdf.setFont('helvetica', 'normal');
-
-      yPos += 26;
-
-      // ── 5. SOLAR SIZING NOTICE (BILINGUAL ENGLISH & URDU) ──
-      checkPageBreak(25);
-      pdf.setFillColor(254, 242, 242);
-      pdf.roundedRect(margins.left, yPos, contentWidth, 20, 2, 2, 'F');
-      pdf.setDrawColor(254, 202, 202);
-      pdf.setLineWidth(0.3);
-      pdf.roundedRect(margins.left, yPos, contentWidth, 20, 2, 2, 'S');
-
-      pdf.setFontSize(7.2);
-      pdf.setFont('helvetica', 'bold');
-      pdf.setTextColor(...deepRed);
-      pdf.text('OFFICIAL SIZING NOTICE / اہم ہدایات:', margins.left + 4, yPos + 4.5);
-
-      pdf.setFontSize(7);
-      pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(...slateDark);
-      pdf.text('This is an approximate load estimate. Final battery, inverter and solar panel sizing will be confirmed by our solar experts after reviewing your usage.', margins.left + 4, yPos + 9);
-
-      pdf.text('یہ ایک تخمینہ لوڈ ہے، بیٹری، انورٹر اور سولر پینل کا حتمی سائز ہمارے سولر ماہرین جائزہ لینے کے بعد طے کریں گے۔', margins.left + 4, yPos + 14);
+      pdf.setTextColor(51, 65, 85);
+      pdf.text('• Inverter: ' + document.getElementById('rec-inverter').textContent, margins.left + 6, yPos + 10);
+      pdf.text('• Solar Panels: ' + document.getElementById('rec-panels').textContent, margins.left + 6, yPos + 15);
+      pdf.text('• Battery Backup: ' + document.getElementById('rec-battery').textContent, margins.left + 100, yPos + 10);
 
       yPos += 24;
 
-      // ── 6. FOOTER ──
+      pdf.setFillColor(254, 242, 242);
+      pdf.roundedRect(margins.left, yPos, contentWidth, 16, 2, 2, 'F');
+      pdf.setFontSize(7.2);
+      pdf.setFont('helvetica', 'bold');
+      pdf.setTextColor(185, 28, 28);
+      pdf.text('ENGINEERING SIZING NOTICE:', margins.left + 4, yPos + 4.5);
+      pdf.setFontSize(7);
+      pdf.setFont('helvetica', 'normal');
+      pdf.setTextColor(51, 65, 85);
+      pdf.text('This quotation is an engineering estimation based on standard Pakistani residential appliance ratings.', margins.left + 4, yPos + 8.5);
+      pdf.text('Final battery, inverter model, and solar panel configuration will be finalized upon technical consultation with our engineering team.', margins.left + 4, yPos + 12.5);
+
       const footerY = pageHeight - margins.bottom - 4;
-      pdf.setDrawColor(...grayLine);
+      pdf.setDrawColor(226, 232, 240);
       pdf.setLineWidth(0.3);
       pdf.line(margins.left, footerY - 4, pageWidth - margins.right, footerY - 4);
-
       pdf.setFontSize(7);
       pdf.setTextColor(148, 163, 184);
-      pdf.text(`Bin Zareen Solar Pvt Ltd Pakistan | Helpline: 0325-2053313 | Quotation #${data.quotationNumber}`, margins.left, footerY);
-      pdf.text(`Page 1 of 1`, pageWidth - margins.right - 14, footerY);
+      pdf.text('Bin Zareen Solar Pvt. Ltd. | Helpline: 0325-2053313 | Quotation #' + data.quotationNumber, margins.left, footerY);
 
-      // Return Blob & File
       const blob = pdf.output('blob');
-      const filename = `BinZareen-Solar-Quotation-${data.quotationNumber}.pdf`;
+      const filename = 'BinZareen-Solar-Quotation-' + data.quotationNumber + '.pdf';
       const file = new File([blob], filename, { type: 'application/pdf' });
-
       return { blob, file, filename };
     }
 
-    // ============================================================
-    // FORM SUBMISSION & PDF GENERATION HANDLER
-    // ============================================================
-    async function handleFormSubmit(e) {
+    async function handleFormSubmission(e) {
       if (e) e.preventDefault();
+      const totals = calculateLoadTotals();
 
-      const totals = calculateLiveTotals();
       if (totals.totalWatts === 0) {
-        alert('Please select at least one appliance before generating quotation.\nبراہ کرم کم از کم ایک اپلائنس منتخب کریں۔');
+        alert('Please select at least one appliance before generating your solar quotation.');
         return;
       }
 
@@ -2599,200 +1327,148 @@
       const city = document.getElementById('cust-city').value.trim();
       const rawPhone = document.getElementById('cust-phone').value.trim();
 
-      if (!name) {
-        alert('Please enter your full name.');
-        document.getElementById('cust-name').focus();
-        return;
-      }
-      if (!city) {
-        alert('Please enter your city in Pakistan.');
-        document.getElementById('cust-city').focus();
+      if (!name || !city) {
+        alert('Please enter your full name and city.');
         return;
       }
 
-      const phoneValidation = normalizePakistaniPhone(rawPhone);
-      if (!phoneValidation.valid) {
+      let cleanedPhone = rawPhone.replace(/\D/g, '');
+      if (cleanedPhone.startsWith('0092')) cleanedPhone = cleanedPhone.substring(4);
+      else if (cleanedPhone.startsWith('92')) cleanedPhone = cleanedPhone.substring(2);
+      else if (cleanedPhone.startsWith('0')) cleanedPhone = cleanedPhone.substring(1);
+
+      if (!/^3\d{9}$/.test(cleanedPhone)) {
         alert('Please enter a valid Pakistani WhatsApp number (e.g. 03001234567 or 3001234567).');
-        document.getElementById('cust-phone').focus();
         return;
       }
 
-      const generateBtn = document.getElementById('btn-generate-pdf');
-      generateBtn.disabled = true;
-      generateBtn.innerHTML = `Generating Professional PDF...`;
+      const btnGen = document.getElementById('btn-generate-pdf');
+      btnGen.disabled = true;
+      btnGen.textContent = 'Generating PDF...';
 
       try {
-        const quotationNumber = generateQuotationNumber();
         const now = new Date();
+        const qNum = 'BZ-SOLAR-' + now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '-' + Math.floor(1000+Math.random()*9000);
         const dateFormatted = now.toLocaleDateString('en-PK', { day: '2-digit', month: 'short', year: 'numeric' });
 
-        const quotationPayload = {
-          quotationNumber,
-          dateFormatted,
+        const payload = {
+          quotationNumber: qNum,
+          dateFormatted: dateFormatted,
           customer: {
-            name,
-            city,
-            phone: phoneValidation.international,
-            contactTime: document.getElementById('cust-time').value,
-            monthlyBill: document.getElementById('cust-bill').value,
-            roofType: document.getElementById('cust-roof').value,
-            backupReq: document.getElementById('cust-backup').value,
-            notes: document.getElementById('cust-notes').value.trim()
+            name: name,
+            city: city,
+            phone: '92' + cleanedPhone,
+            contactTime: document.getElementById('cust-contact-time').value
           },
           ...totals
         };
 
-        const { blob, file, filename } = await createQuotationPdfBlob(quotationPayload);
-
-        generatedQuotationData = quotationPayload;
+        const { blob, file, filename } = await createPureEnglishPdfDocument(payload);
+        generatedQuotation = payload;
         generatedPdfBlob = blob;
         generatedPdfFile = file;
-        if (generatedPdfBlobUrl) URL.revokeObjectURL(generatedPdfBlobUrl);
-        generatedPdfBlobUrl = URL.createObjectURL(blob);
 
-        // Enable buttons
+        if (generatedPdfUrl) URL.revokeObjectURL(generatedPdfUrl);
+        generatedPdfUrl = URL.createObjectURL(blob);
+
         document.getElementById('btn-preview-pdf').disabled = false;
         document.getElementById('btn-download-pdf').disabled = false;
         document.getElementById('btn-share-pdf').disabled = false;
         document.getElementById('btn-send-whatsapp').disabled = false;
 
-        // Trigger automatic download
-        triggerPdfDownloadDirect();
-
-        showToast(`Quotation ${quotationNumber} generated successfully!`);
+        triggerPdfDirectDownload();
+        alert('Quotation ' + qNum + ' generated and downloaded successfully!');
       } catch (err) {
-        console.error('Error generating PDF:', err);
+        console.error('PDF error:', err);
         alert('Could not generate PDF. Please try again.');
       } finally {
-        generateBtn.disabled = false;
-        generateBtn.innerHTML = `
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Re-Generate PDF Quotation
-        `;
+        btnGen.disabled = false;
+        btnGen.textContent = '📄 Re-Generate PDF Quotation';
       }
     }
 
-    // ============================================================
-    // PDF ACTIONS: PREVIEW, DOWNLOAD, SHARE & WHATSAPP
-    // ============================================================
     function openPdfPreviewModal() {
-      if (!generatedPdfBlobUrl) return;
-      const iframe = document.getElementById('pdf-preview-iframe');
-      iframe.src = generatedPdfBlobUrl;
+      if (!generatedPdfUrl) return;
+      const iframeContainer = document.getElementById('modal-iframe-container');
+      iframeContainer.innerHTML = '<iframe src="' + generatedPdfUrl + '"></iframe>';
       document.getElementById('pdf-preview-modal').classList.add('open');
     }
 
     function closePdfPreviewModal() {
       document.getElementById('pdf-preview-modal').classList.remove('open');
+      const iframeContainer = document.getElementById('modal-iframe-container');
+      if (iframeContainer) iframeContainer.innerHTML = '';
     }
 
-    function closeModalOnBg(e) {
-      if (e.target === document.getElementById('pdf-preview-modal')) {
-        closePdfPreviewModal();
-      }
+    function closePdfModalOnBg(e) {
+      if (e.target.id === 'pdf-preview-modal') closePdfPreviewModal();
     }
 
-    function triggerPdfDownloadDirect() {
-      if (!generatedPdfBlob || !generatedQuotationData) return;
+    function triggerPdfDirectDownload() {
+      if (!generatedPdfBlob || !generatedQuotation) return;
       const a = document.createElement('a');
-      a.href = generatedPdfBlobUrl;
-      a.download = `BinZareen-Solar-Quotation-${generatedQuotationData.quotationNumber}.pdf`;
+      a.href = generatedPdfUrl;
+      a.download = 'BinZareen-Solar-Quotation-' + generatedQuotation.quotationNumber + '.pdf';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      showToast('PDF quotation downloaded.');
     }
 
-    async function handleNativeSharePdf() {
+    async function handleNativeShare() {
       if (!generatedPdfFile) return;
-
       const shareData = {
         files: [generatedPdfFile],
         title: 'Bin Zareen Solar Quotation',
-        text: `Solar quotation ${generatedQuotationData.quotationNumber} from Bin Zareen Solar Pvt Ltd Pakistan`
+        text: 'Solar quotation ' + generatedQuotation.quotationNumber + ' from Bin Zareen Solar Pvt. Ltd.'
       };
-
       if (navigator.canShare && navigator.canShare({ files: [generatedPdfFile] })) {
         try {
           await navigator.share(shareData);
-          showToast('Quotation shared successfully!');
-        } catch (err) {
-          if (err.name !== 'AbortError') {
-            console.warn('Share error:', err);
-          }
+        } catch (e) {
+          if (e.name !== 'AbortError') console.warn(e);
         }
       } else {
-        alert('File sharing is not supported on this device/browser.\nPlease download the PDF and attach it manually in WhatsApp.');
+        alert('Native file sharing is not supported on this browser. Please download the PDF and send it via WhatsApp.');
       }
     }
 
-    async function handleSendViaWhatsApp() {
-      // If PDF not yet generated, generate it first
-      if (!generatedQuotationData || !generatedPdfBlob) {
-        await handleFormSubmit();
-        if (!generatedQuotationData) return;
+    async function handleWhatsAppSend() {
+      if (!generatedQuotation || !generatedPdfBlob) {
+        await handleFormSubmission();
+        if (!generatedQuotation) return;
       }
 
-      // 1. Ensure download is triggered so customer has the file ready on their device
-      triggerPdfDownloadDirect();
+      triggerPdfDirectDownload();
 
-      // 2. Short prefilled WhatsApp message containing only Quotation Number
-      const quotationNumber = generatedQuotationData.quotationNumber;
+      const qNum = generatedQuotation.quotationNumber;
       const message = [
-        "Hello Bin Zareen Solar,",
-        "",
-        "I have generated my solar load quotation.",
-        `Quotation No: ${quotationNumber}`,
-        "",
-        "Please find the attached PDF quotation."
-      ].join("\n");
+        'Hello Bin Zareen Solar,',
+        '',
+        'I have generated my solar load quotation.',
+        'Quotation No: ' + qNum,
+        '',
+        'Please find the attached PDF quotation.'
+      ].join('\n');
 
-      const whatsappUrl = `https://wa.me/${WHATSAPP_BUSINESS_NUMBER}?text=${encodeURIComponent(message)}`;
+      const waUrl = 'https://wa.me/923252053313?text=' + encodeURIComponent(message);
+      const instructionBanner = document.getElementById('wa-attachment-instruction');
+      if (instructionBanner) instructionBanner.classList.add('show');
 
-      // 3. Show clear instruction card on the website
-      const noticeCard = document.getElementById('wa-instruction-notice');
-      if (noticeCard) {
-        noticeCard.classList.add('show');
-        noticeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-
-      showToast('Opening WhatsApp... Please attach downloaded PDF');
-
-      // 4. Open WhatsApp
       setTimeout(() => {
-        window.open(whatsappUrl, '_blank');
-      }, 400);
+        window.open(waUrl, '_blank');
+      }, 350);
     }
 
-    // ============================================================
-    // UTILITIES
-    // ============================================================
-    function escapeHtml(text) {
-      if (!text) return '';
-      return text.replace(/[&<>"']/g, function(m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
-      });
+    function scrollToQuotationForm() {
+      const form = document.getElementById('customer-form-section');
+      if (form) {
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
-    let toastTimeout;
-    function showToast(msg) {
-      const toast = document.getElementById('toast-banner');
-      const msgEl = document.getElementById('toast-message');
-      if (!toast || !msgEl) return;
-
-      msgEl.textContent = msg;
-      toast.classList.add('show');
-
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000);
-    }
-
-    // Initialize on DOM Ready
     document.addEventListener('DOMContentLoaded', () => {
-      renderApplianceGrid();
-      calculateLiveTotals();
+      renderAppliances();
+      calculateLoadTotals();
     });
   </script>
 </body>

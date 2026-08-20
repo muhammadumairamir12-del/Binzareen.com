@@ -1023,9 +1023,8 @@
       <div class="container" style="position:relative;z-index:1;">
         <button class="back-btn" onclick="goBack()" style="background:rgba(255,255,255,0.15);color:white;border:none;margin-bottom:12px;cursor:pointer;padding:6px 14px;border-radius:6px;font-weight:700;">← Back</button>
         <div class="calc-badge">⚡ Instant Solar Sizing & Official Estimate</div>
-        <h1 class="calc-urdu-title">لوڈ کا انتخاب اور سولر کوٹیشن</h1>
-        <div class="calc-eng-title">Home Load Calculator & Solar Quotation</div>
-        <p>Select your household appliances below to calculate your estimated electrical load instantly. Generate an official bilingual PDF quotation and connect directly with our engineering team via WhatsApp.</p>
+        <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;color:white;margin:6px 0;">Home Load Calculator & Solar Quotation</h1>
+        <p>Select your household appliances below to calculate your estimated electrical load instantly. Generate an official PDF quotation and connect directly with our engineering team via WhatsApp.</p>
       </div>
     </div>
 
@@ -1036,7 +1035,7 @@
         <div class="calc-appliances-box">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1.5px solid #E2E8F0;flex-wrap:wrap;gap:10px;">
             <div>
-              <h2 style="font-size:1.3rem;font-weight:800;color:#0F172A;margin:0;">Select Your Home Appliances</h2>
+              <h2 style="font-size:1.3rem;font-weight:800;color:#0F172A;margin:0;">Select Your Household Appliances</h2>
               <p style="font-size:0.84rem;color:#64748B;margin:2px 0 0;">Adjust quantities using (+) and (−). Real-time load calculations update instantly.</p>
             </div>
             <button onclick="resetIndexCalculator()" style="background:#FEF2F2;color:#DC2626;border:1px solid #FEE2E2;padding:6px 12px;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer;">Reset Selection</button>
@@ -1044,14 +1043,15 @@
 
           <!-- CONTROLS -->
           <div class="calc-controls-bar">
-            <input type="text" id="idx-calc-search" class="calc-search-input" placeholder="Search appliances (e.g. Inverter AC, Fridge, Fan)..." oninput="filterIndexAppliances()">
+            <input type="text" id="idx-calc-search" class="calc-search-input" placeholder="Search appliances (e.g. Inverter AC, Refrigerator, Fan, Pump, Iron)..." oninput="filterIndexAppliances()">
             <div class="calc-category-tabs" id="idx-category-tabs">
               <button class="calc-tab-btn active" onclick="setIndexCategory('all', this)">All Appliances</button>
-              <button class="calc-tab-btn" onclick="setIndexCategory('Cooling & AC', this)">Cooling & AC</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Cooling & Heating', this)">Cooling & Heating</button>
               <button class="calc-tab-btn" onclick="setIndexCategory('Kitchen', this)">Kitchen</button>
-              <button class="calc-tab-btn" onclick="setIndexCategory('Living & Home', this)">Living & Home</button>
-              <button class="calc-tab-btn" onclick="setIndexCategory('Heavy Load', this)">Heavy Load</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Home & Laundry', this)">Home & Laundry</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Heavy Pumps', this)">Heavy Pumps</button>
               <button class="calc-tab-btn" onclick="setIndexCategory('Lighting & Tech', this)">Lighting & Tech</button>
+              <button class="calc-tab-btn" onclick="setIndexCategory('Fitness & Other', this)">Fitness & Other</button>
             </div>
           </div>
 
@@ -1062,9 +1062,9 @@
 
           <!-- CUSTOM ITEM ROW -->
           <div style="margin-top:20px;padding:16px;background:#F8FAFC;border:1.5px dashed #CBD5E1;border-radius:12px;">
-            <div style="font-size:0.88rem;font-weight:700;color:#0F172A;margin-bottom:10px;">➕ Add Custom Appliance or Wattage</div>
+            <div style="font-size:0.88rem;font-weight:700;color:#0F172A;margin-bottom:10px;">➕ Add Custom Appliance or Machinery</div>
             <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr auto;gap:8px;" class="custom-inputs-row">
-              <input type="text" id="idx-custom-name" placeholder="Item Name (e.g. Deep Well Pump)" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
+              <input type="text" id="idx-custom-name" placeholder="Appliance Name (e.g. Deep Well Pump)" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
               <input type="number" id="idx-custom-watts" placeholder="Watts (e.g. 1500)" min="1" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
               <input type="number" id="idx-custom-qty" placeholder="Qty" min="1" value="1" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
               <button onclick="addIndexCustomAppliance()" style="background:#0F172A;color:white;border:none;padding:8px 14px;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.85rem;">+ Add</button>
@@ -1073,16 +1073,15 @@
         </div>
 
         <!-- RIGHT: STICKY LOAD SUMMARY & QUOTATION FORM -->
-        <div class="calc-sidebar-sticky">
+        <div class="calc-sidebar-sticky" id="idx-form-section">
 
           <!-- LOAD SUMMARY CARD -->
           <div class="calc-summary-panel">
             <div class="calc-summary-top">
               <div style="display:flex;justify-content:space-between;align-items:center;">
                 <span style="font-weight:800;font-size:1.15rem;">Total Load Summary</span>
-                <span style="font-family:'Noto Nastaliq Urdu',serif;color:#FDE047;font-size:0.9rem;">کل لوڈ کا خلاصہ</span>
               </div>
-              <small style="color:#94A3B8;display:block;margin-top:2px;">Real-time electrical consumption</small>
+              <small style="color:#94A3B8;display:block;margin-top:2px;">Real-time electrical consumption estimate</small>
             </div>
 
             <div class="calc-summary-metrics">
@@ -1109,9 +1108,8 @@
             </div>
 
             <div class="calc-selected-preview" id="idx-selected-preview">
-              <div style="text-align:center;padding:10px;color:#64748B;">
+              <div style="text-align:center;padding:12px;color:#64748B;">
                 Please select at least one appliance from the left.
-                <div style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;font-size:0.88rem;margin-top:4px;">براہ کرم کم از کم ایک اپلائنس منتخب کریں</div>
               </div>
             </div>
           </div>
@@ -1120,25 +1118,24 @@
           <div class="calc-form-panel">
             <div class="calc-form-title">
               <span>Request Your Solar Quotation</span>
-              <span style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;font-size:0.88rem;">اپنا سولر کوٹیشن حاصل کریں</span>
             </div>
 
             <form id="idx-quotation-form" onsubmit="handleIndexFormSubmit(event)">
               <div class="calc-input-group">
-                <label><span>Full Name *</span><span style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;">پورا نام</span></label>
+                <label><span>Customer Full Name *</span></label>
                 <input type="text" id="idx-cust-name" placeholder="e.g. Muhammad Usman" required>
               </div>
 
               <div class="calc-input-group">
-                <label><span>City in Pakistan *</span><span style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;">شہر</span></label>
-                <input type="text" id="idx-cust-city" placeholder="e.g. Islamabad, Lahore, Karachi..." list="pk-cities-list-idx" required>
+                <label><span>City in Pakistan *</span></label>
+                <input type="text" id="idx-cust-city" placeholder="e.g. Islamabad, Rawalpindi, Lahore..." list="pk-cities-list-idx" required>
                 <datalist id="pk-cities-list-idx">
                   <option value="Islamabad"><option value="Rawalpindi"><option value="Lahore"><option value="Karachi"><option value="Faisalabad"><option value="Multan"><option value="Peshawar"><option value="Gujranwala"><option value="Sialkot"><option value="Quetta"><option value="Hyderabad"><option value="Abbottabad">
                 </datalist>
               </div>
 
               <div class="calc-input-group">
-                <label><span>WhatsApp Number *</span><span style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;">واٹس ایپ نمبر</span></label>
+                <label><span>WhatsApp Number *</span></label>
                 <div style="position:relative;display:flex;align-items:center;">
                   <span style="position:absolute;left:10px;font-size:0.85rem;font-weight:700;color:#0F172A;pointer-events:none;">🇵🇰 +92</span>
                   <input type="tel" id="idx-cust-phone" style="padding-left:60px;" placeholder="300 1234567" required>
@@ -1179,7 +1176,7 @@
 
               <!-- WHATSAPP ATTACHMENT INSTRUCTION CARD -->
               <div class="calc-wa-guide-box" id="idx-wa-guide">
-                <strong>📲 WhatsApp Instruction:</strong>
+                <strong>📲 WhatsApp Instructions:</strong>
                 WhatsApp has been opened with Bin Zareen Solar (0325-2053313). 
                 <br><br>
                 Please tap the <b>attachment (📎 / +) icon</b> in WhatsApp and attach your downloaded PDF quotation before sending.
@@ -1222,7 +1219,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo"><div class="footer-logo-icon"><img src="favicon.png" alt="Logo"></div><div class="footer-company-name">Binzareen<small>Solar Pvt. Ltd.</small></div></div>
-          <p class="footer-desc">پاکستان کی بھروسہ مند سولر و پاور سلوشنز کمپنی، جو گھر، دکان اور فیکٹری کے لیے مکمل توانائی کے حل فراہم کرتی ہے۔</p>
+          <p class="footer-desc">Pakistan's trusted solar & renewable power solutions provider for residential, commercial, and industrial projects.</p>
           <div class="footer-social">
             <a href="https://web.facebook.com/profile.php?id=61585260354718" class="social-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
             <a href="https://www.instagram.com/binzareen.solar/" class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
@@ -1869,23 +1866,46 @@ function toggleMobile() { document.getElementById('mobile-menu').classList.toggl
 function closeMobileOnBg(e) { if (e.target === document.getElementById('mobile-menu')) toggleMobile(); }
 
 // ============================================================
-// MODERN SOLAR HOME LOAD CALCULATOR & QUOTATION SYSTEM
-// ============================================================
+// MODERN SOLAR HOME LOAD CALCULATOR & QUOTATION SYSTEM (38 APPLIANCES, PURE ENGLISH)
 const IDX_APPLIANCES_DATA = [
-  { id: 'iron', nameEn: 'Iron', nameUr: 'استری', category: 'Living & Home', range: '1000W–1200W', defaultWatts: 1100, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H4"/><path d="M2 14v4"/><path d="M12 6v4"/></svg>` },
-  { id: 'ac_1_5_ton', nameEn: 'AC 1.5 Ton Inverter', nameUr: 'AC 1.5 ٹن انورٹر', category: 'Cooling & AC', range: '1500W–1800W', defaultWatts: 1650, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7v10H4V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z"/><path d="M8 12h8"/><path d="M6 17v2"/><path d="M18 17v2"/></svg>` },
-  { id: 'ac_1_ton', nameEn: 'AC 1 Ton Inverter', nameUr: 'AC 1 ٹن انورٹر', category: 'Cooling & AC', range: '1000W–1200W', defaultWatts: 1100, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7v10H4V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z"/><path d="M8 12h8"/><path d="M6 17v2"/><path d="M18 17v2"/></svg>` },
-  { id: 'electric_stove', nameEn: 'Electric Stove', nameUr: 'الیکٹرک چولہا', category: 'Kitchen', range: '1500W–2000W', defaultWatts: 1750, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2"/><path d="M12 20v2"/></svg>` },
-  { id: 'microwave_oven', nameEn: 'Microwave Oven', nameUr: 'مائیکروویو اوون', category: 'Kitchen', range: '1000W–1400W', defaultWatts: 1200, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="15" x="2" y="4" rx="2"/><rect width="10" height="9" x="5" y="7" rx="1"/><path d="M18 8v1"/><path d="M18 12v1"/></svg>` },
-  { id: 'water_pump', nameEn: 'Water Pump / Motor 1HP', nameUr: 'واٹر پمپ / موٹر 1HP', category: 'Heavy Load', range: '750W–800W', defaultWatts: 775, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>` },
-  { id: 'washing_machine', nameEn: 'Washing Machine', nameUr: 'واشنگ مشین', category: 'Living & Home', range: '400W–600W', defaultWatts: 500, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="5"/></svg>` },
-  { id: 'refrigerator', nameEn: 'Refrigerator / Deep Freezer', nameUr: 'فریج / ڈیپ فریزر', category: 'Kitchen', range: '300W–400W', defaultWatts: 350, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="4" x2="20" y1="10" y2="10"/></svg>` },
-  { id: 'water_dispenser', nameEn: 'Water Dispenser', nameUr: 'واٹر ڈسپنسر', category: 'Kitchen', range: '350W–450W', defaultWatts: 400, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v7H6z"/><path d="M7 9v11a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9"/></svg>` },
-  { id: 'tv', nameEn: 'LCD / LED TV', nameUr: 'LCD / LED ٹی وی', category: 'Lighting & Tech', range: '80W–150W', defaultWatts: 115, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="15" x="2" y="3" rx="2"/><polyline points="17 21 12 18 7 21"/></svg>` },
-  { id: 'ceiling_fan', nameEn: 'Ceiling Fan', nameUr: 'چھت کا پنکھا', category: 'Cooling & AC', range: '75W–80W', defaultWatts: 78, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/><path d="M12 12 7 3a4 4 0 0 0-4 4l9 5"/><path d="M12 12l9 5a4 4 0 0 0 4-4l-9-5"/></svg>` },
-  { id: 'inverter_fan', nameEn: 'Inverter Fan', nameUr: 'انورٹر پنکھا', category: 'Cooling & AC', range: '30W–40W', defaultWatts: 35, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/></svg>` },
-  { id: 'led_light', nameEn: 'LED Light / Bulb', nameUr: 'LED لائٹ / بلب', category: 'Lighting & Tech', range: '12W–18W', defaultWatts: 15, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/></svg>` },
-  { id: 'laptop_pc', nameEn: 'Laptop / PC', nameUr: 'لیپ ٹاپ / پی سی', category: 'Lighting & Tech', range: '50W–90W', defaultWatts: 70, iconSvg: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>` }
+  { id: 'ac_2_ton', name: 'AC 2 Ton Inverter', category: 'Cooling & Heating', range: '2000W-2500W', defaultWatts: 2200, img: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=160&auto=format&fit=crop&q=80', icon: '❄️' },
+  { id: 'ac_1_5_ton', name: 'AC 1.5 Ton Inverter', category: 'Cooling & Heating', range: '1500W-1800W', defaultWatts: 1650, img: 'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=160&auto=format&fit=crop&q=80', icon: '❄️' },
+  { id: 'ac_1_ton', name: 'AC 1 Ton Inverter', category: 'Cooling & Heating', range: '1000W-1200W', defaultWatts: 1100, img: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=160&auto=format&fit=crop&q=80', icon: '❄️' },
+  { id: 'air_cooler', name: 'Desert / Room Air Cooler', category: 'Cooling & Heating', range: '150W-300W', defaultWatts: 200, img: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=160&auto=format&fit=crop&q=80', icon: '💨' },
+  { id: 'ceiling_fan', name: 'Ceiling Fan (Standard)', category: 'Cooling & Heating', range: '75W-80W', defaultWatts: 78, img: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=160&auto=format&fit=crop&q=80', icon: '🌀' },
+  { id: 'inverter_fan', name: 'Inverter Ceiling Fan (BLDC)', category: 'Cooling & Heating', range: '30W-45W', defaultWatts: 35, img: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=160&auto=format&fit=crop&q=80', icon: '🌀' },
+  { id: 'pedestal_fan', name: 'Pedestal / Stand Fan', category: 'Cooling & Heating', range: '60W-100W', defaultWatts: 80, img: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=160&auto=format&fit=crop&q=80', icon: '🌀' },
+  { id: 'exhaust_fan', name: 'Exhaust Fan', category: 'Cooling & Heating', range: '40W-70W', defaultWatts: 50, img: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=160&auto=format&fit=crop&q=80', icon: '💨' },
+  { id: 'electric_heater', name: 'Electric Room Heater', category: 'Cooling & Heating', range: '1000W-2000W', defaultWatts: 1500, img: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=160&auto=format&fit=crop&q=80', icon: '🔥' },
+  { id: 'water_geyser', name: 'Electric Geyser / Water Heater', category: 'Cooling & Heating', range: '1500W-2500W', defaultWatts: 2000, img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=160&auto=format&fit=crop&q=80', icon: '🚿' },
+  { id: 'refrigerator', name: 'Refrigerator / Fridge', category: 'Kitchen', range: '200W-350W', defaultWatts: 250, img: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=160&auto=format&fit=crop&q=80', icon: '🧊' },
+  { id: 'deep_freezer', name: 'Deep Freezer (Chest/Upright)', category: 'Kitchen', range: '300W-500W', defaultWatts: 380, img: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=160&auto=format&fit=crop&q=80', icon: '❄️' },
+  { id: 'microwave_oven', name: 'Microwave Oven', category: 'Kitchen', range: '1000W-1400W', defaultWatts: 1200, img: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=160&auto=format&fit=crop&q=80', icon: '📻' },
+  { id: 'electric_stove', name: 'Electric Stove / Induction', category: 'Kitchen', range: '1500W-2200W', defaultWatts: 1800, img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=160&auto=format&fit=crop&q=80', icon: '🍳' },
+  { id: 'electric_kettle', name: 'Electric Kettle', category: 'Kitchen', range: '1200W-1800W', defaultWatts: 1500, img: 'https://images.unsplash.com/photo-1594213114663-ddf3f2a02126?w=160&auto=format&fit=crop&q=80', icon: '🫖' },
+  { id: 'air_fryer', name: 'Air Fryer', category: 'Kitchen', range: '1200W-1800W', defaultWatts: 1500, img: 'https://images.unsplash.com/photo-1586208958839-06c17cacdf08?w=160&auto=format&fit=crop&q=80', icon: '🍟' },
+  { id: 'blender_juicer', name: 'Blender / Juicer / Grinder', category: 'Kitchen', range: '350W-600W', defaultWatts: 450, img: 'https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=160&auto=format&fit=crop&q=80', icon: '🍹' },
+  { id: 'toaster', name: 'Bread Toaster / Sandwich Maker', category: 'Kitchen', range: '700W-1000W', defaultWatts: 800, img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=160&auto=format&fit=crop&q=80', icon: '🥪' },
+  { id: 'water_dispenser', name: 'Water Dispenser (Hot & Cold)', category: 'Kitchen', range: '350W-550W', defaultWatts: 450, img: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=160&auto=format&fit=crop&q=80', icon: '💧' },
+  { id: 'dishwasher', name: 'Automatic Dishwasher', category: 'Kitchen', range: '1200W-1800W', defaultWatts: 1400, img: 'https://images.unsplash.com/photo-1585837575652-267c041d77d4?w=160&auto=format&fit=crop&q=80', icon: '🍽️' },
+  { id: 'ro_water_filter', name: 'RO Water Filter Plant', category: 'Kitchen', range: '40W-80W', defaultWatts: 60, img: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=160&auto=format&fit=crop&q=80', icon: '🚰' },
+  { id: 'electric_iron', name: 'Electric Iron (Istree)', category: 'Home & Laundry', range: '1000W-1400W', defaultWatts: 1100, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=160&auto=format&fit=crop&q=80', icon: '👔' },
+  { id: 'washing_machine', name: 'Automatic Washing Machine', category: 'Home & Laundry', range: '400W-700W', defaultWatts: 500, img: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=160&auto=format&fit=crop&q=80', icon: '🫧' },
+  { id: 'spin_dryer', name: 'Spin Dryer / Clothes Spinner', category: 'Home & Laundry', range: '250W-400W', defaultWatts: 300, img: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=160&auto=format&fit=crop&q=80', icon: '🌀' },
+  { id: 'vacuum_cleaner', name: 'Vacuum Cleaner', category: 'Home & Laundry', range: '1000W-1600W', defaultWatts: 1200, img: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=160&auto=format&fit=crop&q=80', icon: '🧹' },
+  { id: 'water_pump_1hp', name: 'Water Pump / Motor 1 HP', category: 'Heavy Pumps', range: '750W-900W', defaultWatts: 800, img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=160&auto=format&fit=crop&q=80', icon: '⚙️' },
+  { id: 'water_pump_half_hp', name: 'Water Pump / Motor 0.5 HP', category: 'Heavy Pumps', range: '370W-500W', defaultWatts: 400, img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=160&auto=format&fit=crop&q=80', icon: '⚙️' },
+  { id: 'boring_submersible', name: 'Submersible Boring Pump (2HP)', category: 'Heavy Pumps', range: '1500W-2500W', defaultWatts: 1800, img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=160&auto=format&fit=crop&q=80', icon: '🚰' },
+  { id: 'led_light', name: 'LED Light / Bulb', category: 'Lighting & Tech', range: '10W-18W', defaultWatts: 12, img: 'https://images.unsplash.com/photo-1550985543-f47f38aeee65?w=160&auto=format&fit=crop&q=80', icon: '💡' },
+  { id: 'tube_light', name: 'LED Tube Light / Batten', category: 'Lighting & Tech', range: '18W-36W', defaultWatts: 24, img: 'https://images.unsplash.com/photo-1550985543-f47f38aeee65?w=160&auto=format&fit=crop&q=80', icon: '💡' },
+  { id: 'led_tv', name: 'LCD / LED Smart TV (32"-65")', category: 'Lighting & Tech', range: '60W-150W', defaultWatts: 100, img: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=160&auto=format&fit=crop&q=80', icon: '📺' },
+  { id: 'home_theater', name: 'Home Theater / Soundbar', category: 'Lighting & Tech', range: '50W-150W', defaultWatts: 80, img: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=160&auto=format&fit=crop&q=80', icon: '🔊' },
+  { id: 'laptop', name: 'Laptop / Notebook Computer', category: 'Lighting & Tech', range: '50W-90W', defaultWatts: 65, img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=160&auto=format&fit=crop&q=80', icon: '💻' },
+  { id: 'gaming_pc', name: 'Desktop Gaming PC / Workstation', category: 'Lighting & Tech', range: '250W-500W', defaultWatts: 350, img: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=160&auto=format&fit=crop&q=80', icon: '🖥️' },
+  { id: 'wifi_router', name: 'Wi-Fi Router / Modem / ONT', category: 'Lighting & Tech', range: '10W-20W', defaultWatts: 15, img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=160&auto=format&fit=crop&q=80', icon: '📶' },
+  { id: 'cctv_system', name: 'CCTV Cameras & DVR System', category: 'Lighting & Tech', range: '40W-100W', defaultWatts: 60, img: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=160&auto=format&fit=crop&q=80', icon: '📹' },
+  { id: 'mobile_charger', name: 'Mobile / Fast Charger', category: 'Lighting & Tech', range: '20W-65W', defaultWatts: 33, img: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=160&auto=format&fit=crop&q=80', icon: '🔌' },
+  { id: 'treadmill', name: 'Treadmill / Fitness Machine', category: 'Fitness & Other', range: '800W-1800W', defaultWatts: 1200, img: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?w=160&auto=format&fit=crop&q=80', icon: '🏃' }
 ];
 
 const idxAppQuantities = {};
@@ -1905,12 +1925,12 @@ function renderIndexApplianceGrid() {
 
   const filtered = IDX_APPLIANCES_DATA.filter(app => {
     const matchesCat = idxCategory === 'all' || app.category === idxCategory;
-    const matchesSearch = !idxSearchTerm || app.nameEn.toLowerCase().includes(idxSearchTerm.toLowerCase()) || app.nameUr.includes(idxSearchTerm);
+    const matchesSearch = !idxSearchTerm || app.name.toLowerCase().includes(idxSearchTerm.toLowerCase()) || app.category.toLowerCase().includes(idxSearchTerm.toLowerCase());
     return matchesCat && matchesSearch;
   });
 
   if (filtered.length === 0) {
-    container.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px;color:#64748B;">No appliances found matching your search.</div>`;
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:#64748B;">No appliances found matching your search.</div>';
     return;
   }
 
@@ -1919,31 +1939,33 @@ function renderIndexApplianceGrid() {
     const totalW = qty * app.defaultWatts;
 
     const card = document.createElement('div');
-    card.className = `calc-item-card ${qty > 0 ? 'has-qty' : ''}`;
-    card.id = `idx-card-${app.id}`;
-    card.innerHTML = `
-      <div>
-        <div class="calc-item-top">
-          <div class="calc-item-icon">${app.iconSvg}</div>
-          <div class="calc-item-names">
-            <div class="calc-name-en">${app.nameEn}</div>
-            <span class="calc-name-ur">${app.nameUr}</span>
-          </div>
-        </div>
-        <div class="calc-watt-spec">
-          <span>Range: <b>${app.range}</b></span>
-          <span>Def: <b>${app.defaultWatts}W</b></span>
-        </div>
-      </div>
-      <div class="calc-stepper-wrap">
-        <div class="calc-stepper">
-          <button type="button" class="btn-calc-step" onclick="adjustIndexQty('${app.id}', -1)" ${qty === 0 ? 'disabled' : ''}>−</button>
-          <span class="calc-qty-num" id="idx-qty-${app.id}">${qty}</span>
-          <button type="button" class="btn-calc-step" onclick="adjustIndexQty('${app.id}', 1)">+</button>
-        </div>
-        <div class="calc-item-subtotal" id="idx-sub-${app.id}">${qty > 0 ? `${totalW.toLocaleString()} W` : '0 W'}</div>
-      </div>
-    `;
+    card.className = 'calc-item-card ' + (qty > 0 ? 'has-qty' : '');
+    card.id = 'idx-card-' + app.id;
+    card.innerHTML = 
+      '<div>' +
+        '<div class="calc-item-top" style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;">' +
+          '<div style="width:44px;height:44px;border-radius:8px;background:#F8FAFC;border:1px solid #E2E8F0;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">' +
+            '<img src="' + app.img + '" alt="' + app.name + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\';">' +
+            '<span style="display:none;font-size:1.4rem;">' + app.icon + '</span>' +
+          '</div>' +
+          '<div class="calc-item-names" style="flex:1;min-width:0;">' +
+            '<div class="calc-name-en" style="font-size:0.86rem;font-weight:800;color:#0F172A;line-height:1.25;">' + app.name + '</div>' +
+            '<span style="font-size:0.7rem;font-weight:600;color:#64748B;text-transform:uppercase;">' + app.category + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="calc-watt-spec" style="display:flex;justify-content:space-between;background:#F8FAFC;border:1px solid #EEF2F6;border-radius:6px;padding:3px 8px;font-size:0.72rem;color:#334155;margin-bottom:8px;">' +
+          '<span>Range: <b>' + app.range + '</b></span>' +
+          '<span>Avg: <b>' + app.defaultWatts + 'W</b></span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="calc-stepper-wrap" style="display:flex;align-items:center;justify-content:space-between;padding-top:6px;border-top:1px dashed #E2E8F0;">' +
+        '<div class="calc-stepper">' +
+          '<button type="button" class="btn-calc-step" onclick="adjustIndexQty(\'' + app.id + '\', -1)" ' + (qty === 0 ? 'disabled' : '') + '>−</button>' +
+          '<span class="calc-qty-num" id="idx-qty-' + app.id + '">' + qty + '</span>' +
+          '<button type="button" class="btn-calc-step" onclick="adjustIndexQty(\'' + app.id + '\', 1)">+</button>' +
+        '</div>' +
+        '<div class="calc-item-subtotal" id="idx-sub-' + app.id + '">' + (qty > 0 ? totalW.toLocaleString() + ' W' : '0 W') + '</div>' +
+      '</div>';
     container.appendChild(card);
   });
 }
@@ -1953,16 +1975,16 @@ function adjustIndexQty(appId, delta) {
   const next = Math.max(0, cur + delta);
   idxAppQuantities[appId] = next;
 
-  const qtyEl = document.getElementById(`idx-qty-${appId}`);
+  const qtyEl = document.getElementById('idx-qty-' + appId);
   if (qtyEl) qtyEl.textContent = next;
 
   const appObj = IDX_APPLIANCES_DATA.find(a => a.id === appId);
-  const subEl = document.getElementById(`idx-sub-${appId}`);
+  const subEl = document.getElementById('idx-sub-' + appId);
   if (subEl && appObj) {
-    subEl.textContent = next > 0 ? `${(next * appObj.defaultWatts).toLocaleString()} W` : '0 W';
+    subEl.textContent = next > 0 ? (next * appObj.defaultWatts).toLocaleString() + ' W' : '0 W';
   }
 
-  const card = document.getElementById(`idx-card-${appId}`);
+  const card = document.getElementById('idx-card-' + appId);
   if (card) {
     card.classList.toggle('has-qty', next > 0);
     const minusBtn = card.querySelector('.btn-calc-step');
@@ -1997,7 +2019,7 @@ function addIndexCustomAppliance() {
     return;
   }
 
-  idxCustomAppliances.push({ id: 'idx_c_' + Date.now(), nameEn: name, nameUr: 'کسٹم آئٹم', range: `${watts}W`, defaultWatts: watts, qty });
+  idxCustomAppliances.push({ id: 'idx_c_' + Date.now(), name: name, range: watts + 'W', defaultWatts: watts, qty: qty });
   nameEl.value = ''; wattEl.value = ''; qtyEl.value = '1';
   resetIndexGeneratedPdf();
   calculateIndexTotals();
@@ -2032,7 +2054,7 @@ function calculateIndexTotals() {
       const w = q * app.defaultWatts;
       totalQty += q;
       totalWatts += w;
-      selectedList.push({ nameEn: app.nameEn, nameUr: app.nameUr, range: app.range, defaultWatts: app.defaultWatts, qty: q, totalWatts: w });
+      selectedList.push({ name: app.name, category: app.category, range: app.range, defaultWatts: app.defaultWatts, qty: q, totalWatts: w });
     }
   });
 
@@ -2040,15 +2062,15 @@ function calculateIndexTotals() {
     const w = c.qty * c.defaultWatts;
     totalQty += c.qty;
     totalWatts += w;
-    selectedList.push({ nameEn: c.nameEn, nameUr: c.nameUr, range: c.range, defaultWatts: c.defaultWatts, qty: c.qty, totalWatts: w, isCustom: true, id: c.id });
+    selectedList.push({ name: c.name, category: 'Custom Item', range: c.range, defaultWatts: c.defaultWatts, qty: c.qty, totalWatts: w, isCustom: true, id: c.id });
   });
 
   const totalKw = (totalWatts / 1000).toFixed(2);
 
   const sumQty = document.getElementById('idx-sum-qty');
   const sumWatts = document.getElementById('idx-sum-watts');
-  if (sumQty) sumQty.innerHTML = `${totalQty} <small style="font-size:0.75rem;color:#64748B;">items</small>`;
-  if (sumWatts) sumWatts.innerHTML = `${totalWatts.toLocaleString()} <small style="font-size:0.75rem;color:#64748B;">W (${totalKw} kW)</small>`;
+  if (sumQty) sumQty.innerHTML = totalQty + ' <small style="font-size:0.75rem;color:#64748B;">items</small>';
+  if (sumWatts) sumWatts.innerHTML = totalWatts.toLocaleString() + ' <small style="font-size:0.75rem;color:#64748B;">W (' + totalKw + ' kW)</small>';
 
   const tierEl = document.getElementById('idx-tier-badge');
   const recInverter = document.getElementById('idx-rec-inverter');
@@ -2060,32 +2082,32 @@ function calculateIndexTotals() {
   if (tierEl && recInverter && recPanels && recBattery) {
     if (totalWatts === 0) {
       tierEl.className = 'calc-tier-badge tier-none';
-      tierEl.innerHTML = `<span>Status: No Appliances Selected</span><span>0.0 kW</span>`;
+      tierEl.innerHTML = '<span>Status: No Appliances Selected</span><span>0.0 kW</span>';
       recInverter.textContent = 'Pending selection';
       recPanels.textContent = 'Pending selection';
       recBattery.textContent = 'Pending selection';
     } else if (totalWatts <= 3000) {
       tierEl.className = 'calc-tier-badge tier-green';
-      tierEl.innerHTML = `<span>Status: Small Load (Residential)</span><span>${totalKw} kW</span>`;
-      recInverter.textContent = '3.2 kW – 4.2 kW Solar Inverter';
+      tierEl.innerHTML = '<span>Status: Small Load (Residential)</span><span>' + totalKw + ' kW</span>';
+      recInverter.textContent = '3.2 kW - 4.2 kW Solar Inverter';
       const pc = Math.max(4, Math.ceil(totalWatts / 450));
-      recPanels.textContent = `${pc} × 585W Tier-1 Panels (${(pc * 0.585).toFixed(1)} kWp)`;
+      recPanels.textContent = pc + ' × 585W Tier-1 Panels (' + (pc * 0.585).toFixed(1) + ' kWp)';
       recBattery.textContent = '1x 24V/48V Lithium or 2x Tubular';
       statusTier = 'Small Load';
     } else if (totalWatts <= 6000) {
       tierEl.className = 'calc-tier-badge tier-amber';
-      tierEl.innerHTML = `<span>Status: Medium Load (Standard Home)</span><span>${totalKw} kW</span>`;
+      tierEl.innerHTML = '<span>Status: Medium Load (Standard Home)</span><span>' + totalKw + ' kW</span>';
       recInverter.textContent = '6 kW Hybrid Inverter (Growatt / Solis)';
       const pc = Math.max(8, Math.ceil(totalWatts / 480));
-      recPanels.textContent = `${pc} × 585W Bi-Facial Panels (${(pc * 0.585).toFixed(1)} kWp)`;
+      recPanels.textContent = pc + ' × 585W Bi-Facial Panels (' + (pc * 0.585).toFixed(1) + ' kWp)';
       recBattery.textContent = '1x 48V 100Ah Lithium Wallmount';
       statusTier = 'Medium Load';
     } else {
       tierEl.className = 'calc-tier-badge tier-red';
-      tierEl.innerHTML = `<span>Status: High Load (Heavy / Commercial)</span><span>${totalKw} kW</span>`;
-      recInverter.textContent = '10 kW – 15 kW Three-Phase Hybrid';
+      tierEl.innerHTML = '<span>Status: High Load (Heavy / Commercial)</span><span>' + totalKw + ' kW</span>';
+      recInverter.textContent = '10 kW - 15 kW Three-Phase Hybrid';
       const pc = Math.max(14, Math.ceil(totalWatts / 500));
-      recPanels.textContent = `${pc} × 585W–620W Panels (${(pc * 0.585).toFixed(1)} kWp)`;
+      recPanels.textContent = pc + ' × 585W-620W Panels (' + (pc * 0.585).toFixed(1) + ' kWp)';
       recBattery.textContent = '2x 48V 100Ah Lithium Battery Rack';
       statusTier = 'High Load';
     }
@@ -2094,14 +2116,14 @@ function calculateIndexTotals() {
   const prevEl = document.getElementById('idx-selected-preview');
   if (prevEl) {
     if (selectedList.length === 0) {
-      prevEl.innerHTML = `<div style="text-align:center;padding:10px;color:#64748B;">Please select at least one appliance.<div style="font-family:'Noto Nastaliq Urdu',serif;color:#B91C1C;font-size:0.88rem;margin-top:4px;">براہ کرم کم از کم ایک اپلائنس منتخب کریں</div></div>`;
+      prevEl.innerHTML = '<div style="text-align:center;padding:10px;color:#64748B;">Please select at least one appliance from the left.</div>';
     } else {
-      prevEl.innerHTML = selectedList.map(item => `
-        <div class="calc-preview-row">
-          <span><b>${item.nameEn}</b> (${item.nameUr}) × ${item.qty} ${item.isCustom ? `<button onclick="removeIndexCustomAppliance('${item.id}')" style="border:none;background:none;color:#DC2626;cursor:pointer;">✕</button>` : ''}</span>
-          <b style="color:#0F172A;">${item.totalWatts.toLocaleString()} W</b>
-        </div>
-      `).join('');
+      prevEl.innerHTML = selectedList.map(item => 
+        '<div class="calc-preview-row">' +
+          '<span><b>' + item.name + '</b> × ' + item.qty + ' ' + (item.isCustom ? '<button onclick="removeIndexCustomAppliance(\'' + item.id + '\')" style="border:none;background:none;color:#DC2626;cursor:pointer;">✕</button>' : '') + '</span>' +
+          '<b style="color:#0F172A;">' + item.totalWatts.toLocaleString() + ' W</b>' +
+        '</div>'
+      ).join('');
     }
   }
 
@@ -2134,11 +2156,9 @@ async function createIndexPdfDocument(data) {
   const contentWidth = pageWidth - margins.left - margins.right;
   let yPos = margins.top;
 
-  // Header Bar
   pdf.setFillColor(11, 19, 43);
   pdf.rect(0, 0, pageWidth, 5, 'F');
 
-  // Logo Box
   pdf.setFillColor(185, 28, 28);
   pdf.roundedRect(margins.left, yPos, 18, 18, 3, 3, 'F');
   pdf.setTextColor(255, 255, 255);
@@ -2146,19 +2166,17 @@ async function createIndexPdfDocument(data) {
   pdf.setFontSize(11);
   pdf.text('BZ', margins.left + 5.5, yPos + 11.5);
 
-  // Title
   pdf.setTextColor(11, 19, 43);
   pdf.setFontSize(16);
   pdf.text('BIN ZAREEN SOLAR PVT LTD', margins.left + 22, yPos + 6);
   pdf.setFontSize(8.5);
   pdf.setFont('helvetica', 'normal');
   pdf.setTextColor(185, 28, 28);
-  pdf.text('Pakistan Registered Solar Engineering & EPC Solutions | BinZareen.com', margins.left + 22, yPos + 11);
+  pdf.text('Certified Solar EPC & Clean Power Engineering | BinZareen.com', margins.left + 22, yPos + 11);
   pdf.setFontSize(8);
   pdf.setTextColor(100, 116, 139);
-  pdf.text('WhatsApp & Tel: +92 325 2053313 | Email: contact@binzareen.com', margins.left + 22, yPos + 16);
+  pdf.text('Head Office: Islamabad, Pakistan | Helpline: +92 325 2053313 | Email: contact@binzareen.com', margins.left + 22, yPos + 16);
 
-  // Reference Badge
   pdf.setFillColor(254, 242, 242);
   pdf.roundedRect(pageWidth - margins.right - 62, yPos, 62, 18, 2, 2, 'F');
   pdf.setFontSize(7.5);
@@ -2168,8 +2186,8 @@ async function createIndexPdfDocument(data) {
   pdf.setFontSize(8);
   pdf.setFont('helvetica', 'normal');
   pdf.setTextColor(51, 65, 85);
-  pdf.text(`No: ${data.quotationNumber}`, pageWidth - margins.right - 60, yPos + 10);
-  pdf.text(`Date: ${data.dateFormatted}`, pageWidth - margins.right - 60, yPos + 14.5);
+  pdf.text('Ref No: ' + data.quotationNumber, pageWidth - margins.right - 60, yPos + 10);
+  pdf.text('Date: ' + data.dateFormatted, pageWidth - margins.right - 60, yPos + 14.5);
 
   yPos += 26;
   pdf.setDrawColor(185, 28, 28);
@@ -2177,7 +2195,6 @@ async function createIndexPdfDocument(data) {
   pdf.line(margins.left, yPos, pageWidth - margins.right, yPos);
   yPos += 6;
 
-  // Customer Card
   pdf.setFillColor(248, 250, 252);
   pdf.roundedRect(margins.left, yPos, contentWidth, 22, 2, 2, 'F');
   pdf.setFontSize(8.5);
@@ -2187,22 +2204,21 @@ async function createIndexPdfDocument(data) {
   pdf.setFontSize(8);
   pdf.setFont('helvetica', 'normal');
   pdf.setTextColor(51, 65, 85);
-  pdf.text(`Customer Name: ${data.customer.name}`, margins.left + 6, yPos + 11.5);
-  pdf.text(`City: ${data.customer.city}, Pakistan`, margins.left + 6, yPos + 17);
-  pdf.text(`WhatsApp: ${data.customer.phone}`, margins.left + 90, yPos + 11.5);
-  pdf.text(`Preferred Time: ${data.customer.contactTime}`, margins.left + 90, yPos + 17);
+  pdf.text('Customer Name: ' + data.customer.name, margins.left + 6, yPos + 11.5);
+  pdf.text('City: ' + data.customer.city + ', Pakistan', margins.left + 6, yPos + 17);
+  pdf.text('WhatsApp: ' + data.customer.phone, margins.left + 90, yPos + 11.5);
+  pdf.text('Preferred Time: ' + data.customer.contactTime, margins.left + 90, yPos + 17);
 
   yPos += 28;
 
-  // Table Header
   pdf.setFontSize(9);
   pdf.setFont('helvetica', 'bold');
   pdf.setTextColor(185, 28, 28);
   pdf.text('ELECTRICAL LOAD BREAKDOWN (SELECTED APPLIANCES)', margins.left, yPos);
   yPos += 4;
 
-  const colWidths = [10, 58, 36, 26, 20, 32];
-  const tableHeaders = ['Sr.', 'Appliance Description', 'Urdu Name', 'Est. Range', 'Qty', 'Total Watts'];
+  const colWidths = [10, 72, 38, 28, 34];
+  const tableHeaders = ['Sr.', 'Appliance Description', 'Category', 'Quantity', 'Total Peak Watts'];
   pdf.setFillColor(11, 19, 43);
   pdf.rect(margins.left, yPos, contentWidth, 7, 'F');
   pdf.setTextColor(255, 255, 255);
@@ -2216,7 +2232,6 @@ async function createIndexPdfDocument(data) {
   });
   yPos += 7;
 
-  // Rows
   pdf.setTextColor(51, 65, 85);
   pdf.setFontSize(7.5);
   pdf.setFont('helvetica', 'normal');
@@ -2229,34 +2244,31 @@ async function createIndexPdfDocument(data) {
     curX = margins.left;
     pdf.text(String(idx + 1), curX + 2, yPos + 4.2); curX += colWidths[0];
     pdf.setFont('helvetica', 'bold');
-    pdf.text(item.nameEn.substring(0, 32), curX + 2, yPos + 4.2); curX += colWidths[1];
+    pdf.text(item.name.substring(0, 40), curX + 2, yPos + 4.2); curX += colWidths[1];
     pdf.setFont('helvetica', 'normal');
-    pdf.text(item.nameUr ? item.nameUr.substring(0, 24) : '—', curX + 2, yPos + 4.2); curX += colWidths[2];
-    pdf.text(item.range, curX + 2, yPos + 4.2); curX += colWidths[3];
-    pdf.text(`${item.qty}x`, curX + 6, yPos + 4.2); curX += colWidths[4];
+    pdf.text(item.category || 'Home Appliance', curX + 2, yPos + 4.2); curX += colWidths[2];
+    pdf.text(item.qty + ' Unit' + (item.qty > 1 ? 's' : ''), curX + 4, yPos + 4.2); curX += colWidths[3];
     pdf.setFont('helvetica', 'bold');
     pdf.setTextColor(185, 28, 28);
-    pdf.text(`${item.totalWatts.toLocaleString()} W`, curX + 4, yPos + 4.2);
+    pdf.text(item.totalWatts.toLocaleString() + ' W', curX + 4, yPos + 4.2);
     pdf.setTextColor(51, 65, 85);
     pdf.setFont('helvetica', 'normal');
 
     yPos += 6.2;
   });
 
-  // Table Total Footer
   yPos += 2;
   pdf.setFillColor(185, 28, 28);
   pdf.roundedRect(margins.left, yPos, contentWidth, 8.5, 1.5, 1.5, 'F');
   pdf.setTextColor(255, 255, 255);
   pdf.setFontSize(8.5);
   pdf.setFont('helvetica', 'bold');
-  pdf.text(`TOTAL CALCULATED HOME LOAD:`, margins.left + 4, yPos + 5.5);
-  pdf.text(`${data.totalWatts.toLocaleString()} Watts (${data.totalKw} kW)`, margins.left + 78, yPos + 5.5);
-  pdf.text(`Tier: ${data.statusTier}`, margins.left + contentWidth - 45, yPos + 5.5);
+  pdf.text('TOTAL CALCULATED HOME LOAD:', margins.left + 4, yPos + 5.5);
+  pdf.text(data.totalWatts.toLocaleString() + ' Watts (' + data.totalKw + ' kW)', margins.left + 78, yPos + 5.5);
+  pdf.text('Tier: ' + data.statusTier, margins.left + contentWidth - 45, yPos + 5.5);
 
   yPos += 14;
 
-  // System Recommendations
   pdf.setFillColor(248, 250, 252);
   pdf.roundedRect(margins.left, yPos, contentWidth, 20, 2, 2, 'F');
   pdf.setFontSize(8.5);
@@ -2266,36 +2278,34 @@ async function createIndexPdfDocument(data) {
   pdf.setFontSize(7.5);
   pdf.setFont('helvetica', 'normal');
   pdf.setTextColor(51, 65, 85);
-  pdf.text(`• Inverter: ${document.getElementById('idx-rec-inverter').textContent}`, margins.left + 6, yPos + 10);
-  pdf.text(`• Panels: ${document.getElementById('idx-rec-panels').textContent}`, margins.left + 6, yPos + 15);
-  pdf.text(`• Battery: ${document.getElementById('idx-rec-battery').textContent}`, margins.left + 105, yPos + 10);
+  pdf.text('• Inverter: ' + document.getElementById('idx-rec-inverter').textContent, margins.left + 6, yPos + 10);
+  pdf.text('• Panels: ' + document.getElementById('idx-rec-panels').textContent, margins.left + 6, yPos + 15);
+  pdf.text('• Battery: ' + document.getElementById('idx-rec-battery').textContent, margins.left + 105, yPos + 10);
 
   yPos += 24;
 
-  // Bilingual Disclaimer Notice
   pdf.setFillColor(254, 242, 242);
-  pdf.roundedRect(margins.left, yPos, contentWidth, 18, 2, 2, 'F');
-  pdf.setFontSize(7);
+  pdf.roundedRect(margins.left, yPos, contentWidth, 16, 2, 2, 'F');
+  pdf.setFontSize(7.2);
   pdf.setFont('helvetica', 'bold');
   pdf.setTextColor(185, 28, 28);
-  pdf.text('OFFICIAL SIZING NOTICE / اہم ہدایات:', margins.left + 4, yPos + 4.5);
-  pdf.setFontSize(6.8);
+  pdf.text('ENGINEERING SIZING NOTICE:', margins.left + 4, yPos + 4.5);
+  pdf.setFontSize(7);
   pdf.setFont('helvetica', 'normal');
   pdf.setTextColor(51, 65, 85);
-  pdf.text('This is an approximate load estimate. Final battery, inverter and solar panel sizing will be confirmed by our solar experts after reviewing your usage.', margins.left + 4, yPos + 8.5);
-  pdf.text('یہ ایک تخمینہ لوڈ ہے، بیٹری، انورٹر اور سولر پینل کا حتمی سائز ہمارے سولر ماہرین جائزہ لینے کے بعد طے کریں گے۔', margins.left + 4, yPos + 13);
+  pdf.text('This quotation is an engineering estimation based on standard Pakistani residential appliance ratings.', margins.left + 4, yPos + 8.5);
+  pdf.text('Final battery, inverter model, and solar panel configuration will be finalized upon technical consultation with our engineering team.', margins.left + 4, yPos + 12.5);
 
-  // Footer
   const footerY = pageHeight - margins.bottom - 4;
   pdf.setDrawColor(226, 232, 240);
   pdf.setLineWidth(0.3);
   pdf.line(margins.left, footerY - 4, pageWidth - margins.right, footerY - 4);
   pdf.setFontSize(7);
   pdf.setTextColor(148, 163, 184);
-  pdf.text(`Bin Zareen Solar Pvt Ltd Pakistan | Helpline: 0325-2053313 | Quotation #${data.quotationNumber}`, margins.left, footerY);
+  pdf.text('Bin Zareen Solar Pvt Ltd | Helpline: 0325-2053313 | Quotation #' + data.quotationNumber, margins.left, footerY);
 
   const blob = pdf.output('blob');
-  const filename = `BinZareen-Solar-Quotation-${data.quotationNumber}.pdf`;
+  const filename = 'BinZareen-Solar-Quotation-' + data.quotationNumber + '.pdf';
   const file = new File([blob], filename, { type: 'application/pdf' });
   return { blob, file, filename };
 }
@@ -2304,7 +2314,7 @@ async function handleIndexFormSubmit(e) {
   if (e) e.preventDefault();
   const totals = calculateIndexTotals();
   if (totals.totalWatts === 0) {
-    alert('Please select at least one appliance before generating quotation.\nبراہ کرم کم از کم ایک اپلائنس منتخب کریں۔');
+    alert('Please select at least one appliance before generating your solar quotation.');
     return;
   }
 
@@ -2313,7 +2323,7 @@ async function handleIndexFormSubmit(e) {
   const rawPhone = document.getElementById('idx-cust-phone').value.trim();
 
   if (!name || !city) {
-    alert('Please enter your Name and City.');
+    alert('Please enter your full name and city.');
     return;
   }
 
@@ -2333,16 +2343,16 @@ async function handleIndexFormSubmit(e) {
 
   try {
     const now = new Date();
-    const qNum = `BZ-SOLAR-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${Math.floor(1000+Math.random()*9000)}`;
+    const qNum = 'BZ-SOLAR-' + now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '-' + Math.floor(1000+Math.random()*9000);
     const dateFormatted = now.toLocaleDateString('en-PK', { day: '2-digit', month: 'short', year: 'numeric' });
 
     const payload = {
       quotationNumber: qNum,
-      dateFormatted,
+      dateFormatted: dateFormatted,
       customer: {
-        name,
-        city,
-        phone: `92${cleanedPhone}`,
+        name: name,
+        city: city,
+        phone: '92' + cleanedPhone,
         contactTime: document.getElementById('idx-cust-time').value
       },
       ...totals
@@ -2361,7 +2371,7 @@ async function handleIndexFormSubmit(e) {
     document.getElementById('idx-btn-whatsapp').disabled = false;
 
     triggerIndexPdfDownload();
-    alert(`Quotation ${qNum} generated and downloaded successfully!`);
+    alert('Quotation ' + qNum + ' generated and downloaded successfully!');
   } catch (err) {
     console.error('PDF error:', err);
     alert('Could not generate PDF. Please try again.');
@@ -2380,7 +2390,7 @@ function triggerIndexPdfDownload() {
   if (!idxPdfBlob || !idxQuotationData) return;
   const a = document.createElement('a');
   a.href = idxPdfBlobUrl;
-  a.download = `BinZareen-Solar-Quotation-${idxQuotationData.quotationNumber}.pdf`;
+  a.download = 'BinZareen-Solar-Quotation-' + idxQuotationData.quotationNumber + '.pdf';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -2388,7 +2398,7 @@ function triggerIndexPdfDownload() {
 
 async function handleIndexNativeShare() {
   if (!idxPdfFile) return;
-  const shareData = { files: [idxPdfFile], title: 'Bin Zareen Solar Quotation', text: `Solar quotation ${idxQuotationData.quotationNumber}` };
+  const shareData = { files: [idxPdfFile], title: 'Bin Zareen Solar Quotation', text: 'Solar quotation ' + idxQuotationData.quotationNumber + ' from Bin Zareen Solar Pvt Ltd' };
   if (navigator.canShare && navigator.canShare({ files: [idxPdfFile] })) {
     try {
       await navigator.share(shareData);
@@ -2410,23 +2420,24 @@ async function handleIndexSendWhatsApp() {
 
   const qNum = idxQuotationData.quotationNumber;
   const message = [
-    "Hello Bin Zareen Solar,",
-    "",
-    "I have generated my solar load quotation.",
-    `Quotation No: ${qNum}`,
-    "",
-    "Please find the attached PDF quotation."
-  ].join("\n");
+    'Hello Bin Zareen Solar,',
+    '',
+    'I have generated my solar load quotation.',
+    'Quotation No: ' + qNum,
+    '',
+    'Please find the attached PDF quotation.'
+  ].join('\n');
 
-  const waUrl = `https://wa.me/923252053313?text=${encodeURIComponent(message)}`;
-  const guide = document.getElementById('idx-wa-guide');
-  if (guide) guide.classList.add('show');
+  const waUrl = 'https://wa.me/923252053313?text=' + encodeURIComponent(message);
+  const gBox = document.getElementById('idx-wa-guide');
+  if (gBox) gBox.classList.add('show');
 
   setTimeout(() => {
     window.open(waUrl, '_blank');
   }, 350);
 }
 
+// ============================================================
 function initModernCalculator() {
   renderIndexApplianceGrid();
   calculateIndexTotals();
