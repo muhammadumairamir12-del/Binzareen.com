@@ -1,0 +1,18 @@
+# Robots.txt for Bin Zareen Solar Pvt Ltd Pakistan
+# Website: https://binzareen.com/
+
+User-agent: *
+Allow: /
+Allow: /favicon.png
+Allow: /calculator.html
+Allow: /load-calculator.html
+Allow: /quotations.html
+Allow: /quotation.html
+Allow: /quotation-generator.html
+Allow: /quick-access.html
+
+# Disallow admin dashboard and private backend files
+Disallow: /admin.html
+
+# Sitemap Reference
+Sitemap: https://binzareen.com/sitemap.xml
