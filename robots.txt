@@ -3,9 +3,13 @@
 
 User-agent: *
 Allow: /
+Allow: /logo.png
 Allow: /favicon.png
 Allow: /calculator.html
 Allow: /load-calculator.html
+Allow: /services.html
+Allow: /about.html
+Allow: /contact.html
 Allow: /quotations.html
 Allow: /quotation.html
 Allow: /quotation-generator.html
