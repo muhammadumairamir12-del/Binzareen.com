@@ -1536,46 +1536,8 @@ const app = firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 // ============================================================
-// INITIAL PRODUCTS
+// NO HARDCODED INITIAL PRODUCTS — All products load live from Firebase Admin Panel
 // ============================================================
-const initialProducts = [
-  { id: 1, name: 'Jinko Solar 550W Mono PERC Panel', cat: 'solar-panels', catLabel: 'Solar Panels', price: 18500, desc: '550W monocrystalline PERC panel with 25-year performance warranty. Tier 1 brand.', badge: 'Best Seller', brand: 'Jinko Solar', specs: { Power: '550W', Type: 'Monocrystalline PERC', Efficiency: '21.3%', Warranty: '25 Years', 'Max Voltage': '41.8V', Weight: '28kg' }, img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?fm=jpg&q=60&w=600&auto=format&fit=contain' },
-  { id: 2, name: 'LONGi Green 580W Hi-MO6', cat: 'solar-panels', catLabel: 'Solar Panels', price: 21000, desc: 'Latest LONGi Hi-MO6 technology with superior low-light performance. Anti-PID.', badge: 'New', brand: 'LONGi', specs: { Power: '580W', Type: 'N-Type TOPCon', Efficiency: '22.1%', Warranty: '25 Years', 'Max Voltage': '43.2V', Weight: '29kg' }, img: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?fm=jpg&q=60&w=600&auto=format&fit=contain' },
-  { id: 3, name: 'Canadian Solar 540W BiHiKu6', cat: 'solar-panels', catLabel: 'Solar Panels', price: 19500, desc: 'Bifacial solar panel with up to 30% extra energy gain from rear side reflection.', badge: null, brand: 'Canadian Solar', specs: { Power: '540W', Type: 'Bifacial PERC', Efficiency: '20.9%', Warranty: '25 Years', 'Max Voltage': '40.5V', Weight: '27.5kg' }, img: 'https://images.unsplash.com/photo-1584277261846-c6a1672ed979?w=600&auto=format&fit=contain' },
-  { id: 4, name: 'Risen Energy 500W RSM Poly', cat: 'solar-panels', catLabel: 'Solar Panels', price: 14000, desc: 'Reliable polycrystalline panels ideal for budget-conscious installations. Grade A quality.', badge: null, brand: 'Risen Energy', specs: { Power: '500W', Type: 'Polycrystalline', Efficiency: '18.7%', Warranty: '25 Years', 'Max Voltage': '37.6V', Weight: '26.5kg' }, img: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?fm=jpg&q=60&w=600&auto=format&fit=contain' },
-  { id: 5, name: 'Growatt SPH 5000 Hybrid Inverter', cat: 'inverters', catLabel: 'Inverters', price: 95000, desc: '5kW hybrid solar inverter with built-in MPPT and battery management. Wi-Fi monitoring.', badge: 'Best Seller', brand: 'Growatt', specs: { Power: '5000W', Type: 'Hybrid (On/Off Grid)', 'MPPT Channels': '2', 'Max PV Input': '6500W', Battery: '48V Li/Lead', Warranty: '5 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/Frame_164_1_1_510x.png?v=1737897719' },
-  { id: 6, name: 'SolarEdge SE10K On-Grid Inverter', cat: 'inverters', catLabel: 'Inverters', price: 145000, desc: '10kW premium on-grid inverter with DC optimizers for maximum energy harvest.', badge: 'Premium', brand: 'SolarEdge', specs: { Power: '10000W', Type: 'On-Grid', Efficiency: '99.2%', 'MPPT Range': '200-750V', 'IP Rating': 'IP65', Warranty: '12 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/Fronus6KWPV6000WithNetmeteringOffGridSolarInverter_1066x.png?v=1754204638' },
-  { id: 7, name: 'Solis 3.6kW Off-Grid Inverter', cat: 'inverters', catLabel: 'Inverters', price: 62000, desc: 'Pure sine wave off-grid inverter ideal for rural areas and load shedding protection.', badge: null, brand: 'Solis', specs: { Power: '3600W', Type: 'Off-Grid', 'Output Voltage': '220V AC', 'Battery Voltage': '24V', 'Surge Power': '7200W', Warranty: '5 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/EnvyPV9000_1066x.png?v=1767696239' },
-  { id: 8, name: 'Deye 8kW Hybrid 3-Phase', cat: 'inverters', catLabel: 'Inverters', price: 185000, desc: '3-phase hybrid inverter for commercial and industrial solar installations.', badge: 'Commercial', brand: 'Deye', specs: { Power: '8000W', Type: 'Hybrid 3-Phase', 'MPPT Channels': '2x2', 'Max PV Input': '12000W', Battery: '48V LiFePO4', Warranty: '5 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/Knox6KWpv8000Hybrid_59db06cd-306f-4afd-980a-645934a4a6b7_1066x.png?v=1752058053' },
-  { id: 9, name: 'Pylon Tech US3000C 3.5kWh LiFePO4', cat: 'batteries', catLabel: 'Batteries', price: 115000, desc: 'Lithium iron phosphate battery with 6000+ cycles. Safe, reliable, stackable design.', badge: 'Premium', brand: 'Pylontech', specs: { Capacity: '3.5kWh', Type: 'LiFePO4 Lithium', Cycles: '6000+', Voltage: '48V', 'Depth of Discharge': '95%', Warranty: '10 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/DynessLithiumBattery51.2V100Amp_1066x.png?v=1763548804' },
-  { id: 10, name: 'Volta 200Ah AGM Battery', cat: 'batteries', catLabel: 'Batteries', price: 28000, desc: 'Maintenance-free sealed AGM battery. Deep cycle design for solar applications.', badge: 'Popular', brand: 'Volta', specs: { Capacity: '200Ah', Type: 'AGM Sealed', Voltage: '12V', 'Cycles (50% DoD)': '800+', Weight: '62kg', Warranty: '2 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/Powerwall3.025.6v100A_1066x.png?v=1762176444' },
-  { id: 11, name: 'Tesla Powerwall-Style 10kWh Pack', cat: 'batteries', catLabel: 'Batteries', price: 380000, desc: 'High-capacity wall-mounted lithium battery for whole-home backup power storage.', badge: 'New', brand: 'Generic Li-Ion', specs: { Capacity: '10kWh', Type: 'NMC Lithium', Cycles: '4000+', Voltage: '48V', 'Usable Energy': '9.5kWh', Warranty: '10 Years' }, img: 'https://kamalsolar.pk/cdn/shop/files/51.2100AmpIP20_1066x.png?v=1770548600' },
-  { id: 12, name: 'Phoenix 120Ah Gel Battery', cat: 'batteries', catLabel: 'Batteries', price: 16500, desc: 'Budget-friendly gel battery for UPS and small solar systems. Spill-proof design.', badge: null, brand: 'Phoenix', specs: { Capacity: '120Ah', Type: 'GEL', Voltage: '12V', Weight: '38kg', 'Self Discharge': '<3%/month', Warranty: '18 Months' }, img: 'https://kamalsolar.pk/cdn/shop/files/51.2100AmpIP20_1066x.png?v=1770548600' },
-  { id: 13, name: 'Honda EP2500 2.5kVA Generator', cat: 'generators', catLabel: 'Generators', price: 85000, desc: 'Reliable Honda petrol generator with OHC engine. Ideal for homes and small shops.', badge: 'Best Seller', brand: 'Honda', specs: { Power: '2500VA', Engine: 'Honda OHC 4-stroke', Fuel: 'Petrol', Runtime: '7 hours (75%)', Weight: '45kg', Warranty: '2 Years' }, img: 'https://www.shutterstock.com/image-photo/backup-power-supply-generator-industrial-260nw-2518137373.jpg' },
-  { id: 14, name: 'Yamaha EF6600DE 6.5kVA Digital', cat: 'generators', catLabel: 'Generators', price: 145000, desc: 'Digital inverter generator with clean power output. Extra quiet with electric start.', badge: 'Premium', brand: 'Yamaha', specs: { Power: '6600VA', Engine: 'Yamaha 4-stroke', Fuel: 'Petrol', Runtime: '9.5 hours', Noise: '68dB', Warranty: '2 Years' }, img: 'https://www.shutterstock.com/image-photo/whole-home-gas-powered-electricity-generator-2565046773' },
-  { id: 15, name: 'Perkins 10kVA Diesel Generator', cat: 'generators', catLabel: 'Generators', price: 320000, desc: 'Industrial-grade Perkins diesel generator for continuous commercial power backup.', badge: 'Industrial', brand: 'Perkins', specs: { Power: '10000VA', Engine: 'Perkins 403D', Fuel: 'Diesel', Runtime: '14 hours', Alternator: 'Stamford', Warranty: '2 Years' }, img: 'https://www.shutterstock.com/image-3d-object/generator-2297646969' },
-  { id: 16, name: 'APC Smart-UPS 2kVA Online', cat: 'ups', catLabel: 'UPS Systems', price: 72000, desc: 'True online double-conversion UPS for servers and critical equipment. Zero transfer time.', badge: 'Best Seller', brand: 'APC by Schneider', specs: { Power: '2000VA / 1800W', Type: 'True Online (Double Conversion)', Runtime: '15 min (50%)', Transfer: '0ms', 'LCD Display': 'Yes', Warranty: '2 Years' }, img: 'https://media.istockphoto.com/id/2260641873/photo/a-man-installing-a-replacement-battery-pack-for-an-uninterruptible-power-supply-or-ups-unit.webp?s=612x612' },
-  { id: 17, name: 'Homage 3kVA Solar UPS', cat: 'ups', catLabel: 'UPS Systems', price: 38000, desc: 'Solar-compatible UPS with built-in MPPT controller. Perfect for solar+grid hybrid setups.', badge: 'Solar Compatible', brand: 'Homage', specs: { Power: '3000VA / 2400W', Type: 'Modified Sine Wave', 'Solar Input': 'MPPT 24V', 'Battery Voltage': '24V', Transfer: '<5ms', Warranty: '1 Year' }, img: 'https://media.istockphoto.com/id/2249502299/photo/a-man-installing-a-replacement-battery-pack-for-an-uninterruptible-power-supply-or-ups-unit.webp?s=612x612' },
-  { id: 18, name: 'Luminous 5kVA Solar Inverter UPS', cat: 'ups', catLabel: 'UPS Systems', price: 65000, desc: 'Heavy-duty solar UPS for running AC, fridge, fans and full home appliances.', badge: 'Heavy Duty', brand: 'Luminous', specs: { Power: '5000VA / 4000W', Type: 'Pure Sine Wave', 'Solar MPPT': '100A', 'Battery Banks': '48V', Warranty: '2 Years', Output: '220V AC' }, img: 'https://media.istockphoto.com/id/172991219/photo/ups.webp?s=612x612' },
-  { id: 19, name: 'Lorentz PS2 Solar Water Pump', cat: 'water-pumps', catLabel: 'Water Pumps', price: 45000, desc: 'DC solar submersible pump for agricultural use. Works directly on solar panels, no battery needed.', badge: 'Agricultural', brand: 'Lorentz', specs: { Flow: '3m3/hour', 'Max Head': '80m', Power: 'DC Solar Direct', Motor: 'Brushless DC', 'Solar Input': '48-150V', Warranty: '3 Years' }, img: 'https://plus.unsplash.com/premium_photo-1661946906973-b9d3ce2c6055?w=600&auto=format&fit=crop' },
-  { id: 20, name: 'Grundfos SQ Solar Pump System', cat: 'water-pumps', catLabel: 'Water Pumps', price: 68000, desc: 'Complete solar pump system with controller, for bore holes up to 100m depth.', badge: 'Complete Kit', brand: 'Grundfos', specs: { Flow: '5m3/hour', 'Max Head': '100m', Depth: '100m Max', Power: 'DC/AC', Protection: 'IP68', Warranty: '2 Years' }, img: 'https://media.istockphoto.com/id/2207376997/photo/water-pumps-in-a-large-power-plant.webp?s=612x612' },
-  { id: 21, name: 'Durable Copper Wires (10mm)', cat: 'cables-wires', catLabel: 'Cables & Wires', price: 2200, desc: 'High-quality copper wires for solar installations, resistant to heat and corrosion.', badge: 'Best Seller', brand: 'Generic', specs: { Type: 'Copper', Gauge: '10mm', Length: '100m Roll', 'Max Current': '50A', Insulation: 'PVC', Warranty: '1 Year' }, img: 'https://media.istockphoto.com/id/144349803/photo/cables.webp?s=612x612' },
-  { id: 22, name: 'Solar DC Cable (4mm Red/Black)', cat: 'cables-wires', catLabel: 'Cables & Wires', price: 1500, desc: 'UV resistant solar DC cables for connecting panels to inverters. Sold per meter or roll.', badge: null, brand: 'Generic', specs: { Type: 'Solar DC', Gauge: '4mm', Color: 'Red/Black', 'UV Resistant': 'Yes', 'Max Voltage': '1000V DC', Warranty: '2 Years' }, img: 'https://media.istockphoto.com/id/144349803/photo/cables.webp?s=612x612' },
-  { id: 23, name: 'MPPT Solar Charge Controller 60A', cat: 'electronics', catLabel: 'Electronic Components', price: 9500, desc: 'Advanced MPPT charge controller for efficient solar battery charging. LCD display.', badge: 'Best Seller', brand: 'Generic', specs: { Current: '60A', Voltage: '12/24/48V Auto', 'Max PV Input': '150V', Type: 'MPPT', Efficiency: '98%', Warranty: '1 Year' }, img: 'https://media.istockphoto.com/id/1317836696/photo/electrical-components.webp?s=612x612' },
-  { id: 24, name: 'PWM Charge Controller 30A', cat: 'electronics', catLabel: 'Electronic Components', price: 3200, desc: 'Budget-friendly PWM solar charge controller for small systems. LED indicator.', badge: null, brand: 'Generic', specs: { Current: '30A', Voltage: '12/24V', Type: 'PWM', Display: 'LED', Protection: 'Over-charge/discharge', Warranty: '1 Year' }, img: 'https://media.istockphoto.com/id/1317836696/photo/electrical-components.webp?s=612x612' },
-  { id: 25, name: 'DC-AC Power Inverter 2000W', cat: 'electronics', catLabel: 'Electronic Components', price: 12000, desc: 'Pure sine wave DC to AC power inverter for home and vehicle use.', badge: 'Popular', brand: 'Generic', specs: { Power: '2000W', 'Input Voltage': '12V DC', 'Output Voltage': '220V AC', Type: 'Pure Sine Wave', Protection: 'Over-load/thermal', Warranty: '1 Year' }, img: 'https://media.istockphoto.com/id/1317836696/photo/electrical-components.webp?s=612x612' },
-  { id: 26, name: 'Solar Panel Combiner Box 4-String', cat: 'electronics', catLabel: 'Electronic Components', price: 5500, desc: 'Weatherproof PV combiner box with surge protection for solar arrays.', badge: null, brand: 'Generic', specs: { Strings: '4 Input', 'Max Voltage': '1000V DC', Protection: 'IP65', Fuse: '15A per string', 'Lightning Protection': 'Yes', Warranty: '2 Years' }, img: 'https://media.istockphoto.com/id/1317836696/photo/electrical-components.webp?s=612x612' },
-  { id: 27, name: 'Samsung 1.5 Ton Inverter AC', cat: 'home-appliances', catLabel: 'Home Appliances', price: 145000, desc: 'Energy-efficient inverter AC compatible with solar systems. 5-star rating.', badge: 'Solar Compatible', brand: 'Samsung', specs: { Capacity: '1.5 Ton', Type: 'Inverter Split AC', 'Energy Rating': '5 Star', Refrigerant: 'R410A', 'Cooling Power': '18000 BTU', Warranty: '5 Years' }, img: 'https://media.istockphoto.com/id/1369627757/photo/modern-air-conditioner-on-the-wall.webp?s=612x612' },
-  { id: 28, name: 'Haier 12 Cu.Ft Solar Refrigerator', cat: 'home-appliances', catLabel: 'Home Appliances', price: 95000, desc: 'DC solar refrigerator that runs directly on solar panels. No inverter needed.', badge: 'Best Seller', brand: 'Haier', specs: { Capacity: '12 Cu.Ft', Type: 'DC Solar Refrigerator', Voltage: '12/24V DC', 'Energy Use': '60W avg', 'Star Rating': '4 Star', Warranty: '3 Years' }, img: 'https://media.istockphoto.com/id/1369627757/photo/modern-air-conditioner-on-the-wall.webp?s=612x612' },
-  { id: 29, name: 'Solar LED Street Light 100W', cat: 'home-appliances', catLabel: 'Home Appliances', price: 18500, desc: 'All-in-one solar LED street light with auto dusk-to-dawn sensor. IP66 rated.', badge: 'Popular', brand: 'Generic', specs: { Power: '100W', Type: 'All-in-One Solar LED', Battery: 'Li-ion Built-in', 'IP Rating': 'IP66', Runtime: '14 hours', Warranty: '2 Years' }, img: 'https://media.istockphoto.com/id/1369627757/photo/modern-air-conditioner-on-the-wall.webp?s=612x612' },
-  { id: 30, name: 'Solar Water Heater 200L', cat: 'home-appliances', catLabel: 'Home Appliances', price: 55000, desc: 'Evacuated tube solar water heater for domestic hot water supply. Stainless steel tank.', badge: null, brand: 'Generic', specs: { Capacity: '200 Liters', Type: 'Evacuated Tube', Tubes: '20 tubes', Tank: 'SS304 Stainless', Pressure: '0.6 MPa', Warranty: '5 Years' }, img: 'https://media.istockphoto.com/id/1369627757/photo/modern-air-conditioner-on-the-wall.webp?s=612x612' },
-  { id: 31, name: 'Solar Panel Cleaning Kit', cat: 'others', catLabel: 'Others', price: 2500, desc: 'Professional solar panel cleaning kit with extension pole, brush, and cleaning solution.', badge: null, brand: 'Generic', specs: { Includes: 'Brush, Pole, Solution', 'Pole Length': '3m extendable', 'Safe for': 'All panel types', Quantity: '1 Set', Warranty: '6 Months' }, img: 'https://images.unsplash.com/photo-1609791872621-5b4e7b2e7b00?w=600&auto=format&fit=crop' },
-  { id: 32, name: 'MC4 Solar Connectors (Pair)', cat: 'others', catLabel: 'Others', price: 350, desc: 'Weatherproof MC4 solar panel connectors for outdoor installations. UV resistant.', badge: 'Essential', brand: 'Generic', specs: { Type: 'MC4', 'Max Current': '30A', 'Max Voltage': '1000V DC', 'IP Rating': 'IP67', 'UV Resistant': 'Yes', Quantity: '1 Pair' }, img: 'https://media.istockphoto.com/id/144349803/photo/cables.webp?s=612x612' },
-  { id: 33, name: 'Net Metering Application Service', cat: 'others', catLabel: 'Others', price: 15000, desc: 'Complete net metering application service — we handle all LESCO/MEPCO paperwork.', badge: 'Service', brand: 'Bin Zareen', specs: { Includes: 'Documentation, Submission', Timeline: '30-45 working days', Utility: 'LESCO / MEPCO', 'Follow-up': 'Included', 'Site Visit': 'Included' }, img: 'https://images.unsplash.com/photo-1684382487202-f88aaa74f4e0?w=600&auto=format&fit=crop' },
-  { id: 101, name: 'Home Solar Installation', cat: 'installation', catLabel: 'Installation', price: 50000, desc: 'Professional rooftop installation for standard home systems.', badge: 'Popular', brand: 'Bin Zareen', specs: {}, img: 'https://images.unsplash.com/photo-1584277261846-c6a1672ed979?w=600' },
-  { id: 102, name: 'Commercial Installation', cat: 'installation', catLabel: 'Installation', price: 150000, desc: 'Large scale commercial and factory solar installations.', badge: null, brand: 'Bin Zareen', specs: {}, img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600' },
-  { id: 103, name: 'System Maintenance & Cleaning', cat: 'installation', catLabel: 'Installation', price: 5000, desc: 'Complete system checkup and panel cleaning service.', badge: 'Service', brand: 'Bin Zareen', specs: {}, img: 'https://images.unsplash.com/photo-1697665896701-1b8bd594f860?w=600' }
-];
 
 let allProducts = [];
 let cart = [];
@@ -1603,18 +1565,21 @@ function selectPayment(method) {
 // ============================================================
 // INSTANT PRODUCT RENDERING & PERSISTENT FIREBASE SYNC
 // ============================================================
-// 1. Immediately load products from cache or fallback so homepage categories, carousels, cards & navigation render instantly!
+// 1. Immediately load products from cache so homepage renders instantly on revisit.
+//    Firebase live-sync (below) will always refresh with the latest admin data.
 try {
+  // Cache-buster: if cache version mismatch, purge stale mock-product cache
+  const CACHE_VERSION = 'v2';
+  if (localStorage.getItem('bz_cache_ver') !== CACHE_VERSION) {
+    localStorage.removeItem('bz_products_cache');
+    localStorage.setItem('bz_cache_ver', CACHE_VERSION);
+  }
   const cached = localStorage.getItem('bz_products_cache');
   if (cached) {
     allProducts = JSON.parse(cached);
-  } else if (typeof initialProducts !== 'undefined' && initialProducts && initialProducts.length > 0) {
-    allProducts = initialProducts.map(p => ({ ...p, id: String(p.id) }));
   }
 } catch (e) {
-  if (typeof initialProducts !== 'undefined' && initialProducts && initialProducts.length > 0) {
-    allProducts = initialProducts.map(p => ({ ...p, id: String(p.id) }));
-  }
+  // Cache unreadable — Firebase will populate allProducts momentarily
 }
 
 // 2. Realtime Firebase synchronization (Strictly Read-Only, never auto-seeds or resurrects deleted items)
@@ -1700,8 +1665,9 @@ function formatPrice(p) { return 'Rs. ' + parseInt(p).toLocaleString('en-PK'); }
 // ============================================================
 function renderCategoryShowcase() {
   const container = document.getElementById('cat-showcase-container');
+  if (!container) return;
 
-  // ✅ UPDATED IMAGES as requested
+  // Left banner images are FINAL as requested
   const displayCategories = [
     { id: 'solar-panels', name: 'Solar Panels', img: 'https://kamalsolar.pk/cdn/shop/files/Knox_03KW_Hybrid_1_750x.png?v=1738083132' },
     { id: 'inverters', name: 'Inverters', img: 'https://kamalsolar.pk/cdn/shop/files/Knox04KWHybrid_1-min_750x.png?v=1737898390' },
@@ -1718,32 +1684,71 @@ function renderCategoryShowcase() {
 
   let html = '';
   displayCategories.forEach(cat => {
-    // Filter out 'installation' category from product carousels to only show real products
+    // Show all actual products in this category (added from admin panel and live database)
     const catProducts = allProducts.filter(p => p.cat === cat.id && p.cat !== 'installation'); 
     
     if (catProducts.length > 0) {
+      // Include ALL products in the category without truncating to 4
       let displayProds = [...catProducts];
-      while (displayProds.length < 4 && catProducts.length > 0) displayProds = displayProds.concat(catProducts);
-      displayProds = displayProds.slice(0, 4);
+      while (displayProds.length < 4) {
+        displayProds = displayProds.concat(catProducts);
+      }
+      // Duplicate for smooth seamless infinite CSS animation
       const loopProds = [...displayProds, ...displayProds];
+      
       const productsHtml = loopProds.map(p => {
-        // Ensure only products show product details, services link to services page
-        const onClick = p.cat === 'installation' ? "showPage('services')" : "showProductDetail('" + p.id + "')";
-        return '<div class="cat-prod-card" onclick="' + onClick + '"><img src="' + p.img + '" alt="' + p.name + '" class="cat-prod-img"><div class="cat-prod-name">' + p.name + '</div><div class="cat-prod-price">' + formatPrice(p.price) + '</div></div>';
+        const discountBadge = p.discount ? '<span style="position:absolute;top:6px;right:6px;background:#EF4444;color:white;font-size:0.68rem;font-weight:700;padding:2px 7px;border-radius:100px;box-shadow:0 1px 3px rgba(0,0,0,0.2);">' + p.discount + '% OFF</span>' : '';
+        const mainBadge = p.badge ? '<span style="position:absolute;top:6px;left:6px;background:var(--red-bright);color:white;font-size:0.68rem;font-weight:700;padding:2px 7px;border-radius:100px;">' + p.badge + '</span>' : '';
+        const oldPriceHtml = p.oldPrice ? ' <s style="font-size:0.75rem;color:#94A3B8;margin-left:4px;">' + formatPrice(p.oldPrice) + '</s>' : '';
+        return '<div class="cat-prod-card" onclick="showProductDetail(\'' + p.id + '\')">' +
+          '<div style="position:relative;width:100%;height:130px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;overflow:hidden;border-radius:10px;background:#f8fafc;">' +
+            (p.img ? '<img src="' + p.img + '" alt="' + p.name + '" class="cat-prod-img" loading="lazy">' : '') +
+            mainBadge + discountBadge +
+          '</div>' +
+          '<div class="cat-prod-name" title="' + p.name + '">' + p.name + '</div>' +
+          '<div class="cat-prod-price">' + formatPrice(p.price) + oldPriceHtml + '</div>' +
+        '</div>';
       }).join('');
-      const leftClick = cat.id === 'installation' ? "showPage('services')" : "showPage('cat','" + cat.id + "')";
-      html += '<div class="cat-showcase-row"><div class="cat-showcase-left" onclick="' + leftClick + '"><img src="' + cat.img + '" alt="' + cat.name + '" onerror="this.style.objectFit=\'contain\';this.style.background=\'var(--red-pale)\'"><div class="cat-showcase-overlay"><h3 class="cat-showcase-title">' + cat.name + '</h3><div class="cat-showcase-link">View All Products <span>→</span></div></div></div><div class="cat-showcase-right"><div class="carousel-track">' + productsHtml + '</div></div></div>';
-    } else if (cat.id === 'installation') { // Special handling for the 'Installation Services' row
+
+      html += '<div class="cat-showcase-row">' +
+        '<div class="cat-showcase-left" onclick="showPage(\'cat\',\'' + cat.id + '\')">' +
+          '<img src="' + cat.img + '" alt="' + cat.name + '" onerror="this.style.objectFit=\'contain\';this.style.background=\'var(--red-pale)\'">' +
+          '<div class="cat-showcase-overlay">' +
+            '<h3 class="cat-showcase-title">' + cat.name + '</h3>' +
+            '<div class="cat-showcase-link">View All ' + cat.name + ' <span>→</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cat-showcase-right">' +
+          '<div class="carousel-track">' + productsHtml + '</div>' +
+        '</div>' +
+      '</div>';
+    } else if (cat.id === 'installation') {
       const servicesProds = allProducts.filter(p => p.cat === 'installation');
       if (servicesProds.length > 0) {
         let displayProds = [...servicesProds];
-        while (displayProds.length < 4 && servicesProds.length > 0) displayProds = displayProds.concat(servicesProds);
-        displayProds = displayProds.slice(0, 4);
+        while (displayProds.length < 4) displayProds = displayProds.concat(servicesProds);
         const loopProds = [...displayProds, ...displayProds];
         const productsHtml = loopProds.map(p => {
-          return '<div class="cat-prod-card" onclick="showPage(\'services\')"><img src="' + p.img + '" alt="' + p.name + '" class="cat-prod-img" loading="lazy"><div class="cat-prod-name">' + p.name + '</div><div class="cat-prod-price">' + formatPrice(p.price) + '</div></div>';
+          return '<div class="cat-prod-card" onclick="showPage(\'services\')">' +
+            '<div style="position:relative;width:100%;height:130px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;overflow:hidden;border-radius:10px;background:#f8fafc;">' +
+              '<img src="' + p.img + '" alt="' + p.name + '" class="cat-prod-img" loading="lazy">' +
+            '</div>' +
+            '<div class="cat-prod-name">' + p.name + '</div>' +
+            '<div class="cat-prod-price">' + formatPrice(p.price) + '</div>' +
+          '</div>';
         }).join('');
-        html += '<div class="cat-showcase-row"><div class="cat-showcase-left" onclick="showPage(\'services\')"><img src="' + cat.img + '" alt="' + cat.name + '" onerror="this.style.objectFit=\'contain\';this.style.background=\'var(--red-pale)\'" loading="lazy"><div class="cat-showcase-overlay"><h3 class="cat-showcase-title">' + cat.name + '</h3><div class="cat-showcase-link">View All Services <span>→</span></div></div></div><div class="cat-showcase-right"><div class="carousel-track">' + productsHtml + '</div></div></div>';
+        html += '<div class="cat-showcase-row">' +
+          '<div class="cat-showcase-left" onclick="showPage(\'services\')">' +
+            '<img src="' + cat.img + '" alt="' + cat.name + '" onerror="this.style.objectFit=\'contain\';this.style.background=\'var(--red-pale)\'" loading="lazy">' +
+            '<div class="cat-showcase-overlay">' +
+              '<h3 class="cat-showcase-title">' + cat.name + '</h3>' +
+              '<div class="cat-showcase-link">View All Services <span>→</span></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="cat-showcase-right">' +
+            '<div class="carousel-track">' + productsHtml + '</div>' +
+          '</div>' +
+        '</div>';
       }
     }
   });
