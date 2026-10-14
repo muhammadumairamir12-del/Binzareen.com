@@ -596,15 +596,242 @@
             font-size: 0.9rem;
         }
 
-        /* Desktop optimization */
+        /* Search and Filter Inputs */
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            background: var(--card);
+            color: var(--text);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+        }
+
+        .cat-filter {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            background: var(--card);
+            color: var(--text);
+            cursor: pointer;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        .cat-filter:focus {
+            border-color: var(--primary);
+        }
+
+        /* ===================== IMAGE UPLOAD COMPONENT ===================== */
+        .img-choice-box {
+            background: #f8fafc;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .img-field-block {
+            background: white;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            transition: border-color 0.2s, opacity 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        .img-field-block.disabled {
+            background: #f1f5f9;
+            opacity: 0.6;
+            border-style: dashed;
+            cursor: not-allowed;
+        }
+
+        .img-field-block.disabled input {
+            cursor: not-allowed;
+            background: #f1f5f9;
+        }
+
+        .img-field-block.active-source {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.08);
+        }
+
+        .img-field-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .img-field-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .img-mode-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .img-mode-badge.badge-file {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .img-mode-badge.badge-url {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .img-or-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-soft);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: -2px 0;
+        }
+
+        .img-or-divider::before,
+        .img-or-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .img-or-divider span {
+            padding: 0 10px;
+        }
+
+        .img-field-hint {
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        .upload-status-text {
+            font-size: 0.82rem;
+            margin-top: 6px;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .img-preview-wrapper {
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .img-preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-soft);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-clear-img {
+            background: #fee2e2;
+            color: var(--primary);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-clear-img:hover {
+            background: #fecaca;
+        }
+
+        .btn-clear-img:active {
+            transform: scale(0.96);
+        }
+
+        .img-preview-box {
+            width: 100%;
+            height: 150px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-preview-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Desktop optimization (min-width: 640px) */
         @media (min-width: 640px) {
             .stats-row {
                 grid-template-columns: repeat(4, 1fr);
                 padding: 20px 24px;
             }
 
-            .action-bar { padding: 0 24px 20px; }
-            .btn-add { flex: none; padding: 13px 24px; }
+            .action-bar {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                padding: 0 24px 20px;
+            }
+
+            .btn-add {
+                flex: none;
+                padding: 13px 24px;
+            }
+
+            .search-input {
+                flex: 1;
+            }
+
+            .cat-filter {
+                width: auto;
+                flex: none;
+            }
+
             .products-section { padding: 0 24px 32px; }
 
             .product-card-inner { padding: 16px; }
@@ -619,6 +846,103 @@
             }
 
             .form-body { padding: 24px; }
+        }
+
+        /* Mobile optimization (max-width: 639px) */
+        @media (max-width: 639px) {
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                padding: 12px 14px;
+            }
+
+            .stat-pill {
+                padding: 12px 8px;
+            }
+
+            .stat-pill .num {
+                font-size: 1.5rem;
+            }
+
+            .action-bar {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                padding: 0 14px 14px;
+            }
+
+            .btn-add {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 16px;
+            }
+
+            .search-input,
+            .cat-filter {
+                width: 100%;
+            }
+
+            .products-section {
+                padding: 0 14px 20px;
+            }
+
+            .form-2col {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .form-sheet {
+                max-height: 94vh;
+                padding-bottom: max(30px, env(safe-area-inset-bottom, 20px));
+            }
+
+            .form-body {
+                padding: 16px 14px;
+            }
+
+            .form-header {
+                padding: 14px 16px;
+            }
+        }
+
+        /* Small mobile screens (max-width: 380px) */
+        @media (max-width: 380px) {
+            .top-bar {
+                padding: 10px 12px;
+            }
+
+            .top-bar-left .brand {
+                font-size: 0.92rem;
+            }
+
+            .top-bar-left .logo-img-small {
+                width: 26px;
+                height: 26px;
+            }
+
+            .logout-btn {
+                padding: 6px 10px;
+                font-size: 0.78rem;
+            }
+
+            .product-card-inner {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .product-thumb {
+                width: 52px;
+                height: 52px;
+            }
+
+            .product-name {
+                font-size: 0.88rem;
+            }
+
+            .card-action-btn {
+                padding: 8px 6px;
+                font-size: 0.8rem;
+            }
         }
 
         /* Scrollbar */
@@ -691,11 +1015,9 @@
         <button class="btn-add" onclick="openForm()">
             <span>＋</span> New Product
         </button>
-        <input type="text" id="search-input" placeholder="🔍 Search products..."
-            oninput="filterList(this.value)"
-            style="flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;background:var(--card);">
-        <select id="cat-filter" onchange="filterList(document.getElementById('search-input').value)"
-            style="padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Outfit',sans-serif;font-size:0.85rem;outline:none;background:var(--card);color:var(--text);cursor:pointer;">
+        <input type="text" id="search-input" class="search-input" placeholder="🔍 Search products..."
+            oninput="filterList(this.value)">
+        <select id="cat-filter" class="cat-filter" onchange="filterList(document.getElementById('search-input').value)">
             <option value="">All Categories</option>
             <option value="solar-panels">☀️ Solar Panels</option>
             <option value="inverters">🔌 Inverters</option>
@@ -775,9 +1097,43 @@
                 <textarea id="f-desc" rows="2" placeholder="Product ki short description likhen..."></textarea>
             </div>
 
+            <!-- ── PRODUCT IMAGE (Upload or URL - Mutually Exclusive) ── -->
             <div class="form-row">
-                <label>Image URL</label>
-                <input type="url" id="f-img" placeholder="https://...">
+                <label>Product Image</label>
+                <div class="img-choice-box">
+                    <!-- Option 1: File Upload (Cloudinary) -->
+                    <div class="img-field-block" id="block-img-file">
+                        <div class="img-field-header">
+                            <span class="img-field-title">📁 Upload from Device</span>
+                            <span id="badge-upload-file" class="img-mode-badge badge-file" style="display:none;">Active</span>
+                        </div>
+                        <input type="file" id="f-img-file" accept="image/*" onchange="handleImageFileSelect(event)">
+                        <div id="f-img-status" class="upload-status-text"></div>
+                    </div>
+
+                    <div class="img-or-divider"><span>OR</span></div>
+
+                    <!-- Option 2: Direct Image URL -->
+                    <div class="img-field-block" id="block-img-url">
+                        <div class="img-field-header">
+                            <span class="img-field-title">🔗 Paste Image URL</span>
+                            <span id="badge-upload-url" class="img-mode-badge badge-url" style="display:none;">Active</span>
+                        </div>
+                        <input type="url" id="f-img" placeholder="https://..." oninput="handleImageUrlInput(event)">
+                        <div class="img-field-hint" id="f-img-hint">Auto-fills when file is uploaded, or enter link manually.</div>
+                    </div>
+
+                    <!-- Image Preview Container -->
+                    <div id="img-preview-container" class="img-preview-wrapper" style="display:none;">
+                        <div class="img-preview-header">
+                            <span>Image Preview</span>
+                            <button type="button" class="btn-clear-img" onclick="clearImageSelection()">✕ Remove Image</button>
+                        </div>
+                        <div class="img-preview-box">
+                            <img id="f-img-preview" src="" alt="Product Preview" onerror="handlePreviewError()">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- ── SPECIFICATIONS (simple key-value rows) ── -->
@@ -836,6 +1192,177 @@ const adminApp = firebase.initializeApp(firebaseConfig, "bzAdmin");
 const auth = adminApp.auth();
 const db = adminApp.database();
 const productsRef = db.ref('products');
+
+// ==================== CLOUDINARY CONFIG ====================
+// ⚠️ CLOUDINARY CREDENTIALS:
+// To connect to your Cloudinary account, replace these two placeholder values:
+const CLOUDINARY_CLOUD_NAME = 'doxzegops'; // <-- Paste your Cloudinary Cloud Name here
+const CLOUDINARY_UPLOAD_PRESET = 'binzareen_products'; // <-- Paste your Unsigned Upload Preset name here
+
+let isUploadingImage = false;
+
+// Cloudinary Unsigned Upload Helper
+async function uploadToCloudinary(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+    const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+        { method: 'POST', body: formData }
+    );
+    if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error?.message || 'Upload failed');
+    }
+    const data = await response.json();
+    return data.secure_url;
+}
+
+// Handler: When admin selects a file (Adjustment 1: Mutually Exclusive)
+async function handleImageFileSelect(event) {
+    const fileInput = event.target;
+    const file = fileInput.files && fileInput.files[0];
+    const urlInput = document.getElementById('f-img');
+    const statusEl = document.getElementById('f-img-status');
+    const previewContainer = document.getElementById('img-preview-container');
+    const previewImg = document.getElementById('f-img-preview');
+    const blockFile = document.getElementById('block-img-file');
+    const blockUrl = document.getElementById('block-img-url');
+    const badgeFile = document.getElementById('badge-upload-file');
+    const badgeUrl = document.getElementById('badge-upload-url');
+    const hintUrl = document.getElementById('f-img-hint');
+    const saveBtn = document.querySelector('.form-save-btn');
+
+    if (!file) {
+        if (!urlInput.value.trim()) {
+            clearImageSelection();
+        }
+        return;
+    }
+
+    // Adjustment 1: Disable manual URL input while file is selected
+    urlInput.disabled = true;
+    blockUrl.classList.add('disabled');
+    blockFile.classList.add('active-source');
+    blockUrl.classList.remove('active-source');
+    if (badgeFile) badgeFile.style.display = 'inline-block';
+    if (badgeUrl) badgeUrl.style.display = 'none';
+    if (hintUrl) hintUrl.textContent = '🔒 Locked: File selected from device.';
+
+    // Immediate local preview for responsive UX
+    try {
+        previewImg.src = URL.createObjectURL(file);
+        previewContainer.style.display = 'block';
+    } catch (e) {}
+
+    statusEl.innerHTML = '<span style="color:#d97706;font-weight:600;">⏳ Uploading to Cloudinary...</span>';
+    isUploadingImage = true;
+    if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.textContent = '⏳ Uploading Image...';
+    }
+
+    try {
+        const secureUrl = await uploadToCloudinary(file);
+        // Auto-fill existing #f-img so saveProduct() continues working with zero changes
+        urlInput.value = secureUrl;
+        previewImg.src = secureUrl;
+        statusEl.innerHTML = '<span style="color:#16a34a;font-weight:600;">✓ Uploaded successfully!</span>';
+    } catch (error) {
+        console.error('Cloudinary upload error:', error);
+        statusEl.innerHTML = `<span style="color:#dc2626;font-weight:600;">✕ Upload failed: ${error.message || 'Network error'}.</span>`;
+        // Re-enable URL input on error so admin is never stuck
+        urlInput.disabled = false;
+        blockUrl.classList.remove('disabled');
+        blockFile.classList.remove('active-source');
+        if (hintUrl) hintUrl.textContent = 'Auto-fills when file is uploaded, or enter link manually.';
+    } finally {
+        isUploadingImage = false;
+        if (saveBtn) {
+            saveBtn.disabled = false;
+            saveBtn.textContent = '✓ Save Product';
+        }
+    }
+}
+
+// Handler: When admin manually types/pastes a URL (Adjustment 1: Mutually Exclusive)
+function handleImageUrlInput(event) {
+    const urlInput = event.target;
+    const urlVal = urlInput.value.trim();
+    const fileInput = document.getElementById('f-img-file');
+    const statusEl = document.getElementById('f-img-status');
+    const previewContainer = document.getElementById('img-preview-container');
+    const previewImg = document.getElementById('f-img-preview');
+    const blockFile = document.getElementById('block-img-file');
+    const blockUrl = document.getElementById('block-img-url');
+    const badgeFile = document.getElementById('badge-upload-file');
+    const badgeUrl = document.getElementById('badge-upload-url');
+
+    if (urlVal.length > 0) {
+        // Adjustment 1: Disable file picker when manual URL is entered
+        fileInput.disabled = true;
+        fileInput.value = '';
+        blockFile.classList.add('disabled');
+        blockUrl.classList.add('active-source');
+        blockFile.classList.remove('active-source');
+        if (badgeUrl) badgeUrl.style.display = 'inline-block';
+        if (badgeFile) badgeFile.style.display = 'none';
+
+        // Update preview
+        previewImg.src = urlVal;
+        previewContainer.style.display = 'block';
+        statusEl.innerHTML = '<span style="color:#4b5563;font-size:0.78rem;">🔗 Using direct image link</span>';
+    } else {
+        // Clearing URL re-enables file picker
+        fileInput.disabled = false;
+        blockFile.classList.remove('disabled', 'active-source');
+        blockUrl.classList.remove('active-source');
+        if (badgeUrl) badgeUrl.style.display = 'none';
+        previewContainer.style.display = 'none';
+        previewImg.src = '';
+        statusEl.textContent = '';
+    }
+}
+
+// Reset / Clear Image Handler
+function clearImageSelection() {
+    const fileInput = document.getElementById('f-img-file');
+    const urlInput = document.getElementById('f-img');
+    const statusEl = document.getElementById('f-img-status');
+    const previewContainer = document.getElementById('img-preview-container');
+    const previewImg = document.getElementById('f-img-preview');
+    const blockFile = document.getElementById('block-img-file');
+    const blockUrl = document.getElementById('block-img-url');
+    const badgeFile = document.getElementById('badge-upload-file');
+    const badgeUrl = document.getElementById('badge-upload-url');
+    const hintUrl = document.getElementById('f-img-hint');
+
+    if (fileInput) {
+        fileInput.value = '';
+        fileInput.disabled = false;
+    }
+    if (urlInput) {
+        urlInput.value = '';
+        urlInput.disabled = false;
+    }
+    if (blockFile) blockFile.classList.remove('disabled', 'active-source');
+    if (blockUrl) blockUrl.classList.remove('disabled', 'active-source');
+    if (badgeFile) badgeFile.style.display = 'none';
+    if (badgeUrl) badgeUrl.style.display = 'none';
+    if (hintUrl) hintUrl.textContent = 'Auto-fills when file is uploaded, or enter link manually.';
+    if (previewContainer) previewContainer.style.display = 'none';
+    if (previewImg) previewImg.src = '';
+    if (statusEl) statusEl.textContent = '';
+    isUploadingImage = false;
+}
+
+function handlePreviewError() {
+    const previewImg = document.getElementById('f-img-preview');
+    if (previewImg && previewImg.src && !previewImg.src.includes('placeholder')) {
+        previewImg.src = 'https://via.placeholder.com/200x120/f4f6f9/999?text=Image+Not+Found';
+    }
+}
 
 let products = [];
 
@@ -982,7 +1509,19 @@ function openForm(id = null) {
             document.getElementById('f-price').value = p.price || '';
             document.getElementById('f-old-price').value = p.oldPrice || '';
             document.getElementById('f-desc').value = p.desc || '';
-            document.getElementById('f-img').value = p.img || '';
+            const currentImg = p.img || '';
+            document.getElementById('f-img').value = currentImg;
+            if (currentImg) {
+                document.getElementById('f-img-preview').src = currentImg;
+                document.getElementById('img-preview-container').style.display = 'block';
+                document.getElementById('f-img-status').innerHTML = '<span style="color:#4b5563;font-size:0.78rem;">✓ Current saved image</span>';
+                document.getElementById('f-img').disabled = false;
+                document.getElementById('f-img-file').disabled = false;
+                document.getElementById('block-img-file').classList.remove('disabled', 'active-source');
+                document.getElementById('block-img-url').classList.remove('disabled', 'active-source');
+            } else {
+                clearImageSelection();
+            }
             document.getElementById('f-badge').value = p.badge || '';
             document.getElementById('f-discount').value = p.discount || '';
             document.getElementById('f-popup').value = p.popup || '';
@@ -1013,12 +1552,13 @@ function overlayClick(e) {
 }
 
 function resetForm() {
-    ['f-id','f-name','f-brand','f-price','f-old-price','f-desc','f-img',
+    ['f-id','f-name','f-brand','f-price','f-old-price','f-desc',
      'f-badge','f-discount','f-popup','f-cat-label'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = '';
     });
     document.getElementById('f-cat').value = '';
+    clearImageSelection();
     const prev = document.getElementById('offer-preview');
     if (prev) { prev.className = 'offer-preview'; prev.innerHTML = ''; }
     document.getElementById('specs-rows').innerHTML = '';
@@ -1101,6 +1641,10 @@ function updateOfferPreview() {
 }
 
 function saveProduct() {
+    if (isUploadingImage) {
+        alert('⏳ Image upload jari hai, barah-e-karam upload mukammal hone tak intezar karen.');
+        return;
+    }
     const id = document.getElementById('f-id').value;
     const name = document.getElementById('f-name').value.trim();
     const cat = document.getElementById('f-cat').value;

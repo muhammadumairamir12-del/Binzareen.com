@@ -1430,6 +1430,23 @@
       pdf.setFont('helvetica', 'normal');
 
       data.selectedItems.forEach((item, idx) => {
+        if (yPos > pageHeight - margins.bottom - 75) {
+          pdf.addPage();
+          yPos = margins.top + 8;
+          pdf.setFillColor(9, 14, 31);
+          pdf.rect(margins.left, yPos, contentWidth, 6.5, 'F');
+          pdf.setTextColor(255, 255, 255);
+          pdf.setFontSize(7.2);
+          pdf.setFont('helvetica', 'bold');
+          let hX = margins.left;
+          tableHeaders.forEach((h, hIdx) => {
+            pdf.text(h, hX + 2, yPos + 4.5);
+            hX += colWidths[hIdx];
+          });
+          yPos += 6.5;
+          pdf.setTextColor(51, 65, 85);
+          pdf.setFont('helvetica', 'normal');
+        }
         if (idx % 2 === 0) {
           pdf.setFillColor(248, 250, 252);
           pdf.rect(margins.left, yPos, contentWidth, 5.5, 'F');
@@ -1665,13 +1682,41 @@
       triggerPdfDirectDownload();
 
       const qNum = generatedQuotation.quotationNumber;
+      const c = generatedQuotation.customer || {};
+      const itemsBreakdown = (generatedQuotation.selectedItems || []).map((item, idx) => 
+        (idx + 1) + '. ' + item.name + ' (Qty: ' + item.qty + ') - ' + item.totalWatts.toLocaleString() + ' W'
+      ).join('\n');
+
+      const recInv = document.getElementById('rec-inverter') ? document.getElementById('rec-inverter').textContent : 'Turnkey Inverter';
+      const recPan = document.getElementById('rec-panels') ? document.getElementById('rec-panels').textContent : 'Tier-1 Panels';
+      const recBat = document.getElementById('rec-battery') ? document.getElementById('rec-battery').textContent : 'Battery Storage';
+
       const message = [
-        'Hello Bin Zareen Solar,',
+        '*BIN ZAREEN SOLAR — FREE LOAD QUOTATION*',
+        '----------------------------------------',
+        '📄 *Quotation Ref:* ' + qNum,
+        '📅 *Date:* ' + (generatedQuotation.dateFormatted || ''),
         '',
-        'I have generated my solar load quotation.',
-        'Quotation No: ' + qNum,
+        '👤 *Customer Details:*',
+        '• Name: ' + (c.name || ''),
+        '• City: ' + (c.city || '') + ', Pakistan',
+        '• Phone: +' + (c.phone || ''),
+        '• Preferred Time: ' + (c.contactTime || 'Anytime'),
         '',
-        'Please find the attached PDF quotation.'
+        '⚡ *Load Analysis:*',
+        '• Total Appliances: ' + generatedQuotation.totalQty + ' units',
+        '• Total Peak Load: ' + generatedQuotation.totalWatts.toLocaleString() + ' Watts (' + generatedQuotation.totalKw + ' kW)',
+        '• Load Tier: ' + generatedQuotation.statusTier,
+        '',
+        '📋 *Appliances Selected:*',
+        itemsBreakdown,
+        '',
+        '☀️ *Recommended System:*',
+        '• Inverter: ' + recInv,
+        '• Panels: ' + recPan,
+        '• Battery: ' + recBat,
+        '----------------------------------------',
+        '💬 *Attached Official PDF quotation from Bin Zareen Solar (0325-2053313).*'
       ].join('\n');
 
       const waUrl = 'https://wa.me/923252053313?text=' + encodeURIComponent(message);

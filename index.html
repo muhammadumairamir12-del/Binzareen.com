@@ -637,14 +637,58 @@
   .calc-wa-guide-box { display: none; background: #F0FDF4; border: 1.5px solid #BBF7D0; border-radius: 8px; padding: 12px; margin-top: 12px; font-size: 0.8rem; color: #166534; line-height: 1.5; }
   .calc-wa-guide-box.show { display: block; }
   
+  .custom-inputs-row { display: grid; grid-template-columns: 2fr 1.2fr 1fr auto; gap: 8px; }
+  
+  /* Floating Mobile Load Bar */
+  .calc-floating-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0F172A;
+    color: white;
+    padding: 10px 16px;
+    z-index: 999;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.25);
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 2px solid #B91C1C;
+  }
+  .calc-floating-bar-info { display: flex; flex-direction: column; }
+  .calc-floating-bar-watts { font-size: 0.95rem; font-weight: 800; color: #FDE047; }
+  .calc-floating-bar-sub { font-size: 0.72rem; color: #94A3B8; }
+  .calc-floating-bar-btn {
+    background: #B91C1C;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
   @media (max-width: 1024px) {
-    .calc-main-layout { grid-template-columns: 1fr; }
+    .calc-main-layout { grid-template-columns: 1fr; padding: 24px 0 80px; }
     .calc-sidebar-sticky { position: static; }
+    #page-calculator.active .calc-floating-bar { display: flex; }
   }
   @media (max-width: 600px) {
     .calc-grid-container { grid-template-columns: 1fr; }
     .calc-summary-metrics { grid-template-columns: 1fr; }
     .calc-actions-2col { grid-template-columns: 1fr; }
+    .calc-appliances-box { padding: 14px 12px; border-radius: 14px; }
+    .custom-inputs-row { grid-template-columns: 1fr; }
+    .calc-form-panel { padding: 14px 12px; border-radius: 14px; }
+    .calc-controls-bar { flex-direction: column; align-items: stretch; }
+    .calc-search-input { min-width: 0; width: 100%; }
+    .calc-category-tabs { -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .calc-category-tabs::-webkit-scrollbar { display: none; }
+    .calc-hero { padding: 24px 0; }
   }
 </style>
 <link rel="dns-prefetch" href="https://www.gstatic.com">
@@ -1238,7 +1282,7 @@
           <!-- CUSTOM ITEM ROW -->
           <div style="margin-top:20px;padding:16px;background:#F8FAFC;border:1.5px dashed #CBD5E1;border-radius:12px;">
             <div style="font-size:0.88rem;font-weight:700;color:#0F172A;margin-bottom:10px;">➕ Add Custom Appliance or Machinery</div>
-            <div style="display:grid;grid-template-columns:2fr 1.2fr 1fr auto;gap:8px;" class="custom-inputs-row">
+            <div class="custom-inputs-row">
               <input type="text" id="idx-custom-name" placeholder="Appliance Name (e.g. Deep Well Pump)" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
               <input type="number" id="idx-custom-watts" placeholder="Watts (e.g. 1500)" min="1" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
               <input type="number" id="idx-custom-qty" placeholder="Qty" min="1" value="1" style="padding:8px 10px;border:1.5px solid #E2E8F0;border-radius:6px;font-size:0.85rem;">
@@ -1362,6 +1406,17 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- FLOATING MOBILE BAR (Instant Total & Jump to Quote Form) -->
+    <div class="calc-floating-bar" id="idx-calc-floating-bar">
+      <div class="calc-floating-bar-info">
+        <span class="calc-floating-bar-watts" id="idx-float-watts">0 Watts (0.0 kW)</span>
+        <span class="calc-floating-bar-sub"><span id="idx-float-qty">0</span> appliances selected</span>
+      </div>
+      <button type="button" class="calc-floating-bar-btn" onclick="scrollToIndexQuotationForm()">
+        View Quote Form ↓
+      </button>
     </div>
   </div>
 
@@ -1592,6 +1647,15 @@ function loadProductsFromFirebase() {
         if (obj) {
           allProducts = Object.keys(obj).map(k => ({ id: k, ...obj[k] }));
           allProducts = allProducts.map(p => ({ ...p, id: String(p.id) }));
+          // Ensure newly added admin products (push IDs starting with '-') appear first, sorted newest first
+          allProducts.sort((a, b) => {
+            const aIsPush = a.id && a.id.startsWith('-');
+            const bIsPush = b.id && b.id.startsWith('-');
+            if (aIsPush && bIsPush) return b.id.localeCompare(a.id);
+            if (aIsPush && !bIsPush) return -1;
+            if (!aIsPush && bIsPush) return 1;
+            return parseInt(a.id) - parseInt(b.id);
+          });
           if (typeof renderCategoryShowcase === 'function') renderCategoryShowcase();
           if (typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
           if (typeof updateCartCount === 'function') updateCartCount();
@@ -1688,11 +1752,14 @@ function renderCategoryShowcase() {
 // ============================================================
 function renderProductCard(p) {
   if (p.cat === 'installation') return ''; // Prevent installation services from showing up in product grids
-  const inCart = cart.find(c => c.id === p.id);
+  const inCart = cart.find(c => String(c.id) === String(p.id));
+  const discountBadge = p.discount ? '<div class="product-badge" style="background:#EF4444;right:8px;left:auto;">' + p.discount + '% OFF</div>' : '';
+  const mainBadge = p.badge ? '<div class="product-badge">' + p.badge + '</div>' : '';
+  const oldPriceHtml = p.oldPrice ? ' <s style="font-size:0.78rem;color:#94A3B8;margin-left:4px;">' + formatPrice(p.oldPrice) + '</s>' : '';
   return '<div class="product-card" onclick="showProductDetail(\'' + p.id + '\')"><div class="product-img">' +
     (p.img ? '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' : '') +
-    (p.badge ? '<div class="product-badge">' + p.badge + '</div>' : '') +
-    '</div><div class="product-body"><div class="product-cat">' + p.catLabel + '</div><div class="product-name">' + p.name + '</div><div class="product-desc">' + p.desc + '</div><div class="product-footer"><div class="product-price">' + formatPrice(p.price) + ' <small>Inc. GST</small></div><button class="add-cart-btn ' + (inCart ? 'added' : '') + '" onclick="event.stopPropagation();addToCart(\'' + p.id + '\')">' + (inCart ? '✓ Added' : 'Add to Cart') + '</button></div></div></div>';
+    mainBadge + discountBadge +
+    '</div><div class="product-body"><div class="product-cat">' + (p.catLabel || p.cat) + '</div><div class="product-name">' + p.name + '</div><div class="product-desc">' + (p.desc || '') + '</div><div class="product-footer"><div class="product-price">' + formatPrice(p.price) + oldPriceHtml + ' <small>Inc. GST</small></div><button class="add-cart-btn ' + (inCart ? 'added' : '') + '" onclick="event.stopPropagation();addToCart(\'' + p.id + '\')">' + (inCart ? '✓ Added' : 'Add to Cart') + '</button></div></div></div>';
 }
 
 // ============================================================
@@ -1779,7 +1846,7 @@ function showProductDetail(id) {
   // Niche addToCart mein quotes add kiye gaye hain
   document.getElementById('pdp-content').innerHTML =
     '<div><div class="pdp-img-main">' + (p.img ? '<img src="' + p.img + '" alt="' + p.name + '" style="max-width:90%;max-height:90%;object-fit:contain;">' : '') + '</div><div class="pdp-thumbs"><div class="pdp-thumb active">' + (p.img ? '<img src="' + p.img + '" style="max-width:90%;max-height:90%;object-fit:contain;">' : '') + '</div></div></div>' +
-    '<div class="pdp-content"><div class="product-cat" style="margin-bottom:8px;">' + p.catLabel + '</div><h1>' + p.name + '</h1><div class="pdp-rating"><span style="color:var(--orange);font-size:1rem;">★★★★★</span><span style="font-size:0.85rem;color:var(--gray-mid);">(48 reviews)</span>' + (p.badge ? '<span style="background:var(--red-bright);color:white;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:100px;">' + p.badge + '</span>' : '') + '</div><div class="pdp-price-box"><div class="pdp-price">' + formatPrice(p.price) + '</div><div class="pdp-price-note">✓ GST Included &nbsp;|&nbsp; ✓ Free Delivery Islamabad &nbsp;|&nbsp; ✓ Installation Available</div></div><p style="color:var(--gray-dark);line-height:1.8;margin-bottom:24px;">' + p.desc + '</p><div class="pdp-specs">' + specsHTML + '</div><div class="pdp-qty"><span style="font-weight:700;font-size:0.9rem;">Qty:</span><button class="qty-btn" onclick="changeQty(-1)">−</button><span class="qty-num" id="pdp-qty">1</span><button class="qty-btn" onclick="changeQty(1)">+</button></div><div class="pdp-actions"><button class="btn-blue" id="pdp-cart-btn" onclick="addToCart(\'' + p.id + '\')" style="flex:1;">' + (inCart ? '✓ Already in Cart' : '+ Add to Cart') + '</button><button class="btn-blue-outline" onclick="showPage(\'contact\')">Get Quote</button></div><div style="margin-top:20px;display:flex;gap:16px;font-size:0.83rem;color:var(--gray-mid);"><span>🚚 Free delivery Islamabad</span><span>✓ Genuine product</span><span>🔧 Installation available</span></div></div>';
+    '<div class="pdp-content"><div class="product-cat" style="margin-bottom:8px;">' + p.catLabel + '</div><h1>' + p.name + '</h1><div class="pdp-rating"><span style="color:var(--orange);font-size:1rem;">★★★★★</span><span style="font-size:0.85rem;color:var(--gray-mid);">(48 reviews)</span>' + (p.badge ? '<span style="background:var(--red-bright);color:white;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:100px;">' + p.badge + '</span>' : '') + '</div><div class="pdp-price-box"><div class="pdp-price">' + formatPrice(p.price) + (p.oldPrice ? ' <s style="font-size:1.1rem;color:var(--gray-mid);margin-left:8px;">' + formatPrice(p.oldPrice) + '</s>' : '') + (p.discount ? ' <span style="background:#EF4444;color:white;font-size:0.75rem;padding:3px 8px;border-radius:6px;margin-left:6px;vertical-align:middle;">' + p.discount + '% OFF</span>' : '') + '</div><div class="pdp-price-note">✓ GST Included &nbsp;|&nbsp; ✓ Free Delivery Islamabad &nbsp;|&nbsp; ✓ Installation Available</div></div><p style="color:var(--gray-dark);line-height:1.8;margin-bottom:24px;">' + p.desc + '</p><div class="pdp-specs">' + specsHTML + '</div><div class="pdp-qty"><span style="font-weight:700;font-size:0.9rem;">Qty:</span><button class="qty-btn" onclick="changeQty(-1)">−</button><span class="qty-num" id="pdp-qty">1</span><button class="qty-btn" onclick="changeQty(1)">+</button></div><div class="pdp-actions"><button class="btn-blue" id="pdp-cart-btn" onclick="addToCart(\'' + p.id + '\')" style="flex:1;">' + (inCart ? '✓ Already in Cart' : '+ Add to Cart') + '</button><button class="btn-blue-outline" onclick="showPage(\'contact\')">Get Quote</button></div><div style="margin-top:20px;display:flex;gap:16px;font-size:0.83rem;color:var(--gray-mid);"><span>🚚 Free delivery Islamabad</span><span>✓ Genuine product</span><span>🔧 Installation available</span></div></div>';
   
   const related = allProducts.filter(x => x.cat === p.cat && String(x.id) !== String(p.id) && x.cat !== 'installation').slice(0, 4);
   document.getElementById('related-products').innerHTML = related.map(renderProductCard).join('');
@@ -2246,6 +2313,10 @@ function calculateIndexTotals() {
   const sumWatts = document.getElementById('idx-sum-watts');
   if (sumQty) sumQty.innerHTML = totalQty + ' <small style="font-size:0.75rem;color:#64748B;">items</small>';
   if (sumWatts) sumWatts.innerHTML = totalWatts.toLocaleString() + ' <small style="font-size:0.75rem;color:#64748B;">W (' + totalKw + ' kW)</small>';
+  const floatWatts = document.getElementById('idx-float-watts');
+  const floatQty = document.getElementById('idx-float-qty');
+  if (floatWatts) floatWatts.textContent = totalWatts.toLocaleString() + ' Watts (' + totalKw + ' kW)';
+  if (floatQty) floatQty.textContent = totalQty;
 
   const tierEl = document.getElementById('idx-tier-badge');
   const recInverter = document.getElementById('idx-rec-inverter');
@@ -2447,6 +2518,23 @@ async function createIndexPdfDocument(data) {
   pdf.setFont('helvetica', 'normal');
 
   data.selectedItems.forEach((item, idx) => {
+    if (yPos > pageHeight - margins.bottom - 75) {
+      pdf.addPage();
+      yPos = margins.top + 8;
+      pdf.setFillColor(9, 14, 31);
+      pdf.rect(margins.left, yPos, contentWidth, 6.5, 'F');
+      pdf.setTextColor(255, 255, 255);
+      pdf.setFontSize(7.2);
+      pdf.setFont('helvetica', 'bold');
+      let hX = margins.left;
+      tableHeaders.forEach((h, hIdx) => {
+        pdf.text(h, hX + 2, yPos + 4.5);
+        hX += colWidths[hIdx];
+      });
+      yPos += 6.5;
+      pdf.setTextColor(51, 65, 85);
+      pdf.setFont('helvetica', 'normal');
+    }
     if (idx % 2 === 0) {
       pdf.setFillColor(248, 250, 252);
       pdf.rect(margins.left, yPos, contentWidth, 5.5, 'F');
@@ -2664,13 +2752,41 @@ async function handleIndexSendWhatsApp() {
   triggerIndexPdfDownload();
 
   const qNum = idxQuotationData.quotationNumber;
+  const c = idxQuotationData.customer || {};
+  const itemsBreakdown = (idxQuotationData.selectedItems || idxQuotationData.selectedList || []).map((item, idx) => 
+    (idx + 1) + '. ' + item.name + ' (Qty: ' + item.qty + ') - ' + item.totalWatts.toLocaleString() + ' W'
+  ).join('\n');
+
+  const recInv = document.getElementById('idx-rec-inverter') ? document.getElementById('idx-rec-inverter').textContent : 'Turnkey Inverter';
+  const recPan = document.getElementById('idx-rec-panels') ? document.getElementById('idx-rec-panels').textContent : 'Tier-1 Panels';
+  const recBat = document.getElementById('idx-rec-battery') ? document.getElementById('idx-rec-battery').textContent : 'Battery Storage';
+
   const message = [
-    'Hello Bin Zareen Solar,',
+    '*BIN ZAREEN SOLAR — FREE LOAD QUOTATION*',
+    '----------------------------------------',
+    '📄 *Quotation Ref:* ' + qNum,
+    '📅 *Date:* ' + (idxQuotationData.dateFormatted || ''),
     '',
-    'I have generated my solar load quotation.',
-    'Quotation No: ' + qNum,
+    '👤 *Customer Details:*',
+    '• Name: ' + (c.name || ''),
+    '• City: ' + (c.city || '') + ', Pakistan',
+    '• Phone: +' + (c.phone || ''),
+    '• Preferred Time: ' + (c.contactTime || 'Anytime'),
     '',
-    'Please find the attached PDF quotation.'
+    '⚡ *Load Analysis:*',
+    '• Total Appliances: ' + idxQuotationData.totalQty + ' units',
+    '• Total Peak Load: ' + idxQuotationData.totalWatts.toLocaleString() + ' Watts (' + idxQuotationData.totalKw + ' kW)',
+    '• Load Tier: ' + idxQuotationData.statusTier,
+    '',
+    '📋 *Appliances Selected:*',
+    itemsBreakdown,
+    '',
+    '☀️ *Recommended System:*',
+    '• Inverter: ' + recInv,
+    '• Panels: ' + recPan,
+    '• Battery: ' + recBat,
+    '----------------------------------------',
+    '💬 *Attached Official PDF quotation from Bin Zareen Solar (0325-2053313).*'
   ].join('\n');
 
   const waUrl = 'https://wa.me/923252053313?text=' + encodeURIComponent(message);
@@ -2683,6 +2799,11 @@ async function handleIndexSendWhatsApp() {
 }
 
 // ============================================================
+function scrollToIndexQuotationForm() {
+  const el = document.getElementById('idx-form-section');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
 function initModernCalculator() {
   renderIndexApplianceGrid();
   calculateIndexTotals();
