@@ -1499,7 +1499,7 @@ function renderList(list) {
 function openForm(id = null) {
     resetForm();
     if (id) {
-        const p = products.find(x => x.id === id);
+        const p = products.find(x => String(x.id) === String(id));
         if (p) {
             document.getElementById('f-id').value = p.id;
             document.getElementById('f-name').value = p.name || '';
@@ -1666,13 +1666,27 @@ function saveProduct() {
         return;
     }
 
-    const data = { name, cat, catLabel, brand, price, oldPrice, desc, img, badge, discount, popup, specs };
+    const cleanData = {
+        name: name,
+        cat: cat,
+        catLabel: catLabel || cat,
+        brand: brand || '',
+        price: price,
+        desc: desc,
+        img: img || '',
+        oldPrice: (oldPrice !== null && !isNaN(oldPrice)) ? oldPrice : null,
+        badge: badge || null,
+        discount: (discount !== null && !isNaN(discount)) ? discount : null,
+        popup: popup || null,
+        specs: (specs && typeof specs === 'object' && Object.keys(specs).length > 0) ? specs : null
+    };
 
     const saveBtn = document.querySelector('.form-save-btn');
     saveBtn.textContent = 'Saving...';
     saveBtn.disabled = true;
 
-    const ref = id ? productsRef.child(id).update(data) : productsRef.push(data);
+    const strId = id ? String(id).trim() : null;
+    const ref = strId ? productsRef.child(strId).update(cleanData) : productsRef.push(cleanData);
     ref.then(() => {
         closeForm();
     }).catch(err => {
@@ -1683,8 +1697,14 @@ function saveProduct() {
 }
 
 function deleteProduct(id) {
+    if (!id) return;
     if (confirm('Yeh product delete karna chahte hain?\nYeh action wapis nahi ho ga.')) {
-        productsRef.child(id).remove().catch(err => alert('Error: ' + err.message));
+        const strId = String(id).trim();
+        productsRef.child(strId).remove().then(() => {
+            // Successfully removed from Firebase Realtime Database
+        }).catch(err => {
+            alert('Delete Error: ' + err.message);
+        });
     }
 }
 </script>

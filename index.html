@@ -1601,53 +1601,22 @@ function selectPayment(method) {
 }
 
 // ============================================================
-// FIREBASE SEED & LOAD
+// FIREBASE PERSISTENT SYNC (NO RESEEDING)
 // ============================================================
-function seedDatabaseWithInitialProducts() {
-  const productsRef = database.ref('products');
-  productsRef.once('value', snapshot => {
-    if (!snapshot.exists()) {
-      const updates = {};
-      initialProducts.forEach(p => { updates['/' + p.id] = p; });
-      productsRef.update(updates);
-    }
-  });
-}
-
 function loadProductsFromFirebase() {
+  const splashTimeout = setTimeout(() => {
+    hideSplashScreen();
+  }, 1200);
+
   try {
-    seedDatabaseWithInitialProducts();
-  } catch (e) {
-    console.error('Seed error:', e);
-  }
-  
-  // Use initial products immediately
-  try {
-    if (initialProducts && initialProducts.length > 0) {
-      allProducts = initialProducts.map(p => ({ ...p, id: parseInt(p.id) }));
-      if (typeof renderCategoryShowcase === 'function') renderCategoryShowcase();
-      if (typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
-      if (typeof updateCartCount === 'function') updateCartCount();
-    }
-  } catch (e) {
-    console.error('Initial products error:', e);
-  }
-  
-  // Try to load from Firebase (non-blocking)
-  try {
-    const splashTimeout = setTimeout(() => {
-      hideSplashScreen();
-    }, 800);
-    
     database.ref('products').on('value', snapshot => {
       clearTimeout(splashTimeout);
       hideSplashScreen();
       try {
         const obj = snapshot.val();
-        if (obj) {
-          allProducts = Object.keys(obj).map(k => ({ id: k, ...obj[k] }));
-          allProducts = allProducts.map(p => ({ ...p, id: String(p.id) }));
-          // Ensure newly added admin products (push IDs starting with '-') appear first, sorted newest first
+        if (obj && typeof obj === 'object') {
+          allProducts = Object.keys(obj).map(k => ({ id: String(k), ...obj[k] }));
+          // Sort newly added admin products (push IDs starting with '-') first, sorted newest first
           allProducts.sort((a, b) => {
             const aIsPush = a.id && a.id.startsWith('-');
             const bIsPush = b.id && b.id.startsWith('-');
@@ -1656,9 +1625,20 @@ function loadProductsFromFirebase() {
             if (!aIsPush && bIsPush) return 1;
             return parseInt(a.id) - parseInt(b.id);
           });
-          if (typeof renderCategoryShowcase === 'function') renderCategoryShowcase();
-          if (typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
-          if (typeof updateCartCount === 'function') updateCartCount();
+        } else {
+          allProducts = [];
+        }
+
+        // Live re-render whichever page the user is currently viewing
+        if (typeof renderCategoryShowcase === 'function') renderCategoryShowcase();
+        if (typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
+        if (typeof updateCartCount === 'function') updateCartCount();
+        if (currentPage === 'products' && typeof renderAllProducts === 'function') {
+          renderAllProducts();
+        } else if (currentPage === 'cat' && typeof renderCategoryPage === 'function' && currentCat) {
+          renderCategoryPage(currentCat);
+        } else if (currentPage === 'product' && typeof showProductDetail === 'function' && currentProductId) {
+          showProductDetail(currentProductId);
         }
       } catch (e) {
         console.error('Firebase data processing error:', e);
@@ -1666,10 +1646,12 @@ function loadProductsFromFirebase() {
     }, (error) => {
       clearTimeout(splashTimeout);
       hideSplashScreen();
-      console.log('Firebase error:', error);
+      console.error('Firebase connection error:', error);
     });
   } catch (e) {
-    console.error('Firebase connection error:', e);
+    clearTimeout(splashTimeout);
+    hideSplashScreen();
+    console.error('Firebase initialization error:', e);
   }
 }
 
