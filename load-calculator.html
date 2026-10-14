@@ -934,19 +934,19 @@
             </button>
 
             <div class="btn-action-grid-2">
-              <button type="button" class="btn-sec-action" id="btn-preview-pdf" onclick="openPdfPreviewModal()" disabled>
+              <button type="button" class="btn-sec-action" id="btn-preview-pdf" onclick="openPdfPreviewModal()">
                 👁️ Preview PDF
               </button>
-              <button type="button" class="btn-sec-action" id="btn-download-pdf" onclick="triggerPdfDirectDownload()" disabled>
+              <button type="button" class="btn-sec-action" id="btn-download-pdf" onclick="triggerPdfDirectDownload()">
                 📥 Download PDF
               </button>
             </div>
 
-            <button type="button" class="btn-sec-action" id="btn-share-pdf" onclick="handleNativeShare()" disabled style="width:100%;margin-top:8px;">
+            <button type="button" class="btn-sec-action" id="btn-share-pdf" onclick="handleNativeShare()" style="width:100%;margin-top:8px;">
               🔗 Share PDF (Native Share)
             </button>
 
-            <button type="button" class="btn-whatsapp-action" id="btn-send-whatsapp" onclick="handleWhatsAppSend()" disabled>
+            <button type="button" class="btn-whatsapp-action" id="btn-send-whatsapp" onclick="handleWhatsAppSend()">
               💬 Send PDF via WhatsApp
             </button>
 
@@ -1628,8 +1628,11 @@
       }
     }
 
-    function openPdfPreviewModal() {
-      if (!generatedPdfUrl) return;
+    async function openPdfPreviewModal() {
+      if (!generatedPdfUrl) {
+        await handleFormSubmission();
+        if (!generatedPdfUrl) return;
+      }
       const iframeContainer = document.getElementById('modal-iframe-container');
       iframeContainer.innerHTML = '<iframe src="' + generatedPdfUrl + '"></iframe>';
       document.getElementById('pdf-preview-modal').classList.add('open');
@@ -1645,8 +1648,11 @@
       if (e.target.id === 'pdf-preview-modal') closePdfPreviewModal();
     }
 
-    function triggerPdfDirectDownload() {
-      if (!generatedPdfBlob || !generatedQuotation) return;
+    async function triggerPdfDirectDownload() {
+      if (!generatedPdfBlob || !generatedQuotation) {
+        await handleFormSubmission();
+        if (!generatedPdfBlob || !generatedQuotation) return;
+      }
       const a = document.createElement('a');
       a.href = generatedPdfUrl;
       a.download = 'BinZareen-Solar-Quotation-' + generatedQuotation.quotationNumber + '.pdf';
@@ -1656,7 +1662,10 @@
     }
 
     async function handleNativeShare() {
-      if (!generatedPdfFile) return;
+      if (!generatedPdfFile) {
+        await handleFormSubmission();
+        if (!generatedPdfFile) return;
+      }
       const shareData = {
         files: [generatedPdfFile],
         title: 'Bin Zareen Solar Quotation',
@@ -1723,9 +1732,7 @@
       const instructionBanner = document.getElementById('wa-attachment-instruction');
       if (instructionBanner) instructionBanner.classList.add('show');
 
-      setTimeout(() => {
-        window.open(waUrl, '_blank');
-      }, 350);
+      window.open(waUrl, '_blank');
     }
 
     function scrollToQuotationForm() {
