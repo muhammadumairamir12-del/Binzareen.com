@@ -1601,8 +1601,23 @@ function selectPayment(method) {
 }
 
 // ============================================================
-// FIREBASE PERSISTENT SYNC (NO RESEEDING)
+// INSTANT PRODUCT RENDERING & PERSISTENT FIREBASE SYNC
 // ============================================================
+// 1. Immediately load products from cache or fallback so homepage categories, carousels, cards & navigation render instantly!
+try {
+  const cached = localStorage.getItem('bz_products_cache');
+  if (cached) {
+    allProducts = JSON.parse(cached);
+  } else if (typeof initialProducts !== 'undefined' && initialProducts && initialProducts.length > 0) {
+    allProducts = initialProducts.map(p => ({ ...p, id: String(p.id) }));
+  }
+} catch (e) {
+  if (typeof initialProducts !== 'undefined' && initialProducts && initialProducts.length > 0) {
+    allProducts = initialProducts.map(p => ({ ...p, id: String(p.id) }));
+  }
+}
+
+// 2. Realtime Firebase synchronization (Strictly Read-Only, never auto-seeds or resurrects deleted items)
 function loadProductsFromFirebase() {
   const splashTimeout = setTimeout(() => {
     hideSplashScreen();
@@ -1625,11 +1640,18 @@ function loadProductsFromFirebase() {
             if (!aIsPush && bIsPush) return 1;
             return parseInt(a.id) - parseInt(b.id);
           });
+          // Cache the live products so page load is always instant with latest admin edits/deletions
+          try {
+            localStorage.setItem('bz_products_cache', JSON.stringify(allProducts));
+          } catch (e) {}
         } else {
           allProducts = [];
+          try {
+            localStorage.removeItem('bz_products_cache');
+          } catch (e) {}
         }
 
-        // Live re-render whichever page the user is currently viewing
+        // Live re-render all homepage and catalog views
         if (typeof renderCategoryShowcase === 'function') renderCategoryShowcase();
         if (typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
         if (typeof updateCartCount === 'function') updateCartCount();
@@ -2811,12 +2833,21 @@ function initModernCalculator() {
 // INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+  // Immediately render homepage showcase, featured products, and cart
+  try {
+    if (typeof renderCategoryShowcase === 'function') renderCategoryShowcase();
+    if (typeof renderFeaturedProducts === 'function') renderFeaturedProducts();
+    if (typeof updateCartCount === 'function') updateCartCount();
+  } catch (e) {
+    console.error('Initial render error:', e);
+  }
+
   // Hide splash immediately on DOM ready
   setTimeout(() => {
     hideSplashScreen();
-  }, 500);
+  }, 400);
   
-  // Load products in background
+  // Load live products from Firebase in background
   try {
     loadProductsFromFirebase();
   } catch (e) {
